@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">PT JASA MUTU MINERAL INDONESIA</string>
+    <!--  resource for login  -->
+    <string name="title_login">Sign in to the app</string>
+    <string name="subtitle_login">Please use your account to log in.</string>
+    <string name="form_username">Your username</string>
+    <string name="form_password">Your password</string>
+    <string name="forgot_password">Did you forget your passsword?</string>
+    <string name="remember_me">Remember me</string>
+
+    <!-- resource for forgot password -->
+    <string name="subtitle_forgot_pass">Enter the email address when registering</string>
+    <string name="title_forgot_pass">Reset your password</string>
+    <string name="form_email">Your email</string>
+
+</resources>

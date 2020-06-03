@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="app_name">19dp</dimen>
+    <dimen name="title">25dp</dimen>
+    <dimen name="subtitle">20dp</dimen>
+    <dimen name="description">12dp</dimen>
+</resources>
