@@ -12,7 +12,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".role.ChoicesRoleActivity"></activity>
+        <activity android:name=".detail.DetailAssignment"></activity>
+        <activity android:name=".role.ChoicesRoleActivity" />
         <activity android:name=".surveyor.MainSurveyor" />
         <activity android:name=".sampler.MainSampler" />
         <activity android:name=".forgot.ForgotPassword" />

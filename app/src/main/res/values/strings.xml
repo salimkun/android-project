@@ -3,14 +3,17 @@
     <!--  resource for login  -->
     <string name="title_login">Sign in to the app</string>
     <string name="subtitle_login">Please use your account to log in.</string>
-    <string name="form_username">Your username</string>
-    <string name="form_password">Your password</string>
-    <string name="forgot_password">Did you forget your passsword?</string>
+    <string name="form_username">Username</string>
+    <string name="form_password">Password</string>
+    <string name="forgot_password">Forgot password ? <b>Reset Here</b></string>
     <string name="remember_me">Remember me</string>
 
     <!-- resource for forgot password -->
-    <string name="subtitle_forgot_pass">Enter the email address when registering</string>
+    <string name="subtitle_forgot_pass">We just need your registered email id to sent you password reset instruction</string>
     <string name="title_forgot_pass">Reset your password</string>
-    <string name="form_email">Your email</string>
+    <string name="form_email">Email</string>
+    <string name="search_text_list">Search Assignment Documents</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>

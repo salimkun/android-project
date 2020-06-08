@@ -15,6 +15,9 @@ public class LoginManager {
 
     public static final String STATUS = "spSudahLogin";
 
+    public static final String ID_DOC_ATTENDANCE = "idDocAttendance";
+
+
     SharedPreferences sp;
     SharedPreferences.Editor spEditor;
 
@@ -48,6 +51,10 @@ public class LoginManager {
 
     public String getAccessToken() {
         return sp.getString(ACCESS_TOKEN, "");
+    }
+
+    public String getIdDocAttendance() {
+        return sp.getString(ID_DOC_ATTENDANCE, "");
     }
 
     public Boolean getSPSudahLogin() {

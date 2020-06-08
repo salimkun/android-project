@@ -59,27 +59,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="30dp"
             android:orientation="vertical">
-
-            <TextView
-                android:id="@+id/txt_title_login"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:textAlignment="center"
-                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                android:text="@string/title_login" />
-
-            <TextView
-                android:id="@+id/txt_subtitle_login"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:textAlignment="center"
-                android:textSize="@dimen/description"
-                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-                android:text="@string/subtitle_login" />
 
             <EditText
                 android:id="@+id/edit_txt_username"
@@ -108,7 +89,7 @@
                 android:id="@+id/btn_login"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Masuk"
+                android:text="LOG IN"
                 android:layout_marginTop="10dp"
                 android:background="@color/colorButton"
                 android:textColor="@android:color/white"/>
@@ -119,8 +100,10 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:autoLink="web"
+                android:textAlignment="center"
                 android:onClick="perform_forgotPassword"
-                android:text="@string/forgot_password" />
+                android:text="@string/forgot_password"
+                android:gravity="center_horizontal" />
         </LinearLayout>
 
     </LinearLayout>

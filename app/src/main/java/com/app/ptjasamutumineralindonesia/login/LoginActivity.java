@@ -54,22 +54,28 @@ public class LoginActivity extends AppCompatActivity {
         mPassword = (EditText) findViewById(R.id.edit_txt_password);
         mRememberMe = (CheckBox) findViewById(R.id.edit_box_rememberMe);
 
+//        if (sharedPrefManager.getSPSudahLogin()) {
+//            Log.d("testing", sharedPrefManager.getUserRoles());
+//            switch(sharedPrefManager.getUserRoles().toLowerCase()){
+//                case "sampler":
+//                    startActivity(new Intent(LoginActivity.this, MainSampler.class)
+//                            .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK));
+//                    break;
+//                case "surveyor":
+//                    startActivity(new Intent(LoginActivity.this, MainSurveyor.class)
+//                            .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK));
+//                    break;
+//                default:
+//                    startActivity(new Intent(LoginActivity.this, MainSurveyor.class)
+//                            .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK));
+//                    break;
+//            }
+//            finish();
+//        }
+
         if (sharedPrefManager.getSPSudahLogin()) {
-            Log.d("testing", sharedPrefManager.getUserRoles());
-            switch(sharedPrefManager.getUserRoles().toLowerCase()){
-                case "sampler":
-                    startActivity(new Intent(LoginActivity.this, MainSampler.class)
-                            .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK));
-                    break;
-                case "surveyor":
-                    startActivity(new Intent(LoginActivity.this, MainSurveyor.class)
-                            .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK));
-                    break;
-                default:
-                    startActivity(new Intent(LoginActivity.this, MainSurveyor.class)
-                            .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK));
-                    break;
-            }
+            startActivity(new Intent(LoginActivity.this, MainSampler.class)
+                    .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK));
             finish();
         }
 
@@ -118,7 +124,7 @@ public class LoginActivity extends AppCompatActivity {
                             Log.d("ini token", idToken);
                             sharedPrefManager.saveSPBoolean(LoginManager.STATUS, true);
                             sharedPrefManager.saveSPString(LoginManager.ACCESS_TOKEN, idToken);
-                            startActivity(new Intent(LoginActivity.this, ChoicesRoleActivity.class)
+                            startActivity(new Intent(LoginActivity.this, MainSampler.class)
                                     .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK));
                             finish();
                         }
