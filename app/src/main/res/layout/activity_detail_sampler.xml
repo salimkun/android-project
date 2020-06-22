@@ -329,6 +329,10 @@
                     android:paddingTop="10dp"
                     android:orientation="vertical">
 
+                    <HorizontalScrollView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
                     <com.google.android.material.tabs.TabLayout
                         android:id="@+id/tab_layout_detail"
                         android:layout_width="match_parent"
@@ -338,16 +342,28 @@
                             android:id="@+id/item_attendCard"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Attend Card" />
+                            android:text="Attendence Card" />
 
                         <com.google.android.material.tabs.TabItem
                             android:id="@+id/item_sampingMass"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Sampling Mass" />
-                    </com.google.android.material.tabs.TabLayout>
+                            android:text="Sampling Mass Basis" />
 
-<!--                    <com.google.android.material.tabs.TabLayout-->
+                        <com.google.android.material.tabs.TabItem
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Sampling Time Basis" />
+
+                        <com.google.android.material.tabs.TabItem
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Sample Dispatch" />
+
+
+                    </com.google.android.material.tabs.TabLayout>
+                </HorizontalScrollView>
+                    <!--                    <com.google.android.material.tabs.TabLayout-->
 <!--                        android:id="@+id/tab_layout_detail"-->
 <!--                        android:layout_width="match_parent"-->
 <!--                        android:layout_height="wrap_content"-->
@@ -359,30 +375,35 @@
                     <androidx.viewpager.widget.ViewPager
                         android:id="@+id/pager_detail"
                         android:layout_width="match_parent"
-                        android:layout_height="200dp"/>
+                        android:layout_height="400dp"/>
                 </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
                     android:paddingTop="10dp"
                     android:weightSum="2"
                     android:orientation="horizontal">
 
                     <Button
-                        android:text="Save"
-                        android:background="@color/colorButton"
+                        android:id="@+id/btn_cancel_detail_sampler"
+                        android:text="Cancel"
+                        android:background="#DF2143"
                         android:layout_weight="1"
                         android:layout_gravity="center"
                         android:gravity="center"
+                        android:layout_marginRight="5dp"
                         android:textColor="@android:color/white"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"/>
 
                     <Button
-                        android:text="Cancel"
-                        android:background="#DF2143"
+                        android:id="@+id/btn_save_detail_sampler"
+                        android:text="Save"
+                        android:background="@color/colorPrimary"
                         android:layout_weight="1"
+                        android:layout_marginLeft="5dp"
                         android:layout_gravity="center"
                         android:gravity="center"
                         android:textColor="@android:color/white"

@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".detail.samplingmassbasis.AddSamplingMassBassLine">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_margin="10dp">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textStyle="bold"
+                    android:textAppearance="@android:style/TextAppearance.Medium"
+                    android:text="Sampling Mass Basis Line" />
+
+                <TextView
+                    android:layout_marginTop="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Incr No"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"/>
+
+                <EditText
+                    android:id="@+id/edit_IncrNo_add_samplingMBasisLine"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:inputType="number" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_weight="3"
+                    android:orientation="horizontal">
+
+                    <CheckBox
+                        android:id="@+id/ga_status_samplingMBasisLine"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="GA" />
+
+                    <CheckBox
+                        android:id="@+id/tm_status_samplingMBasisLine"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="TM" />
+
+                    <CheckBox
+                        android:id="@+id/sa_status_samplingMBasisLine"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="SA" />
+
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Coal Condition"
+                    android:layout_marginTop="10dp"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"/>
+
+                <Spinner
+                    android:id="@+id/spinner_CoalCondition_add_samplingMBasisLine"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Weather"
+                    android:layout_marginTop="10dp"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"/>
+
+                <Spinner
+                    android:id="@+id/spinner_weather_add_samplingMBasisLine"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:layout_marginTop="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Interval"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"/>
+
+                <EditText
+                    android:id="@+id/edit_interval_add_samplingMBasisLine"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:inputType="number"/>
+
+                <TextView
+                    android:layout_marginTop="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Notes"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"/>
+
+                <EditText
+                    android:id="@+id/edit_notes_add_samplingMBasisLine"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:inputType="textPersonName"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="4"
+                    android:layout_marginTop="10dp"
+                    android:orientation="horizontal">
+
+                    <Button
+                        android:id="@+id/btn_cancel_add_samplingMBasisLine"
+                        android:layout_width="wrap_content"
+                        android:background="@android:color/holo_red_dark"
+                        android:textColor="@android:color/white"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="2"
+                        android:layout_marginRight="5dp"
+                        android:text="Cancel"/>
+
+                    <Button
+                        android:id="@+id/btn_save_add_samplingMBasisLine"
+                        android:layout_width="wrap_content"
+                        android:background="@color/colorPrimary"
+                        android:textColor="@android:color/white"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
+                        android:layout_weight="2"
+                        android:text="Submit"/>
+                </LinearLayout>
+            </LinearLayout>
+        </ScrollView>
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

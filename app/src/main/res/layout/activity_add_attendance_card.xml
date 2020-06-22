@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".detail.attendancecard.AddAttendanceCard">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_margin="10dp">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:textAppearance="@android:style/TextAppearance.Medium"
+                android:text="Document Information" />
+
+            <TextView
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Document Number"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"/>
+
+            <EditText
+                android:id="@+id/docNumber_add_attendance"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="textPersonName"
+                android:text="-"
+                android:enabled="false"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Barge"
+                android:layout_marginTop="10dp"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"/>
+
+            <Spinner
+                android:id="@+id/spinner_barge_add_attendance"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Document Status"
+                android:layout_marginTop="10dp"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"/>
+
+            <Spinner
+                android:id="@+id/spinner_docStatus_add_attendance"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Document Date"
+                android:layout_marginTop="10dp"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"/>
+
+            <EditText
+                android:id="@+id/edit_docDate_add_attendance"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="textPersonName"
+                android:focusable="false"
+                android:text="YYYY-MM-DD"/>
+
+            <LinearLayout
+                android:id="@+id/viewTimeSheetLine"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="@android:style/TextAppearance.Medium"
+                    android:textStyle="bold"
+                    android:text="Attendance Data"/>
+
+                    <RelativeLayout
+                        android:layout_marginTop="10dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <SearchView
+                            android:id="@+id/search_attendance_data"
+                            android:layout_width="wrap_content"
+                            android:layout_alignParentLeft="true"
+                            android:layout_height="wrap_content"/>
+
+                        <Button
+                            android:id="@+id/btn_add_attendance_data"
+                            android:layout_width="25dp"
+                            android:layout_height="25dp"
+                            android:layout_alignParentRight="true"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginRight="10dp"
+                            android:layout_centerVertical="true"
+                            android:background="@drawable/circle_button"
+                            android:gravity="center"
+                            android:text="+"
+                            android:textColor="@android:color/white" />
+                    </RelativeLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_marginTop="10dp"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical" >
+
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/recyclerView_list_attendance_daata"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                        </androidx.recyclerview.widget.RecyclerView>
+
+                        <TextView
+                            android:id="@+id/txt_noData_attendance_data"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:gravity="center"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                            android:text="No Data" />
+
+                    </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="4"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/btn_cancel_add_attendance"
+                    android:layout_width="wrap_content"
+                    android:background="@android:color/holo_red_dark"
+                    android:textColor="@android:color/white"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:layout_marginRight="5dp"
+                    android:text="Cancel"/>
+
+                <Button
+                    android:id="@+id/btn_save_add_attendance"
+                    android:layout_width="wrap_content"
+                    android:background="@color/colorPrimary"
+                    android:textColor="@android:color/white"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:layout_weight="2"
+                    android:text="Submit"/>
+            </LinearLayout>
+            </LinearLayout>
+        </ScrollView>
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

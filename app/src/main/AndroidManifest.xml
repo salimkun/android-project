@@ -12,7 +12,15 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".detail.DetailAssignment"></activity>
+        <activity android:name=".detail.sampledispatch.AddSampleDispatchLines"></activity>
+        <activity android:name=".detail.sampledispatch.AddSampleDispatch" />
+        <activity android:name=".detail.samplingtimebasis.AddSamplingTBasisLine" />
+        <activity android:name=".detail.samplingmassbasis.AddSamplingMassBassLine" />
+        <activity android:name=".detail.samplingmassbasis.AddSamplingMassBasis" />
+        <activity android:name=".detail.samplingtimebasis.AddSamplingTimeBasis" />
+        <activity android:name=".detail.attendancecard.AddAttendanceData" />
+        <activity android:name=".detail.attendancecard.AddAttendanceCard" />
+        <activity android:name=".detail.DetailAssignment" />
         <activity android:name=".role.ChoicesRoleActivity" />
         <activity android:name=".surveyor.MainSurveyor" />
         <activity android:name=".sampler.MainSampler" />

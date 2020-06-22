@@ -1,30 +1,49 @@
 package com.app.ptjasamutumineralindonesia.detail;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.app.ptjasamutumineralindonesia.R;
+import com.app.ptjasamutumineralindonesia.detail.attendancecard.AttendanceResult;
+import com.app.ptjasamutumineralindonesia.detail.samplingtimebasis.SamplingTBasisLineResults;
 import com.app.ptjasamutumineralindonesia.helpers.ApiBase;
 import com.app.ptjasamutumineralindonesia.login.LoginActivity;
 import com.app.ptjasamutumineralindonesia.sampler.ApiSamplerInterface;
+import com.app.ptjasamutumineralindonesia.sampler.AssignmentLetterResult;
 import com.app.ptjasamutumineralindonesia.sampler.AssignmentResult;
 import com.app.ptjasamutumineralindonesia.sampler.MainSampler;
 import com.app.ptjasamutumineralindonesia.sharepreference.LoginManager;
 import com.google.android.material.tabs.TabItem;
 import com.google.android.material.tabs.TabLayout;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -36,12 +55,15 @@ public class DetailAssignment extends AppCompatActivity {
     LoginManager sharedPrefManager;
     private Retrofit retrofit;
     String idToken;
-    String idAssignment;
+    String idAssignment, idAssignmentDocNumber;
     EditText docNumber, letterOfAssignment, docDate, docStatus, startDate, endDate, placeName;
     EditText notes, typeWork, worker, reason;
     Spinner spinnerStatus;
     TabLayout tablayout_detail;
     ViewPager viewPager;
+    Button btnCancel, btnSave;
+    String sDate, eDate, dDate, workerId, assignmentLetterId, description;
+    AssignmentLetterResult assignmentLetter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,7 +97,123 @@ public class DetailAssignment extends AppCompatActivity {
 
         tablayout_detail = findViewById(R.id.tab_layout_detail);
         viewPager = findViewById(R.id.pager_detail);
-        AdapterFragmentDetail adapter_fragment = new AdapterFragmentDetail(getSupportFragmentManager(), tablayout_detail.getTabCount());
+
+        Intent intent = getIntent();
+        idAssignment = intent.getStringExtra("idAssignment");
+        idAssignmentDocNumber = intent.getStringExtra("idAssignmentDocNumber");
+        retrofit = ApiBase.getClient();
+
+
+        if (sharedPrefManager.getSPSudahLogin()==false) {
+            startActivity(new Intent(DetailAssignment.this, LoginActivity.class)
+                    .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK));
+            finish();
+        }
+        idToken = sharedPrefManager.getAccessToken();
+        getDetail();
+
+        btnCancel = findViewById(R.id.btn_cancel_detail_sampler);
+        btnCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(DetailAssignment.this, MainSampler.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
+                finish();
+            }
+        });
+
+        btnSave = findViewById(R.id.btn_save_detail_sampler);
+        btnSave.setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.O)
+            @Override
+            public void onClick(View v) {
+                JsonObject paramadd = new JsonObject();
+                try {
+                    JSONObject objAssignLetter_ = new JSONObject();
+                    objAssignLetter_.put("id", assignmentLetter.getId());
+                    objAssignLetter_.put("documentNumber", assignmentLetter.getDocumentNumber());
+                    objAssignLetter_.put("documentDate", assignmentLetter.getDocumentDate());
+                    objAssignLetter_.put("documentStatus", assignmentLetter.getDocumentStatus());
+                    objAssignLetter_.put("doscription", assignmentLetter.getDescription());
+                    objAssignLetter_.put("startDate", assignmentLetter.getStartDate());
+                    objAssignLetter_.put("assignedById", assignmentLetter.getAssignedById());
+                    objAssignLetter_.put("endDate", assignmentLetter.getEndDate());
+                    objAssignLetter_.put("placeId", assignmentLetter.getPlaceId());
+                    objAssignLetter_.put("inspectionRequestId", assignmentLetter.getInspectionRequestId());
+                    objAssignLetter_.put("companyId", assignmentLetter.getCompanyId());
+                    objAssignLetter_.put("assignedByName", assignmentLetter.getAssignedByName());
+                    objAssignLetter_.put("placeName", assignmentLetter.getPlaceName());
+                    objAssignLetter_.put("inspectionRequestDocumentNumber", assignmentLetter.getInspectionRequestDocumentNumber());
+
+                    JSONObject jsonObj_ = new JSONObject();
+
+                    jsonObj_.put("reason", reason.getText());
+                    jsonObj_.put("status", spinnerStatus.getSelectedItem().toString());
+                    jsonObj_.put("id", idAssignment);
+                    jsonObj_.put("endDate", eDate);
+                    jsonObj_.put("startDate", sDate);
+                    jsonObj_.put("documentNumber", docNumber.getText());
+                    jsonObj_.put("documentDate", dDate);
+                    jsonObj_.put("documentStatus", docStatus.getText());
+                    jsonObj_.put("description", description);
+                    jsonObj_.put("workType", typeWork.getText());
+                    jsonObj_.put("assignmentLetterId", assignmentLetterId);
+                    jsonObj_.put("assignmentLetterDocumentNumber", letterOfAssignment.getText());
+                    jsonObj_.put("assignmentLetter", objAssignLetter_);
+                    jsonObj_.put("workerId", workerId);
+                    jsonObj_.put("workerName", worker.getText());
+
+                    JsonParser jsonParser = new JsonParser();
+                    paramadd = (JsonObject) jsonParser.parse(jsonObj_.toString());
+
+                    //print parameter
+                    Log.d("parameter for add  ", "AS PARAMETER  " + paramadd);
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                final ApiDetailInterface service = retrofit.create(ApiDetailInterface.class);
+                Call<AttendanceResult> call = service.updateAttendanceCard("Bearer ".concat(idToken), paramadd);
+                Log.d("request put smblines", call.request().toString());
+                call.enqueue(new Callback<AttendanceResult>() {
+                    @Override
+                    public void onResponse(Call<AttendanceResult> call, Response<AttendanceResult> response) {
+                        if (!response.isSuccessful()) {
+                            Toast.makeText(getBaseContext(), response.raw().toString(), Toast.LENGTH_SHORT).show();
+                        } else {
+                            Toast.makeText(getBaseContext(), "Success Updated", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<AttendanceResult> call, Throwable t) {
+                        //for getting error in network put here Toast, so get the error on network
+                        Toast.makeText(getBaseContext(), "Failed to update attendance card, please try at a moment", Toast.LENGTH_SHORT).show();
+                    }
+                });
+            }
+        });
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                // todo: goto back activity from here
+                Intent intent = new Intent(DetailAssignment.this, MainSampler.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
+                finish();
+                return true;
+
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+    public void setAdapterFragment() {
+        AdapterFragmentDetail adapter_fragment = new AdapterFragmentDetail(getSupportFragmentManager(), tablayout_detail.getTabCount(), idAssignment, idAssignmentDocNumber);
         viewPager.setAdapter(adapter_fragment);
         viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tablayout_detail));
 
@@ -102,41 +240,11 @@ public class DetailAssignment extends AppCompatActivity {
 
         spinnerArrayAdapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
         spinnerStatus.setAdapter(spinnerArrayAdapter);
-
-
-        Intent intent = getIntent();
-        idAssignment = intent.getStringExtra("idAssignment");
-        retrofit = ApiBase.getClient();
-
-
-        if (sharedPrefManager.getSPSudahLogin()==false) {
-            startActivity(new Intent(DetailAssignment.this, LoginActivity.class)
-                    .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK));
-            finish();
-        }
-        idToken = sharedPrefManager.getAccessToken();
-        getDetail();
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                // todo: goto back activity from here
-                Intent intent = new Intent(DetailAssignment.this, MainSampler.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
-                startActivity(intent);
-                finish();
-                return true;
-
-            default:
-                return super.onOptionsItemSelected(item);
-        }
-    }
-
-    private void getDetail(){
-        ApiSamplerInterface service = retrofit.create(ApiSamplerInterface .class);
-        Call<AssignmentResult> call=service.getDetailAssignment("Bearer ".concat(idToken), idAssignment);
+    public void getDetail(){
+        final ApiSamplerInterface[] service = {retrofit.create(ApiSamplerInterface.class)};
+        Call<AssignmentResult> call= service[0].getDetailAssignment("Bearer ".concat(idToken), idAssignment);
         call.enqueue(new Callback<AssignmentResult>() {
             @Override
             public void onResponse(Call<AssignmentResult> call, Response<AssignmentResult> response) {
@@ -153,7 +261,18 @@ public class DetailAssignment extends AppCompatActivity {
                     typeWork.setText(response.body().getWorkType());
                     worker.setText(response.body().getWorkerName());
                     reason.setText(response.body().getReason());
-                    sharedPrefManager.saveSPString(LoginManager.ID_DOC_ATTENDANCE, response.body().getId());
+
+                    sDate = response.body().getStartDate();
+                    eDate = response.body().getEndDate();
+                    dDate = response.body().getDocumentDate();
+                    workerId = response.body().getWorkerId();
+                    assignmentLetter = response.body().getAssignmentLetter();
+                    assignmentLetterId = response.body().getAssignmentLetterId();
+                    description = response.body().getDescription();
+
+                            setAdapterFragment();
+//                    sharedPrefManager.saveSPString(LoginManager.ID_DOC_ATTENDANCE, response.body().getId());
+
                     int valStatus=0;
                     switch (response.body().getStatus()){
                         case "CREATED":

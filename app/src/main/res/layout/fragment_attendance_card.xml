@@ -3,19 +3,41 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".detail.AttendanceCard">
+    tools:context=".detail.attendancecard.AttendanceCard">
 
     <LinearLayout
         android:layout_width="match_parent"
+        android:layout_marginTop="10dp"
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <ScrollView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <SearchView
+                    android:id="@+id/search_attendance_card"
+                    android:layout_width="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_height="wrap_content"/>
+
+                <Button
+                    android:id="@+id/btn_add_attendance"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginRight="10dp"
+                    android:layout_centerVertical="true"
+                    android:background="@drawable/circle_button"
+                    android:gravity="center"
+                    android:text="+"
+                    android:textColor="@android:color/white" />
+            </RelativeLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
+                android:layout_marginTop="10dp"
                 android:layout_height="wrap_content"
                 android:orientation="vertical" >
 
@@ -36,8 +58,6 @@
                     android:text="No Data" />
 
             </LinearLayout>
-        </ScrollView>
-
 
     </LinearLayout>
 </FrameLayout>

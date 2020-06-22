@@ -70,7 +70,7 @@ public class ListSamplerAdapter extends RecyclerView.Adapter<ListSamplerAdapter.
 
             @Override
             public void onClick(View v) {
-                holder.recyclerViewSampler.setBackgroundResource(R.drawable.table_header_cell_bg);
+                holder.recyclerViewSampler.setBackgroundColor(Color.parseColor("#6200EE"));
                 holder.assignmentLetterDocumentNumber.setTextColor(Color.WHITE);
                 holder.documentNumber.setTextColor(Color.WHITE);
                 holder.startDate.setTextColor(Color.WHITE);
@@ -78,9 +78,9 @@ public class ListSamplerAdapter extends RecyclerView.Adapter<ListSamplerAdapter.
                 holder.status.setTextColor(Color.WHITE);
                 Intent intent = new Intent(context, DetailAssignment.class);
                 intent.putExtra("idAssignment", listSampler.get(position).getId());
+                intent.putExtra("idAssignmentDocNumber", listSampler.get(position).getDocumentNumber());
                 Log.d("nilai idAssignment", listSampler.get(position).getId());
                 context.startActivities(new Intent[]{intent});
-
                 ((Activity)context).finish();
             }
         });

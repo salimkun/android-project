@@ -1,4 +1,4 @@
-package com.app.ptjasamutumineralindonesia.detail;
+package com.app.ptjasamutumineralindonesia.detail.attendancecard;
 
 public class AttendanceResult {
     private String id;

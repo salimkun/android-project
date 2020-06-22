@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".detail.attendancecard.AddAttendanceData">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_margin="10dp">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:textAppearance="@android:style/TextAppearance.Medium"
+                android:text="Attendance Date" />
+
+            <TextView
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Attendance Time"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"/>
+
+            <EditText
+                android:id="@+id/edit_docDate_add_attendance_data"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="textPersonName"
+                android:focusable="false"
+                android:text="Select Date"/>
+
+            <EditText
+                android:id="@+id/edit_docTime_add_attendance_data"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="textPersonName"
+                android:focusable="false"
+                android:text="Select Time"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="weather"
+                android:layout_marginTop="10dp"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"/>
+
+            <Spinner
+                android:id="@+id/spinner_weather_add_attendance_data"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Notes"
+                android:layout_marginTop="10dp"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"/>
+
+            <EditText
+                android:id="@+id/edit_notes_add_attendance_data"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="4"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/btn_cancel_add_attendance_data"
+                    android:layout_width="wrap_content"
+                    android:background="@android:color/holo_red_dark"
+                    android:textColor="@android:color/white"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:layout_marginRight="5dp"
+                    android:text="Cancel"/>
+
+                <Button
+                    android:id="@+id/btn_save_add_attendance_data"
+                    android:layout_width="wrap_content"
+                    android:background="@color/colorPrimary"
+                    android:textColor="@android:color/white"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:layout_weight="2"
+                    android:text="Submit"/>
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

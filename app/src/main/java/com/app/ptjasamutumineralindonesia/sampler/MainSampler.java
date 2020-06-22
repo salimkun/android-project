@@ -75,7 +75,6 @@ public class MainSampler extends AppCompatActivity {
             finish();
         }
         idToken = sharedPrefManager.getAccessToken();
-
         loadData("1");
     }
 

@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".detail.samplingmassbasis.SamplingMassBasis">
+    tools:context=".detail.sampledispatch.SampleDispatch">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -16,12 +16,13 @@
             android:layout_height="wrap_content">
 
             <SearchView
-                android:id="@+id/search_samplingMBasis"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:id="@+id/search_sampleDispatch"
+                android:layout_width="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_height="wrap_content"/>
 
             <Button
-                android:id="@+id/btn_add_samplingMBasis"
+                android:id="@+id/btn_add_sampleDispatch"
                 android:layout_width="25dp"
                 android:layout_height="25dp"
                 android:layout_alignParentRight="true"
@@ -34,29 +35,29 @@
                 android:textColor="@android:color/white" />
         </RelativeLayout>
 
-            <LinearLayout
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:orientation="vertical" >
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerView_list_sampledispatch"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+            </androidx.recyclerview.widget.RecyclerView>
+
+            <TextView
+                android:id="@+id/txt_noData_sampledispatch"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:orientation="vertical" >
-
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/recyclerView_list_samplingMBasis"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-                </androidx.recyclerview.widget.RecyclerView>
-
-                <TextView
-                    android:id="@+id/txt_noData_samplingMBasis"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:gravity="center"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                    android:text="No Data" />
-
-            </LinearLayout>
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:text="No Data" />
+        </LinearLayout>
 
     </LinearLayout>
 
