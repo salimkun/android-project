@@ -12,6 +12,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
@@ -70,10 +72,11 @@ public class AddAttendanceData extends AppCompatActivity {
     private Retrofit retrofit;
 
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getSupportActionBar().setTitle("Add Attendance Data");
+        getSupportActionBar().setTitle("Timesheet Line");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         setContentView(R.layout.activity_add_attendance_data);
 
@@ -159,7 +162,27 @@ public class AddAttendanceData extends AppCompatActivity {
             }
         });
 
+        editDate.setText(LocalDateTime.now().toString().substring(0,10));
+        editTime.setText(LocalDateTime.now().toString().substring(11,16));
         btnSaveData = findViewById(R.id.btn_save_add_attendance_data);
+        btnSaveData.setEnabled(false);
+        notes.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                setUpButton();
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                setUpButton();
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                setUpButton();
+            }
+        });
+
         btnSaveData.setOnClickListener(new View.OnClickListener() {
             @RequiresApi(api = Build.VERSION_CODES.O)
             @Override
@@ -245,14 +268,14 @@ public class AddAttendanceData extends AppCompatActivity {
                         }
                     });
                 }
-
-                Intent intent = new Intent(AddAttendanceData.this, AddAttendanceCard.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
-                intent.putExtra("idAssignment", idAssignment);
-                intent.putExtra("idAssingmentDocNumber", idAssignmentDocNumber);
-                intent.putExtra("idTimeSheet", idTimeSheet);
-                startActivity(intent);
-                finish();
+//
+//                Intent intent = new Intent(AddAttendanceData.this, AddAttendanceCard.class);
+//                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+//                intent.putExtra("idAssignment", idAssignment);
+//                intent.putExtra("idAssingmentDocNumber", idAssignmentDocNumber);
+//                intent.putExtra("idTimeSheet", idTimeSheet);
+//                startActivity(intent);
+//                finish();
 
             }
         });
@@ -339,6 +362,14 @@ public class AddAttendanceData extends AppCompatActivity {
 
         }
 
+    }
+
+    private void setUpButton(){
+        if (notes.getText().toString().isEmpty()){
+            btnSaveData.setEnabled(false);
+        } else {
+            btnSaveData.setEnabled(true);
+        }
     }
 
     private void updateLabelDate() {

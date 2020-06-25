@@ -34,6 +34,7 @@ import com.google.gson.JsonParser;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.time.Instant;
 import java.time.ZoneId;
@@ -73,10 +74,11 @@ public class AddAttendanceCard extends AppCompatActivity {
     private RecyclerView viewListAttendance;
     private ArrayList<AttendanceResult> list = new ArrayList<>();
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getSupportActionBar().setTitle("Add Attendance Card");
+        getSupportActionBar().setTitle("Timesheet");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         setContentView(R.layout.activity_add_attendance_card);
         retrofit = ApiBase.getClient();
@@ -122,6 +124,7 @@ public class AddAttendanceCard extends AppCompatActivity {
         myCalendar = Calendar.getInstance();
 
         docDate = (EditText) findViewById(R.id.edit_docDate_add_attendance);
+        docDate.setText(LocalDateTime.now().toString().substring(0,10));
         final DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
 
             @Override
@@ -146,6 +149,81 @@ public class AddAttendanceCard extends AppCompatActivity {
             }
         });
 
+        if (idTimeSheet!=null){
+            // perintah buat nampilin list
+            Call<AttendanceResult> call=service.getDetailAttendance("Bearer ".concat(idToken), idTimeSheet);
+            Log.d("request get detail", call.request().toString());
+            call.enqueue(new Callback<AttendanceResult>() {
+                @Override
+                public void onResponse(Call<AttendanceResult> call, Response<AttendanceResult> response) {
+                    Log.d("ini loh", response.raw().toString());
+                    if(!response.isSuccessful()){
+                        Toast.makeText(getBaseContext(),response.raw().toString(),Toast.LENGTH_SHORT).show();
+                    }else {
+                        docNumber.setText(response.body().getDocumentNumber());
+                        docDate.setText(response.body().getDocumentDate().substring(0, 10));
+                        int valStatus=0;
+                        switch (response.body().getDocumentStatus()){
+                            case "CREATED":
+                                valStatus = 0;
+                                break;
+                            case "UPDATED":
+                                valStatus = 1;
+                                break;
+                            case "DELETED":
+                                valStatus = 2;
+                                break;
+                            case "REVISED":
+                                valStatus = 3;
+                                break;
+                            case "REVIEWED":
+                                valStatus = 4;
+                                break;
+                            case "ACCEPTED":
+                                valStatus = 5;
+                                break;
+                            case "REJECTED":
+                                valStatus = 6;
+                                break;
+                            case "VALIDATED":
+                                valStatus = 7;
+                                break;
+                            case "APPROVED":
+                                valStatus = 8;
+                                break;
+                        }
+                        spinnerDocStatus.setSelection(valStatus);
+                        for (int i=0; i<spinnerBarge.getCount();i++){
+                            if (spinnerBarge.getSelectedItem()==response.body().getBargeName()){
+                                break;
+                            }else{
+                                spinnerBarge.setSelection(i);
+                            }
+                        }
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<AttendanceResult> call, Throwable t) {
+                    //for getting error in network put here Toast, so get the error on network
+                    Toast.makeText(getBaseContext(),"Failed to add attendance card, please try at a moment",Toast.LENGTH_SHORT).show();
+                }
+            });
+
+            viewTimeSheetLine.setVisibility(LinearLayout.VISIBLE);
+            loadData();
+        }
+
+        handlenoData = findViewById(R.id.txt_noData_attendance_data);
+        handlenoData.setVisibility(View.INVISIBLE);
+        viewListAttendance = findViewById(R.id.recyclerView_list_attendance_daata);
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false);
+        viewListAttendance.setLayoutManager(layoutManager);
+        viewListAttendance.setHasFixedSize(true);
+
+        viewListAttendance.setLayoutManager(new LinearLayoutManager(this));//Vertikal Layout Manager
+        viewListAttendance.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
+
         btnSaveAddAttendance = findViewById(R.id.btn_save_add_attendance);
         btnSaveAddAttendance.setOnClickListener(new View.OnClickListener() {
             @RequiresApi(api = Build.VERSION_CODES.O)
@@ -153,7 +231,7 @@ public class AddAttendanceCard extends AppCompatActivity {
             public void onClick(View v) {
                 Log.d("ini docNumber" , docNumber.getText().toString());
                 JsonObject paramadd = new JsonObject();
-                LocalDate localDate = LocalDate.parse(docDate.getText());
+                final LocalDate localDate = LocalDate.parse(docDate.getText());
                 Instant documentDate = localDate.atStartOfDay(ZoneId.of("UTC")).toInstant();
 
                 if (docNumber.getText().toString().equals("-") || docNumber.getText().toString().isEmpty()) {
@@ -187,6 +265,8 @@ public class AddAttendanceCard extends AppCompatActivity {
                             } else {
                                 Toast.makeText(getBaseContext(), "Success Created", Toast.LENGTH_SHORT).show();
                                 docNumber.setText(response.body().getDocumentNumber());
+                                idTimeSheet = response.body().getId();
+                                loadData();
                             }
                         }
 
@@ -258,82 +338,6 @@ public class AddAttendanceCard extends AppCompatActivity {
         });
         btnAddAttendanceData.setBackgroundResource(R.drawable.circle_button);
 
-
-        if (idTimeSheet!=null){
-            // perintah buat nampilin list
-            Call<AttendanceResult> call=service.getDetailAttendance("Bearer ".concat(idToken), idTimeSheet);
-            Log.d("request get detail", call.request().toString());
-            call.enqueue(new Callback<AttendanceResult>() {
-                @Override
-                public void onResponse(Call<AttendanceResult> call, Response<AttendanceResult> response) {
-                    Log.d("ini loh", response.raw().toString());
-                    if(!response.isSuccessful()){
-                        Toast.makeText(getBaseContext(),response.raw().toString(),Toast.LENGTH_SHORT).show();
-                    }else {
-                        docNumber.setText(response.body().getDocumentNumber());
-                        docDate.setText(response.body().getDocumentDate().substring(0, 10));
-                        int valStatus=0;
-                        switch (response.body().getDocumentStatus()){
-                            case "CREATED":
-                                valStatus = 0;
-                                break;
-                            case "UPDATED":
-                                valStatus = 1;
-                                break;
-                            case "DELETED":
-                                valStatus = 2;
-                                break;
-                            case "REVISED":
-                                valStatus = 3;
-                                break;
-                            case "REVIEWED":
-                                valStatus = 4;
-                                break;
-                            case "ACCEPTED":
-                                valStatus = 5;
-                                break;
-                            case "REJECTED":
-                                valStatus = 6;
-                                break;
-                            case "VALIDATED":
-                                valStatus = 7;
-                                break;
-                            case "APPROVED":
-                                valStatus = 8;
-                                break;
-                        }
-                        spinnerDocStatus.setSelection(valStatus);
-                        for (int i=0; i<spinnerBarge.getCount();i++){
-                            if (spinnerBarge.getSelectedItem()==response.body().getBargeName()){
-                                break;
-                            }else{
-                                spinnerBarge.setSelection(i);
-                            }
-                        }
-                    }
-                }
-
-                @Override
-                public void onFailure(Call<AttendanceResult> call, Throwable t) {
-                    //for getting error in network put here Toast, so get the error on network
-                    Toast.makeText(getBaseContext(),"Failed to add attendance card, please try at a moment",Toast.LENGTH_SHORT).show();
-                }
-            });
-
-            viewTimeSheetLine.setVisibility(LinearLayout.VISIBLE);
-        }
-
-        handlenoData = findViewById(R.id.txt_noData_attendance_data);
-        handlenoData.setVisibility(View.INVISIBLE);
-        viewListAttendance = findViewById(R.id.recyclerView_list_attendance_daata);
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false);
-        viewListAttendance.setLayoutManager(layoutManager);
-        viewListAttendance.setHasFixedSize(true);
-
-        viewListAttendance.setLayoutManager(new LinearLayoutManager(this));//Vertikal Layout Manager
-        viewListAttendance.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
-        loadData();
-
         searchAttendance = findViewById(R.id.search_attendance_data);
         searchAttendance.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
 
@@ -395,10 +399,11 @@ public class AddAttendanceCard extends AppCompatActivity {
         ApiDetailInterface service = retrofit.create(ApiDetailInterface .class);
         String sort = "documentDate,desc";
         Call<ArrayList<AttendanceDataResult>> call=service.getListAttendanceData("Bearer ".concat(idToken), idTimeSheet);
+        Log.d("request timesheetL ", call.request().toString());
         call.enqueue(new Callback<ArrayList<AttendanceDataResult>>() {
             @Override
             public void onResponse(Call<ArrayList<AttendanceDataResult>> call, Response<ArrayList<AttendanceDataResult>> response) {
-                Log.d("ini hasilnya ", response.body().toString());
+                Log.d("timesheetL response", response.body().toString());
                 if(response.isSuccessful()){
                     AdapterAttendanceDataList adapter = new AdapterAttendanceDataList(AddAttendanceCard.this,response.body(), idAssignment, idAssignmentDocNumber, idToken, idTimeSheet);
                     adapter.notifyDataSetChanged();

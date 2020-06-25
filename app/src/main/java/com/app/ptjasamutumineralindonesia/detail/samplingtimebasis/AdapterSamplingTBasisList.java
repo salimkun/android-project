@@ -68,6 +68,10 @@ public class AdapterSamplingTBasisList extends RecyclerView.Adapter<AdapterSampl
         holder.documentStatus.setText(listSamplingTBasis.get(position).getDocumentStatus());
         holder.documentNumber.setText(listSamplingTBasis.get(position).getDocumentNumber());
         holder.documentDate.setText(listSamplingTBasis.get(position).getDocumentDate().substring(0, 10));
+        holder.documentEtc.setText("Lot No: " + listSamplingTBasis.get(position).getLotNo() + " Total Lot: " +
+                listSamplingTBasis.get(position).getTotalLot());
+        holder.dateRange.setText(listSamplingTBasis.get(position).getStartTime().substring(0,10) + " - " +
+                listSamplingTBasis.get(position).getEndTime().substring(0,10));
         holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
@@ -75,6 +79,8 @@ public class AdapterSamplingTBasisList extends RecyclerView.Adapter<AdapterSampl
                 holder.documentStatus.setTextColor(Color.WHITE);
                 holder.documentNumber.setTextColor(Color.WHITE);
                 holder.documentDate.setTextColor(Color.WHITE);
+                holder.dateRange.setTextColor(Color.WHITE);
+                holder.documentEtc.setTextColor(Color.WHITE);
                 showAlertDialogButtonClicked(v, listSamplingTBasis.get(position).getId(), holder);
                 return false;
             }
@@ -99,6 +105,8 @@ public class AdapterSamplingTBasisList extends RecyclerView.Adapter<AdapterSampl
                 holder.documentStatus.setTextColor(Color.BLACK);
                 holder.documentNumber.setTextColor(Color.BLACK);
                 holder.documentDate.setTextColor(Color.BLACK);
+                holder.dateRange.setTextColor(Color.BLACK);
+                holder.documentEtc.setTextColor(Color.BLACK);
 
                 Intent intent = new Intent(context, AddSamplingTimeBasis.class);
                 intent.putExtra("idSamplingTBasis", idSamplingTBasis);
@@ -116,6 +124,8 @@ public class AdapterSamplingTBasisList extends RecyclerView.Adapter<AdapterSampl
                 holder.documentStatus.setTextColor(Color.BLACK);
                 holder.documentNumber.setTextColor(Color.BLACK);
                 holder.documentDate.setTextColor(Color.BLACK);
+                holder.dateRange.setTextColor(Color.BLACK);
+                holder.documentEtc.setTextColor(Color.BLACK);
 
                 // deleteAttendance;
                 Call<Void> call=service.deleteSamplingTBasis("Bearer ".concat(idToken), idSamplingTBasis);
@@ -123,6 +133,7 @@ public class AdapterSamplingTBasisList extends RecyclerView.Adapter<AdapterSampl
                     @Override
                     public void onResponse(Call<Void> call, Response<Void> response) {
                         Toast.makeText(context,"Success delete sampling mass basis",Toast.LENGTH_SHORT).show();
+                        holder.documentStatus.setText("DELETED");
                     }
 
                     @Override
@@ -143,6 +154,8 @@ public class AdapterSamplingTBasisList extends RecyclerView.Adapter<AdapterSampl
                 holder.documentStatus.setTextColor(Color.BLACK);
                 holder.documentNumber.setTextColor(Color.BLACK);
                 holder.documentDate.setTextColor(Color.BLACK);
+                holder.dateRange.setTextColor(Color.BLACK);
+                holder.documentEtc.setTextColor(Color.BLACK);
             }
         });
 
@@ -162,7 +175,7 @@ public class AdapterSamplingTBasisList extends RecyclerView.Adapter<AdapterSampl
     }
 
     class ListViewHolder extends RecyclerView.ViewHolder {
-        TextView documentNumber, documentDate, documentStatus;
+        TextView documentNumber, documentDate, documentStatus,  documentEtc, dateRange;
         LinearLayout viewSamplingTBasis;
 
         ListViewHolder(View itemView) {
@@ -171,6 +184,8 @@ public class AdapterSamplingTBasisList extends RecyclerView.Adapter<AdapterSampl
             documentNumber = itemView.findViewById(R.id.txt_docNumber_samplingtbasis);
             documentStatus = itemView.findViewById(R.id.txt_docStatus_samplingtbasis);
             viewSamplingTBasis = itemView.findViewById(R.id.view_list_samplingtbasis);
+            dateRange = itemView.findViewById(R.id.txt_dateRange_samplingtbasis);
+            documentEtc = itemView.findViewById(R.id.txt_etc_samplingtbasis);
         }
     }
 

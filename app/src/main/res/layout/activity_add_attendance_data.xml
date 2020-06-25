@@ -22,17 +22,10 @@
             android:orientation="vertical">
 
             <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textStyle="bold"
-                android:textAppearance="@android:style/TextAppearance.Medium"
-                android:text="Attendance Date" />
-
-            <TextView
                 android:layout_marginTop="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Attendance Time"
+                android:text="Timesheet Time"
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium"/>
 
             <EditText
@@ -68,7 +61,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Notes"
+                android:text="Remarks"
                 android:layout_marginTop="10dp"
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium"/>
 

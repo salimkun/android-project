@@ -62,10 +62,11 @@ public class AddSamplingTBasisLine extends AppCompatActivity {
     private Spinner spinnerCoalCondition, spinnerWeather;
     Calendar myCalendar;
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getSupportActionBar().setTitle("Add Sampling Time Basis Line");
+        getSupportActionBar().setTitle("Sampling Time Basis Line");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         setContentView(R.layout.activity_add_sampling_t_basis_line);
 
@@ -167,6 +168,9 @@ public class AddSamplingTBasisLine extends AppCompatActivity {
             }
         });
 
+
+        intervalDate.setText(LocalDateTime.now().toString().substring(0,10));
+        intervalTime.setText(LocalDateTime.now().toString().substring(11,16));
 
         btnSaveData = findViewById(R.id.btn_save_add_samplingTBasisLine);
         btnSaveData.setOnClickListener(new View.OnClickListener() {

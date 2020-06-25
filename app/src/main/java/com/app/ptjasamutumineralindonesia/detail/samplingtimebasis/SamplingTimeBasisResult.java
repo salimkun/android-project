@@ -1,35 +1,58 @@
 package com.app.ptjasamutumineralindonesia.detail.samplingtimebasis;
 
+import androidx.annotation.Nullable;
+
 public class SamplingTimeBasisResult {
+
     private String id;
     private String documentNumber;
     private String documentDate;
     private String documentStatus;
-    private double estimatedQuantity;
-    private double actualQuantity;
-    private int lotNo;
+    @Nullable
+    private String estimatedQuantity;
+    @Nullable
+    private String actualQuantity;
+    @Nullable
+    private String lotNo;
+    @Nullable
     private String standardTestMethod;
+    @Nullable
     private String startTime;
+    @Nullable
     private String endTime;
-    private int totalLot;
-    private double speedConveyor;
-    private double interval;
-    private double nominalTopSize;
+    @Nullable
+    private String totalLot;
+    @Nullable
+    private String speedConveyor;
+    @Nullable
+    private String interval;
+    @Nullable
+    private String nominalTopSize;
+    @Nullable
     private String coalType;
+    @Nullable
     private String vesselId;
     private String bargeId;
     private String shipperId;
     private String locationId;
+    @Nullable
     private String clientId;
     private String preparedById;
+    @Nullable
     private String checkedById;
+    @Nullable
     private String assignmentWorkOrderId;
+    @Nullable
     private String vesselName;
     private String bargeName;
     private String shipperName;
+    @Nullable
     private String locationName;
+    @Nullable
     private String preparedByName;
+    @Nullable
     private String checkedByName;
+    @Nullable
     private String assignmentWorkOrderDocumentNumber;
 
     public String getId() {
@@ -64,27 +87,27 @@ public class SamplingTimeBasisResult {
         this.documentStatus = documentStatus;
     }
 
-    public double getEstimatedQuantity() {
+    public String getEstimatedQuantity() {
         return estimatedQuantity;
     }
 
-    public void setEstimatedQuantity(double estimatedQuantity) {
+    public void setEstimatedQuantity(String estimatedQuantity) {
         this.estimatedQuantity = estimatedQuantity;
     }
 
-    public double getActualQuantity() {
+    public String getActualQuantity() {
         return actualQuantity;
     }
 
-    public void setActualQuantity(double actualQuantity) {
+    public void setActualQuantity(String actualQuantity) {
         this.actualQuantity = actualQuantity;
     }
 
-    public int getLotNo() {
+    public String getLotNo() {
         return lotNo;
     }
 
-    public void setLotNo(int lotNo) {
+    public void setLotNo(String lotNo) {
         this.lotNo = lotNo;
     }
 
@@ -92,7 +115,7 @@ public class SamplingTimeBasisResult {
         return standardTestMethod;
     }
 
-    public void setStandartTestMethod(String standartTestMethod) {
+    public void setStandardTestMethod(String standartTestMethod) {
         this.standardTestMethod = standardTestMethod;
     }
 
@@ -112,35 +135,35 @@ public class SamplingTimeBasisResult {
         this.endTime = endTime;
     }
 
-    public int getTotalLot() {
+    public String getTotalLot() {
         return totalLot;
     }
 
-    public void setTotalLot(int totalLot) {
+    public void setTotalLot(String totalLot) {
         this.totalLot = totalLot;
     }
 
-    public double getSpeedConveyor() {
+    public String getSpeedConveyor() {
         return speedConveyor;
     }
 
-    public void setSpeedConveyor(double speedConveyor) {
+    public void setSpeedConveyor(String speedConveyor) {
         this.speedConveyor = speedConveyor;
     }
 
-    public double getInterval() {
+    public String getInterval() {
         return interval;
     }
 
-    public void setInterval(double interval) {
+    public void setInterval(String interval) {
         this.interval = interval;
     }
 
-    public double getNominalTopSize() {
+    public String getNominalTopSize() {
         return nominalTopSize;
     }
 
-    public void setNominalTopSize(double nominalTopSize) {
+    public void setNominalTopSize(String nominalTopSize) {
         this.nominalTopSize = nominalTopSize;
     }
 

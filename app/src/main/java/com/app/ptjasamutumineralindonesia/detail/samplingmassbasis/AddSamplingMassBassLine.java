@@ -29,6 +29,7 @@ import com.google.gson.JsonParser;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.math.BigDecimal;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -58,12 +59,13 @@ public class AddSamplingMassBassLine extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getSupportActionBar().setTitle("Add Sampling Mass Basis Line");
+        getSupportActionBar().setTitle("Sampling Mass Basis Line");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         setContentView(R.layout.activity_add_sampling_mass_bass_line);
 
         editIncr = findViewById(R.id.edit_IncrNo_add_samplingMBasisLine);
         editInterval = findViewById(R.id.edit_interval_add_samplingMBasisLine);
+        editInterval.addTextChangedListener(new NumberTextWatcher(editInterval));
         editNotes = findViewById(R.id.edit_notes_add_samplingMBasisLine);
         ga = findViewById(R.id.ga_status_samplingMBasisLine);
         tm = findViewById(R.id.tm_status_samplingMBasisLine);
@@ -114,7 +116,7 @@ public class AddSamplingMassBassLine extends AppCompatActivity {
                         jsonObj_.put("coalCondition", spinnerCoalCondition.getSelectedItem().toString());
                         jsonObj_.put("ga", ga.isChecked());
                         jsonObj_.put("incrNo", editIncr.getText());
-                        jsonObj_.put("interval", editInterval.getText());
+                        jsonObj_.put("interval", BigDecimal.valueOf(Double.valueOf(editInterval.getText().toString().replace(",", ""))));
                         jsonObj_.put("remarks", editNotes.getText());
                         jsonObj_.put("sa", sa.isChecked());
                         jsonObj_.put("samplingMassBasisId", idSamplingMBasis);
@@ -155,7 +157,7 @@ public class AddSamplingMassBassLine extends AppCompatActivity {
                         jsonObj_.put("coalCondition", spinnerCoalCondition.getSelectedItem().toString());
                         jsonObj_.put("ga", ga.isChecked());
                         jsonObj_.put("incrNo", editIncr.getText());
-                        jsonObj_.put("interval", editInterval.getText());
+                        jsonObj_.put("interval", editInterval.getText().toString().replace(",", ""));
                         jsonObj_.put("remarks", editNotes.getText());
                         jsonObj_.put("sa", sa.isChecked());
                         jsonObj_.put("samplingMassBasisId", idSamplingMBasis);

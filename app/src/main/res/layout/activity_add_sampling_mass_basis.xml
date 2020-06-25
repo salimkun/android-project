@@ -132,7 +132,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:ems="10"
-                    android:inputType="number" />
+                    android:inputType="numberDecimal" />
 
                 <TextView
                     android:layout_width="match_parent"
@@ -146,7 +146,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:ems="10"
-                    android:inputType="number" />
+                    android:inputType="numberDecimal" />
 
                 <TextView
                     android:layout_width="match_parent"
@@ -238,7 +238,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:ems="10"
-                    android:inputType="number" />
+                    android:inputType="numberDecimal" />
 
                 <TextView
                     android:layout_width="match_parent"
@@ -252,7 +252,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:ems="10"
-                    android:inputType="number" />
+                    android:inputType="numberDecimal"/>
 
                 <TextView
                     android:layout_width="match_parent"
@@ -266,7 +266,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:ems="10"
-                    android:inputType="number" />
+                    android:inputType="numberDecimal" />
 
                 <TextView
                     android:layout_width="match_parent"
@@ -316,7 +316,7 @@
                         android:layout_height="wrap_content"
                         android:textAppearance="@android:style/TextAppearance.Medium"
                         android:textStyle="bold"
-                        android:text="Sampling Mass Basis Line"/>
+                        android:text="Sampling Mass Basis Lines"/>
 
                     <RelativeLayout
                         android:layout_marginTop="10dp"

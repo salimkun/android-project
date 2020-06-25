@@ -6,7 +6,7 @@ public class SampleDispatchResult {
     private String documentDate;
     private String documentStatus;
     private String jobNumber;
-    private int toonage;
+    private String toonage;
     private String dateSampling;
     private String sentTime;
     private String receivedTime;
@@ -65,11 +65,11 @@ public class SampleDispatchResult {
         this.jobNumber = jobNumber;
     }
 
-    public int getToonage() {
+    public String getToonage() {
         return toonage;
     }
 
-    public void setToonage(int toonage) {
+    public void setToonage(String toonage) {
         this.toonage = toonage;
     }
 

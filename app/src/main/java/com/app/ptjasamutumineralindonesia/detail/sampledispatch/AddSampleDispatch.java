@@ -31,6 +31,7 @@ import com.app.ptjasamutumineralindonesia.detail.samplingmassbasis.AdapterSampli
 import com.app.ptjasamutumineralindonesia.detail.samplingmassbasis.AddSamplingMassBasis;
 import com.app.ptjasamutumineralindonesia.detail.samplingmassbasis.AddSamplingMassBassLine;
 import com.app.ptjasamutumineralindonesia.detail.samplingmassbasis.EmployeResults;
+import com.app.ptjasamutumineralindonesia.detail.samplingmassbasis.NumberTextWatcher;
 import com.app.ptjasamutumineralindonesia.detail.samplingmassbasis.PartnerResults;
 import com.app.ptjasamutumineralindonesia.detail.samplingmassbasis.SamplingMassBasisLineResults;
 import com.app.ptjasamutumineralindonesia.detail.samplingmassbasis.SamplingMassBasisResult;
@@ -42,6 +43,7 @@ import com.google.gson.JsonParser;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
 import java.time.Instant;
 import java.time.LocalDate;
@@ -79,10 +81,11 @@ public class AddSampleDispatch extends AppCompatActivity {
 
     private RecyclerView viewListSampeDispatch;
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getSupportActionBar().setTitle("Add Sample Dispatch");
+        getSupportActionBar().setTitle("Sample Dispatch");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         setContentView(R.layout.activity_add_sample_dispatch);
 
@@ -94,11 +97,20 @@ public class AddSampleDispatch extends AppCompatActivity {
         docNumber = findViewById(R.id.docNumber_add_sampleDispatch);
         jobNumber = findViewById(R.id.jobNumber_add_sampleDispatch);
         toonage = findViewById(R.id.toonage_add_sampleDispatch);
+        toonage.setText("0");
+        toonage.addTextChangedListener(new NumberTextWatcher(toonage));
 
         docDate = findViewById(R.id.edit_docDate_add_sampleDispatch);
+        docDate.setText(LocalDateTime.now().toString().substring(0,10));
+
         samplingDate = findViewById(R.id.edit_samplingDate_add_sampleDispatch);
+        samplingDate.setText(LocalDateTime.now().toString().substring(0,10));
+
         sentTime = findViewById(R.id.edit_sentTime_add_sampleDispatch);
+        sentTime.setText(LocalDateTime.now().toString().substring(0,10));
+
         receivedTime = findViewById(R.id.edit_receivedTime_add_sampleDispatch);
+        receivedTime.setText(LocalDateTime.now().toString().substring(0,10));
 
         viewListSampleDispatchLine = findViewById(R.id.viewSampleDispatchLine);
         viewListSampleDispatchLine.setVisibility(LinearLayout.GONE);
@@ -229,153 +241,15 @@ public class AddSampleDispatch extends AppCompatActivity {
         spinnerReceivedBy = findViewById(R.id.spinner_receivedBy_add_sampleDispatch);
         setSpinnerPartner();
 
-        btnSaveAddSampleDispatch = findViewById(R.id.btn_save_add_sampleDispatch);
-        btnSaveAddSampleDispatch.setOnClickListener(new View.OnClickListener() {
-            @RequiresApi(api = Build.VERSION_CODES.O)
-            @Override
-            public void onClick(View v) {
-                JsonObject paramadd = new JsonObject();
-                LocalDate localDocDate = LocalDate.parse(docDate.getText());
-                Instant docDateInstant = localDocDate.atStartOfDay(ZoneId.of("UTC")).toInstant();
+        handlenoData = findViewById(R.id.txt_noData_sampledispatch_data);
+        handlenoData.setVisibility(View.INVISIBLE);
+        viewListSampeDispatch = findViewById(R.id.recyclerView_list_sampledispatch_data);
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false);
+        viewListSampeDispatch.setLayoutManager(layoutManager);
+        viewListSampeDispatch.setHasFixedSize(true);
 
-                LocalDate localSamplingDate = LocalDate.parse(samplingDate.getText());
-                Instant samplingDateInstant = localSamplingDate.atStartOfDay(ZoneId.of("UTC")).toInstant();
-
-                LocalDate localSentTime = LocalDate.parse(sentTime.getText());
-                Instant sentTimeInstant = localSentTime.atStartOfDay(ZoneId.of("UTC")).toInstant();
-
-                LocalDate localReceivedTime = LocalDate.parse(receivedTime.getText());
-                Instant receivedTimeInstant = localReceivedTime.atStartOfDay(ZoneId.of("UTC")).toInstant();
-
-                if (docNumber.getText().toString().equals("-") || docNumber.getText().toString().isEmpty()) {
-                    try {
-                        JSONObject jsonObj_ = new JSONObject();
-                        jsonObj_.put("assignmentWorkOrderDocumentNumber", idAssignmentDocNumber);
-                        jsonObj_.put("assignmentWorkOrderId", idAssignment);
-                        jsonObj_.put("bargeId", idBargeArr.get(spinnerBarge.getSelectedItemPosition()));
-                        jsonObj_.put("bargeName", spinnerBarge.getSelectedItem().toString());
-                        jsonObj_.put("clientId", null);
-                        jsonObj_.put("clientName", null);
-                        jsonObj_.put("companyId", null);
-                        jsonObj_.put("companyName", null);
-                        jsonObj_.put("dateSampling", samplingDateInstant);
-                        jsonObj_.put("documentDate", docDateInstant);
-                        jsonObj_.put("documentNumber", docNumber.getText());
-                        jsonObj_.put("documentStatus", spinnerDocStatus.getSelectedItem().toString());
-                        jsonObj_.put("jobNumber", jobNumber.getText());
-                        jsonObj_.put("receivedById", idEmployeeArr.get(spinnerReceivedBy.getSelectedItemPosition()));
-                        jsonObj_.put("receivedByName", spinnerReceivedBy.getSelectedItem().toString());
-                        jsonObj_.put("receivedTime", receivedTimeInstant);
-                        jsonObj_.put("sentById", null);
-                        jsonObj_.put("sentByName", null);
-                        jsonObj_.put("sentTime", sentTimeInstant);
-                        jsonObj_.put("tonnage", toonage.getText());
-                        jsonObj_.put("vesselId", idVesselArr.get(spinnerVessel.getSelectedItemPosition()));
-                        jsonObj_.put("vesselName", spinnerVessel.getSelectedItem().toString());
-
-                        JsonParser jsonParser = new JsonParser();
-                        paramadd = (JsonObject) jsonParser.parse(jsonObj_.toString());
-
-                        //print parameter
-                        Log.d("parameter for add  ", "AS PARAMETER  " + paramadd);
-
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
-                    Call<SampleDispatchResult> call = service.addSampleDispatch("Bearer ".concat(idToken), paramadd);
-                    Log.d("request add attendace", call.request().toString());
-                    call.enqueue(new Callback<SampleDispatchResult>() {
-                        @Override
-                        public void onResponse(Call<SampleDispatchResult> call, Response<SampleDispatchResult> response) {
-                            Log.d("ini loh", response.raw().toString());
-                            if (!response.isSuccessful()) {
-                                Toast.makeText(getBaseContext(), response.raw().toString(), Toast.LENGTH_SHORT).show();
-                            } else {
-                                Toast.makeText(getBaseContext(), "Success Created", Toast.LENGTH_SHORT).show();
-                                docNumber.setText(response.body().getDocumentNumber());
-                            }
-                        }
-
-                        @Override
-                        public void onFailure(Call<SampleDispatchResult> call, Throwable t) {
-                            //for getting error in network put here Toast, so get the error on network
-                            Toast.makeText(getBaseContext(), "Failed to add sample dispatch, please try at a moment", Toast.LENGTH_SHORT).show();
-                        }
-                    });
-
-                } else {
-                    try {
-                        JSONObject jsonObj_ = new JSONObject();
-                        jsonObj_.put("assignmentWorkOrderDocumentNumber", idAssignmentDocNumber);
-                        jsonObj_.put("assignmentWorkOrderId", idAssignment);
-                        jsonObj_.put("bargeId", idBargeArr.get(spinnerBarge.getSelectedItemPosition()));
-                        jsonObj_.put("bargeName", spinnerBarge.getSelectedItem().toString());
-                        jsonObj_.put("clientId", null);
-                        jsonObj_.put("clientName", null);
-                        jsonObj_.put("companyId", null);
-                        jsonObj_.put("companyName", null);
-                        jsonObj_.put("dateSampling", samplingDateInstant);
-                        jsonObj_.put("documentDate", docDateInstant);
-                        jsonObj_.put("documentNumber", docNumber.getText());
-                        jsonObj_.put("documentStatus", spinnerDocStatus.getSelectedItem().toString());
-                        jsonObj_.put("jobNumber", jobNumber.getText());
-                        jsonObj_.put("receivedById", idEmployeeArr.get(spinnerReceivedBy.getSelectedItemPosition()));
-                        jsonObj_.put("receivedByName", spinnerReceivedBy.getSelectedItem().toString());
-                        jsonObj_.put("receivedTime", receivedTimeInstant);
-                        jsonObj_.put("sentById", null);
-                        jsonObj_.put("sentByName", null);
-                        jsonObj_.put("sentTime", sentTimeInstant);
-                        jsonObj_.put("tonnage", toonage.getText());
-                        jsonObj_.put("vesselId", idVesselArr.get(spinnerVessel.getSelectedItemPosition()));
-                        jsonObj_.put("vesselName", spinnerVessel.getSelectedItem().toString());
-                        jsonObj_.put("id", idSampleDispatch);
-
-                        JsonParser jsonParser = new JsonParser();
-                        paramadd = (JsonObject) jsonParser.parse(jsonObj_.toString());
-
-                        //print parameter
-                        Log.d("parameter for add  ", "AS PARAMETER  " + paramadd);
-
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
-                    Call<SampleDispatchResult> call = service.updateSampleDispatch("Bearer ".concat(idToken), paramadd);
-                    Log.d("request put attendace", call.request().toString());
-                    call.enqueue(new Callback<SampleDispatchResult>() {
-                        @Override
-                        public void onResponse(Call<SampleDispatchResult> call, Response<SampleDispatchResult> response) {
-                            if (!response.isSuccessful()) {
-                                Toast.makeText(getBaseContext(), response.raw().toString(), Toast.LENGTH_SHORT).show();
-                            } else {
-                                Toast.makeText(getBaseContext(), "Success Updated", Toast.LENGTH_SHORT).show();
-                                docNumber.setText(response.body().getDocumentNumber());
-                            }
-                        }
-
-                        @Override
-                        public void onFailure(Call<SampleDispatchResult> call, Throwable t) {
-                            //for getting error in network put here Toast, so get the error on network
-                            Toast.makeText(getBaseContext(), "Failed to update sample dispatch, please try at a moment", Toast.LENGTH_SHORT).show();
-                        }
-                    });
-                }
-
-                viewListSampleDispatchLine.setVisibility(LinearLayout.VISIBLE);
-            }
-        });
-
-        btnCancel = findViewById(R.id.btn_cancel_add_sampleDispatch);
-        btnCancel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(AddSampleDispatch.this, DetailAssignment.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
-                intent.putExtra("idAssignment", idAssignment);
-                intent.putExtra("idAssingmentDocNumber", idAssignmentDocNumber);
-                startActivity(intent);
-                finish();
-            }
-        });
+        viewListSampeDispatch.setLayoutManager(new LinearLayoutManager(this));//Vertikal Layout Manager
+        viewListSampeDispatch.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
 
         if (idSampleDispatch!=null){
             Call<SampleDispatchResult> call=service.getDetailSampleDispatch("Bearer ".concat(idToken), idSampleDispatch);
@@ -466,7 +340,158 @@ public class AddSampleDispatch extends AppCompatActivity {
 
 
             viewListSampleDispatchLine.setVisibility(LinearLayout.VISIBLE);
+            loadData();
         }
+
+        btnSaveAddSampleDispatch = findViewById(R.id.btn_save_add_sampleDispatch);
+        btnSaveAddSampleDispatch.setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.O)
+            @Override
+            public void onClick(View v) {
+                JsonObject paramadd = new JsonObject();
+                LocalDate localDocDate = LocalDate.parse(docDate.getText());
+                Instant docDateInstant = localDocDate.atStartOfDay(ZoneId.of("UTC")).toInstant();
+
+                LocalDate localSamplingDate = LocalDate.parse(samplingDate.getText());
+                Instant samplingDateInstant = localSamplingDate.atStartOfDay(ZoneId.of("UTC")).toInstant();
+
+                LocalDate localSentTime = LocalDate.parse(sentTime.getText());
+                Instant sentTimeInstant = localSentTime.atStartOfDay(ZoneId.of("UTC")).toInstant();
+
+                LocalDate localReceivedTime = LocalDate.parse(receivedTime.getText());
+                Instant receivedTimeInstant = localReceivedTime.atStartOfDay(ZoneId.of("UTC")).toInstant();
+
+                if (docNumber.getText().toString().equals("-") || docNumber.getText().toString().isEmpty()) {
+                    try {
+                        JSONObject jsonObj_ = new JSONObject();
+                        jsonObj_.put("assignmentWorkOrderDocumentNumber", idAssignmentDocNumber);
+                        jsonObj_.put("assignmentWorkOrderId", idAssignment);
+                        jsonObj_.put("bargeId", idBargeArr.get(spinnerBarge.getSelectedItemPosition()));
+                        jsonObj_.put("bargeName", spinnerBarge.getSelectedItem().toString());
+                        jsonObj_.put("clientId", null);
+                        jsonObj_.put("clientName", null);
+                        jsonObj_.put("companyId", null);
+                        jsonObj_.put("companyName", null);
+                        jsonObj_.put("dateSampling", samplingDateInstant);
+                        jsonObj_.put("documentDate", docDateInstant);
+                        jsonObj_.put("documentNumber", docNumber.getText());
+                        jsonObj_.put("documentStatus", spinnerDocStatus.getSelectedItem().toString());
+                        jsonObj_.put("jobNumber", jobNumber.getText());
+                        jsonObj_.put("receivedById", idEmployeeArr.get(spinnerReceivedBy.getSelectedItemPosition()));
+                        jsonObj_.put("receivedByName", spinnerReceivedBy.getSelectedItem().toString());
+                        jsonObj_.put("receivedTime", receivedTimeInstant);
+                        jsonObj_.put("sentById", null);
+                        jsonObj_.put("sentByName", null);
+                        jsonObj_.put("sentTime", sentTimeInstant);
+                        jsonObj_.put("toonage", BigDecimal.valueOf(Double.valueOf(toonage.getText().toString().replace(",", ""))));
+                        jsonObj_.put("vesselId", idVesselArr.get(spinnerVessel.getSelectedItemPosition()));
+                        jsonObj_.put("vesselName", spinnerVessel.getSelectedItem().toString());
+
+                        JsonParser jsonParser = new JsonParser();
+                        paramadd = (JsonObject) jsonParser.parse(jsonObj_.toString());
+
+                        //print parameter
+                        Log.d("parameter for add  ", "AS PARAMETER  " + paramadd);
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                    Call<SampleDispatchResult> call = service.addSampleDispatch("Bearer ".concat(idToken), paramadd);
+                    Log.d("request add attendace", call.request().toString());
+                    call.enqueue(new Callback<SampleDispatchResult>() {
+                        @Override
+                        public void onResponse(Call<SampleDispatchResult> call, Response<SampleDispatchResult> response) {
+                            Log.d("ini loh", response.raw().toString());
+                            if (!response.isSuccessful()) {
+                                Toast.makeText(getBaseContext(), response.raw().toString(), Toast.LENGTH_SHORT).show();
+                            } else {
+                                Toast.makeText(getBaseContext(), "Success Created", Toast.LENGTH_SHORT).show();
+                                docNumber.setText(response.body().getDocumentNumber());
+                                idSampleDispatch = response.body().getId();
+                                loadData();
+                            }
+                        }
+
+                        @Override
+                        public void onFailure(Call<SampleDispatchResult> call, Throwable t) {
+                            //for getting error in network put here Toast, so get the error on network
+                            Toast.makeText(getBaseContext(), "Failed to add sample dispatch, please try at a moment", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+
+                } else {
+                    try {
+                        JSONObject jsonObj_ = new JSONObject();
+                        jsonObj_.put("assignmentWorkOrderDocumentNumber", idAssignmentDocNumber);
+                        jsonObj_.put("assignmentWorkOrderId", idAssignment);
+                        jsonObj_.put("bargeId", idBargeArr.get(spinnerBarge.getSelectedItemPosition()));
+                        jsonObj_.put("bargeName", spinnerBarge.getSelectedItem().toString());
+                        jsonObj_.put("clientId", null);
+                        jsonObj_.put("clientName", null);
+                        jsonObj_.put("companyId", null);
+                        jsonObj_.put("companyName", null);
+                        jsonObj_.put("dateSampling", samplingDateInstant);
+                        jsonObj_.put("documentDate", docDateInstant);
+                        jsonObj_.put("documentNumber", docNumber.getText());
+                        jsonObj_.put("documentStatus", spinnerDocStatus.getSelectedItem().toString());
+                        jsonObj_.put("jobNumber", jobNumber.getText());
+                        jsonObj_.put("receivedById", idEmployeeArr.get(spinnerReceivedBy.getSelectedItemPosition()));
+                        jsonObj_.put("receivedByName", spinnerReceivedBy.getSelectedItem().toString());
+                        jsonObj_.put("receivedTime", receivedTimeInstant);
+                        jsonObj_.put("sentById", null);
+                        jsonObj_.put("sentByName", null);
+                        jsonObj_.put("sentTime", sentTimeInstant);
+                        jsonObj_.put("toonage", BigDecimal.valueOf(Double.valueOf(toonage.getText().toString().replace(",", ""))));
+                        jsonObj_.put("vesselId", idVesselArr.get(spinnerVessel.getSelectedItemPosition()));
+                        jsonObj_.put("vesselName", spinnerVessel.getSelectedItem().toString());
+                        jsonObj_.put("id", idSampleDispatch);
+
+                        JsonParser jsonParser = new JsonParser();
+                        paramadd = (JsonObject) jsonParser.parse(jsonObj_.toString());
+
+                        //print parameter
+                        Log.d("parameter for add  ", "AS PARAMETER  " + paramadd);
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                    Call<SampleDispatchResult> call = service.updateSampleDispatch("Bearer ".concat(idToken), paramadd);
+                    Log.d("request put attendace", call.request().toString());
+                    call.enqueue(new Callback<SampleDispatchResult>() {
+                        @Override
+                        public void onResponse(Call<SampleDispatchResult> call, Response<SampleDispatchResult> response) {
+                            if (!response.isSuccessful()) {
+                                Toast.makeText(getBaseContext(), response.raw().toString(), Toast.LENGTH_SHORT).show();
+                            } else {
+                                Toast.makeText(getBaseContext(), "Success Updated", Toast.LENGTH_SHORT).show();
+                                docNumber.setText(response.body().getDocumentNumber());
+                            }
+                        }
+
+                        @Override
+                        public void onFailure(Call<SampleDispatchResult> call, Throwable t) {
+                            //for getting error in network put here Toast, so get the error on network
+                            Toast.makeText(getBaseContext(), "Failed to update sample dispatch, please try at a moment", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                }
+
+                viewListSampleDispatchLine.setVisibility(LinearLayout.VISIBLE);
+            }
+        });
+
+        btnCancel = findViewById(R.id.btn_cancel_add_sampleDispatch);
+        btnCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(AddSampleDispatch.this, DetailAssignment.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                intent.putExtra("idAssignment", idAssignment);
+                intent.putExtra("idAssingmentDocNumber", idAssignmentDocNumber);
+                startActivity(intent);
+                finish();
+            }
+        });
 
         btnAddSampleDispatchLine = findViewById(R.id.btn_add_sampleDispatch_data);
         btnAddSampleDispatchLine.setOnClickListener(new View.OnClickListener() {
@@ -482,18 +507,6 @@ public class AddSampleDispatch extends AppCompatActivity {
                 finish();
             }
         });
-
-        handlenoData = findViewById(R.id.txt_noData_sampledispatch_data);
-        handlenoData.setVisibility(View.INVISIBLE);
-        viewListSampeDispatch = findViewById(R.id.recyclerView_list_sampledispatch_data);
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false);
-        viewListSampeDispatch.setLayoutManager(layoutManager);
-        viewListSampeDispatch.setHasFixedSize(true);
-
-        viewListSampeDispatch.setLayoutManager(new LinearLayoutManager(this));//Vertikal Layout Manager
-        viewListSampeDispatch.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
-
-        loadData();
 
         searcSampleDispatchLines = findViewById(R.id.search_sampleDispatch_data);
         searcSampleDispatchLines.setOnQueryTextListener(new SearchView.OnQueryTextListener() {

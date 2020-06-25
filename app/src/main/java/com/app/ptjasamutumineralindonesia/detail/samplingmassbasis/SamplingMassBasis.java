@@ -21,7 +21,10 @@ import com.app.ptjasamutumineralindonesia.R;
 import com.app.ptjasamutumineralindonesia.detail.ApiDetailInterface;
 import com.app.ptjasamutumineralindonesia.detail.attendancecard.AddAttendanceCard;
 import com.app.ptjasamutumineralindonesia.detail.attendancecard.AttendanceResult;
+import com.app.ptjasamutumineralindonesia.detail.samplingtimebasis.SamplingTimeBasis;
+import com.app.ptjasamutumineralindonesia.detail.samplingtimebasis.SamplingTimeBasisResult;
 import com.app.ptjasamutumineralindonesia.helpers.ApiBase;
+import com.app.ptjasamutumineralindonesia.login.ApiLoginInterface;
 import com.app.ptjasamutumineralindonesia.sharepreference.LoginManager;
 
 import java.util.ArrayList;
@@ -43,13 +46,12 @@ public class SamplingMassBasis extends Fragment {
     private static final String ARG_PARAM2 = "idAssignmentDocNumber";
     LoginManager sharedPrefManager;
     private RecyclerView viewListSamplingMBasis;
-    private ArrayList<AttendanceResult> list = new ArrayList<>();
     private Retrofit retrofit;
     TextView handlenoData;
     String idToken;
     SearchView searchSamplingBasis;
     Button btnAdd;
-
+    ApiDetailInterface service;
     // TODO: Rename and change types of parameters
     String idAssignment, idAssignmentDocNumber;
 
@@ -101,6 +103,7 @@ public class SamplingMassBasis extends Fragment {
 
         // for show list sampler
         retrofit = ApiBase.getClient();
+        service = retrofit.create(ApiDetailInterface .class);
         idToken = sharedPrefManager.getAccessToken();
         loadData();
 
@@ -148,7 +151,6 @@ public class SamplingMassBasis extends Fragment {
     }
 
     public void search_sampling(String query){
-        ApiDetailInterface service = retrofit.create(ApiDetailInterface .class);
         Call<ArrayList<SamplingMassBasisResult>> call=service.searchListSamplingMBasis("Bearer ".concat(idToken), idAssignment, query);
         call.enqueue(new Callback<ArrayList<SamplingMassBasisResult>>() {
             @Override
@@ -176,13 +178,13 @@ public class SamplingMassBasis extends Fragment {
     }
 
     public void loadData(){
-        ApiDetailInterface service = retrofit.create(ApiDetailInterface .class);
         String sort = "documentDate,desc";
-        Call<ArrayList<SamplingMassBasisResult>> call=service.getListSamplingMBasis("Bearer ".concat(idToken), idAssignment, sort);
+        ApiDetailInterface services = retrofit.create(ApiDetailInterface .class);
+        Call<ArrayList<SamplingMassBasisResult>> call=services.getListSamplingMBasis("Bearer ".concat(idToken), idAssignment, sort);
+        Log.d("samamamamama", call.request().toString());
         call.enqueue(new Callback<ArrayList<SamplingMassBasisResult>>() {
             @Override
             public void onResponse(Call<ArrayList<SamplingMassBasisResult>> call, Response<ArrayList<SamplingMassBasisResult>> response) {
-                Log.d("ini hasilnya sampling" , response.body().toString());
                 if(response.isSuccessful()){
                     AdapterSamplingMBasisList adapter = new AdapterSamplingMBasisList(getContext(),response.body(), idAssignment, idAssignmentDocNumber, idToken);
                     adapter.notifyDataSetChanged();
@@ -207,7 +209,8 @@ public class SamplingMassBasis extends Fragment {
                 //for getting error in network put here Toast, so get the error on network
                 viewListSamplingMBasis.setVisibility(View.INVISIBLE);
                 handlenoData.setVisibility(View.VISIBLE);
-                Toast.makeText(getContext(),"Failed to get roles, please try at a moment",Toast.LENGTH_SHORT).show();
+                Log.d("error bos", idAssignment + " " + t.getLocalizedMessage() + t.toString());
+                Toast.makeText(getContext(),"Failed to get list sampling mass basis, please try at a moment " + idAssignment + t.getLocalizedMessage(),Toast.LENGTH_SHORT).show();
             }
         });
     }

@@ -1,5 +1,6 @@
 package com.app.ptjasamutumineralindonesia.detail.attendancecard;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -16,10 +17,15 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
+import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.app.ptjasamutumineralindonesia.R;
 import com.app.ptjasamutumineralindonesia.detail.ApiDetailInterface;
+import com.app.ptjasamutumineralindonesia.detail.DetailAssignment;
+import com.app.ptjasamutumineralindonesia.detail.sampledispatch.SampleDispatch;
+import com.app.ptjasamutumineralindonesia.detail.samplingmassbasis.SamplingMassBasis;
+import com.app.ptjasamutumineralindonesia.detail.samplingtimebasis.SamplingTimeBasis;
 import com.app.ptjasamutumineralindonesia.helpers.ApiBase;
 import com.app.ptjasamutumineralindonesia.role.Role;
 import com.app.ptjasamutumineralindonesia.sharepreference.LoginManager;
@@ -67,6 +73,7 @@ public class AdapterAttendanceList extends RecyclerView.Adapter<AdapterAttendanc
 
         holder.documentStatus.setText(listAttendance.get(position).getDocumentStatus());
         holder.documentNumber.setText(listAttendance.get(position).getDocumentNumber());
+        holder.barge.setText(listAttendance.get(position).getBargeName());
         holder.documentDate.setText(listAttendance.get(position).getDocumentDate().substring(0, 10));
 
         holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
@@ -76,6 +83,7 @@ public class AdapterAttendanceList extends RecyclerView.Adapter<AdapterAttendanc
                 holder.documentStatus.setTextColor(Color.WHITE);
                 holder.documentNumber.setTextColor(Color.WHITE);
                 holder.documentDate.setTextColor(Color.WHITE);
+                holder.barge.setTextColor(Color.WHITE);
                 showAlertDialogButtonClicked(v, listAttendance.get(position).getId(), holder);
                 return false;
             }
@@ -99,6 +107,7 @@ public class AdapterAttendanceList extends RecyclerView.Adapter<AdapterAttendanc
                 holder.documentStatus.setTextColor(Color.BLACK);
                 holder.documentNumber.setTextColor(Color.BLACK);
                 holder.documentDate.setTextColor(Color.BLACK);
+                holder.barge.setTextColor(Color.BLACK);
 
                 Intent intent = new Intent(context, AddAttendanceCard.class);
                 intent.putExtra("idTimeSheet", idTimeSheet);
@@ -116,6 +125,7 @@ public class AdapterAttendanceList extends RecyclerView.Adapter<AdapterAttendanc
                 holder.documentStatus.setTextColor(Color.BLACK);
                 holder.documentNumber.setTextColor(Color.BLACK);
                 holder.documentDate.setTextColor(Color.BLACK);
+                holder.barge.setTextColor(Color.BLACK);
 
                 // deleteAttendance;
                 Call<Void> call=service.deleteAttendance("Bearer ".concat(idToken), idTimeSheet);
@@ -123,6 +133,7 @@ public class AdapterAttendanceList extends RecyclerView.Adapter<AdapterAttendanc
                     @Override
                     public void onResponse(Call<Void> call, Response<Void> response) {
                         Toast.makeText(context,"Success delete attendance card",Toast.LENGTH_SHORT).show();
+                        holder.documentStatus.setText("DELETED");
                     }
 
                     @Override
@@ -132,7 +143,12 @@ public class AdapterAttendanceList extends RecyclerView.Adapter<AdapterAttendanc
                     }
                 });
 
-                AttendanceCard.newInstance(idAssignment, idAssignmentDocNumber);
+//                Intent intent = new Intent(context, DetailAssignment.class);
+//                intent.putExtra("idAssignment", idAssignment);
+//                intent.putExtra("idAssignmentDocNumber", idAssignmentDocNumber);
+//
+//                context.startActivities(new Intent[]{intent});
+//                ((Activity)context).finish();
             }
         });
 
@@ -143,6 +159,7 @@ public class AdapterAttendanceList extends RecyclerView.Adapter<AdapterAttendanc
                 holder.documentStatus.setTextColor(Color.BLACK);
                 holder.documentNumber.setTextColor(Color.BLACK);
                 holder.documentDate.setTextColor(Color.BLACK);
+                holder.barge.setTextColor(Color.BLACK);
             }
         });
 
@@ -162,7 +179,7 @@ public class AdapterAttendanceList extends RecyclerView.Adapter<AdapterAttendanc
     }
 
     class ListViewHolder extends RecyclerView.ViewHolder {
-        TextView documentNumber, documentDate, documentStatus;
+        TextView documentNumber, documentDate, documentStatus, barge;
         LinearLayout viewAttendance;
 
         ListViewHolder(View itemView) {
@@ -171,6 +188,8 @@ public class AdapterAttendanceList extends RecyclerView.Adapter<AdapterAttendanc
             documentNumber = itemView.findViewById(R.id.txt_docNumber_attendance);
             documentStatus = itemView.findViewById(R.id.txt_docStatus_attendance);
             viewAttendance = itemView.findViewById(R.id.view_list_attendance);
+            barge = itemView.findViewById(R.id.txt_barge_attendance);
+            barge.setVisibility(View.VISIBLE);
         }
     }
 

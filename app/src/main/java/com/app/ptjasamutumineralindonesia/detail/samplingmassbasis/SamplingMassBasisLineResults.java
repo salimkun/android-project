@@ -5,7 +5,7 @@ public class SamplingMassBasisLineResults {
     private Boolean ga;
     private String id;
     private int incrNo;
-    private int interval;
+    private String interval;
     private String remarks;
     private Boolean sa;
     private String samplingMassBasisId;
@@ -44,11 +44,11 @@ public class SamplingMassBasisLineResults {
         this.incrNo = incrNo;
     }
 
-    public int getInterval() {
+    public String getInterval() {
         return interval;
     }
 
-    public void setInterval(int interval) {
+    public void setInterval(String interval) {
         this.interval = interval;
     }
 

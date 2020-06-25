@@ -57,7 +57,7 @@ public class AddSampleDispatchLines extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getSupportActionBar().setTitle("Add Sample Dispatch Line");
+        getSupportActionBar().setTitle("Sample Dispatch Line");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         setContentView(R.layout.activity_add_sample_dispatch_lines);
 

@@ -78,9 +78,8 @@ public interface ApiDetailInterface {
     @GET("sampling-mass-bases-by-assigment-work-order")
     Call<ArrayList<SamplingMassBasisResult>> getListSamplingMBasis(
             @Header("Authorization") String token, @Query("assignmentWorkOrderId") String assignmentWorkOrderId, @Query("sort") String sort);
-//    @Query("page") int page, @Query("size") int size
 
-    @GET("_search/sampling-mass-bases-by-assignment-work-order")
+    @GET("_search/sampling-mass-bases-by-assigment-work-order")
     Call<ArrayList<SamplingMassBasisResult>> searchListSamplingMBasis(
             @Header("Authorization") String token, @Query("assignmentWorkOrderId") String assignmentWorkOrderId, @Query("query") String query);
 

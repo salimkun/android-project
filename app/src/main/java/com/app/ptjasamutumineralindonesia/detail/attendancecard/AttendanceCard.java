@@ -212,7 +212,7 @@ public class AttendanceCard extends Fragment {
                 //for getting error in network put here Toast, so get the error on network
                 viewListAttendance.setVisibility(View.INVISIBLE);
                 handlenoData.setVisibility(View.VISIBLE);
-                Toast.makeText(getContext(),"Failed to get roles, please try at a moment",Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(),"Failed to get timesheet list, please try at a moment",Toast.LENGTH_SHORT).show();
             }
         });
     }

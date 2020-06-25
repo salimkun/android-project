@@ -22,13 +22,6 @@
                 android:orientation="vertical">
 
                 <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textStyle="bold"
-                    android:textAppearance="@android:style/TextAppearance.Medium"
-                    android:text="Sampling Time Basis Line" />
-
-                <TextView
                     android:layout_marginTop="10dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -125,7 +118,7 @@
                     android:layout_marginTop="10dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Notes"
+                    android:text="Remarks"
                     android:textAppearance="@style/TextAppearance.AppCompat.Medium"/>
 
                 <EditText

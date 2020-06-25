@@ -33,6 +33,7 @@ import com.app.ptjasamutumineralindonesia.detail.sampledispatch.SeaPortResults;
 import com.app.ptjasamutumineralindonesia.detail.samplingmassbasis.AdapterSamplingMBLineList;
 import com.app.ptjasamutumineralindonesia.detail.samplingmassbasis.AddSamplingMassBassLine;
 import com.app.ptjasamutumineralindonesia.detail.samplingmassbasis.EmployeResults;
+import com.app.ptjasamutumineralindonesia.detail.samplingmassbasis.NumberTextWatcher;
 import com.app.ptjasamutumineralindonesia.detail.samplingmassbasis.PartnerResults;
 import com.app.ptjasamutumineralindonesia.detail.samplingmassbasis.SamplingMassBasisLineResults;
 import com.app.ptjasamutumineralindonesia.detail.samplingmassbasis.SamplingMassBasisResult;
@@ -44,6 +45,7 @@ import com.google.gson.JsonParser;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
 import java.time.Instant;
 import java.time.LocalDate;
@@ -83,10 +85,11 @@ public class AddSamplingTimeBasis extends AppCompatActivity {
 
     private RecyclerView viewListSamplingTBLines;
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getSupportActionBar().setTitle("Add Sampling Time Basis");
+        getSupportActionBar().setTitle("Sampling Time Basis");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         setContentView(R.layout.activity_add_sampling_t_basis);
 
@@ -251,6 +254,21 @@ public class AddSamplingTimeBasis extends AppCompatActivity {
             }
         });
 
+        estimatedQuantity.setText("0");
+        estimatedQuantity.addTextChangedListener(new NumberTextWatcher(estimatedQuantity));
+        actualQuantity.setText("0");
+        actualQuantity.addTextChangedListener(new NumberTextWatcher(actualQuantity));
+        speedConveyor.setText("0");
+        speedConveyor.addTextChangedListener(new NumberTextWatcher(speedConveyor));
+        interval.setText("0");
+        interval.addTextChangedListener(new NumberTextWatcher(interval));
+        nominalTopSize.setText("0");
+        nominalTopSize.addTextChangedListener(new NumberTextWatcher(nominalTopSize));
+        startDate.setText(LocalDateTime.now().toString().substring(0,10));
+        startTime.setText(LocalDateTime.now().toString().substring(11,16));
+        endDate.setText(LocalDateTime.now().toString().substring(0,10));
+        endTime.setText(LocalDateTime.now().toString().substring(11,16));
+        docDate.setText(LocalDateTime.now().toString().substring(0,10));
 
         spinnerDocStatus = findViewById(R.id.spinner_docStatus_add_samplingTBasis);
         final String[] docStatusArr =  {"CREATED", "UPDATED", "DELETED", "REVISED", "REVIEWED", "ACCEPTED", "REJECTED", "VALIDATED", "APPROVED"};
@@ -297,167 +315,15 @@ public class AddSamplingTimeBasis extends AppCompatActivity {
         spinnerCheckedBy = findViewById(R.id.spinner_checkedBy_add_samplingTBasis);
         setSpinnerCheckedBy();
 
-        btnSaveAddSamplingTBasis = findViewById(R.id.btn_save_add_samplingTBasis);
-        btnSaveAddSamplingTBasis.setOnClickListener(new View.OnClickListener() {
-            @RequiresApi(api = Build.VERSION_CODES.O)
-            @Override
-            public void onClick(View v) {
-                JsonObject paramadd = new JsonObject();
-                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-                LocalDateTime startD = LocalDateTime.parse(startDate.getText().toString().concat(" ").concat(startTime.getText().toString()).concat(":00"), formatter);
-                Instant startDateInstant = startD.atZone(ZoneId.of("UTC")).toInstant();
+        handlenoData = findViewById(R.id.txt_noData_samplingTBasis_data);
+        handlenoData.setVisibility(View.INVISIBLE);
+        viewListSamplingTBLines = findViewById(R.id.recyclerView_list_samplingTBasis_data);
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false);
+        viewListSamplingTBLines.setLayoutManager(layoutManager);
+        viewListSamplingTBLines.setHasFixedSize(true);
 
-                LocalDateTime endD = LocalDateTime.parse(endDate.getText().toString().concat(" ").concat(endTime.getText().toString()).concat(":00"), formatter);
-                Instant endDateInstant = startD.atZone(ZoneId.of("UTC")).toInstant();
-
-                LocalDate localDate = LocalDate.parse(docDate.getText());
-                Instant documentDate = localDate.atStartOfDay(ZoneId.of("UTC")).toInstant();
-                if (docNumber.getText().toString().equals("-") || docNumber.getText().toString().isEmpty()) {
-                    try {
-                        JSONObject jsonObj_ = new JSONObject();
-                        jsonObj_.put("actualQuantity", actualQuantity.getText());
-                        jsonObj_.put("assignmentWorkOrderDocumentNumber", idAssignmentDocNumber);
-                        jsonObj_.put("assignmentWorkOrderId", idAssignment);
-                        jsonObj_.put("bargeId", idBargeArr.get(spinnerBarge.getSelectedItemPosition()));
-                        jsonObj_.put("bargeName", spinnerBarge.getSelectedItem().toString());
-                        jsonObj_.put("checkedById", idCheckedByArr.get(spinnerCheckedBy.getSelectedItemPosition()));
-                        jsonObj_.put("checkedByName", spinnerCheckedBy.getSelectedItem().toString());
-                        jsonObj_.put("clientId", null);
-                        jsonObj_.put("clientName", null);
-                        jsonObj_.put("documentDate", documentDate.toString());
-                        jsonObj_.put("documentNumber", docNumber.getText());
-                        jsonObj_.put("documentStatus", spinnerDocStatus.getSelectedItem().toString());
-                        jsonObj_.put("endTime", endDateInstant);
-                        jsonObj_.put("estimatedQuantity", estimatedQuantity.getText());
-                        jsonObj_.put("interval", interval.getText());
-                        jsonObj_.put("locationId", idLocationArr.get(spinnerLocation.getSelectedItemPosition()));
-                        jsonObj_.put("locationName", spinnerLocation.getSelectedItem().toString());
-                        jsonObj_.put("lotNo", lotNo.getText().toString());
-                        jsonObj_.put("nominalTopSize", nominalTopSize.getText());
-                        jsonObj_.put("preparedById", null);
-                        jsonObj_.put("preparedByName", null);
-                        jsonObj_.put("shipperId", idPartnerArr.get(spinnerPartner.getSelectedItemPosition()));
-                        jsonObj_.put("shipperName", spinnerPartner.getSelectedItem().toString());
-                        jsonObj_.put("speedConveyor", speedConveyor.getText().toString());
-                        jsonObj_.put("standardTestMethod", spinnerSTM.getSelectedItem().toString());
-                        jsonObj_.put("startTime", startDateInstant);
-                        jsonObj_.put("totalLot", totalLot.getText());
-                        jsonObj_.put("vesselId", idVesselArr.get(spinnerVessel.getSelectedItemPosition()));
-                        jsonObj_.put("vesselName", spinnerVessel.getSelectedItem().toString());
-                        jsonObj_.put("coalType", spinnerCoalType.getSelectedItem().toString());
-                        jsonObj_.put("standardTestMethod", spinnerSTM.getSelectedItem().toString());
-                        JsonParser jsonParser = new JsonParser();
-                        paramadd = (JsonObject) jsonParser.parse(jsonObj_.toString());
-
-                        //print parameter
-                        Log.d("parameter for add  ", "AS PARAMETER  " + paramadd);
-
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
-                    Call<SamplingTimeBasisResult> call = service.addSamplingTBasis("Bearer ".concat(idToken), paramadd);
-                    Log.d("request add attendace", call.request().toString());
-                    call.enqueue(new Callback<SamplingTimeBasisResult>() {
-                        @Override
-                        public void onResponse(Call<SamplingTimeBasisResult> call, Response<SamplingTimeBasisResult> response) {
-                            Log.d("ini loh", response.raw().toString());
-                            if (!response.isSuccessful()) {
-                                Toast.makeText(getBaseContext(), response.raw().toString(), Toast.LENGTH_SHORT).show();
-                            } else {
-                                Toast.makeText(getBaseContext(), "Success Created", Toast.LENGTH_SHORT).show();
-                                docNumber.setText(response.body().getDocumentNumber());
-                            }
-                        }
-
-                        @Override
-                        public void onFailure(Call<SamplingTimeBasisResult> call, Throwable t) {
-                            //for getting error in network put here Toast, so get the error on network
-                            Toast.makeText(getBaseContext(), "Failed to add samplingTB, please try at a moment", Toast.LENGTH_SHORT).show();
-                        }
-                    });
-
-                } else {
-                    try {
-                        JSONObject jsonObj_ = new JSONObject();
-                        jsonObj_.put("actualQuantity", actualQuantity.getText());
-                        jsonObj_.put("assignmentWorkOrderDocumentNumber", idAssignmentDocNumber);
-                        jsonObj_.put("assignmentWorkOrderId", idAssignment);
-                        jsonObj_.put("bargeId", idBargeArr.get(spinnerBarge.getSelectedItemPosition()));
-                        jsonObj_.put("bargeName", spinnerBarge.getSelectedItem().toString());
-                        jsonObj_.put("checkedById", idCheckedByArr.get(spinnerCheckedBy.getSelectedItemPosition()));
-                        jsonObj_.put("checkedByName", spinnerCheckedBy.getSelectedItem().toString());
-                        jsonObj_.put("clientId", null);
-                        jsonObj_.put("clientName", null);
-                        jsonObj_.put("documentDate", documentDate.toString());
-                        jsonObj_.put("documentNumber", docNumber.getText());
-                        jsonObj_.put("documentStatus", spinnerDocStatus.getSelectedItem().toString());
-                        jsonObj_.put("endTime", endDateInstant);
-                        jsonObj_.put("estimatedQuantity", estimatedQuantity.getText());
-                        jsonObj_.put("interval", interval.getText());
-                        jsonObj_.put("locationId", idLocationArr.get(spinnerLocation.getSelectedItemPosition()));
-                        jsonObj_.put("locationName", spinnerLocation.getSelectedItem().toString());
-                        jsonObj_.put("lotNo", lotNo.getText().toString());
-                        jsonObj_.put("nominalTopSize", nominalTopSize.getText());
-                        jsonObj_.put("preparedById", null);
-                        jsonObj_.put("preparedByName", null);
-                        jsonObj_.put("shipperId", idPartnerArr.get(spinnerPartner.getSelectedItemPosition()));
-                        jsonObj_.put("shipperName", spinnerPartner.getSelectedItem().toString());
-                        jsonObj_.put("speedConveyor", speedConveyor.getText().toString());
-                        jsonObj_.put("standardTestMethod", spinnerSTM.getSelectedItem().toString());
-                        jsonObj_.put("startTime", startDateInstant);
-                        jsonObj_.put("totalLot", totalLot.getText());
-                        jsonObj_.put("vesselId", idVesselArr.get(spinnerVessel.getSelectedItemPosition()));
-                        jsonObj_.put("vesselName", spinnerVessel.getSelectedItem().toString());
-                        jsonObj_.put("id", idSamplingTBasis);
-                        jsonObj_.put("coalType", spinnerCoalType.getSelectedItem().toString());
-                        jsonObj_.put("standardTestMethod", spinnerSTM.getSelectedItem().toString());
-
-                        JsonParser jsonParser = new JsonParser();
-                        paramadd = (JsonObject) jsonParser.parse(jsonObj_.toString());
-
-                        //print parameter
-                        Log.d("parameter for add  ", "AS PARAMETER  " + paramadd);
-
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
-                    Call<SamplingTimeBasisResult> call = service.updateSamplingTBasis("Bearer ".concat(idToken), paramadd);
-                    Log.d("request put attendace", call.request().toString());
-                    call.enqueue(new Callback<SamplingTimeBasisResult>() {
-                        @Override
-                        public void onResponse(Call<SamplingTimeBasisResult> call, Response<SamplingTimeBasisResult> response) {
-                            if (!response.isSuccessful()) {
-                                Toast.makeText(getBaseContext(), response.raw().toString(), Toast.LENGTH_SHORT).show();
-                            } else {
-                                Toast.makeText(getBaseContext(), "Success Updated", Toast.LENGTH_SHORT).show();
-                                docNumber.setText(response.body().getDocumentNumber());
-                            }
-                        }
-
-                        @Override
-                        public void onFailure(Call<SamplingTimeBasisResult> call, Throwable t) {
-                            //for getting error in network put here Toast, so get the error on network
-                            Toast.makeText(getBaseContext(), "Failed to update samplingTBasis, please try at a moment", Toast.LENGTH_SHORT).show();
-                        }
-                    });
-                }
-
-                viewTimeBasisLine.setVisibility(LinearLayout.VISIBLE);
-            }
-        });
-
-        btnCancel = findViewById(R.id.btn_cancel_add_samplingTBasis);
-        btnCancel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(AddSamplingTimeBasis.this, DetailAssignment.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
-                intent.putExtra("idAssignment", idAssignment);
-                intent.putExtra("idAssingmentDocNumber", idAssignmentDocNumber);
-                startActivity(intent);
-                finish();
-            }
-        });
+        viewListSamplingTBLines.setLayoutManager(new LinearLayoutManager(this));//Vertikal Layout Manager
+        viewListSamplingTBLines.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
 
         if (idSamplingTBasis!=null){
             // perintah buat nampilin list
@@ -476,30 +342,14 @@ public class AddSamplingTimeBasis extends AppCompatActivity {
                         startTime.setText(response.body().getStartTime().substring(11,16));
                         endDate.setText(response.body().getEndTime().substring(0,10));
                         endTime.setText(response.body().getEndTime().substring(11,16));
-                        estimatedQuantity.setText(
-                                String.valueOf(response.body().getEstimatedQuantity()
-                                ).substring( 0, String.valueOf(response.body().getEstimatedQuantity()
-                                ).indexOf(".")));
-                        actualQuantity.setText(
-                                String.valueOf(response.body().getActualQuantity()
-                                ).substring( 0, String.valueOf(response.body().getActualQuantity()
-                                ).indexOf(".")));
-                        lotNo.setText(
-                                String.valueOf(response.body().getLotNo()));
+                        estimatedQuantity.setText(response.body().getEstimatedQuantity());
+                        actualQuantity.setText(response.body().getActualQuantity());
+                        lotNo.setText(String.valueOf(response.body().getLotNo()));
                         totalLot.setText(
                                 String.valueOf(response.body().getTotalLot()));
-                        speedConveyor.setText(
-                                String.valueOf(response.body().getSpeedConveyor()
-                                ).substring( 0,  String.valueOf(response.body().getSpeedConveyor()
-                                ).indexOf(".")));
-                        interval.setText(
-                                String.valueOf(response.body().getInterval()
-                                ).substring( 0,  String.valueOf(response.body().getInterval()
-                                ).indexOf(".")));
-                        nominalTopSize.setText(
-                                String.valueOf(response.body().getNominalTopSize()
-                                ).substring( 0,  String.valueOf(response.body().getNominalTopSize()
-                                ).indexOf(".")));
+                        speedConveyor.setText(response.body().getSpeedConveyor());
+                        interval.setText(response.body().getInterval());
+                        nominalTopSize.setText(response.body().getNominalTopSize());
 
                         int valStatus=0;
                         switch (response.body().getDocumentStatus()){
@@ -534,11 +384,17 @@ public class AddSamplingTimeBasis extends AppCompatActivity {
                         spinnerDocStatus.setSelection(valStatus);
 
                         int valcoal=0;
-                        switch (response.body().getCoalType()){
+                        String coal;
+                        if (response.body().getCoalType()==null){
+                            coal = "";
+                        } else {
+                            coal = response.body().getCoalType();
+                        }
+                        switch (coal){
                             case "CRUSHER":
                                 valcoal = 0;
                                 break;
-                            case "RAW":
+                            default:
                                 valcoal = 1;
                                 break;
                         }
@@ -608,7 +464,172 @@ public class AddSamplingTimeBasis extends AppCompatActivity {
             });
 
             viewTimeBasisLine.setVisibility(LinearLayout.VISIBLE);
+            loadData();
         }
+
+        btnSaveAddSamplingTBasis = findViewById(R.id.btn_save_add_samplingTBasis);
+        btnSaveAddSamplingTBasis.setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.O)
+            @Override
+            public void onClick(View v) {
+                JsonObject paramadd = new JsonObject();
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+                LocalDateTime startD = LocalDateTime.parse(startDate.getText().toString().concat(" ").concat(startTime.getText().toString()).concat(":00"), formatter);
+                Instant startDateInstant = startD.atZone(ZoneId.of("UTC")).toInstant();
+
+                LocalDateTime endD = LocalDateTime.parse(endDate.getText().toString().concat(" ").concat(endTime.getText().toString()).concat(":00"), formatter);
+                Instant endDateInstant = startD.atZone(ZoneId.of("UTC")).toInstant();
+
+                LocalDate localDate = LocalDate.parse(docDate.getText());
+                Instant documentDate = localDate.atStartOfDay(ZoneId.of("UTC")).toInstant();
+                if (docNumber.getText().toString().equals("-") || docNumber.getText().toString().isEmpty()) {
+                    try {
+                        JSONObject jsonObj_ = new JSONObject();
+                        jsonObj_.put("actualQuantity", BigDecimal.valueOf(Double.valueOf(actualQuantity.getText().toString().replace(",", ""))));
+                        jsonObj_.put("assignmentWorkOrderDocumentNumber", idAssignmentDocNumber);
+                        jsonObj_.put("assignmentWorkOrderId", idAssignment);
+                        jsonObj_.put("bargeId", idBargeArr.get(spinnerBarge.getSelectedItemPosition()));
+                        jsonObj_.put("bargeName", spinnerBarge.getSelectedItem().toString());
+                        jsonObj_.put("checkedById", idCheckedByArr.get(spinnerCheckedBy.getSelectedItemPosition()));
+                        jsonObj_.put("checkedByName", spinnerCheckedBy.getSelectedItem().toString());
+                        jsonObj_.put("clientId", null);
+                        jsonObj_.put("clientName", null);
+                        jsonObj_.put("documentDate", documentDate.toString());
+                        jsonObj_.put("documentNumber", docNumber.getText());
+                        jsonObj_.put("documentStatus", spinnerDocStatus.getSelectedItem().toString());
+                        jsonObj_.put("endTime", endDateInstant);
+                        jsonObj_.put("estimatedQuantity", BigDecimal.valueOf(Double.valueOf(estimatedQuantity.getText().toString().replace(",", ""))));
+                        jsonObj_.put("interval", BigDecimal.valueOf(Double.valueOf(interval.getText().toString().replace(",", ""))));
+                        jsonObj_.put("locationId", idLocationArr.get(spinnerLocation.getSelectedItemPosition()));
+                        jsonObj_.put("locationName", spinnerLocation.getSelectedItem().toString());
+                        jsonObj_.put("lotNo", lotNo.getText().toString());
+                        jsonObj_.put("nominalTopSize", BigDecimal.valueOf(Double.valueOf(nominalTopSize.getText().toString().replace(",", ""))));
+                        jsonObj_.put("preparedById", null);
+                        jsonObj_.put("preparedByName", null);
+                        jsonObj_.put("shipperId", idPartnerArr.get(spinnerPartner.getSelectedItemPosition()));
+                        jsonObj_.put("shipperName", spinnerPartner.getSelectedItem().toString());
+                        jsonObj_.put("speedConveyor", BigDecimal.valueOf(Double.valueOf(speedConveyor.getText().toString().replace(",", ""))));
+                        jsonObj_.put("standardTestMethod", spinnerSTM.getSelectedItem().toString());
+                        jsonObj_.put("startTime", startDateInstant);
+                        jsonObj_.put("totalLot", totalLot.getText());
+                        jsonObj_.put("vesselId", idVesselArr.get(spinnerVessel.getSelectedItemPosition()));
+                        jsonObj_.put("vesselName", spinnerVessel.getSelectedItem().toString());
+                        jsonObj_.put("coalType", spinnerCoalType.getSelectedItem().toString());
+                        jsonObj_.put("standardTestMethod", spinnerSTM.getSelectedItem().toString());
+                        JsonParser jsonParser = new JsonParser();
+                        paramadd = (JsonObject) jsonParser.parse(jsonObj_.toString());
+
+                        //print parameter
+                        Log.d("parameter for add  ", "AS PARAMETER  " + paramadd);
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                    Call<SamplingTimeBasisResult> call = service.addSamplingTBasis("Bearer ".concat(idToken), paramadd);
+                    Log.d("request add attendace", call.request().toString());
+                    call.enqueue(new Callback<SamplingTimeBasisResult>() {
+                        @Override
+                        public void onResponse(Call<SamplingTimeBasisResult> call, Response<SamplingTimeBasisResult> response) {
+                            Log.d("ini loh", response.raw().toString());
+                            if (!response.isSuccessful()) {
+                                Toast.makeText(getBaseContext(), response.raw().toString(), Toast.LENGTH_SHORT).show();
+                            } else {
+                                Toast.makeText(getBaseContext(), "Success Created", Toast.LENGTH_SHORT).show();
+                                docNumber.setText(response.body().getDocumentNumber());
+                                idSamplingTBasis = response.body().getId();
+                                loadData();
+                            }
+                        }
+
+                        @Override
+                        public void onFailure(Call<SamplingTimeBasisResult> call, Throwable t) {
+                            //for getting error in network put here Toast, so get the error on network
+                            Toast.makeText(getBaseContext(), "Failed to add samplingTB, please try at a moment", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+
+                } else {
+                    try {
+                        JSONObject jsonObj_ = new JSONObject();
+                        jsonObj_.put("actualQuantity", BigDecimal.valueOf(Double.valueOf(actualQuantity.getText().toString().replace(",", ""))));
+                        jsonObj_.put("assignmentWorkOrderDocumentNumber", idAssignmentDocNumber);
+                        jsonObj_.put("assignmentWorkOrderId", idAssignment);
+                        jsonObj_.put("bargeId", idBargeArr.get(spinnerBarge.getSelectedItemPosition()));
+                        jsonObj_.put("bargeName", spinnerBarge.getSelectedItem().toString());
+                        jsonObj_.put("checkedById", idCheckedByArr.get(spinnerCheckedBy.getSelectedItemPosition()));
+                        jsonObj_.put("checkedByName", spinnerCheckedBy.getSelectedItem().toString());
+                        jsonObj_.put("clientId", null);
+                        jsonObj_.put("clientName", null);
+                        jsonObj_.put("documentDate", documentDate.toString());
+                        jsonObj_.put("documentNumber", docNumber.getText());
+                        jsonObj_.put("documentStatus", spinnerDocStatus.getSelectedItem().toString());
+                        jsonObj_.put("endTime", endDateInstant);
+                        jsonObj_.put("estimatedQuantity", BigDecimal.valueOf(Double.valueOf(estimatedQuantity.getText().toString().replace(",", ""))));
+                        jsonObj_.put("interval", BigDecimal.valueOf(Double.valueOf(interval.getText().toString().replace(",", ""))));
+                        jsonObj_.put("locationId", idLocationArr.get(spinnerLocation.getSelectedItemPosition()));
+                        jsonObj_.put("locationName", spinnerLocation.getSelectedItem().toString());
+                        jsonObj_.put("lotNo", lotNo.getText().toString());
+                        jsonObj_.put("nominalTopSize", BigDecimal.valueOf(Double.valueOf(nominalTopSize.getText().toString().replace(",", ""))));
+                        jsonObj_.put("preparedById", null);
+                        jsonObj_.put("preparedByName", null);
+                        jsonObj_.put("shipperId", idPartnerArr.get(spinnerPartner.getSelectedItemPosition()));
+                        jsonObj_.put("shipperName", spinnerPartner.getSelectedItem().toString());
+                        jsonObj_.put("speedConveyor", BigDecimal.valueOf(Double.valueOf(speedConveyor.getText().toString().replace(",", ""))));
+                        jsonObj_.put("standardTestMethod", spinnerSTM.getSelectedItem().toString());
+                        jsonObj_.put("startTime", startDateInstant);
+                        jsonObj_.put("totalLot", totalLot.getText());
+                        jsonObj_.put("vesselId", idVesselArr.get(spinnerVessel.getSelectedItemPosition()));
+                        jsonObj_.put("vesselName", spinnerVessel.getSelectedItem().toString());
+                        jsonObj_.put("id", idSamplingTBasis);
+                        jsonObj_.put("coalType", spinnerCoalType.getSelectedItem().toString());
+                        jsonObj_.put("standardTestMethod", spinnerSTM.getSelectedItem().toString());
+
+                        JsonParser jsonParser = new JsonParser();
+                        paramadd = (JsonObject) jsonParser.parse(jsonObj_.toString());
+
+                        //print parameter
+                        Log.d("parameter for add  ", "AS PARAMETER  " + paramadd);
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                    Call<SamplingTimeBasisResult> call = service.updateSamplingTBasis("Bearer ".concat(idToken), paramadd);
+                    Log.d("request put attendace", call.request().toString());
+                    call.enqueue(new Callback<SamplingTimeBasisResult>() {
+                        @Override
+                        public void onResponse(Call<SamplingTimeBasisResult> call, Response<SamplingTimeBasisResult> response) {
+                            if (!response.isSuccessful()) {
+                                Toast.makeText(getBaseContext(), response.raw().toString(), Toast.LENGTH_SHORT).show();
+                            } else {
+                                Toast.makeText(getBaseContext(), "Success Updated", Toast.LENGTH_SHORT).show();
+                                docNumber.setText(response.body().getDocumentNumber());
+                            }
+                        }
+
+                        @Override
+                        public void onFailure(Call<SamplingTimeBasisResult> call, Throwable t) {
+                            //for getting error in network put here Toast, so get the error on network
+                            Toast.makeText(getBaseContext(), "Failed to update samplingTBasis, please try at a moment", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                }
+
+                viewTimeBasisLine.setVisibility(LinearLayout.VISIBLE);
+            }
+        });
+
+        btnCancel = findViewById(R.id.btn_cancel_add_samplingTBasis);
+        btnCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(AddSamplingTimeBasis.this, DetailAssignment.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                intent.putExtra("idAssignment", idAssignment);
+                intent.putExtra("idAssingmentDocNumber", idAssignmentDocNumber);
+                startActivity(intent);
+                finish();
+            }
+        });
 
         btnAddSamplingTBasisData = findViewById(R.id.btn_add_samplingTBasis_data);
         btnAddSamplingTBasisData.setOnClickListener(new View.OnClickListener() {
@@ -624,18 +645,6 @@ public class AddSamplingTimeBasis extends AppCompatActivity {
                 finish();
             }
         });
-
-        handlenoData = findViewById(R.id.txt_noData_samplingTBasis_data);
-        handlenoData.setVisibility(View.INVISIBLE);
-        viewListSamplingTBLines = findViewById(R.id.recyclerView_list_samplingTBasis_data);
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false);
-        viewListSamplingTBLines.setLayoutManager(layoutManager);
-        viewListSamplingTBLines.setHasFixedSize(true);
-
-        viewListSamplingTBLines.setLayoutManager(new LinearLayoutManager(this));//Vertikal Layout Manager
-        viewListSamplingTBLines.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
-
-        loadData();
 
         searcSamplingTBasisLines = findViewById(R.id.search_samplingTBasis_data);
         searcSamplingTBasisLines.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
