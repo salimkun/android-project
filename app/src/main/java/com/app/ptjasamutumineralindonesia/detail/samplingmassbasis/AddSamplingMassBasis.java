@@ -341,9 +341,21 @@ public class AddSamplingMassBasis extends AppCompatActivity {
                         endTime.setText(response.body().getEndTime().substring(11,16));
                         estimatedQuantity.setText(response.body().getEstimatedQuantity());
                         actualQuantity.setText(response.body().getActualQuantity());
-                        lotNo.setText(String.valueOf(response.body().getLotNo()));
-                        totalLot.setText(
-                                String.valueOf(response.body().getTotalLot()));
+                        String lot;
+                        if (response.body().getLotNo() == null || response.body().getLotNo().isEmpty()){
+                            lot = "";
+                        } else {
+                            lot = response.body().getLotNo();
+                        }
+
+                        String total;
+                        if ( response.body().getTotalLot() == null || response.body().getTotalLot().isEmpty()){
+                            total = "";
+                        } else {
+                            total = response.body().getTotalLot();
+                        }
+                        lotNo.setText(lot);
+                        totalLot.setText(total);
                         speedConveyor.setText(response.body().getSpeedConveyor());
                         interval.setText(response.body().getInterval());
                         nominalTopSize.setText(response.body().getNominalTopSize());

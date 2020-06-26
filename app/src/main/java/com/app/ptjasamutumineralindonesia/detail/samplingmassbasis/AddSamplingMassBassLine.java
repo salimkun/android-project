@@ -65,6 +65,7 @@ public class AddSamplingMassBassLine extends AppCompatActivity {
 
         editIncr = findViewById(R.id.edit_IncrNo_add_samplingMBasisLine);
         editInterval = findViewById(R.id.edit_interval_add_samplingMBasisLine);
+        editInterval.setText("0");
         editInterval.addTextChangedListener(new NumberTextWatcher(editInterval));
         editNotes = findViewById(R.id.edit_notes_add_samplingMBasisLine);
         ga = findViewById(R.id.ga_status_samplingMBasisLine);

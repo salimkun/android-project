@@ -344,9 +344,21 @@ public class AddSamplingTimeBasis extends AppCompatActivity {
                         endTime.setText(response.body().getEndTime().substring(11,16));
                         estimatedQuantity.setText(response.body().getEstimatedQuantity());
                         actualQuantity.setText(response.body().getActualQuantity());
-                        lotNo.setText(String.valueOf(response.body().getLotNo()));
-                        totalLot.setText(
-                                String.valueOf(response.body().getTotalLot()));
+                        String lot;
+                        if (response.body().getLotNo() == null || response.body().getLotNo().isEmpty()){
+                            lot = "";
+                        } else {
+                            lot = response.body().getLotNo();
+                        }
+
+                        String total;
+                        if ( response.body().getTotalLot() == null || response.body().getTotalLot().isEmpty()){
+                            total = "";
+                        } else {
+                            total = response.body().getTotalLot();
+                        }
+                        lotNo.setText(lot);
+                        totalLot.setText(total);
                         speedConveyor.setText(response.body().getSpeedConveyor());
                         interval.setText(response.body().getInterval());
                         nominalTopSize.setText(response.body().getNominalTopSize());
@@ -459,7 +471,7 @@ public class AddSamplingTimeBasis extends AppCompatActivity {
                 @Override
                 public void onFailure(Call<SamplingTimeBasisResult> call, Throwable t) {
                     //for getting error in network put here Toast, so get the error on network
-                    Toast.makeText(getBaseContext(),"Failed to add attendance card, please try at a moment",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getBaseContext(),"Failed to get detail sampling time basis, please try at a moment",Toast.LENGTH_SHORT).show();
                 }
             });
 

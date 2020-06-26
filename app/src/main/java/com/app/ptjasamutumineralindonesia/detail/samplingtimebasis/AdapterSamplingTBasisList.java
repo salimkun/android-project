@@ -68,8 +68,20 @@ public class AdapterSamplingTBasisList extends RecyclerView.Adapter<AdapterSampl
         holder.documentStatus.setText(listSamplingTBasis.get(position).getDocumentStatus());
         holder.documentNumber.setText(listSamplingTBasis.get(position).getDocumentNumber());
         holder.documentDate.setText(listSamplingTBasis.get(position).getDocumentDate().substring(0, 10));
-        holder.documentEtc.setText("Lot No: " + listSamplingTBasis.get(position).getLotNo() + " Total Lot: " +
-                listSamplingTBasis.get(position).getTotalLot());
+        String lot;
+        if (listSamplingTBasis.get(position).getLotNo() == null || listSamplingTBasis.get(position).getLotNo().isEmpty()){
+            lot = "''";
+        } else {
+            lot = listSamplingTBasis.get(position).getLotNo();
+        }
+
+        String total;
+        if ( listSamplingTBasis.get(position).getTotalLot() == null || listSamplingTBasis.get(position).getTotalLot().isEmpty()){
+            total = "''";
+        } else {
+            total = listSamplingTBasis.get(position).getTotalLot();
+        }
+        holder.documentEtc.setText("Lot No: ".concat(lot).concat(" Total Lot: ").concat(total));
         holder.dateRange.setText(listSamplingTBasis.get(position).getStartTime().substring(0,10) + " - " +
                 listSamplingTBasis.get(position).getEndTime().substring(0,10));
         holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {

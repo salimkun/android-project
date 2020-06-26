@@ -31,6 +31,8 @@ import android.widget.Toast;
 import com.app.ptjasamutumineralindonesia.R;
 import com.app.ptjasamutumineralindonesia.detail.ApiDetailInterface;
 import com.app.ptjasamutumineralindonesia.detail.DetailAssignment;
+import com.app.ptjasamutumineralindonesia.detail.sampledispatch.AddSampleDispatch;
+import com.app.ptjasamutumineralindonesia.detail.sampledispatch.AddSampleDispatchLines;
 import com.app.ptjasamutumineralindonesia.helpers.ApiBase;
 import com.app.ptjasamutumineralindonesia.sharepreference.LoginManager;
 import com.google.gson.JsonObject;
@@ -65,7 +67,7 @@ public class AddAttendanceData extends AppCompatActivity {
     private Spinner spinnerWeather;
     private EditText editDate, editTime, notes;
     Calendar myCalendar;
-    Button btnSaveData;
+    Button btnSaveData, btnCancelData;
     private String idToken;
     LoginManager sharedPrefManager;
     ApiDetailInterface service;
@@ -277,6 +279,20 @@ public class AddAttendanceData extends AppCompatActivity {
 //                startActivity(intent);
 //                finish();
 
+            }
+        });
+
+        btnCancelData = findViewById(R.id.btn_cancel_add_attendance_data);
+        btnCancelData.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(AddAttendanceData.this, AddAttendanceCard.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                intent.putExtra("idAssignment", idAssignment);
+                intent.putExtra("idAssignmentDocNumber", idAssignmentDocNumber);
+                intent.putExtra("idTimeSheet", idTimeSheet);
+                startActivity(intent);
+                finish();
             }
         });
 
