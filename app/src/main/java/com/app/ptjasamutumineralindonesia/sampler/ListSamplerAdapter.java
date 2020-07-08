@@ -31,6 +31,7 @@ public class ListSamplerAdapter extends RecyclerView.Adapter<ListSamplerAdapter.
         this.listSampler = list;
         this.context = context;
         sharedPrefManager = new LoginManager(context);
+        sharedPrefManager = new LoginManager(context);
     }
 
     private OnItemClickCallback onItemClickCallback;

@@ -62,9 +62,9 @@ public class AdapterAttendanceDataList extends RecyclerView.Adapter<AdapterAtten
     @Override
     public void onBindViewHolder(@NonNull final AdapterAttendanceDataList.ListViewHolder holder, final int position) {
 
-        holder.documentStatus.setText(listAttendance.get(position).getRemarks());
-        holder.documentNumber.setText(listAttendance.get(position).getWeatherType());
-        holder.documentDate.setText(listAttendance.get(position).getTimesheetTime().substring(0,10).concat(" ").concat(listAttendance.get(position).getTimesheetTime().substring(11,16)));
+        holder.documentStatus.setText("Remarks : " +listAttendance.get(position).getRemarks());
+        holder.documentNumber.setText("Weather Type : " + listAttendance.get(position).getWeatherType());
+        holder.documentDate.setText("Timesheet Time : " + listAttendance.get(position).getTimesheetTime().substring(0,10).concat(" ").concat(listAttendance.get(position).getTimesheetTime().substring(11,16)));
 
         holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
             @Override

@@ -147,7 +147,7 @@ public class AddSampleDispatchLines extends AppCompatActivity {
                         paramadd = (JsonObject) jsonParser.parse(jsonObj_.toString());
 
                         //print parameter
-                        Log.d("parameter for add  ", "AS PARAMETER  " + paramadd);
+                        Log.d("parameter for update  ", "AS PARAMETER  " + paramadd);
 
                     } catch (JSONException e) {
                         e.printStackTrace();
@@ -204,7 +204,13 @@ public class AddSampleDispatchLines extends AppCompatActivity {
                         editSealNum.setText(response.body().getSealNumber());
 
                         int valDispatchType=0;
-                        switch (response.body().getDispatchType()){
+                        String dispatchType;
+                        if (response.body().getDispatchType()==null){
+                            dispatchType = "";
+                        } else {
+                            dispatchType = response.body().getDispatchType();
+                        }
+                        switch (dispatchType){
                             case "LAB":
                                 valDispatchType = 0;
                                 break;

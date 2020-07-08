@@ -30,7 +30,6 @@ import android.widget.Toast;
 import com.app.ptjasamutumineralindonesia.R;
 import com.app.ptjasamutumineralindonesia.detail.ApiDetailInterface;
 import com.app.ptjasamutumineralindonesia.detail.DetailAssignment;
-import com.app.ptjasamutumineralindonesia.detail.attendancecard.AddAttendanceCard;
 import com.app.ptjasamutumineralindonesia.detail.attendancecard.BargeResults;
 import com.app.ptjasamutumineralindonesia.detail.sampledispatch.SeaPortResults;
 import com.app.ptjasamutumineralindonesia.helpers.ApiBase;
@@ -468,7 +467,7 @@ public class AddSamplingMassBasis extends AppCompatActivity {
                 @Override
                 public void onFailure(Call<SamplingMassBasisResult> call, Throwable t) {
                     //for getting error in network put here Toast, so get the error on network
-                    Toast.makeText(getBaseContext(),"Failed to add attendance card, please try at a moment",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getBaseContext(),"Failed to add SamplingMB, please try at a moment",Toast.LENGTH_SHORT).show();
                 }
             });
 
@@ -535,7 +534,7 @@ public class AddSamplingMassBasis extends AppCompatActivity {
                         e.printStackTrace();
                     }
                     Call<SamplingMassBasisResult> call = service.addSamplingMBasis("Bearer ".concat(idToken), paramadd);
-                    Log.d("request add attendace", call.request().toString());
+                    Log.d("request add samplingMB", call.request().toString());
                     call.enqueue(new Callback<SamplingMassBasisResult>() {
                         @Override
                         public void onResponse(Call<SamplingMassBasisResult> call, Response<SamplingMassBasisResult> response) {
@@ -603,7 +602,7 @@ public class AddSamplingMassBasis extends AppCompatActivity {
                         e.printStackTrace();
                     }
                     Call<SamplingMassBasisResult> call = service.updateSamplingMBasis("Bearer ".concat(idToken), paramadd);
-                    Log.d("request put attendace", call.request().toString());
+                    Log.d("request put samplingMB", call.request().toString());
                     call.enqueue(new Callback<SamplingMassBasisResult>() {
                         @Override
                         public void onResponse(Call<SamplingMassBasisResult> call, Response<SamplingMassBasisResult> response) {
@@ -961,6 +960,7 @@ public class AddSamplingMassBasis extends AppCompatActivity {
         spinnerCheckedByAdapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
         spinnerCheckedBy.setAdapter(spinnerCheckedByAdapter);
     }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {

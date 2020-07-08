@@ -30,13 +30,9 @@ import com.app.ptjasamutumineralindonesia.detail.ApiDetailInterface;
 import com.app.ptjasamutumineralindonesia.detail.DetailAssignment;
 import com.app.ptjasamutumineralindonesia.detail.attendancecard.BargeResults;
 import com.app.ptjasamutumineralindonesia.detail.sampledispatch.SeaPortResults;
-import com.app.ptjasamutumineralindonesia.detail.samplingmassbasis.AdapterSamplingMBLineList;
-import com.app.ptjasamutumineralindonesia.detail.samplingmassbasis.AddSamplingMassBassLine;
 import com.app.ptjasamutumineralindonesia.detail.samplingmassbasis.EmployeResults;
 import com.app.ptjasamutumineralindonesia.detail.samplingmassbasis.NumberTextWatcher;
 import com.app.ptjasamutumineralindonesia.detail.samplingmassbasis.PartnerResults;
-import com.app.ptjasamutumineralindonesia.detail.samplingmassbasis.SamplingMassBasisLineResults;
-import com.app.ptjasamutumineralindonesia.detail.samplingmassbasis.SamplingMassBasisResult;
 import com.app.ptjasamutumineralindonesia.helpers.ApiBase;
 import com.app.ptjasamutumineralindonesia.sharepreference.LoginManager;
 import com.google.gson.JsonObject;
@@ -490,7 +486,7 @@ public class AddSamplingTimeBasis extends AppCompatActivity {
                 Instant startDateInstant = startD.atZone(ZoneId.of("UTC")).toInstant();
 
                 LocalDateTime endD = LocalDateTime.parse(endDate.getText().toString().concat(" ").concat(endTime.getText().toString()).concat(":00"), formatter);
-                Instant endDateInstant = startD.atZone(ZoneId.of("UTC")).toInstant();
+                Instant endDateInstant = endD.atZone(ZoneId.of("UTC")).toInstant();
 
                 LocalDate localDate = LocalDate.parse(docDate.getText());
                 Instant documentDate = localDate.atStartOfDay(ZoneId.of("UTC")).toInstant();

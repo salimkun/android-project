@@ -6,6 +6,9 @@
         android:icon="@drawable/ic_search"
         app:showAsAction="collapseActionView|ifRoom"
         app:actionViewClass="android.widget.SearchView" />
+    <item android:id="@+id/refresh"
+        android:title="Refresh"
+        android:icon="@drawable/ic_logout"/>
     <item android:id="@+id/logOut"
         android:title="Logout"
         android:icon="@drawable/ic_logout"/>

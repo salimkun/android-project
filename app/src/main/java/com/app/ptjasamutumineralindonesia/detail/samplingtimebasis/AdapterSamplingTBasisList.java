@@ -70,14 +70,14 @@ public class AdapterSamplingTBasisList extends RecyclerView.Adapter<AdapterSampl
         holder.documentDate.setText(listSamplingTBasis.get(position).getDocumentDate().substring(0, 10));
         String lot;
         if (listSamplingTBasis.get(position).getLotNo() == null || listSamplingTBasis.get(position).getLotNo().isEmpty()){
-            lot = "''";
+            lot = "0";
         } else {
             lot = listSamplingTBasis.get(position).getLotNo();
         }
 
         String total;
         if ( listSamplingTBasis.get(position).getTotalLot() == null || listSamplingTBasis.get(position).getTotalLot().isEmpty()){
-            total = "''";
+            total = "0";
         } else {
             total = listSamplingTBasis.get(position).getTotalLot();
         }

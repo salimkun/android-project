@@ -55,17 +55,36 @@ public class AdapterSamplingTBLineList extends RecyclerView.Adapter<AdapterSampl
     @NonNull
     @Override
     public AdapterSamplingTBLineList.ListViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int viewType) {
-        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_list_attendance, viewGroup, false);
+        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_list_samplingtbasis, viewGroup, false);
         return new AdapterSamplingTBLineList.ListViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull final AdapterSamplingTBLineList.ListViewHolder holder, final int position) {
 
-        holder.coalCondition.setText(listSamplingTBLines.get(position).getCoalCondition());
-        holder.weather.setText(listSamplingTBLines.get(position).getWeather());
-        holder.notes.setText(listSamplingTBLines.get(position).getRemarks());
-
+        holder.coalCondition.setText("Coal Condition : " + listSamplingTBLines.get(position).getCoalCondition());
+        holder.weather.setText("Weather : "+ listSamplingTBLines.get(position).getWeather());
+        holder.notes.setText("Remarks : "+ listSamplingTBLines.get(position).getRemarks());
+        String ga, tm, sa;
+        if (listSamplingTBLines.get(position).getGa() == true){
+            ga = "yes";
+        } else {
+            ga = "no";
+        }
+        if (listSamplingTBLines.get(position).getTm() == true){
+            tm = "yes";
+        } else {
+            tm = "no";
+        }
+        if (listSamplingTBLines.get(position).getSa() == true){
+            sa = "yes";
+        } else {
+            sa = "no";
+        }
+        holder.etc.setText("GA : " + ga + " TM : " + tm + " SA : " + sa);
+        holder.etc2.setText("Incr No : "+ listSamplingTBLines.get(position).getIncrNo());
+        holder.interval.setText("Interval : " + listSamplingTBLines.get(position).getInterval().substring(0,10) + " " +
+                listSamplingTBLines.get(position).getInterval().substring(11,16));
         holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
@@ -73,6 +92,9 @@ public class AdapterSamplingTBLineList extends RecyclerView.Adapter<AdapterSampl
                 holder.coalCondition.setTextColor(Color.WHITE);
                 holder.weather.setTextColor(Color.WHITE);
                 holder.notes.setTextColor(Color.WHITE);
+                holder.etc.setTextColor(Color.WHITE);
+                holder.etc2.setTextColor(Color.WHITE);
+                holder.interval.setTextColor(Color.WHITE);
                 showAlertDialogButtonClicked(v, listSamplingTBLines.get(position).getId(), holder);
                 return false;
             }
@@ -96,6 +118,9 @@ public class AdapterSamplingTBLineList extends RecyclerView.Adapter<AdapterSampl
                 holder.coalCondition.setTextColor(Color.BLACK);
                 holder.notes.setTextColor(Color.BLACK);
                 holder.weather.setTextColor(Color.BLACK);
+                holder.etc.setTextColor(Color.BLACK);
+                holder.etc2.setTextColor(Color.BLACK);
+                holder.interval.setTextColor(Color.BLACK);
 
                 Intent intent = new Intent(context, AddSamplingTBasisLine.class);
                 intent.putExtra("idAssignment", idAssignment);
@@ -115,6 +140,9 @@ public class AdapterSamplingTBLineList extends RecyclerView.Adapter<AdapterSampl
                 holder.weather.setTextColor(Color.BLACK);
                 holder.coalCondition.setTextColor(Color.BLACK);
                 holder.notes.setTextColor(Color.BLACK);
+                holder.etc.setTextColor(Color.BLACK);
+                holder.etc2.setTextColor(Color.BLACK);
+                holder.interval.setTextColor(Color.BLACK);
 
                 // deleteAttendance;
                 Call<Void> call=service.deleteSamplingMBasisLines("Bearer ".concat(idToken), idSamplingTBasisLine);
@@ -140,6 +168,8 @@ public class AdapterSamplingTBLineList extends RecyclerView.Adapter<AdapterSampl
                 holder.weather.setTextColor(Color.BLACK);
                 holder.coalCondition.setTextColor(Color.BLACK);
                 holder.notes.setTextColor(Color.BLACK);
+                holder.etc.setTextColor(Color.BLACK);
+                holder.interval.setTextColor(Color.BLACK);
             }
         });
 
@@ -159,15 +189,19 @@ public class AdapterSamplingTBLineList extends RecyclerView.Adapter<AdapterSampl
     }
 
     class ListViewHolder extends RecyclerView.ViewHolder {
-        TextView weather, coalCondition, notes;
+        TextView weather, coalCondition, notes, etc, interval, etc2;
         LinearLayout viewSamplingTBLines;
 
         ListViewHolder(View itemView) {
             super(itemView);
-            notes = itemView.findViewById(R.id.txt_dateDoc_attendance);
-            coalCondition = itemView.findViewById(R.id.txt_docNumber_attendance);
-            weather = itemView.findViewById(R.id.txt_docStatus_attendance);
-            viewSamplingTBLines = itemView.findViewById(R.id.view_list_attendance);
+            notes = itemView.findViewById(R.id.txt_dateDoc_samplingtbasis);
+            coalCondition = itemView.findViewById(R.id.txt_docNumber_samplingtbasis);
+            weather = itemView.findViewById(R.id.txt_docStatus_samplingtbasis);
+            etc = itemView.findViewById(R.id.txt_etc_samplingtbasis);
+            etc2 = itemView.findViewById(R.id.txt_etc1_samplingtbasis);
+            etc2.setVisibility(View.VISIBLE);
+            interval = itemView.findViewById(R.id.txt_dateRange_samplingtbasis);
+            viewSamplingTBLines = itemView.findViewById(R.id.view_list_samplingtbasis);
         }
     }
 

@@ -30,6 +30,17 @@
 
     <TextView
         android:textColor="#111"
+        android:id="@+id/txt_etc2_samplingmbasis"
+        android:text="DOCUMENT DATE"
+        android:visibility="gone"
+        android:layout_margin="5dp"
+        android:textAppearance="@style/TextAppearance.AppCompat.Caption"
+        android:layout_gravity="top"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:textColor="#111"
         android:id="@+id/txt_dateDoc_samplingmbasis"
         android:text="DOCUMENT DATE"
         android:layout_margin="5dp"

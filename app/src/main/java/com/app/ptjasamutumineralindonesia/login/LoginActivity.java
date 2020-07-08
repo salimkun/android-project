@@ -14,10 +14,12 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.app.ptjasamutumineralindonesia.MainActivity;
+import com.app.ptjasamutumineralindonesia.NofFoundPage;
 import com.app.ptjasamutumineralindonesia.R;
 import com.app.ptjasamutumineralindonesia.forgot.ForgotPassword;
 import com.app.ptjasamutumineralindonesia.helpers.ApiBase;
 import com.app.ptjasamutumineralindonesia.role.ChoicesRoleActivity;
+import com.app.ptjasamutumineralindonesia.role.RoleResult;
 import com.app.ptjasamutumineralindonesia.sampler.MainSampler;
 import com.app.ptjasamutumineralindonesia.sharepreference.LoginManager;
 import com.app.ptjasamutumineralindonesia.surveyor.MainSurveyor;
@@ -26,6 +28,9 @@ import com.google.gson.JsonParser;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.Arrays;
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -41,6 +46,7 @@ public class LoginActivity extends AppCompatActivity {
     Button btn_login;
     String username, password;
     boolean rememberMe;
+    private String accessToken;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -85,7 +91,7 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View view)
             {
                 Log.d("testing", "apa aja");
-                ApiLoginInterface service = retrofit.create(ApiLoginInterface .class);
+                final ApiLoginInterface service = retrofit.create(ApiLoginInterface .class);
                 username =   mUsername.getText().toString();
                 password =  mPassword.getText().toString();
                 rememberMe = mRememberMe.isChecked();
@@ -120,10 +126,52 @@ public class LoginActivity extends AppCompatActivity {
                         }else {
                             //response.body() have your LoginResult fields and methods  (example you have to access error then try like this response.body().getError() )
                             String msg = response.body().getMessage();
-                            String idToken = response.body().getIdToken();
-                            Log.d("ini token", idToken);
+                            accessToken = response.body().getIdToken();
+                            Log.d("ini token", accessToken);
                             sharedPrefManager.saveSPBoolean(LoginManager.STATUS, true);
-                            sharedPrefManager.saveSPString(LoginManager.ACCESS_TOKEN, idToken);
+                            sharedPrefManager.saveSPString(LoginManager.ACCESS_TOKEN, accessToken);
+//                            Call<MeResult> getRole = service.getMeData("Bearer " + accessToken);
+//                            Log.d("request getMeData ", getRole.request().headers().toString());
+//                            getRole.enqueue(new Callback<MeResult>() {
+//                                @Override
+//                                public void onResponse(Call<MeResult> call, Response<MeResult> response) {
+//                                    Log.d("response medata ", response.body().toString());
+//                                    List<String> listRole = response.body().getAuthorities();
+//
+//                                    if(listRole.contains("ROLE_ADMIN")){
+//                                        sharedPrefManager.saveSPString(LoginManager.USER_ROLES, "ADMIN");
+//                                        startActivity(new Intent(LoginActivity.this, MainSampler.class)
+//                                                .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK));
+//                                        finish();
+//                                    } else if (listRole.contains("ROLE_SURVEYOR") && listRole.contains("ROLE_SAMPLER")){
+//                                        sharedPrefManager.saveSPString(LoginManager.USER_ROLES, "ADMIN");
+//                                        startActivity(new Intent(LoginActivity.this, MainSampler.class)
+//                                                .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK));
+//                                        finish();
+//                                    } else if (listRole.contains("ROLE_SURVEYOR")){
+//                                        sharedPrefManager.saveSPString(LoginManager.USER_ROLES, "SURVEYOR");
+//                                        startActivity(new Intent(LoginActivity.this, MainSampler.class)
+//                                                .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK));
+//                                        finish();
+//                                    } else if (listRole.contains("ROLE_SAMPLER")){
+//                                        sharedPrefManager.saveSPString(LoginManager.USER_ROLES, "SAMPLER");
+//                                        startActivity(new Intent(LoginActivity.this, MainSampler.class)
+//                                                .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK));
+//                                        finish();
+//                                    } else {
+//                                        startActivity(new Intent(LoginActivity.this, NofFoundPage.class)
+//                                                .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK));
+//                                        finish();
+//                                    }
+//                                }
+//
+//                                @Override
+//                                public void onFailure(Call<MeResult> call, Throwable t) {
+//                                    //for getting error in network put here Toast, so get the error on network
+//                                    Log.d("Error DataPersonal ", t.getLocalizedMessage());
+//                                    Toast.makeText(getBaseContext(),"Failed to getData personal, please try at a moment ",Toast.LENGTH_SHORT).show();
+//                                }
+//                            });
                             startActivity(new Intent(LoginActivity.this, MainSampler.class)
                                     .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK));
                             finish();

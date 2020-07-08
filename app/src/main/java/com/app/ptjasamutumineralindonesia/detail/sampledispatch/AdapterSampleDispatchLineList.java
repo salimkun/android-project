@@ -55,7 +55,7 @@ public class AdapterSampleDispatchLineList extends RecyclerView.Adapter<AdapterS
     @NonNull
     @Override
     public AdapterSampleDispatchLineList.ListViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int viewType) {
-        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_list_attendance, viewGroup, false);
+        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_list_samplingtbasis, viewGroup, false);
         return new AdapterSampleDispatchLineList.ListViewHolder(view);
     }
 
@@ -65,6 +65,19 @@ public class AdapterSampleDispatchLineList extends RecyclerView.Adapter<AdapterS
         holder.dispatch.setText("Dispatch : "+ listSampleDispatchLines.get(position).getDispatch());
         holder.dispatchType.setText("Dispatch Type : " + listSampleDispatchLines.get(position).getDispatchType());
         holder.received.setText("Received : "+ listSampleDispatchLines.get(position).getReceived());
+        String bagNumber, sealNumber;
+        if (listSampleDispatchLines.get(position).getBagNumber()==null || listSampleDispatchLines.get(position).getBagNumber().isEmpty()){
+            bagNumber = "0";
+        } else {
+            bagNumber = listSampleDispatchLines.get(position).getBagNumber();
+        }
+        if (listSampleDispatchLines.get(position).getSealNumber()==null || listSampleDispatchLines.get(position).getSealNumber().isEmpty()){
+            sealNumber = "0";
+        } else {
+            sealNumber= listSampleDispatchLines.get(position).getSealNumber();
+        }
+        holder.etc.setText("Bag Number : " + bagNumber);
+        holder.nowork.setText("Seal Number : " + sealNumber);
 
         holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
@@ -73,6 +86,9 @@ public class AdapterSampleDispatchLineList extends RecyclerView.Adapter<AdapterS
                 holder.dispatchType.setTextColor(Color.WHITE);
                 holder.dispatch.setTextColor(Color.WHITE);
                 holder.received.setTextColor(Color.WHITE);
+                holder.etc.setTextColor(Color.WHITE);
+                holder.nowork.setTextColor(Color.WHITE);
+
                 showAlertDialogButtonClicked(v, listSampleDispatchLines.get(position).getId(), holder);
                 return false;
             }
@@ -96,6 +112,8 @@ public class AdapterSampleDispatchLineList extends RecyclerView.Adapter<AdapterS
                 holder.dispatch.setTextColor(Color.BLACK);
                 holder.dispatchType.setTextColor(Color.BLACK);
                 holder.received.setTextColor(Color.BLACK);
+                holder.etc.setTextColor(Color.BLACK);
+                holder.nowork.setTextColor(Color.BLACK);
 
                 Intent intent = new Intent(context, AddSampleDispatchLines.class);
                 intent.putExtra("idAssignment", idAssignment);
@@ -115,6 +133,8 @@ public class AdapterSampleDispatchLineList extends RecyclerView.Adapter<AdapterS
                 holder.dispatchType.setTextColor(Color.BLACK);
                 holder.dispatch.setTextColor(Color.BLACK);
                 holder.received.setTextColor(Color.BLACK);
+                holder.etc.setTextColor(Color.BLACK);
+                holder.nowork.setTextColor(Color.BLACK);
 
                 // deleteAttendance;
                 Call<Void> call=service.deleteSampleDispatchLines("Bearer ".concat(idToken), idSampleDispatchLine);
@@ -140,6 +160,9 @@ public class AdapterSampleDispatchLineList extends RecyclerView.Adapter<AdapterS
                 holder.dispatchType.setTextColor(Color.BLACK);
                 holder.dispatch.setTextColor(Color.BLACK);
                 holder.received.setTextColor(Color.BLACK);
+                holder.etc.setTextColor(Color.BLACK);
+                holder.nowork.setTextColor(Color.BLACK);
+
             }
         });
 
@@ -159,15 +182,17 @@ public class AdapterSampleDispatchLineList extends RecyclerView.Adapter<AdapterS
     }
 
     class ListViewHolder extends RecyclerView.ViewHolder {
-        TextView dispatchType, received, dispatch;
+        TextView dispatchType, received, dispatch, etc, nowork;
         LinearLayout viewSampleDispatchLines;
 
         ListViewHolder(View itemView) {
             super(itemView);
-            received = itemView.findViewById(R.id.txt_dateDoc_attendance);
-            dispatch = itemView.findViewById(R.id.txt_docNumber_attendance);
-            dispatchType = itemView.findViewById(R.id.txt_docStatus_attendance);
-            viewSampleDispatchLines = itemView.findViewById(R.id.view_list_attendance);
+            received = itemView.findViewById(R.id.txt_dateDoc_samplingtbasis);
+            dispatch = itemView.findViewById(R.id.txt_docNumber_samplingtbasis);
+            dispatchType = itemView.findViewById(R.id.txt_docStatus_samplingtbasis);
+            etc = itemView.findViewById(R.id.txt_etc_samplingtbasis);
+            viewSampleDispatchLines = itemView.findViewById(R.id.view_list_samplingtbasis);
+            nowork = itemView.findViewById(R.id.txt_dateRange_samplingtbasis);
         }
     }
 }

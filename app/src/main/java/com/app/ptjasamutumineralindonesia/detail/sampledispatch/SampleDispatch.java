@@ -208,7 +208,7 @@ public class SampleDispatch extends Fragment {
                 //for getting error in network put here Toast, so get the error on network
                 viewListSampleDispatch.setVisibility(View.INVISIBLE);
                 handlenoData.setVisibility(View.VISIBLE);
-                Toast.makeText(getContext(),"Failed to get dispatch, please try at a moment",Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(),"Failed to get dispatch, please try at a moment " + t.getMessage(),Toast.LENGTH_SHORT).show();
             }
         });
     }

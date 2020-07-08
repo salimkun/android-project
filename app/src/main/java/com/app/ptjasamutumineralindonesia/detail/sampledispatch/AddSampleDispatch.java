@@ -1,11 +1,5 @@
 package com.app.ptjasamutumineralindonesia.detail.sampledispatch;
 
-import androidx.annotation.RequiresApi;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.DividerItemDecoration;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Build;
@@ -23,18 +17,18 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.DividerItemDecoration;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.app.ptjasamutumineralindonesia.R;
 import com.app.ptjasamutumineralindonesia.detail.ApiDetailInterface;
 import com.app.ptjasamutumineralindonesia.detail.DetailAssignment;
 import com.app.ptjasamutumineralindonesia.detail.attendancecard.BargeResults;
-import com.app.ptjasamutumineralindonesia.detail.samplingmassbasis.AdapterSamplingMBLineList;
-import com.app.ptjasamutumineralindonesia.detail.samplingmassbasis.AddSamplingMassBasis;
-import com.app.ptjasamutumineralindonesia.detail.samplingmassbasis.AddSamplingMassBassLine;
 import com.app.ptjasamutumineralindonesia.detail.samplingmassbasis.EmployeResults;
 import com.app.ptjasamutumineralindonesia.detail.samplingmassbasis.NumberTextWatcher;
-import com.app.ptjasamutumineralindonesia.detail.samplingmassbasis.PartnerResults;
-import com.app.ptjasamutumineralindonesia.detail.samplingmassbasis.SamplingMassBasisLineResults;
-import com.app.ptjasamutumineralindonesia.detail.samplingmassbasis.SamplingMassBasisResult;
 import com.app.ptjasamutumineralindonesia.helpers.ApiBase;
 import com.app.ptjasamutumineralindonesia.sharepreference.LoginManager;
 import com.google.gson.JsonObject;
@@ -49,7 +43,6 @@ import java.time.Instant;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
@@ -268,9 +261,13 @@ public class AddSampleDispatch extends AppCompatActivity {
                         receivedTime.setText(response.body().getReceivedTime().substring(0, 10));
                         jobNumber.setText(response.body().getJobNumber());
 
-                        toonage.setText(
-                                String.valueOf(response.body().getToonage()
-                                ));
+                        String toonageVal;
+                        if (response.body().getToonage()==null){
+                            toonageVal = "0";
+                        } else {
+                            toonageVal = response.body().getToonage();
+                        }
+                        toonage.setText(toonageVal);
 
                         int valStatus = 0;
                         switch (response.body().getDocumentStatus()) {
@@ -502,7 +499,7 @@ public class AddSampleDispatch extends AppCompatActivity {
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                 intent.putExtra("idAssignment", idAssignment);
                 intent.putExtra("idAssignmentDocNumber", idAssignmentDocNumber);
-                intent.putExtra("idSamplingMBasis", idSampleDispatch);
+                intent.putExtra("idSampleDispatch", idSampleDispatch);
                 startActivity(intent);
                 finish();
             }

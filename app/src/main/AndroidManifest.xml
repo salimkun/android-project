@@ -5,6 +5,7 @@
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
+        android:name=".detail.draftSurvey.ImageController"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -12,7 +13,10 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".detail.sampledispatch.AddSampleDispatchLines"></activity>
+        <activity android:name=".detail.draftSurvey.AddDraftSurveyManual"></activity>
+        <activity android:name=".NofFoundPage" />
+<!--        <activity android:name=".detail.draftSurvey.DrawImage" />-->
+        <activity android:name=".detail.sampledispatch.AddSampleDispatchLines" />
         <activity android:name=".detail.sampledispatch.AddSampleDispatch" />
         <activity android:name=".detail.samplingtimebasis.AddSamplingTBasisLine" />
         <activity android:name=".detail.samplingmassbasis.AddSamplingMassBassLine" />

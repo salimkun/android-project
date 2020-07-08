@@ -13,12 +13,12 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.app.ptjasamutumineralindonesia.R;
 import com.app.ptjasamutumineralindonesia.detail.attendancecard.AttendanceResult;
-import com.app.ptjasamutumineralindonesia.detail.samplingtimebasis.SamplingTBasisLineResults;
 import com.app.ptjasamutumineralindonesia.helpers.ApiBase;
 import com.app.ptjasamutumineralindonesia.login.LoginActivity;
 import com.app.ptjasamutumineralindonesia.sampler.ApiSamplerInterface;
@@ -26,7 +26,6 @@ import com.app.ptjasamutumineralindonesia.sampler.AssignmentLetterResult;
 import com.app.ptjasamutumineralindonesia.sampler.AssignmentResult;
 import com.app.ptjasamutumineralindonesia.sampler.MainSampler;
 import com.app.ptjasamutumineralindonesia.sharepreference.LoginManager;
-import com.google.android.material.tabs.TabItem;
 import com.google.android.material.tabs.TabLayout;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
@@ -34,16 +33,9 @@ import com.google.gson.JsonParser;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.time.Instant;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.ZoneId;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -54,12 +46,13 @@ public class DetailAssignment extends AppCompatActivity {
 
     LoginManager sharedPrefManager;
     private Retrofit retrofit;
-    String idToken;
+    String idToken, role;
     String idAssignment, idAssignmentDocNumber;
     EditText docNumber, letterOfAssignment, docDate, docStatus, startDate, endDate, placeName;
     EditText notes, typeWork, worker, reason;
     Spinner spinnerStatus;
     TabLayout tablayout_detail;
+    LinearLayout layoutTabSampler, layoutTabSurveyor;
     ViewPager viewPager;
     Button btnCancel, btnSave;
     String sDate, eDate, dDate, workerId, assignmentLetterId, description;
@@ -94,9 +87,8 @@ public class DetailAssignment extends AppCompatActivity {
         worker = findViewById(R.id.edit_worker);
         worker.setEnabled(false);
         reason = findViewById(R.id.edit_reason);
-
-        tablayout_detail = findViewById(R.id.tab_layout_detail);
-        viewPager = findViewById(R.id.pager_detail);
+        layoutTabSampler = findViewById(R.id.sampler_tab);
+        layoutTabSurveyor = findViewById(R.id.surveyor_tab);
 
         Intent intent = getIntent();
         idAssignment = intent.getStringExtra("idAssignment");
@@ -213,10 +205,15 @@ public class DetailAssignment extends AppCompatActivity {
     }
 
     public void setAdapterFragment() {
-        AdapterFragmentDetail adapter_fragment = new AdapterFragmentDetail(getSupportFragmentManager(), tablayout_detail.getTabCount(), idAssignment, idAssignmentDocNumber);
-        viewPager.setAdapter(adapter_fragment);
-        viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tablayout_detail));
 
+        if (role.equals("SURVEYOR")){
+            AdapterFragmentSurveyor adapter_fragment = new AdapterFragmentSurveyor(getSupportFragmentManager(), tablayout_detail.getTabCount(), idAssignment, idAssignmentDocNumber);
+            viewPager.setAdapter(adapter_fragment);
+        } else {
+            AdapterFragmentSampler adapter_fragment = new AdapterFragmentSampler(getSupportFragmentManager(), tablayout_detail.getTabCount(), idAssignment, idAssignmentDocNumber);
+            viewPager.setAdapter(adapter_fragment);
+        }
+        viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tablayout_detail));
         tablayout_detail.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
@@ -270,7 +267,19 @@ public class DetailAssignment extends AppCompatActivity {
                     assignmentLetterId = response.body().getAssignmentLetterId();
                     description = response.body().getDescription();
 
-                            setAdapterFragment();
+                    //        role = sharedPrefManager.getUserRoles();
+                    role = typeWork.getText().toString();
+                    if (role.equals("SURVEYOR")){
+                        tablayout_detail = findViewById(R.id.tab_layout_detail_surveyor);
+                        viewPager = findViewById(R.id.pager_detail_surveyor);
+                        layoutTabSampler.setVisibility(View.GONE);
+                    } else {
+                        tablayout_detail = findViewById(R.id.tab_layout_detail_sampler);
+                        viewPager = findViewById(R.id.pager_detail_sampler);
+                        layoutTabSurveyor.setVisibility(View.GONE);
+                    }
+
+                    setAdapterFragment();
 //                    sharedPrefManager.saveSPString(LoginManager.ID_DOC_ATTENDANCE, response.body().getId());
 
                     int valStatus=0;

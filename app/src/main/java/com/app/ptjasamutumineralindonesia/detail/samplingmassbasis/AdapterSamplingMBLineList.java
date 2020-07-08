@@ -55,16 +55,41 @@ public class AdapterSamplingMBLineList extends RecyclerView.Adapter<AdapterSampl
     @NonNull
     @Override
     public AdapterSamplingMBLineList.ListViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int viewType) {
-        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_list_attendance, viewGroup, false);
+        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_list_samplingmbasis, viewGroup, false);
         return new AdapterSamplingMBLineList.ListViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull final AdapterSamplingMBLineList.ListViewHolder holder, final int position) {
 
-        holder.coalCondition.setText(listSamplingMBLines.get(position).getCoalCondition());
-        holder.weather.setText(listSamplingMBLines.get(position).getWeather());
-        holder.notes.setText(listSamplingMBLines.get(position).getRemarks());
+        String coalCondition;
+        if (listSamplingMBLines.get(position).getCoalCondition() == null){
+            coalCondition = "0";
+        } else {
+            coalCondition = listSamplingMBLines.get(position).getCoalCondition();
+        }
+        holder.coalCondition.setText("Coal Condition : " + coalCondition);
+        holder.weather.setText("Weather : " + listSamplingMBLines.get(position).getWeather());
+        holder.notes.setText("Remarks : " + listSamplingMBLines.get(position).getRemarks());
+        String ga, tm, sa;
+        if (listSamplingMBLines.get(position).getGa() == true){
+            ga = "yes";
+        } else {
+            ga = "no";
+        }
+        if (listSamplingMBLines.get(position).getTm() == true){
+            tm = "yes";
+        } else {
+            tm = "no";
+        }
+        if (listSamplingMBLines.get(position).getSa() == true){
+            sa = "yes";
+        } else {
+            sa = "no";
+        }
+        holder.etc.setText("GA : " + ga + " TM : " + tm + " SA : " + sa);
+        holder.etc2.setText("Incr No : "+ listSamplingMBLines.get(position).getIncrNo());
+        holder.interval.setText("Interval :" +listSamplingMBLines.get(position).getInterval());
 
         holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
@@ -73,6 +98,9 @@ public class AdapterSamplingMBLineList extends RecyclerView.Adapter<AdapterSampl
                 holder.coalCondition.setTextColor(Color.WHITE);
                 holder.weather.setTextColor(Color.WHITE);
                 holder.notes.setTextColor(Color.WHITE);
+                holder.etc2.setTextColor(Color.WHITE);
+                holder.etc.setTextColor(Color.WHITE);
+                holder.interval.setTextColor(Color.WHITE);
                 showAlertDialogButtonClicked(v, listSamplingMBLines.get(position).getId(), holder);
                 return false;
             }
@@ -96,6 +124,9 @@ public class AdapterSamplingMBLineList extends RecyclerView.Adapter<AdapterSampl
                 holder.coalCondition.setTextColor(Color.BLACK);
                 holder.notes.setTextColor(Color.BLACK);
                 holder.weather.setTextColor(Color.BLACK);
+                holder.etc.setTextColor(Color.BLACK);
+                holder.etc2.setTextColor(Color.BLACK);
+                holder.interval.setTextColor(Color.BLACK);
 
                 Intent intent = new Intent(context, AddSamplingMassBassLine.class);
                 intent.putExtra("idAssignment", idAssignment);
@@ -115,6 +146,9 @@ public class AdapterSamplingMBLineList extends RecyclerView.Adapter<AdapterSampl
                 holder.weather.setTextColor(Color.BLACK);
                 holder.coalCondition.setTextColor(Color.BLACK);
                 holder.notes.setTextColor(Color.BLACK);
+                holder.etc.setTextColor(Color.BLACK);
+                holder.etc2.setTextColor(Color.BLACK);
+                holder.interval.setTextColor(Color.BLACK);
 
                 // deleteAttendance;
                 Call<Void> call=service.deleteSamplingMBasisLines("Bearer ".concat(idToken), idSamplingMBasisLine);
@@ -140,6 +174,9 @@ public class AdapterSamplingMBLineList extends RecyclerView.Adapter<AdapterSampl
                 holder.weather.setTextColor(Color.BLACK);
                 holder.coalCondition.setTextColor(Color.BLACK);
                 holder.notes.setTextColor(Color.BLACK);
+                holder.etc.setTextColor(Color.BLACK);
+                holder.etc2.setTextColor(Color.BLACK);
+                holder.interval.setTextColor(Color.BLACK);
             }
         });
 
@@ -159,15 +196,18 @@ public class AdapterSamplingMBLineList extends RecyclerView.Adapter<AdapterSampl
     }
 
     class ListViewHolder extends RecyclerView.ViewHolder {
-        TextView weather, coalCondition, notes;
+        TextView weather, coalCondition, notes, etc, interval, etc2;
         LinearLayout viewSamplingMBLines;
 
         ListViewHolder(View itemView) {
             super(itemView);
-            notes = itemView.findViewById(R.id.txt_dateDoc_attendance);
-            coalCondition = itemView.findViewById(R.id.txt_docNumber_attendance);
-            weather = itemView.findViewById(R.id.txt_docStatus_attendance);
-            viewSamplingMBLines = itemView.findViewById(R.id.view_list_attendance);
+            notes = itemView.findViewById(R.id.txt_dateDoc_samplingmbasis);
+            coalCondition = itemView.findViewById(R.id.txt_docNumber_samplingmbasis);
+            weather = itemView.findViewById(R.id.txt_docStatus_samplingmbasis);
+            etc = itemView.findViewById(R.id.txt_etc_samplingmbasis);
+            etc2 = itemView.findViewById(R.id.txt_etc2_samplingmbasis);
+            interval = itemView.findViewById(R.id.txt_dateRange_samplingmbasis);
+            viewSamplingMBLines = itemView.findViewById(R.id.view_list_samplingmbasis);
         }
     }
 

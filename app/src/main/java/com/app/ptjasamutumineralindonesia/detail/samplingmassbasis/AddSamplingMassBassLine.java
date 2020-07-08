@@ -66,7 +66,7 @@ public class AddSamplingMassBassLine extends AppCompatActivity {
         editIncr = findViewById(R.id.edit_IncrNo_add_samplingMBasisLine);
         editInterval = findViewById(R.id.edit_interval_add_samplingMBasisLine);
         editInterval.setText("0");
-        editInterval.addTextChangedListener(new NumberTextWatcher(editInterval));
+//        editInterval.addTextChangedListener(new NumberTextWatcher(editInterval));
         editNotes = findViewById(R.id.edit_notes_add_samplingMBasisLine);
         ga = findViewById(R.id.ga_status_samplingMBasisLine);
         tm = findViewById(R.id.tm_status_samplingMBasisLine);
@@ -238,7 +238,13 @@ public class AddSamplingMassBassLine extends AppCompatActivity {
                         }
 
                         int valStatus=0;
-                        switch (response.body().getWeather()){
+                        String weather;
+                        if (response.body().getWeather()==null){
+                            weather = "";
+                        } else {
+                            weather = response.body().getWeather();
+                        }
+                        switch (weather){
                             case "SUNNY":
                                 valStatus = 0;
                                 break;

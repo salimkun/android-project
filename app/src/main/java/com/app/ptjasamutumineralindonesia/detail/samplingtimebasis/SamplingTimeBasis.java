@@ -186,7 +186,6 @@ public class SamplingTimeBasis extends Fragment {
         call.enqueue(new Callback<ArrayList<SamplingTimeBasisResult>>() {
             @Override
             public void onResponse(Call<ArrayList<SamplingTimeBasisResult>> call, Response<ArrayList<SamplingTimeBasisResult>> response) {
-                Log.d("ini hasilnya sampling" , response.body().toString());
                 if(response.isSuccessful()){
                     AdapterSamplingTBasisList adapter = new AdapterSamplingTBasisList(getContext(),response.body(), idAssignment, idAssignmentDocNumber, idToken);
                     adapter.notifyDataSetChanged();

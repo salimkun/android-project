@@ -1,0 +1,1315 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".detail.draftSurvey.AddDraftSurveyManual">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_margin="10dp">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textStyle="bold"
+                    android:textAppearance="@android:style/TextAppearance.Medium"
+                    android:text="Document Information"/>
+
+                <TextView
+                    android:layout_marginTop="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Document Number"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"/>
+
+                <EditText
+                    android:id="@+id/docNumber_add_draftSurvey"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:inputType="textPersonName"
+                    android:text="-"
+                    android:enabled="false"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Survey Type"
+                    android:layout_marginTop="10dp"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"/>
+
+                <Spinner
+                    android:id="@+id/spinner_surveyType_add_draftSurvey"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Place"
+                    android:layout_marginTop="10dp"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"/>
+
+                <Spinner
+                    android:id="@+id/spinner_place_add_draftSurvey"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Document Date"
+                    android:layout_marginTop="10dp"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"/>
+
+                <EditText
+                    android:id="@+id/edit_docDate_add_draftSurvey"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:inputType="textPersonName"
+                    android:focusable="false"
+                    android:text="YYYY-MM-DD"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Document Status"
+                    android:layout_marginTop="10dp"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"/>
+
+                <Spinner
+                    android:id="@+id/spinner_docStatus_add_draftSurvey"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Survey Start Time"
+                    android:layout_marginTop="10dp"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"/>
+
+                <EditText
+                    android:id="@+id/edit_startDate_add_draftSurvey"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:inputType="textPersonName"
+                    android:focusable="false"
+                    android:text="YYYY-MM-DD"/>
+
+                <EditText
+                    android:id="@+id/edit_startTime_add_draftSurvey"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:inputType="textPersonName"
+                    android:focusable="false"
+                    android:text="YYYY-MM-DD"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Survey End Time"
+                    android:layout_marginTop="10dp"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"/>
+
+                <EditText
+                    android:id="@+id/edit_endDate_add_draftSurvey"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:inputType="textPersonName"
+                    android:focusable="false"
+                    android:text="YYYY-MM-DD"/>
+
+                <EditText
+                    android:id="@+id/edit_endTime_add_draftSurvey"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:inputType="textPersonName"
+                    android:focusable="false"
+                    android:text="YYYY-MM-DD"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Barge"
+                    android:layout_marginTop="10dp"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"/>
+
+                <Spinner
+                    android:id="@+id/spinner_barge_add_draftManual"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Vessel"
+                    android:layout_marginTop="10dp"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"/>
+
+                <Spinner
+                    android:id="@+id/spinner_vessel_add_draftSurvey"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Cargo"
+                    android:layout_marginTop="10dp"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"/>
+
+                <EditText
+                    android:id="@+id/edit_cargo_add_draftSurvey"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:inputType="textPersonName"/>
+
+                <!-- DATA INFORMATION               -->
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textStyle="bold"
+                    android:textAppearance="@android:style/TextAppearance.Medium"
+                    android:text="Data Information"/>
+
+                <TextView
+                    android:layout_marginTop="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="LPP"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"/>
+
+                <EditText
+                    android:id="@+id/edit_lpp_add_draftSurvey"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:inputType="numberDecimal"
+                    />
+
+                <TextView
+                    android:layout_marginTop="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="LWT"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"/>
+
+                <EditText
+                    android:id="@+id/edit_lwt_add_draftSurvey"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:inputType="numberDecimal"
+                    />
+
+                <TextView
+                    android:layout_marginTop="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Constant"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"/>
+
+                <EditText
+                    android:id="@+id/edit_constant_add_draftSurvey"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:inputType="numberDecimal"
+                    />
+
+                <TextView
+                    android:layout_marginTop="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="lf"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"/>
+
+                <EditText
+                    android:id="@+id/edit_lf_add_draftSurvey"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:inputType="numberDecimal"
+                    />
+
+                <TextView
+                    android:layout_marginTop="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="lm"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"/>
+
+                <EditText
+                    android:id="@+id/edit_lm_add_draftSurvey"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:inputType="numberDecimal"
+                    />
+
+                <TextView
+                    android:layout_marginTop="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="la"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"/>
+
+                <EditText
+                    android:id="@+id/edit_la_add_draftSurvey"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:inputType="numberDecimal"
+                    />
+
+                <TextView
+                    android:layout_marginTop="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="LBM"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"/>
+
+                <EditText
+                    android:id="@+id/edit_lbm_add_draftSurvey"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:inputType="numberDecimal"
+                    />
+
+                <TextView
+                    android:layout_marginTop="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Apparent Trim"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"/>
+
+                <EditText
+                    android:id="@+id/edit_apparentTrim_add_draftSurvey"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:inputType="numberDecimal"
+                    />
+
+                <TextView
+                    android:layout_marginTop="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Forward Image"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"/>
+
+                <Button
+                    android:id="@+id/btn_select_fi_add_draftSurvey"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Select" />
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/imageViewF" />
+
+                <TextView
+                    android:layout_marginTop="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="dF(P)"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"/>
+
+                <EditText
+                    android:id="@+id/edit_dfp_add_draftSurvey"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:inputType="numberDecimal"
+                    />
+
+                <TextView
+                    android:layout_marginTop="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="dF(S)"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"/>
+
+                <EditText
+                    android:id="@+id/edit_dfs_add_draftSurvey"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:inputType="numberDecimal"
+                    />
+
+                <TextView
+                    android:layout_marginTop="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Steam Corr."
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"/>
+
+                <EditText
+                    android:id="@+id/edit_steamCorr_add_draftSurvey"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:inputType="numberDecimal"
+                    />
+
+                <TextView
+                    android:layout_marginTop="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Forward Mean"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"/>
+
+                <EditText
+                    android:id="@+id/edit_forwardMean_add_draftSurvey"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:inputType="numberDecimal"
+                    />
+
+                <TextView
+                    android:layout_marginTop="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Forward Mean After Corr."
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"/>
+
+                <EditText
+                    android:id="@+id/edit_forwardMeanAfterCorr_add_draftSurvey"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:inputType="numberDecimal"
+                    />
+
+                <TextView
+                    android:layout_marginTop="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="After Image"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"/>
+
+                <Button
+                    android:id="@+id/btn_select_ai_add_draftSurvey"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Select" />
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/imageViewA" />
+
+                <TextView
+                    android:layout_marginTop="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="dA(P)"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"/>
+
+                <EditText
+                    android:id="@+id/edit_dap_add_draftSurvey"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:inputType="numberDecimal"
+                    />
+
+                <TextView
+                    android:layout_marginTop="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="dA(S)"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"/>
+
+                <EditText
+                    android:id="@+id/edit_das_add_draftSurvey"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:inputType="numberDecimal"
+                    />
+
+                <TextView
+                    android:layout_marginTop="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Steam Corr."
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"/>
+
+                <EditText
+                    android:id="@+id/edit_asteamCorr_add_draftSurvey"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:inputType="numberDecimal"
+                    />
+
+                <TextView
+                    android:layout_marginTop="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="After Mean"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"/>
+
+                <EditText
+                    android:id="@+id/edit_afterMean_add_draftSurvey"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:inputType="numberDecimal"
+                    />
+
+
+                <TextView
+                    android:layout_marginTop="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="After Mean After Corr."
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"/>
+
+                <EditText
+                    android:id="@+id/edit_afterMeanAfterCorr_add_draftSurvey"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:inputType="numberDecimal"
+                    />
+
+                <TextView
+                    android:layout_marginTop="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Mean Forward and After"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"/>
+
+                <EditText
+                    android:id="@+id/edit_MeanFA_add_draftSurvey"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:inputType="numberDecimal"
+                    />
+
+                <TextView
+                    android:layout_marginTop="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Midship Image"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"/>
+
+                <Button
+                    android:id="@+id/btn_select_msi_add_draftSurvey"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Select" />
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/imageViewMSI" />
+
+                <TextView
+                    android:layout_marginTop="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="dM(P)"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"/>
+
+                <EditText
+                    android:id="@+id/edit_dmp_add_draftSurvey"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:inputType="numberDecimal"
+                    />
+
+                <TextView
+                    android:layout_marginTop="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="dM(S)"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"/>
+
+                <EditText
+                    android:id="@+id/edit_dms_add_draftSurvey"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:inputType="numberDecimal"
+                    />
+
+                <TextView
+                    android:layout_marginTop="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Steam Corr."
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"/>
+
+                <EditText
+                    android:id="@+id/edit_msisteamCorr_add_draftSurvey"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:inputType="numberDecimal"
+                    />
+
+                <TextView
+                    android:layout_marginTop="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Mid Mean"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"/>
+
+                <EditText
+                    android:id="@+id/edit_midMean_add_draftSurvey"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:inputType="numberDecimal"
+                    />
+
+                <TextView
+                    android:layout_marginTop="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Midship Mean After Corr."
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"/>
+
+                <EditText
+                    android:id="@+id/edit_midshipMeanAfterCorr_add_draftSurvey"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:inputType="numberDecimal"
+                    />
+
+                <TextView
+                    android:layout_marginTop="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Forward and after Means Corr."
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"/>
+
+                <EditText
+                    android:id="@+id/edit_MeanAfterCorr_add_draftSurvey"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:inputType="numberDecimal"
+                    />
+
+                <TextView
+                    android:layout_marginTop="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Mean of Means"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"/>
+
+                <EditText
+                    android:id="@+id/edit_MeanOfMeans_add_draftSurvey"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:inputType="numberDecimal"
+                    />
+
+                <TextView
+                    android:layout_marginTop="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Draft Corrr for Deformation (Qm)"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"/>
+
+                <EditText
+                    android:id="@+id/edit_draftCorr_add_draftSurvey"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:inputType="numberDecimal"
+                    />
+
+                <TextView
+                    android:layout_marginTop="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="X (Corresponding Displacement)"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"/>
+
+                <EditText
+                    android:id="@+id/edit_CDX_add_draftSurvey"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:inputType="numberDecimal"
+                    />
+
+                <TextView
+                    android:layout_marginTop="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="X1 (Corresponding Displacement)"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"/>
+
+                <EditText
+                    android:id="@+id/edit_CDX1_add_draftSurvey"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:inputType="numberDecimal"
+                    />
+
+                <TextView
+                    android:layout_marginTop="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="X2 (Corresponding Displacement)"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"/>
+
+                <EditText
+                    android:id="@+id/edit_CDX2_add_draftSurvey"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:inputType="numberDecimal"
+                    />
+
+                <TextView
+                    android:layout_marginTop="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Y1 (Corresponding Displacement)"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"/>
+
+                <EditText
+                    android:id="@+id/edit_CDY1_add_draftSurvey"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:inputType="numberDecimal"
+                    />
+
+                <TextView
+                    android:layout_marginTop="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Y2 (Corresponding Displacement)"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"/>
+
+                <EditText
+                    android:id="@+id/edit_CDY2_add_draftSurvey"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:inputType="numberDecimal"
+                    />
+
+                <TextView
+                    android:layout_marginTop="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Corresponding Displacement (Δ)1"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"/>
+
+                <EditText
+                    android:id="@+id/edit_CD1_add_draftSurvey"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:inputType="numberDecimal"
+                    />
+
+                <TextView
+                    android:layout_marginTop="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="X (LCF)"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"/>
+
+                <EditText
+                    android:id="@+id/edit_LCFX_add_draftSurvey"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:inputType="numberDecimal"
+                    />
+
+                <TextView
+                    android:layout_marginTop="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="X1 (LCF)"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"/>
+
+                <EditText
+                    android:id="@+id/edit_LCFX1_add_draftSurvey"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:inputType="numberDecimal"
+                    />
+
+                <TextView
+                    android:layout_marginTop="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="X2 (LCF)"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"/>
+
+                <EditText
+                    android:id="@+id/edit_LCFX2_add_draftSurvey"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:inputType="numberDecimal"
+                    />
+
+                <TextView
+                    android:layout_marginTop="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Y1 (LCF)"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"/>
+
+                <EditText
+                    android:id="@+id/edit_LCFY1_add_draftSurvey"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:inputType="numberDecimal"
+                    />
+
+                <TextView
+                    android:layout_marginTop="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Y2 (LCF)"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"/>
+
+                <EditText
+                    android:id="@+id/edit_LCFY2_add_draftSurvey"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:inputType="numberDecimal"
+                    />
+
+                <TextView
+                    android:layout_marginTop="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="LCF"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"/>
+
+                <EditText
+                    android:id="@+id/edit_LCF_add_draftSurvey"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:inputType="numberDecimal"
+                    />
+
+                <TextView
+                    android:layout_marginTop="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="X (TPC)"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"/>
+
+                <EditText
+                    android:id="@+id/edit_TPCX_add_draftSurvey"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:inputType="numberDecimal"
+                    />
+
+                <TextView
+                    android:layout_marginTop="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="X1 (TPC)"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"/>
+
+                <EditText
+                    android:id="@+id/edit_TPCX1_add_draftSurvey"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:inputType="numberDecimal"
+                    />
+
+                <TextView
+                    android:layout_marginTop="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="X2 (TPC)"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"/>
+
+                <EditText
+                    android:id="@+id/edit_TPCX2_add_draftSurvey"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:inputType="numberDecimal"
+                    />
+
+                <TextView
+                    android:layout_marginTop="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Y1 (TPC)"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"/>
+
+                <EditText
+                    android:id="@+id/edit_TPCY1_add_draftSurvey"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:inputType="numberDecimal"
+                    />
+
+                <TextView
+                    android:layout_marginTop="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Y2 (TPC)"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"/>
+
+                <EditText
+                    android:id="@+id/edit_TPCY2_add_draftSurvey"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:inputType="numberDecimal"
+                    />
+
+                <TextView
+                    android:layout_marginTop="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="TPC"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"/>
+
+                <EditText
+                    android:id="@+id/edit_TPC_add_draftSurvey"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:inputType="numberDecimal"
+                    />
+
+                <TextView
+                    android:layout_marginTop="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="X (MTC + 0.5)"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"/>
+
+                <EditText
+                    android:id="@+id/edit_MTCPX_add_draftSurvey"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:inputType="numberDecimal"
+                    />
+
+                <TextView
+                    android:layout_marginTop="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="X1 (MTC + 0.5)"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"/>
+
+                <EditText
+                    android:id="@+id/edit_MTCPX1_add_draftSurvey"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:inputType="numberDecimal"
+                    />
+
+                <TextView
+                    android:layout_marginTop="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="X2 (MTC + 0.5)"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"/>
+
+                <EditText
+                    android:id="@+id/edit_MTCPX2_add_draftSurvey"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:inputType="numberDecimal"
+                    />
+
+                <TextView
+                    android:layout_marginTop="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Y1 (MTC + 0.5)"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"/>
+
+                <EditText
+                    android:id="@+id/edit_MTCPY1_add_draftSurvey"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:inputType="numberDecimal"
+                    />
+
+                <TextView
+                    android:layout_marginTop="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Y2 (MTC + 0.5)"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"/>
+
+                <EditText
+                    android:id="@+id/edit_MTCPY2_add_draftSurvey"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:inputType="numberDecimal"
+                    />
+
+                <TextView
+                    android:layout_marginTop="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="MTC + 0.5"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"/>
+
+                <EditText
+                    android:id="@+id/edit_MTCP_add_draftSurvey"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:inputType="numberDecimal"
+                    />
+
+                <TextView
+                    android:layout_marginTop="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="X (MTC - 0.5)"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"/>
+
+                <EditText
+                    android:id="@+id/edit_MTCMX_add_draftSurvey"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:inputType="numberDecimal"
+                    />
+
+                <TextView
+                    android:layout_marginTop="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="X1 (MTC - 0.5)"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"/>
+
+                <EditText
+                    android:id="@+id/edit_MTCMX1_add_draftSurvey"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:inputType="numberDecimal"
+                    />
+
+                <TextView
+                    android:layout_marginTop="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="X2 (MTC - 0.5)"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"/>
+
+                <EditText
+                    android:id="@+id/edit_MTCMX2_add_draftSurvey"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:inputType="numberDecimal"
+                    />
+
+                <TextView
+                    android:layout_marginTop="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Y1 (MTC - 0.5)"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"/>
+
+                <EditText
+                    android:id="@+id/edit_MTCMY1_add_draftSurvey"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:inputType="numberDecimal"
+                    />
+
+                <TextView
+                    android:layout_marginTop="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Y2 (MTC - 0.5)"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"/>
+
+                <EditText
+                    android:id="@+id/edit_MTCMY2_add_draftSurvey"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:inputType="numberDecimal"
+                    />
+
+                <TextView
+                    android:layout_marginTop="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="MTC - 0.5"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"/>
+
+                <EditText
+                    android:id="@+id/edit_MTCM_add_draftSurvey"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:inputType="numberDecimal"
+                    />
+
+                <TextView
+                    android:layout_marginTop="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="ΔMTC"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"/>
+
+                <EditText
+                    android:id="@+id/edit_DMTC_add_draftSurvey"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:inputType="numberDecimal"
+                    />
+
+                <TextView
+                    android:layout_marginTop="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="True Trim"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"/>
+
+                <EditText
+                    android:id="@+id/edit_TT_add_draftSurvey"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:inputType="numberDecimal"
+                    />
+
+                <TextView
+                    android:layout_marginTop="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Trim 1"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"/>
+
+                <EditText
+                    android:id="@+id/edit_T1_add_draftSurvey"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:inputType="numberDecimal"
+                    />
+
+                <TextView
+                    android:layout_marginTop="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Trim 2"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"/>
+
+                <EditText
+                    android:id="@+id/edit_T2_add_draftSurvey"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:inputType="numberDecimal"
+                    />
+
+                <TextView
+                    android:layout_marginTop="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Disp. Corr for Trim (Δ)2"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"/>
+
+                <EditText
+                    android:id="@+id/edit_DCFT_add_draftSurvey"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:inputType="numberDecimal"
+                    />
+                <TextView
+                    android:layout_marginTop="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Density Standard"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"/>
+
+                <EditText
+                    android:id="@+id/edit_DS_add_draftSurvey"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:inputType="numberDecimal"
+                    />
+
+                <TextView
+                    android:layout_marginTop="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Density Observed"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"/>
+
+                <EditText
+                    android:id="@+id/edit_DO_add_draftSurvey"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:inputType="numberDecimal"
+                    />
+
+                <TextView
+                    android:layout_marginTop="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Density Corr."
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"/>
+
+                <EditText
+                    android:id="@+id/edit_DC_add_draftSurvey"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:inputType="numberDecimal"
+                    />
+                <TextView
+                    android:layout_marginTop="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Displacement Corr For Density(Δ3)"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"/>
+
+                <EditText
+                    android:id="@+id/edit_DCFD3_add_draftSurvey"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:inputType="numberDecimal"
+                    />
+
+                <TextView
+                    android:layout_marginTop="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Total Deductibed Weight"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"/>
+
+                <EditText
+                    android:id="@+id/edit_TDW_add_draftSurvey"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:inputType="numberDecimal"
+                    />
+
+                <TextView
+                    android:layout_marginTop="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Net Displacement"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"/>
+
+                <EditText
+                    android:id="@+id/edit_ND_add_draftSurvey"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:inputType="numberDecimal"
+                    />
+
+                <TextView
+                    android:layout_marginTop="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Remarks"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"/>
+
+                <EditText
+                    android:id="@+id/edit_remarks_add_draftSurvey"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:inputType="textPersonName"
+                    />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="4"
+                    android:layout_marginTop="10dp"
+                    android:orientation="horizontal">
+
+                    <Button
+                        android:id="@+id/btn_cancel_add_draftSurvey"
+                        android:layout_width="wrap_content"
+                        android:background="@android:color/holo_red_dark"
+                        android:textColor="@android:color/white"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="2"
+                        android:layout_marginRight="5dp"
+                        android:text="Cancel"/>
+
+                    <Button
+                        android:id="@+id/btn_save_add_draftSurvey"
+                        android:layout_width="wrap_content"
+                        android:background="@color/colorPrimary"
+                        android:textColor="@android:color/white"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
+                        android:layout_weight="2"
+                        android:text="Submit"/>
+                </LinearLayout>
+
+            </LinearLayout>
+        </ScrollView>
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

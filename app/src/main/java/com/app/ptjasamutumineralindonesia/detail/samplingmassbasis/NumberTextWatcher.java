@@ -1,10 +1,13 @@
 package com.app.ptjasamutumineralindonesia.detail.samplingmassbasis;
-import java.text.DecimalFormat;
-import java.text.ParseException;
 
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.widget.EditText;
+
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
+import java.text.ParseException;
+import java.util.Locale;
 
 public class NumberTextWatcher implements TextWatcher {
 
@@ -16,9 +19,12 @@ public class NumberTextWatcher implements TextWatcher {
 
     public NumberTextWatcher(EditText et)
     {
-        df = new DecimalFormat("#,###.####");
+        DecimalFormatSymbols otherSymbols = new DecimalFormatSymbols(Locale.US);
+        otherSymbols.setDecimalSeparator('.');
+        otherSymbols.setGroupingSeparator(',');
+        df = new DecimalFormat("#,###.####", otherSymbols);
         df.setDecimalSeparatorAlwaysShown(true);
-        dfnd = new DecimalFormat("#,###");
+        dfnd = new DecimalFormat("#,###", otherSymbols);
         this.et = et;
         hasFractionalPart = false;
     }

@@ -75,7 +75,7 @@ public class MainSampler extends AppCompatActivity {
             finish();
         }
         idToken = sharedPrefManager.getAccessToken();
-        loadData("1");
+        loadData();
     }
 
     @Override
@@ -83,6 +83,7 @@ public class MainSampler extends AppCompatActivity {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.menu_bar, menu);
         MenuItem logoutButton = menu.findItem(R.id.logOut);
+        MenuItem refreshButton = menu.findItem(R.id.refresh);
         MenuItem searchViewItem = menu.findItem(R.id.search);
         final SearchView searchView = (SearchView) MenuItemCompat.getActionView(searchViewItem);
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
@@ -90,7 +91,7 @@ public class MainSampler extends AppCompatActivity {
             public boolean onQueryTextSubmit(String query) {
                 searchView.clearFocus();
                 if (query.isEmpty()){
-                     loadData("1");
+                     loadData();
                 } else {
                     search(query);
                 }
@@ -101,7 +102,7 @@ public class MainSampler extends AppCompatActivity {
             @Override
             public boolean onQueryTextChange(String newText) {
                 if (newText.isEmpty()){
-                    loadData("1");
+                    loadData();
                 } else {
                     search(newText);
                 }
@@ -117,6 +118,13 @@ public class MainSampler extends AppCompatActivity {
                 startActivity(new Intent(MainSampler.this, LoginActivity.class)
                         .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK));
                 finish();
+                return false;
+            }
+        });
+        refreshButton.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                loadData();
                 return false;
             }
         });
@@ -151,7 +159,7 @@ public class MainSampler extends AppCompatActivity {
         });
     }
 
-    public void loadData(String page){
+    public void loadData(){
         ApiSamplerInterface service = retrofit.create(ApiSamplerInterface .class);
         String sort = "documentDate,desc";
 //        String size = "2";

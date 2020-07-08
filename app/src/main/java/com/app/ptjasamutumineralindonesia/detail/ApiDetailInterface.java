@@ -3,6 +3,7 @@ package com.app.ptjasamutumineralindonesia.detail;
 import com.app.ptjasamutumineralindonesia.detail.attendancecard.AttendanceDataResult;
 import com.app.ptjasamutumineralindonesia.detail.attendancecard.AttendanceResult;
 import com.app.ptjasamutumineralindonesia.detail.attendancecard.BargeResults;
+import com.app.ptjasamutumineralindonesia.detail.draftSurvey.DraftSurveyResults;
 import com.app.ptjasamutumineralindonesia.detail.sampledispatch.SampleDispatchLineResults;
 import com.app.ptjasamutumineralindonesia.detail.sampledispatch.SampleDispatchResult;
 import com.app.ptjasamutumineralindonesia.detail.sampledispatch.SeaPortResults;
@@ -194,7 +195,7 @@ public interface ApiDetailInterface {
 
     @GET("sample-dispatch-lines")
     Call<ArrayList<SampleDispatchLineResults>> getListSampleDispatchLines(
-            @Header("Authorization") String token, @Query("sampleDispatchLineId") String sampleDispatchLineId);
+            @Header("Authorization") String token, @Query("sampleDispatchId") String sampleDispatchId);
 
     @GET("sample-dispatch-lines/{id}")
     Call<SampleDispatchLineResults> getDetailSampleDispatchLines(
@@ -223,4 +224,26 @@ public interface ApiDetailInterface {
     @GET("employees")
     Call<ArrayList<EmployeResults>> getListEmployees(
             @Header("Authorization") String token);
+
+    @GET("draft-survey-manuals-by-assignment-work-order")
+    Call<ArrayList<DraftSurveyResults>> getListDraftSurvey(
+            @Header("Authorization") String token, @Query("assignmentWorkOrderId") String assignmentWorkOrderId, @Query("sort") String sort);
+
+    @GET("_search/draft-survey-manuals-by-assignment-work-order")
+    Call<ArrayList<DraftSurveyResults>> searchListDraftSurvey(
+            @Header("Authorization") String token, @Query("assignmentWorkOrderId") String assignmentWorkOrderId, @Query("query") String query);
+
+    @GET("draft-survey-manuals/{id}")
+    Call<DraftSurveyResults> getDetailDraftSurvey(
+            @Header("Authorization") String token, @Path("id") String idDraftSurvey);
+
+    @DELETE("draft-survey-manuals/{id}")
+    Call<DraftSurveyResults> deleteDraftSurvey(
+            @Header("Authorization") String token, @Path("id") String idDraftSurvey);
+
+    @POST("draft-survey-manuals")
+    Call<DraftSurveyResults> addDraftSurvey(@Header("Authorization") String token, @Body JsonObject body);
+
+    @PUT("draft-survey-manuals")
+    Call<DraftSurveyResults> updateDraftSurvey(@Header("Authorization") String token, @Body JsonObject body);
 }

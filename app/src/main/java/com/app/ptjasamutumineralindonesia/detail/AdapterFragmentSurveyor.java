@@ -5,23 +5,21 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentStatePagerAdapter;
 
 import com.app.ptjasamutumineralindonesia.detail.attendancecard.AttendanceCard;
-import com.app.ptjasamutumineralindonesia.detail.sampledispatch.SampleDispatch;
-import com.app.ptjasamutumineralindonesia.detail.samplingmassbasis.SamplingMassBasis;
-import com.app.ptjasamutumineralindonesia.detail.samplingtimebasis.SamplingTimeBasis;
+import com.app.ptjasamutumineralindonesia.detail.draftSurvey.DraftSurveyManuals;
 
-public class AdapterFragmentDetail extends FragmentStatePagerAdapter {
+public class AdapterFragmentSurveyor extends FragmentStatePagerAdapter {
 
     private int numOfTabs;
     private String idAssignment;
     private String idAssignmentDocNumber;
-    public AdapterFragmentDetail(FragmentManager fm, int numOfTabs, String idAssignment, String idAssignmentDocNumber) {
+    public AdapterFragmentSurveyor(FragmentManager fm, int numOfTabs, String idAssignment, String idAssignmentDocNumber) {
         super(fm);
         this.numOfTabs = numOfTabs;
         this.idAssignment = idAssignment;
         this.idAssignmentDocNumber = idAssignmentDocNumber;
     }
 
-    public AdapterFragmentDetail(FragmentManager fm) {
+    public AdapterFragmentSurveyor(FragmentManager fm) {
         super(fm);
     }
     @Override
@@ -30,11 +28,7 @@ public class AdapterFragmentDetail extends FragmentStatePagerAdapter {
             case 0:
                 return AttendanceCard.newInstance(idAssignment, idAssignmentDocNumber);
             case 1:
-                return SamplingMassBasis.newInstance(idAssignment, idAssignmentDocNumber);
-            case 2:
-                return SamplingTimeBasis.newInstance(idAssignment, idAssignmentDocNumber);
-            case 3:
-                return SampleDispatch.newInstance(idAssignment, idAssignmentDocNumber);
+                return DraftSurveyManuals.newInstance(idAssignment, idAssignmentDocNumber);
             default:
                 return null;
         }

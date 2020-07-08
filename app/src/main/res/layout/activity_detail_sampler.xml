@@ -324,6 +324,7 @@
                 </LinearLayout>
 
                 <LinearLayout
+                    android:id="@+id/sampler_tab"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:paddingTop="10dp"
@@ -334,18 +335,16 @@
                         android:layout_height="wrap_content">
 
                     <com.google.android.material.tabs.TabLayout
-                        android:id="@+id/tab_layout_detail"
+                        android:id="@+id/tab_layout_detail_sampler"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent">
 
                         <com.google.android.material.tabs.TabItem
-                            android:id="@+id/item_attendCard"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Timesheets" />
 
                         <com.google.android.material.tabs.TabItem
-                            android:id="@+id/item_sampingMass"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Sampling Mass Basis" />
@@ -373,7 +372,50 @@
 <!--                        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"/>-->
 
                     <androidx.viewpager.widget.ViewPager
-                        android:id="@+id/pager_detail"
+                        android:id="@+id/pager_detail_sampler"
+                        android:layout_width="match_parent"
+                        android:layout_height="400dp"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/surveyor_tab"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:paddingTop="10dp"
+                    android:orientation="vertical">
+
+                    <HorizontalScrollView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <com.google.android.material.tabs.TabLayout
+                            android:id="@+id/tab_layout_detail_surveyor"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+
+                            <com.google.android.material.tabs.TabItem
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Timesheets" />
+
+                            <com.google.android.material.tabs.TabItem
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Draft Survey Manuals" />
+
+                        </com.google.android.material.tabs.TabLayout>
+                    </HorizontalScrollView>
+                    <!--                    <com.google.android.material.tabs.TabLayout-->
+                    <!--                        android:id="@+id/tab_layout_detail"-->
+                    <!--                        android:layout_width="match_parent"-->
+                    <!--                        android:layout_height="wrap_content"-->
+                    <!--                        android:background="?attr/colorPrimary"-->
+                    <!--                        android:elevation="6dp"-->
+                    <!--                        android:minHeight="?attr/actionBarSize"-->
+                    <!--                        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"/>-->
+
+                    <androidx.viewpager.widget.ViewPager
+                        android:id="@+id/pager_detail_surveyor"
                         android:layout_width="match_parent"
                         android:layout_height="400dp"/>
                 </LinearLayout>
