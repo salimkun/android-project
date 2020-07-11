@@ -8,8 +8,10 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.provider.MediaStore;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -87,6 +89,8 @@ public class AddDraftSurveyManual extends AppCompatActivity {
     ImageView viewFimg, viewAimg, viewMSIimg;
     ApiDetailInterface service;
     int type;
+    Response<DraftSurveyResults> responseGlobal;
+    Handler handler = new Handler();
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
@@ -170,18 +174,19 @@ public class AddDraftSurveyManual extends AppCompatActivity {
 
         forwarAfter = findViewById(R.id.edit_MeanFA_add_draftSurvey);
         forwarAfter.setText("0.0000");
+        forwarAfter.setEnabled(false);
 
         steamCorr = findViewById(R.id.edit_steamCorr_add_draftSurvey);
         steamCorr.setText("0.0000");
+        steamCorr.setEnabled(false);
+
 
         forwardMean = findViewById(R.id.edit_forwardMean_add_draftSurvey);
         forwardMean.setText("0.0000");
-
         forwardMean.setEnabled(false);
 
         forwardMeanAfterCorr = findViewById(R.id.edit_forwardMeanAfterCorr_add_draftSurvey);
         forwardMeanAfterCorr.setText("0.0000");
-
         forwardMeanAfterCorr.setEnabled(false);
 
         apparentTrim = findViewById(R.id.edit_apparentTrim_add_draftSurvey);
@@ -195,14 +200,13 @@ public class AddDraftSurveyManual extends AppCompatActivity {
 
         asteamCorr = findViewById(R.id.edit_asteamCorr_add_draftSurvey);
         asteamCorr.setText("0.0000");
+        asteamCorr.setEnabled(false);
 
         afterMean = findViewById(R.id.edit_afterMean_add_draftSurvey);
         afterMean.setText("0.0000");
-        afterMean.setEnabled(false);
 
         afterMeanAfterCorr = findViewById(R.id.edit_afterMeanAfterCorr_add_draftSurvey);
         afterMeanAfterCorr.setText("0.0000");
-
         afterMeanAfterCorr.setEnabled(false);
 
         dmp = findViewById(R.id.edit_dmp_add_draftSurvey);
@@ -213,16 +217,17 @@ public class AddDraftSurveyManual extends AppCompatActivity {
 
         msisteamCorr = findViewById(R.id.edit_msisteamCorr_add_draftSurvey);
         msisteamCorr.setText("0.0000");
+        msisteamCorr.setEnabled(false);
 
         midMean = findViewById(R.id.edit_midMean_add_draftSurvey);
         midMean.setText("0.0000");
-
         midMean.setEnabled(false);
+
 
         midMeanAfterCorr = findViewById(R.id.edit_midshipMeanAfterCorr_add_draftSurvey);
         midMeanAfterCorr.setText("0.0000");
-
         midMeanAfterCorr.setEnabled(false);
+
 
         faMeansCorr = findViewById(R.id.edit_MeanAfterCorr_add_draftSurvey);
         faMeansCorr.setText("0.0000");
@@ -230,17 +235,16 @@ public class AddDraftSurveyManual extends AppCompatActivity {
 
         mOM = findViewById(R.id.edit_MeanOfMeans_add_draftSurvey);
         mOM.setText("0.0000");
-
         mOM.setEnabled(false);
 
         draftCorr = findViewById(R.id.edit_draftCorr_add_draftSurvey);
         draftCorr.setText("0.0000");
-
         draftCorr.setEnabled(false);
 
         lcfy = findViewById(R.id.edit_LCF_add_draftSurvey);
         lcfy.setText("0.0000");
         lcfy.setEnabled(false);
+
 
         lcfy1 = findViewById(R.id.edit_LCFY1_add_draftSurvey);
         lcfy1.setText("0.0000");
@@ -260,6 +264,7 @@ public class AddDraftSurveyManual extends AppCompatActivity {
         cdy = findViewById(R.id.edit_CD1_add_draftSurvey);
         cdy.setText("0.0000");
         cdy.setEnabled(false);
+
 
         cdy1 = findViewById(R.id.edit_CDY1_add_draftSurvey);
         cdy1.setText("0.0000");
@@ -336,18 +341,23 @@ public class AddDraftSurveyManual extends AppCompatActivity {
 
         dmtc = findViewById(R.id.edit_DMTC_add_draftSurvey);
         dmtc.setText("0.0000");
+        dmtc.setEnabled(false);
 
         t2 = findViewById(R.id.edit_T2_add_draftSurvey);
         t2.setText("0.0000");
+        t2.setEnabled(false);
 
         tt = findViewById(R.id.edit_TT_add_draftSurvey);
         tt.setText("0.0000");
+        tt.setEnabled(false);
 
         t1 = findViewById(R.id.edit_T1_add_draftSurvey);
         t1.setText("0.0000");
+        t1.setEnabled(false);
 
         dcft = findViewById(R.id.edit_DCFT_add_draftSurvey);
         dcft.setText("0.0000");
+        dcft.setEnabled(false);
 
         ds = findViewById(R.id.edit_DS_add_draftSurvey);
         ds.setText("1.025");
@@ -359,17 +369,18 @@ public class AddDraftSurveyManual extends AppCompatActivity {
         dc.setText("0.0000");
         dc.setEnabled(false);
 
+
         dcfd3 = findViewById(R.id.edit_DCFD3_add_draftSurvey);
         dcfd3.setText("0.0000");
         dcfd3.setEnabled(false);
 
         nedD = findViewById(R.id.edit_ND_add_draftSurvey);
         nedD.setText("0.0000");
+        nedD.setEnabled(false);
+
 
         tdw = findViewById(R.id.edit_TDW_add_draftSurvey);
         tdw.setText("0.0000");
-
-        setFunction();
 
         remarks = findViewById(R.id.edit_remarks_add_draftSurvey);
 
@@ -545,7 +556,6 @@ public class AddDraftSurveyManual extends AppCompatActivity {
         });
         docNumber.setText("-");
         if (idDraftSurvey!=null){
-            // perintah buat nampilin list
             Call<DraftSurveyResults> call=service.getDetailDraftSurvey("Bearer ".concat(idToken), idDraftSurvey);
             Log.d("request get detail", call.request().toString());
             call.enqueue(new Callback<DraftSurveyResults>() {
@@ -555,180 +565,9 @@ public class AddDraftSurveyManual extends AppCompatActivity {
                     if(!response.isSuccessful()){
                         Toast.makeText(getBaseContext(),response.raw().toString(),Toast.LENGTH_SHORT).show();
                     }else {
-                        docNumber.setText(response.body().getDocumentNumber());
-                        docDate.setText(response.body().getDocumentDate().substring(0, 10));
-                        startDate.setText(response.body().getSurveyStartTime().substring(0,10));
-                        startTIme.setText(response.body().getSurveyStartTime().substring(11,16));
-                        endDate.setText(response.body().getSurveyEndTime().substring(0,10));
-                        endTime.setText(response.body().getSurveyEndTime().substring(11,16));
-                        lpp.setText(stringToDecimals(response.body().getLpp()));
-                        lwt.setText(stringToDecimals(response.body().getLwt()));
-                        constant.setText(stringToDecimals(response.body().getConstant()));
-                        lf.setText(stringToDecimals(response.body().getLf()));
-                        lm.setText(stringToDecimals(response.body().getLm()));
-                        la.setText(stringToDecimals(response.body().getLa()));
-                        lbm.setText(stringToDecimals(response.body().getLbm()));
-                        apparentTrim.setText(stringToDecimals(response.body().getApparentt()));
-                        cargo.setText(response.body().getCargo());
-
-                        if (response.body().getFimage()!=null){
-                            setImageEdit(response.body().getFimage(), 1);
-                            fImage = response.body().getFimage();
-                        }
-                        dfp.setText(stringToDecimals(response.body().getDfp()));
-                        dfs.setText(stringToDecimals(response.body().getDfs()));
-                        steamCorr.setText(stringToDecimals(response.body().getFsteamcorr()));
-                        forwardMean.setText(stringToDecimals(response.body().getFmean()));
-                        forwardMeanAfterCorr.setText(stringToDecimals(response.body().getFaftersteamcorr()));
-                        forwarAfter.setText(stringToDecimals(response.body().getFamean()));
-
-                        if (response.body().getAimage()!=null){
-                            setImageEdit(response.body().getAimage(), 2);
-                            aImage = response.body().getAimage();
-                        }
-
-                        dap.setText(stringToDecimals(response.body().getDap()));
-                        das.setText(stringToDecimals(response.body().getDas()));
-                        asteamCorr.setText(stringToDecimals(response.body().getAsteamcorr()));
-                        afterMean.setText(stringToDecimals(response.body().getAmean()));
-                        afterMeanAfterCorr.setText(stringToDecimals(response.body().getAaftersteamcorr()));
-
-                        if (response.body().getMimage()!=null){
-                            setImageEdit(response.body().getMimage(), 3);
-                            mImage = response.body().getMimage();
-                        }
-
-                        dmp.setText(stringToDecimals(response.body().getDmp()));
-                        dms.setText(stringToDecimals(response.body().getDms()));
-                        msisteamCorr.setText(stringToDecimals(response.body().getMsteamcorr()));
-                        midMean.setText(stringToDecimals(response.body().getMmean()));
-                        midMeanAfterCorr.setText(stringToDecimals(response.body().getMaftersteamcorr()));
-
-                        cdx.setText(stringToDecimals(response.body().getX()));
-                        cdx1.setText(stringToDecimals(response.body().getX1()));
-                        cdx2.setText(stringToDecimals(response.body().getX2()));
-                        cdy1.setText(stringToDecimals(response.body().getY1()));
-                        cdy2.setText(stringToDecimals(response.body().getY2()));
-
-                        lcfx.setText(stringToDecimals(response.body().getLcfx()));
-                        lcfx1.setText(stringToDecimals(response.body().getLcfx1()));
-                        lcfx2.setText(stringToDecimals(response.body().getLcfx2()));
-                        lcfy1.setText(stringToDecimals(response.body().getLcfy1()));
-                        lcfy2.setText(stringToDecimals(response.body().getLcfy2()));
-
-                        tpcx.setText(stringToDecimals(response.body().getTpcx()));
-                        tpcy.setText(stringToDecimals(response.body().getTpccorrdisplacement()));
-                        tpcx1.setText(stringToDecimals(response.body().getTpcx1()));
-                        tpcx2.setText(stringToDecimals(response.body().getTpcx2()));
-                        tpcy1.setText(stringToDecimals(response.body().getTpcy1()));
-                        tpcy2.setText(stringToDecimals(response.body().getTpcy2()));
-
-                        mtcpx.setText(stringToDecimals(response.body().getMtcplusx()));
-                        mtcpx1.setText(stringToDecimals(response.body().getMtcplusx1()));
-                        mtcpx2.setText(stringToDecimals(response.body().getMtcplusx2()));
-                        mtcpy1.setText(stringToDecimals(response.body().getMtcplusy1()));
-                        mtcpy2.setText(stringToDecimals(response.body().getMtcplusy2()));
-                        mtcpy.setText(stringToDecimals(response.body().getMtcplusy()));
-
-                        mtcmx.setText(stringToDecimals(response.body().getMtcminx()));
-                        mtcmx1.setText(stringToDecimals(response.body().getMtcminx1()));
-                        mtcmx2.setText(stringToDecimals(response.body().getMtcminx2()));
-                        mtcmy1.setText(stringToDecimals(response.body().getMtcminy1()));
-                        mtcmy2.setText(stringToDecimals(response.body().getMtcminy2()));
-                        mtcmy.setText(stringToDecimals(response.body().getMtcminy()));
-
-                        dmtc.setText(stringToDecimals(response.body().getMeanmtc()));
-                        tt.setText(stringToDecimals(response.body().getTruetrim()));
-                        t1.setText(stringToDecimals(response.body().getTrim1()));
-                        t2.setText(stringToDecimals(response.body().getTrim2()));
-                        dcft.setText(stringToDecimals(response.body().getDispcortrim()));
-                        ds.setText(stringToDecimals(response.body().getDensitystandard()));
-                        dod.setText(stringToDecimals(response.body().getDensityobserved()));
-                        dc.setText(stringToDecimals(response.body().getDensitycorr()));
-                        dcfd3.setText(stringToDecimals(response.body().getCorrdisplacement()));
-                        tdw.setText(stringToDecimals(response.body().getTotaldeductweight()));
-                        nedD.setText(stringToDecimals(response.body().getNetdisp()));
-                        remarks.setText(response.body().getRemarks());
-
-                        int valStatus=0;
-                        switch (response.body().getDocumentStatus()){
-                            case "CREATED":
-                                valStatus = 0;
-                                break;
-                            case "UPDATED":
-                                valStatus = 1;
-                                break;
-                            case "DELETED":
-                                valStatus = 2;
-                                break;
-                            case "REVISED":
-                                valStatus = 3;
-                                break;
-                            case "REVIEWED":
-                                valStatus = 4;
-                                break;
-                            case "ACCEPTED":
-                                valStatus = 5;
-                                break;
-                            case "REJECTED":
-                                valStatus = 6;
-                                break;
-                            case "VALIDATED":
-                                valStatus = 7;
-                                break;
-                            case "APPROVED":
-                                valStatus = 8;
-                                break;
-                        }
-                        spinnerDocStatus.setSelection(valStatus);
-
-                        int valSurveyType=0;
-                        String surveyTypeS;
-                        if (response.body().getDraftSurveyManualType()==null){
-                            surveyTypeS = "";
-                        } else {
-                            surveyTypeS = response.body().getDraftSurveyManualType();
-                        }
-                        switch (surveyTypeS){
-                            case "INITIAL":
-                                valSurveyType = 0;
-                                break;
-                            case "INTERMEDIATE":
-                                valSurveyType = 1;
-                                break;
-                            case "FINAL":
-                                valSurveyType = 2;
-                                break;
-                            default:
-                                valSurveyType = 1;
-                                break;
-                        }
-                        spinnerSurveyType.setSelection(valSurveyType);
-
-                        for (int i=0; i<spinnerBarge.getCount();i++){
-                            if (spinnerBarge.getSelectedItem()==response.body().getBargeName()){
-                                break;
-                            }else{
-                                spinnerBarge.setSelection(i);
-                            }
-                        }
-
-                        for (int i=0; i<spinnerLocation.getCount();i++){
-                            if (spinnerLocation.getSelectedItem()==response.body().getPlaceName()){
-                                break;
-                            }else{
-                                spinnerLocation.setSelection(i);
-                            }
-                        }
-
-                        for (int i=0; i<spinnerVessel.getCount();i++){
-                            if (spinnerVessel.getSelectedItem()==response.body().getTugBoatName()){
-                                break;
-                            }else{
-                                spinnerVessel.setSelection(i);
-                            }
-                        }
-
+                        responseGlobal = response;
+                        AsyncTaskRunner runner = new AsyncTaskRunner();
+                        runner.execute("10");
                     }
                 }
 
@@ -738,8 +577,9 @@ public class AddDraftSurveyManual extends AppCompatActivity {
                     Toast.makeText(getBaseContext(),"Failed to get detail sampling time basis, please try at a moment",Toast.LENGTH_SHORT).show();
                 }
             });
-
-
+            // perintah buat nampilin list
+        } else {
+            setFunction();
         }
 
         btnSubmit = findViewById(R.id.btn_save_add_draftSurvey);
@@ -765,7 +605,7 @@ public class AddDraftSurveyManual extends AppCompatActivity {
                         jsonObj_.put("aimage", endcodeA);
                         jsonObj_.put("aimageContentType", amime);
                         jsonObj_.put("amean", BigDecimal.valueOf(Double.valueOf(afterMean.getText().toString().replace(",", ""))));
-                        jsonObj_.put("apparentt", null);
+                        jsonObj_.put("apparentt", BigDecimal.valueOf(Double.valueOf(apparentTrim.getText().toString().replace(",", ""))));
                         jsonObj_.put("assignmentWorkOrderDocumentNumber", idAssignmentDocNumber);
                         jsonObj_.put("assignmentWorkOrderId", idAssignment);
                         jsonObj_.put("asteamcorr", stringToDecimals(asteamCorr.getText().toString()));
@@ -773,7 +613,7 @@ public class AddDraftSurveyManual extends AppCompatActivity {
                         jsonObj_.put("bargeName", spinnerBarge.getSelectedItem().toString());
                         jsonObj_.put("cargo", cargo.getText());
                         jsonObj_.put("constant", constant.getText());
-                        jsonObj_.put("corrdisplacement", null);
+                        jsonObj_.put("corrdisplacement", BigDecimal.valueOf(Double.valueOf(cdy.getText().toString().replace(",", ""))));
                         jsonObj_.put("da", null);
                         jsonObj_.put("daftermean", null);
                         jsonObj_.put("dap", BigDecimal.valueOf(Double.valueOf(dap.getText().toString().replace(",", ""))));
@@ -806,7 +646,7 @@ public class AddDraftSurveyManual extends AppCompatActivity {
                         jsonObj_.put("fimage", endcodeF);
                         jsonObj_.put("fimageContentType", fmime);
                         jsonObj_.put("fmean", BigDecimal.valueOf(Double.valueOf(forwardMean.getText().toString().replace(",", ""))));
-                        jsonObj_.put("fsteamcorr", stringToDecimals(steamCorr.getText().toString()));
+                        jsonObj_.put("fsteamcorr", BigDecimal.valueOf(Double.valueOf(steamCorr.getText().toString().replace(",", ""))));
                         jsonObj_.put("la", BigDecimal.valueOf(Double.valueOf(la.getText().toString().replace(",", ""))));
                         jsonObj_.put("lbm", BigDecimal.valueOf(Double.valueOf(lbm.getText().toString().replace(",", ""))));
                         jsonObj_.put("lcfcorrdisplacement", BigDecimal.valueOf(Double.valueOf(lcfy.getText().toString().replace(",", ""))));
@@ -816,18 +656,18 @@ public class AddDraftSurveyManual extends AppCompatActivity {
                         jsonObj_.put("lcfy", BigDecimal.valueOf(Double.valueOf(lcfy.getText().toString().replace(",", ""))));
                         jsonObj_.put("lcfy1", BigDecimal.valueOf(Double.valueOf(lcfy1.getText().toString().replace(",", ""))));
                         jsonObj_.put("lcfy2", BigDecimal.valueOf(Double.valueOf(lcfy2.getText().toString().replace(",", ""))));
-                        jsonObj_.put("lf", stringToDecimals(lf.getText().toString()));
+                        jsonObj_.put("lf", BigDecimal.valueOf(Double.valueOf(lf.getText().toString().replace(",", ""))));
                         jsonObj_.put("lm", BigDecimal.valueOf(Double.valueOf(lm.getText().toString().replace(",", ""))));
                         jsonObj_.put("lpp", BigDecimal.valueOf(Double.valueOf(lpp.getText().toString().replace(",", ""))));
                         jsonObj_.put("lwt", BigDecimal.valueOf(Double.valueOf(lwt.getText().toString().replace(",", ""))));
                         jsonObj_.put("maftersteamcorr", BigDecimal.valueOf(Double.valueOf(midMeanAfterCorr.getText().toString().replace(",", ""))));
-                        jsonObj_.put("meanfa", BigDecimal.valueOf(Double.valueOf(midMeanAfterCorr.getText().toString().replace(",", ""))));
+                        jsonObj_.put("meanfa", BigDecimal.valueOf(Double.valueOf(forwarAfter.getText().toString().replace(",", ""))));
                         jsonObj_.put("meanmtc", BigDecimal.valueOf(Double.valueOf(dmtc.getText().toString().replace(",", ""))));
                         jsonObj_.put("mimage", endcodeM);
                         jsonObj_.put("mimageContentType", mmime);
                         jsonObj_.put("mmean", BigDecimal.valueOf(Double.valueOf(midMean.getText().toString().replace(",", ""))));
-                        jsonObj_.put("mmmean", BigDecimal.valueOf(Double.valueOf(midMean.getText().toString().replace(",", ""))));
-                        jsonObj_.put("msteamcor", stringToDecimals(msisteamCorr.getText().toString()));
+                        jsonObj_.put("mmmean", BigDecimal.valueOf(Double.valueOf(mOM.getText().toString().replace(",", ""))));
+                        jsonObj_.put("msteamcor", BigDecimal.valueOf(Double.valueOf(msisteamCorr.getText().toString().replace(",", ""))));
                         jsonObj_.put("mtcmincorrdisplacement", BigDecimal.valueOf(Double.valueOf(mtcmy.getText().toString().replace(",", ""))));
                         jsonObj_.put("mtcminx", BigDecimal.valueOf(Double.valueOf(mtcmx.getText().toString().replace(",", ""))));
                         jsonObj_.put("mtcminx1", BigDecimal.valueOf(Double.valueOf(mtcmx1.getText().toString().replace(",", ""))));
@@ -853,7 +693,7 @@ public class AddDraftSurveyManual extends AppCompatActivity {
                         jsonObj_.put("tpcx", BigDecimal.valueOf(Double.valueOf(tpcx.getText().toString().replace(",", ""))));
                         jsonObj_.put("tpcx1", BigDecimal.valueOf(Double.valueOf(tpcx1.getText().toString().replace(",", ""))));
                         jsonObj_.put("tpcx2", BigDecimal.valueOf(Double.valueOf(tpcx2.getText().toString().replace(",", ""))));
-                        jsonObj_.put("tpcy", stringToDecimals(tpcy.getText().toString()));
+                        jsonObj_.put("tpcy", BigDecimal.valueOf(Double.valueOf(tpcy.getText().toString().replace(",", ""))));
                         jsonObj_.put("tpcy1", BigDecimal.valueOf(Double.valueOf(tpcy1.getText().toString().replace(",", ""))));
                         jsonObj_.put("tpcy2", BigDecimal.valueOf(Double.valueOf(tpcy2.getText().toString().replace(",", ""))));
                         jsonObj_.put("trim1", BigDecimal.valueOf(Double.valueOf(t1.getText().toString().replace(",", ""))));
@@ -864,8 +704,7 @@ public class AddDraftSurveyManual extends AppCompatActivity {
                         jsonObj_.put("x", BigDecimal.valueOf(Double.valueOf(cdx.getText().toString().replace(",", ""))));
                         jsonObj_.put("x1", BigDecimal.valueOf(Double.valueOf(cdx1.getText().toString().replace(",", ""))));
                         jsonObj_.put("x2", BigDecimal.valueOf(Double.valueOf(cdx2.getText().toString().replace(",", ""))));
-                        jsonObj_.put("dispcorrdensity", stringToDecimals(cdy.getText().toString()));
-                        jsonObj_.put("y",  stringToDecimals(cdy.getText().toString()));
+                        jsonObj_.put("y", BigDecimal.valueOf(Double.valueOf(cdy.getText().toString().replace(",", ""))));
                         jsonObj_.put("y1", BigDecimal.valueOf(Double.valueOf(cdy1.getText().toString().replace(",", ""))));
                         jsonObj_.put("y2", BigDecimal.valueOf(Double.valueOf(cdy2.getText().toString().replace(",", ""))));
 
@@ -908,7 +747,7 @@ public class AddDraftSurveyManual extends AppCompatActivity {
                         jsonObj_.put("aimage", endcodeA);
                         jsonObj_.put("aimageContentType", amime);
                         jsonObj_.put("amean", BigDecimal.valueOf(Double.valueOf(afterMean.getText().toString().replace(",", ""))));
-                        jsonObj_.put("apparentt", null);
+                        jsonObj_.put("apparentt", BigDecimal.valueOf(Double.valueOf(apparentTrim.getText().toString().replace(",", ""))));
                         jsonObj_.put("assignmentWorkOrderDocumentNumber", idAssignmentDocNumber);
                         jsonObj_.put("assignmentWorkOrderId", idAssignment);
                         jsonObj_.put("asteamcorr", BigDecimal.valueOf(Double.valueOf(asteamCorr.getText().toString().replace(",", ""))));
@@ -916,7 +755,7 @@ public class AddDraftSurveyManual extends AppCompatActivity {
                         jsonObj_.put("bargeName", spinnerBarge.getSelectedItem().toString());
                         jsonObj_.put("cargo", cargo.getText());
                         jsonObj_.put("constant", constant.getText());
-                        jsonObj_.put("corrdisplacement", null);
+                        jsonObj_.put("corrdisplacement", BigDecimal.valueOf(Double.valueOf(cdy.getText().toString().replace(",", ""))));
                         jsonObj_.put("da", null);
                         jsonObj_.put("daftermean", null);
                         jsonObj_.put("dap", BigDecimal.valueOf(Double.valueOf(dap.getText().toString().replace(",", ""))));
@@ -952,24 +791,24 @@ public class AddDraftSurveyManual extends AppCompatActivity {
                         jsonObj_.put("fsteamcorr", BigDecimal.valueOf(Double.valueOf(steamCorr.getText().toString().replace(",", ""))));
                         jsonObj_.put("la", BigDecimal.valueOf(Double.valueOf(la.getText().toString().replace(",", ""))));
                         jsonObj_.put("lbm", BigDecimal.valueOf(Double.valueOf(lbm.getText().toString().replace(",", ""))));
-                        jsonObj_.put("lcfcorrdisplacement", stringToDecimals(lcfy.getText().toString()));
+                        jsonObj_.put("lcfcorrdisplacement",BigDecimal.valueOf(Double.valueOf(lcfy.getText().toString().replace(",", ""))));
                         jsonObj_.put("lcfx", BigDecimal.valueOf(Double.valueOf(lcfx.getText().toString().replace(",", ""))));
                         jsonObj_.put("lcfx1", BigDecimal.valueOf(Double.valueOf(lcfx1.getText().toString().replace(",", ""))));
                         jsonObj_.put("lcfx2", BigDecimal.valueOf(Double.valueOf(lcfx2.getText().toString().replace(",", ""))));
-                        jsonObj_.put("lcfy", stringToDecimals(lcfy.getText().toString()));
+                        jsonObj_.put("lcfy", BigDecimal.valueOf(Double.valueOf(lcfy.getText().toString().replace(",", ""))));
                         jsonObj_.put("lcfy1", BigDecimal.valueOf(Double.valueOf(lcfy1.getText().toString().replace(",", ""))));
                         jsonObj_.put("lcfy2", BigDecimal.valueOf(Double.valueOf(lcfy2.getText().toString().replace(",", ""))));
-                        jsonObj_.put("lf", stringToDecimals(lf.getText().toString()));
+                        jsonObj_.put("lf", BigDecimal.valueOf(Double.valueOf(lf.getText().toString().replace(",", ""))));
                         jsonObj_.put("lm", BigDecimal.valueOf(Double.valueOf(lm.getText().toString().replace(",", ""))));
                         jsonObj_.put("lpp", BigDecimal.valueOf(Double.valueOf(lpp.getText().toString().replace(",", ""))));
                         jsonObj_.put("lwt", BigDecimal.valueOf(Double.valueOf(lwt.getText().toString().replace(",", ""))));
                         jsonObj_.put("maftersteamcorr", BigDecimal.valueOf(Double.valueOf(midMeanAfterCorr.getText().toString().replace(",", ""))));
-                        jsonObj_.put("meanfa", BigDecimal.valueOf(Double.valueOf(midMeanAfterCorr.getText().toString().replace(",", ""))));
+                        jsonObj_.put("meanfa", BigDecimal.valueOf(Double.valueOf(forwarAfter.getText().toString().replace(",", ""))));
                         jsonObj_.put("meanmtc", BigDecimal.valueOf(Double.valueOf(dmtc.getText().toString().replace(",", ""))));
                         jsonObj_.put("mimage", endcodeM);
                         jsonObj_.put("mimageContentType", mmime);
                         jsonObj_.put("mmean", BigDecimal.valueOf(Double.valueOf(midMean.getText().toString().replace(",", ""))));
-                        jsonObj_.put("mmmean", BigDecimal.valueOf(Double.valueOf(midMean.getText().toString().replace(",", ""))));
+                        jsonObj_.put("mmmean", BigDecimal.valueOf(Double.valueOf(mOM.getText().toString().replace(",", ""))));
                         jsonObj_.put("msteamcorr", BigDecimal.valueOf(Double.valueOf(msisteamCorr.getText().toString().replace(",", ""))));
                         Double mtcmyVal = Double.valueOf(mtcmy.getText().toString().replace(",", ""));
                         if (mtcmyVal.isNaN()){
@@ -1000,7 +839,7 @@ public class AddDraftSurveyManual extends AppCompatActivity {
                         jsonObj_.put("tpcx", BigDecimal.valueOf(Double.valueOf(tpcx.getText().toString().replace(",", ""))));
                         jsonObj_.put("tpcx1", BigDecimal.valueOf(Double.valueOf(tpcx1.getText().toString().replace(",", ""))));
                         jsonObj_.put("tpcx2", BigDecimal.valueOf(Double.valueOf(tpcx2.getText().toString().replace(",", ""))));
-                        jsonObj_.put("tpcy", stringToDecimals(tpcy.getText().toString()));
+                        jsonObj_.put("tpcy", BigDecimal.valueOf(Double.valueOf(tpcy.getText().toString().replace(",", ""))));
                         jsonObj_.put("tpcy1", BigDecimal.valueOf(Double.valueOf(tpcy1.getText().toString().replace(",", ""))));
                         jsonObj_.put("tpcy2", BigDecimal.valueOf(Double.valueOf(tpcy2.getText().toString().replace(",", ""))));
                         jsonObj_.put("trim1", BigDecimal.valueOf(Double.valueOf(t1.getText().toString().replace(",", ""))));
@@ -1011,7 +850,7 @@ public class AddDraftSurveyManual extends AppCompatActivity {
                         jsonObj_.put("x", BigDecimal.valueOf(Double.valueOf(cdx.getText().toString().replace(",", ""))));
                         jsonObj_.put("x1", BigDecimal.valueOf(Double.valueOf(cdx1.getText().toString().replace(",", ""))));
                         jsonObj_.put("x2", BigDecimal.valueOf(Double.valueOf(cdx2.getText().toString().replace(",", ""))));
-                        jsonObj_.put("y", stringToDecimals(cdy.getText().toString()));
+                        jsonObj_.put("y", BigDecimal.valueOf(Double.valueOf(cdy.getText().toString().replace(",", ""))));
                         jsonObj_.put("y1", BigDecimal.valueOf(Double.valueOf(cdy1.getText().toString().replace(",", ""))));
                         jsonObj_.put("y2", BigDecimal.valueOf(Double.valueOf(cdy2.getText().toString().replace(",", ""))));
                         jsonObj_.put("id", idDraftSurvey);
@@ -1296,7 +1135,7 @@ public class AddDraftSurveyManual extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if (apparentTrim.getText().toString().isEmpty() || apparentTrim.getText().toString().equals("NaN")){
+                if (apparentTrim.getText().toString().isEmpty() || apparentTrim.getText().toString().equals("NaN") || apparentTrim.getText().toString().equals(".")){
                     apparentTrim.setText("0");
                 }
                 msisteamCorr.setText(
@@ -1410,7 +1249,7 @@ public class AddDraftSurveyManual extends AppCompatActivity {
                 forwarAfter.setText(String.valueOf(
                         (Double.valueOf(forwardMeanAfterCorr.getText().toString()) + Double.valueOf(afterMeanAfterCorr.getText().toString()))/2
                 ));
-                tt.setText(String.valueOf(Double.valueOf(afterMeanAfterCorr.getText().toString()) + Double.valueOf(forwardMeanAfterCorr.getText().toString())));
+                tt.setText(String.valueOf(Double.valueOf(afterMeanAfterCorr.getText().toString()) - Double.valueOf(forwardMeanAfterCorr.getText().toString())));
                 faMeansCorr.setText(String.valueOf((Double.valueOf(forwardMeanAfterCorr.getText().toString().replace(",","")) + Double.valueOf(afterMeanAfterCorr.getText().toString().replace(",","")))/2));
             }
 
@@ -1428,7 +1267,7 @@ public class AddDraftSurveyManual extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if (forwarAfter.getText().toString().isEmpty() || forwarAfter.getText().toString().equals("NaN")){
+                if (forwarAfter.getText().toString().isEmpty() || forwarAfter.getText().toString().equals("NaN") || forwarAfter.getText().toString().equals(".")){
                     forwarAfter.setText("0");
                 }
             }
@@ -1438,8 +1277,6 @@ public class AddDraftSurveyManual extends AppCompatActivity {
             }
         });
         forwarAfter.addTextChangedListener(new NumberTextWatcher(forwarAfter));
-        forwarAfter.setEnabled(false
-        );
 
         forwardMean.addTextChangedListener(new TextWatcher() {
             @Override
@@ -1449,7 +1286,7 @@ public class AddDraftSurveyManual extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if (forwardMean.getText().toString().isEmpty()){
+                if (forwardMean.getText().toString().isEmpty() || forwardMean.getText().toString().equals(".")){
                     forwardMean.setText("0");
                 }
                 Double sC =  (
@@ -1497,7 +1334,7 @@ public class AddDraftSurveyManual extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if (steamCorr.getText().toString().isEmpty() || steamCorr.getText().toString().equals("NaN")){
+                if (steamCorr.getText().toString().isEmpty() || steamCorr.getText().toString().equals("NaN") || steamCorr.getText().toString().equals(".")){
                     steamCorr.setText("0");
                 }
             }
@@ -1516,7 +1353,7 @@ public class AddDraftSurveyManual extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if (dfp.getText().toString().isEmpty()){
+                if (dfp.getText().toString().isEmpty() || dfp.getText().toString().equals(".")){
                     dfp.setText("0");
                 }
                 forwardMean.setText(String.valueOf((Double.valueOf(dfp.getText().toString().replace(",",""))+Double.valueOf(dfs.getText().toString().replace(",","")))/2));
@@ -1536,7 +1373,7 @@ public class AddDraftSurveyManual extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if (dfs.getText().toString().isEmpty()){
+                if (dfs.getText().toString().isEmpty() || dfs.getText().toString().equals(".")){
                     dfs.setText("0");
                 }
                 forwardMean.setText(String.valueOf((Double.valueOf(dfp.getText().toString().replace(",",""))+Double.valueOf(dfs.getText().toString().replace(",","")))/2));
@@ -1556,7 +1393,7 @@ public class AddDraftSurveyManual extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if (lwt.getText().toString().isEmpty()){
+                if (lwt.getText().toString().isEmpty() || lwt.getText().toString().equals(".")){
                     lwt.setText("0");
                 }
             }
@@ -1575,7 +1412,7 @@ public class AddDraftSurveyManual extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if (constant.getText().toString().isEmpty()){
+                if (constant.getText().toString().isEmpty() || constant.getText().toString().equals(".")){
                     constant.setText("0");
                 }
             }
@@ -1594,7 +1431,7 @@ public class AddDraftSurveyManual extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if (lm.getText().toString().isEmpty()){
+                if (lm.getText().toString().isEmpty() || lm.getText().toString().equals(".")){
                     lm.setText("0");
                 }
                 msisteamCorr.setText(
@@ -1642,16 +1479,16 @@ public class AddDraftSurveyManual extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if (lpp.getText().toString().isEmpty()){
+                if (lpp.getText().toString().isEmpty() || lpp.getText().toString().equals(".")){
                     lpp.setText("0");
                 }
-                t1.setText(String.valueOf(
+                setTextThread(t1,String.valueOf(
                         (Double.valueOf(lcfy.getText().toString())*Double.valueOf(tpcy.getText().toString())*Double.valueOf(tt.getText().toString())*100)/Double.valueOf(lpp.getText().toString())
                 ));
-                t2.setText(String.valueOf(
-                        ((Double.valueOf(tt.getText().toString())*2)*Double.valueOf(dmtc.getText().toString())*50)/Double.valueOf(lpp.getText().toString())
+                setTextThread(t2,String.valueOf(
+                        ((Double.valueOf(tt.getText().toString())*Double.valueOf(tt.getText().toString()))*Double.valueOf(dmtc.getText().toString())*50)/Double.valueOf(lpp.getText().toString())
                 ));
-                lbm.setText(String.valueOf(Double.valueOf(lpp.getText().toString().replace(",",""))-(Double.valueOf(lf.getText().toString().replace(",",""))+Double.valueOf(la.getText().toString().replace(",","")))));
+                setTextThread(lbm,String.valueOf(Double.valueOf(lpp.getText().toString().replace(",",""))-(Double.valueOf(lf.getText().toString().replace(",",""))+Double.valueOf(la.getText().toString().replace(",","")))));
             }
 
             @Override
@@ -1668,7 +1505,7 @@ public class AddDraftSurveyManual extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if (lbm.getText().toString().isEmpty() || lbm.getText().toString().equals("NaN")){
+                if (lbm.getText().toString().isEmpty() || lbm.getText().toString().equals("NaN") || lbm.getText().toString().equals(".")){
                     lbm.setText("0");
                 }
 
@@ -1777,7 +1614,7 @@ public class AddDraftSurveyManual extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if (lf.getText().toString().isEmpty()){
+                if (lf.getText().toString().isEmpty() || lf.getText().toString().equals(".")){
                     lf.setText("0");
                 }
                 lbm.setText(String.valueOf(Double.valueOf(lpp.getText().toString().replace(",",""))-(Double.valueOf(lf.getText().toString().replace(",",""))+Double.valueOf(la.getText().toString().replace(",","")))));
@@ -1826,7 +1663,7 @@ public class AddDraftSurveyManual extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if (la.getText().toString().isEmpty()){
+                if (la.getText().toString().isEmpty() || la.getText().toString().equals(".")){
                     la.setText("0");
                 }
                 lbm.setText(String.valueOf(Double.valueOf(lpp.getText().toString().replace(",",""))-(Double.valueOf(lf.getText().toString().replace(",",""))+Double.valueOf(la.getText().toString().replace(",","")))));
@@ -1875,7 +1712,7 @@ public class AddDraftSurveyManual extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if (dap.getText().toString().isEmpty()){
+                if (dap.getText().toString().isEmpty() || dap.getText().toString().equals(".")){
                     dap.setText("0");
                 }
                 afterMean.setText(String.valueOf((Double.valueOf(dap.getText().toString().replace(",",""))+Double.valueOf(das.getText().toString().replace(",","")))/2));
@@ -1895,7 +1732,7 @@ public class AddDraftSurveyManual extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if (das.getText().toString().isEmpty()){
+                if (das.getText().toString().isEmpty() || das.getText().toString().equals(".")){
                     das.setText("0");
                 }
                 afterMean.setText(String.valueOf((Double.valueOf(dap.getText().toString().replace(",",""))+Double.valueOf(das.getText().toString().replace(",","")))/2));
@@ -1915,7 +1752,7 @@ public class AddDraftSurveyManual extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if (asteamCorr.getText().toString().isEmpty() || asteamCorr.getText().toString().equals("NaN")){
+                if (asteamCorr.getText().toString().isEmpty() || asteamCorr.getText().toString().equals("NaN") || asteamCorr.getText().toString().equals(".")){
                     asteamCorr.setText("0");
                 }
             }
@@ -1934,7 +1771,7 @@ public class AddDraftSurveyManual extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if (afterMean.getText().toString().isEmpty()){
+                if (afterMean.getText().toString().isEmpty() || afterMean.getText().toString().equals(".")){
                     afterMean.setText("0");
                 }
                 afterMeanAfterCorr.setText(
@@ -1968,14 +1805,14 @@ public class AddDraftSurveyManual extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if (afterMeanAfterCorr.getText().toString().isEmpty() || afterMeanAfterCorr.getText().toString().equals("NaN")){
+                if (afterMeanAfterCorr.getText().toString().isEmpty() || afterMeanAfterCorr.getText().toString().equals("NaN") || afterMeanAfterCorr.getText().toString().equals(".")){
                     afterMeanAfterCorr.setText("0");
                 }
                 faMeansCorr.setText(String.valueOf((Double.valueOf(forwardMeanAfterCorr.getText().toString().replace(",","")) + Double.valueOf(afterMeanAfterCorr.getText().toString().replace(",","")))/2));
                 forwarAfter.setText(String.valueOf(
                         (Double.valueOf(forwardMeanAfterCorr.getText().toString()) + Double.valueOf(afterMeanAfterCorr.getText().toString()))/2
                 ));
-                tt.setText(String.valueOf(Double.valueOf(afterMeanAfterCorr.getText().toString()) + Double.valueOf(forwardMeanAfterCorr.getText().toString())));
+                tt.setText(String.valueOf(Double.valueOf(afterMeanAfterCorr.getText().toString()) - Double.valueOf(forwardMeanAfterCorr.getText().toString())));
             }
 
             @Override
@@ -1992,7 +1829,7 @@ public class AddDraftSurveyManual extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if (dmp.getText().toString().isEmpty()){
+                if (dmp.getText().toString().isEmpty() || dmp.getText().toString().equals(".")){
                     dmp.setText("0");
                 }
                 midMean.setText(String.valueOf((Double.valueOf(dmp.getText().toString().replace(",",""))+Double.valueOf(dms.getText().toString().replace(",","")))/2));
@@ -2012,7 +1849,7 @@ public class AddDraftSurveyManual extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if (dms.getText().toString().isEmpty()){
+                if (dms.getText().toString().isEmpty() || dms.getText().toString().equals(".")){
                     dms.setText("0");
                 }
                 midMean.setText(String.valueOf((Double.valueOf(dmp.getText().toString().replace(",",""))+Double.valueOf(dms.getText().toString().replace(",","")))/2));
@@ -2032,7 +1869,7 @@ public class AddDraftSurveyManual extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if (msisteamCorr.getText().toString().isEmpty() || msisteamCorr.getText().toString().equals("NaN")){
+                if (msisteamCorr.getText().toString().isEmpty() || msisteamCorr.getText().toString().equals("NaN") || msisteamCorr.getText().toString().equals(".")){
                     msisteamCorr.setText("0");
                 }
             }
@@ -2051,7 +1888,7 @@ public class AddDraftSurveyManual extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if (midMean.getText().toString().isEmpty()){
+                if (midMean.getText().toString().isEmpty() || midMean.getText().toString().equals(".")){
                     midMean.setText("0");
                 }
                 midMeanAfterCorr.setText(
@@ -2085,7 +1922,7 @@ public class AddDraftSurveyManual extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if (midMeanAfterCorr.getText().toString().isEmpty()){
+                if (midMeanAfterCorr.getText().toString().isEmpty() || midMeanAfterCorr.getText().toString().equals(".")){
                     midMeanAfterCorr.setText("0");
                 }
                 mOM.setText(String.valueOf((Double.valueOf(faMeansCorr.getText().toString().replace(",","")) + Double.valueOf(midMeanAfterCorr.getText().toString().replace(",","")))/2));
@@ -2106,7 +1943,7 @@ public class AddDraftSurveyManual extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if (faMeansCorr.getText().toString().isEmpty() || faMeansCorr.getText().toString().equals("NaN")){
+                if (faMeansCorr.getText().toString().isEmpty() || faMeansCorr.getText().toString().equals("NaN") || faMeansCorr.getText().toString().equals(".")){
                     faMeansCorr.setText("0");
                 }
                 mOM.setText(String.valueOf((Double.valueOf(faMeansCorr.getText().toString().replace(",","")) + Double.valueOf(midMeanAfterCorr.getText().toString().replace(",","")))/2));
@@ -2126,7 +1963,7 @@ public class AddDraftSurveyManual extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if (mOM.getText().toString().isEmpty() || mOM.getText().toString().equals("NaN")){
+                if (mOM.getText().toString().isEmpty() || mOM.getText().toString().equals("NaN") || mOM.getText().toString().equals(".")){
                     mOM.setText("0");
                 }
                 draftCorr.setText(String.valueOf((Double.valueOf(mOM.getText().toString().replace(",","")) + Double.valueOf(midMeanAfterCorr.getText().toString().replace(",","")))/2));
@@ -2146,7 +1983,7 @@ public class AddDraftSurveyManual extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if (draftCorr.getText().toString().isEmpty() || draftCorr.getText().toString().equals("NaN")){
+                if (draftCorr.getText().toString().isEmpty() || draftCorr.getText().toString().equals("NaN") || draftCorr.getText().toString().equals(".")){
                     draftCorr.setText("0");
                 }
             }
@@ -2165,7 +2002,7 @@ public class AddDraftSurveyManual extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if (lcfy.getText().toString().isEmpty() || lcfy.getText().toString().equals("NaN")){
+                if (lcfy.getText().toString().isEmpty() || lcfy.getText().toString().equals("NaN") || lcfy.getText().toString().equals(".")){
                     lcfy.setText("0");
                 }
                 t1.setText(String.valueOf(
@@ -2187,7 +2024,7 @@ public class AddDraftSurveyManual extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if (lcfy1.getText().toString().isEmpty()){
+                if (lcfy1.getText().toString().isEmpty() || lcfy1.getText().toString().equals(".")){
                     lcfy1.setText("0");
                 }
                 lcfy.setText(String.valueOf(
@@ -2213,7 +2050,7 @@ public class AddDraftSurveyManual extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if (lcfy2.getText().toString().isEmpty() || lcfy2.getText().toString().equals(".")){
+                if (lcfy2.getText().toString().isEmpty() || lcfy2.getText().toString().equals(".") || lcfy2.getText().toString().equals(".")){
                     lcfy2.setText("0");
                 }
                 lcfy.setText(String.valueOf(
@@ -2239,7 +2076,7 @@ public class AddDraftSurveyManual extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if (lcfx.getText().toString().isEmpty()){
+                if (lcfx.getText().toString().isEmpty() || lcfx.getText().toString().equals(".")){
                     lcfx.setText("0");
                 }
                 lcfy.setText(String.valueOf(
@@ -2265,7 +2102,7 @@ public class AddDraftSurveyManual extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if (lcfx1.getText().toString().isEmpty()){
+                if (lcfx1.getText().toString().isEmpty() || lcfx1.getText().toString().equals(".")){
                     lcfx1.setText("0");
                 }
                 lcfy.setText(String.valueOf(
@@ -2290,7 +2127,7 @@ public class AddDraftSurveyManual extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if (lcfx2.getText().toString().isEmpty()){
+                if (lcfx2.getText().toString().isEmpty() || lcfx2.getText().toString().equals(".")){
                     lcfx2.setText("0");
                 }
                 lcfy.setText(String.valueOf(
@@ -2308,132 +2145,6 @@ public class AddDraftSurveyManual extends AppCompatActivity {
         });
         lcfx2.addTextChangedListener(new NumberTextWatcher(lcfx2));
 
-        cdy.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if (cdy.getText().toString().isEmpty() || cdy.getText().toString().equals("NaN")){
-                    cdy.setText("0");
-                }
-                dcft.setText(String.valueOf(
-                        Double.valueOf(cdy.getText().toString())+Double.valueOf(t1.getText().toString())+Double.valueOf(t2.getText().toString())
-                ));
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-            }
-        });
-        cdy.addTextChangedListener(new NumberTextWatcher(cdy));
-
-        cdy1.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if (cdy1.getText().toString().isEmpty()){
-                    cdy1.setText("0");
-                }
-                cdy.setText(String.valueOf(
-                        ((Double.valueOf(cdx.getText().toString().replace(",",""))-Double.valueOf(cdx1.getText().toString().replace(",","")))/
-                                (Double.valueOf(cdx2.getText().toString().replace(",",""))-(Double.valueOf(cdx1.getText().toString().replace(",",""))))*
-                                (Double.valueOf(cdy2.getText().toString().replace(",",""))-Double.valueOf(cdy1.getText().toString().replace(",","")))+
-                                Double.valueOf(cdy1.getText().toString().replace(",",""))
-                        )
-                ));
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-            }
-        });
-        cdy1.addTextChangedListener(new NumberTextWatcher(cdy1));
-
-        cdy2.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if (cdy2.getText().toString().isEmpty()){
-                    cdy2.setText("0");
-                }
-                cdy.setText(String.valueOf(
-                        ((Double.valueOf(cdx.getText().toString().replace(",",""))-Double.valueOf(cdx1.getText().toString().replace(",","")))/
-                                (Double.valueOf(cdx2.getText().toString().replace(",",""))-(Double.valueOf(cdx1.getText().toString().replace(",",""))))*
-                                (Double.valueOf(cdy2.getText().toString().replace(",",""))-Double.valueOf(cdy1.getText().toString().replace(",","")))+
-                                Double.valueOf(cdy1.getText().toString().replace(",",""))
-                        )
-                ));
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-            }
-        });
-        cdy2.addTextChangedListener(new NumberTextWatcher(cdy2));
-
-        cdx.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if (cdx.getText().toString().isEmpty()){
-                    cdx.setText("0");
-                }
-                cdy.setText(String.valueOf(
-                        ((Double.valueOf(cdx.getText().toString().replace(",",""))-Double.valueOf(cdx1.getText().toString().replace(",","")))/
-                                (Double.valueOf(cdx2.getText().toString().replace(",",""))-(Double.valueOf(cdx1.getText().toString().replace(",",""))))*
-                                (Double.valueOf(cdy2.getText().toString().replace(",",""))-Double.valueOf(cdy1.getText().toString().replace(",","")))+
-                                Double.valueOf(cdy1.getText().toString().replace(",",""))
-                        )
-                ));
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-            }
-        });
-        cdx.addTextChangedListener(new NumberTextWatcher(cdx));
-
-        cdx2.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if (cdx2.getText().toString().isEmpty()){
-                    cdx2.setText("0");
-                }
-                cdy.setText(String.valueOf(
-                        ((Double.valueOf(cdx.getText().toString().replace(",",""))-Double.valueOf(cdx1.getText().toString().replace(",","")))/
-                                (Double.valueOf(cdx2.getText().toString().replace(",",""))-(Double.valueOf(cdx1.getText().toString().replace(",",""))))*
-                                (Double.valueOf(cdy2.getText().toString().replace(",",""))-Double.valueOf(cdy1.getText().toString().replace(",","")))+
-                                Double.valueOf(cdy1.getText().toString().replace(",",""))
-                        )
-                ));
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-            }
-        });
-        cdx2.addTextChangedListener(new NumberTextWatcher(cdx2));
-
         tpcy.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -2442,7 +2153,7 @@ public class AddDraftSurveyManual extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if (tpcy.getText().toString().isEmpty() || tpcy.getText().toString().equals("NaN")){
+                if (tpcy.getText().toString().isEmpty() || tpcy.getText().toString().equals("NaN") || tpcy.getText().toString().equals(".")){
                     tpcy.setText("0");
                 }
                 t1.setText(String.valueOf(
@@ -2464,7 +2175,7 @@ public class AddDraftSurveyManual extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if (tpcy1.getText().toString().isEmpty()){
+                if (tpcy1.getText().toString().isEmpty() || tpcy1.getText().toString().equals(".")){
                     tpcy1.setText("0");
                 }
                 tpcy.setText(String.valueOf(
@@ -2490,7 +2201,7 @@ public class AddDraftSurveyManual extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if (tpcy2.getText().toString().isEmpty()){
+                if (tpcy2.getText().toString().isEmpty() || tpcy2.getText().toString().equals(".")){
                     tpcy2.setText("0");
                 }
                 tpcy.setText(String.valueOf(
@@ -2516,7 +2227,7 @@ public class AddDraftSurveyManual extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if (tpcx.getText().toString().isEmpty()){
+                if (tpcx.getText().toString().isEmpty() || tpcx.getText().toString().equals(".")){
                     tpcx.setText("0");
                 }
                 tpcy.setText(String.valueOf(
@@ -2542,7 +2253,7 @@ public class AddDraftSurveyManual extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if (tpcx1.getText().toString().isEmpty()){
+                if (tpcx1.getText().toString().isEmpty() || tpcx1.getText().toString().equals(".")){
                     tpcx1.setText("0");
                 }
                 tpcy.setText(String.valueOf(
@@ -2568,7 +2279,7 @@ public class AddDraftSurveyManual extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if (tpcx2.getText().toString().isEmpty()){
+                if (tpcx2.getText().toString().isEmpty() || tpcx2.getText().toString().equals(".")){
                     tpcx2.setText("0");
                 }
                 tpcy.setText(String.valueOf(
@@ -2594,9 +2305,12 @@ public class AddDraftSurveyManual extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if (cdy.getText().toString().isEmpty()){
+                if (cdy.getText().toString().isEmpty() || cdy.getText().toString().equals("NaN") || cdy.getText().toString().equals(".")){
                     cdy.setText("0");
                 }
+                dcft.setText(String.valueOf(
+                        Double.valueOf(cdy.getText().toString())+Double.valueOf(t1.getText().toString())+Double.valueOf(t2.getText().toString())
+                ));
             }
 
             @Override
@@ -2613,7 +2327,7 @@ public class AddDraftSurveyManual extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if (cdy1.getText().toString().isEmpty()){
+                if (cdy1.getText().toString().isEmpty() || cdy1.getText().toString().equals(".")){
                     cdy1.setText("0");
                 }
                 cdy.setText(String.valueOf(
@@ -2639,7 +2353,7 @@ public class AddDraftSurveyManual extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if (cdy2.getText().toString().isEmpty()){
+                if (cdy2.getText().toString().isEmpty() || cdy2.getText().toString().equals(".")){
                     cdy2.setText("0");
                 }
                 cdy.setText(String.valueOf(
@@ -2657,6 +2371,58 @@ public class AddDraftSurveyManual extends AppCompatActivity {
         });
         cdy2.addTextChangedListener(new NumberTextWatcher(cdy2));
 
+        cdx.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if (cdx.getText().toString().isEmpty() || cdx.getText().toString().equals(".")){
+                    cdx.setText("0");
+                }
+                cdy.setText(String.valueOf(
+                        ((Double.valueOf(cdx.getText().toString().replace(",",""))-Double.valueOf(cdx1.getText().toString().replace(",","")))/
+                                (Double.valueOf(cdx2.getText().toString().replace(",",""))-(Double.valueOf(cdx1.getText().toString().replace(",",""))))*
+                                (Double.valueOf(cdy2.getText().toString().replace(",",""))-Double.valueOf(cdy1.getText().toString().replace(",","")))+
+                                Double.valueOf(cdy1.getText().toString().replace(",",""))
+                        )
+                ));
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+            }
+        });
+        cdx.addTextChangedListener(new NumberTextWatcher(cdx));
+
+        cdx2.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if (cdx2.getText().toString().isEmpty() || cdx2.getText().toString().equals(".")){
+                    cdx2.setText("0");
+                }
+                cdy.setText(String.valueOf(
+                        ((Double.valueOf(cdx.getText().toString().replace(",",""))-Double.valueOf(cdx1.getText().toString().replace(",","")))/
+                                (Double.valueOf(cdx2.getText().toString().replace(",",""))-(Double.valueOf(cdx1.getText().toString().replace(",",""))))*
+                                (Double.valueOf(cdy2.getText().toString().replace(",",""))-Double.valueOf(cdy1.getText().toString().replace(",","")))+
+                                Double.valueOf(cdy1.getText().toString().replace(",",""))
+                        )
+                ));
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+            }
+        });
+        cdx2.addTextChangedListener(new NumberTextWatcher(cdx2));
+
         cdx1.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -2665,7 +2431,7 @@ public class AddDraftSurveyManual extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if (cdx1.getText().toString().isEmpty()){
+                if (cdx1.getText().toString().isEmpty() || cdx1.getText().toString().equals(".")){
                     cdx1.setText("0");
                 }
                 cdy.setText(String.valueOf(
@@ -2691,11 +2457,11 @@ public class AddDraftSurveyManual extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if (mtcpy.getText().toString().isEmpty() || mtcpy.getText().toString().equals("NaN")){
+                if (mtcpy.getText().toString().isEmpty() || mtcpy.getText().toString().equals("NaN") || mtcpy.getText().toString().equals(".")){
                     mtcpy.setText("0");
                 }
                 dmtc.setText(String.valueOf(
-                        Double.valueOf(mtcmy.getText().toString()) + Double.valueOf(mtcpy.getText().toString())
+                        Double.valueOf(mtcpy.getText().toString()) - Double.valueOf(mtcmy.getText().toString())
                 ));
             }
 
@@ -2713,7 +2479,7 @@ public class AddDraftSurveyManual extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if (mtcpy1.getText().toString().isEmpty()){
+                if (mtcpy1.getText().toString().isEmpty() || mtcpy1.getText().toString().equals(".")){
                     mtcpy1.setText("0");
                 }
                 mtcpy.setText(String.valueOf(
@@ -2739,7 +2505,7 @@ public class AddDraftSurveyManual extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if (mtcpy2.getText().toString().isEmpty()){
+                if (mtcpy2.getText().toString().isEmpty() || mtcpy2.getText().toString().equals(".")){
                     mtcpy2.setText("0");
                 }
                 mtcpy.setText(String.valueOf(
@@ -2765,7 +2531,7 @@ public class AddDraftSurveyManual extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if (mtcpx.getText().toString().isEmpty()){
+                if (mtcpx.getText().toString().isEmpty()|| mtcpx.getText().toString().equals(".")){
                     mtcpx.setText("0");
                 }
                 mtcpy.setText(String.valueOf(
@@ -2791,7 +2557,7 @@ public class AddDraftSurveyManual extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if (mtcpx1.getText().toString().isEmpty()){
+                if (mtcpx1.getText().toString().isEmpty()|| mtcpx1.getText().toString().equals(".")){
                     mtcpx1.setText("0");
                 }
                 mtcpy.setText(String.valueOf(
@@ -2817,7 +2583,7 @@ public class AddDraftSurveyManual extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if (mtcpx2.getText().toString().isEmpty()){
+                if (mtcpx2.getText().toString().isEmpty() || mtcpx2.getText().toString().equals(".")){
                     mtcpx2.setText("0");
                 }
                 mtcpy.setText(String.valueOf(
@@ -2843,11 +2609,11 @@ public class AddDraftSurveyManual extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if (mtcmy.getText().toString().isEmpty() || mtcmy.getText().toString().equals("NaN")){
+                if (mtcmy.getText().toString().isEmpty() || mtcmy.getText().toString().equals("NaN") || mtcmy.getText().toString().equals(".")){
                     mtcmy.setText("0");
                 }
                 dmtc.setText(String.valueOf(
-                        Double.valueOf(mtcmy.getText().toString()) + Double.valueOf(mtcpy.getText().toString())
+                        Double.valueOf(mtcpy.getText().toString()) - Double.valueOf(mtcmy.getText().toString())
                 ));
             }
 
@@ -2865,14 +2631,14 @@ public class AddDraftSurveyManual extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if (mtcmy1.getText().toString().isEmpty()){
+                if (mtcmy1.getText().toString().isEmpty() || mtcmy1.getText().toString().equals(".")){
                     mtcmy1.setText("0");
                 }
                 mtcmy.setText(String.valueOf(
                         ((Double.valueOf(mtcmx.getText().toString().replace(",",""))-Double.valueOf(mtcmx1.getText().toString().replace(",","")))/
                                 (Double.valueOf(mtcmx2.getText().toString().replace(",",""))-(Double.valueOf(mtcmx1.getText().toString().replace(",",""))))*
                                 (Double.valueOf(mtcmy2.getText().toString().replace(",",""))-Double.valueOf(mtcmy1.getText().toString().replace(",","")))+
-                                        Double.valueOf(mtcpy1.getText().toString().replace(",",""))
+                                Double.valueOf(mtcmy1.getText().toString().replace(",",""))
                         )
                 ));
             }
@@ -2891,14 +2657,14 @@ public class AddDraftSurveyManual extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if (mtcmy2.getText().toString().isEmpty()){
+                if (mtcmy2.getText().toString().isEmpty() || mtcmy2.getText().toString().equals(".")){
                     mtcmy2.setText("0");
                 }
                 mtcmy.setText(String.valueOf(
                         ((Double.valueOf(mtcmx.getText().toString().replace(",",""))-Double.valueOf(mtcmx1.getText().toString().replace(",","")))/
                                 (Double.valueOf(mtcmx2.getText().toString().replace(",",""))-(Double.valueOf(mtcmx1.getText().toString().replace(",",""))))*
                                 (Double.valueOf(mtcmy2.getText().toString().replace(",",""))-Double.valueOf(mtcmy1.getText().toString().replace(",","")))+
-                                Double.valueOf(mtcpy1.getText().toString().replace(",",""))
+                                Double.valueOf(mtcmy1.getText().toString().replace(",",""))
                         )
                 ));
             }
@@ -2917,14 +2683,14 @@ public class AddDraftSurveyManual extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if (mtcmx.getText().toString().isEmpty()){
+                if (mtcmx.getText().toString().isEmpty() || mtcmx.getText().toString().equals(".")){
                     mtcmx.setText("0");
                 }
                 mtcmy.setText(String.valueOf(
                         ((Double.valueOf(mtcmx.getText().toString().replace(",",""))-Double.valueOf(mtcmx1.getText().toString().replace(",","")))/
                                 (Double.valueOf(mtcmx2.getText().toString().replace(",",""))-(Double.valueOf(mtcmx1.getText().toString().replace(",",""))))*
                                 (Double.valueOf(mtcmy2.getText().toString().replace(",",""))-Double.valueOf(mtcmy1.getText().toString().replace(",","")))+
-                                Double.valueOf(mtcpy1.getText().toString().replace(",",""))
+                                Double.valueOf(mtcmy1.getText().toString().replace(",",""))
                         )
                 ));
             }
@@ -2943,14 +2709,14 @@ public class AddDraftSurveyManual extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if (mtcmx1.getText().toString().isEmpty()){
+                if (mtcmx1.getText().toString().isEmpty() || mtcmx1.getText().toString().equals(".")){
                     mtcmx1.setText("0");
                 }
                 mtcmy.setText(String.valueOf(
                         ((Double.valueOf(mtcmx.getText().toString().replace(",",""))-Double.valueOf(mtcmx1.getText().toString().replace(",","")))/
                                 (Double.valueOf(mtcmx2.getText().toString().replace(",",""))-(Double.valueOf(mtcmx1.getText().toString().replace(",",""))))*
                                 (Double.valueOf(mtcmy2.getText().toString().replace(",",""))-Double.valueOf(mtcmy1.getText().toString().replace(",","")))+
-                                Double.valueOf(mtcpy1.getText().toString().replace(",",""))
+                                Double.valueOf(mtcmy1.getText().toString().replace(",",""))
                         )
                 ));
             }
@@ -2969,14 +2735,14 @@ public class AddDraftSurveyManual extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if (mtcmx2.getText().toString().isEmpty()){
+                if (mtcmx2.getText().toString().isEmpty() || mtcmx2.getText().toString().equals(".")){
                     mtcmx2.setText("0");
                 }
                 mtcmy.setText(String.valueOf(
                         ((Double.valueOf(mtcmx.getText().toString().replace(",",""))-Double.valueOf(mtcmx1.getText().toString().replace(",","")))/
                                 (Double.valueOf(mtcmx2.getText().toString().replace(",",""))-(Double.valueOf(mtcmx1.getText().toString().replace(",",""))))*
                                 (Double.valueOf(mtcmy2.getText().toString().replace(",",""))-Double.valueOf(mtcmy1.getText().toString().replace(",","")))+
-                                Double.valueOf(mtcpy1.getText().toString().replace(",",""))
+                                Double.valueOf(mtcmy1.getText().toString().replace(",",""))
                         )
                 ));
             }
@@ -2995,11 +2761,11 @@ public class AddDraftSurveyManual extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if (dmtc.getText().toString().isEmpty() || dmtc.getText().toString().equals("NaN")){
+                if (dmtc.getText().toString().isEmpty() || dmtc.getText().toString().equals("NaN") || dmtc.getText().toString().equals(".")){
                     dmtc.setText("0");
                 }
                 t2.setText(String.valueOf(
-                        ((Double.valueOf(tt.getText().toString())*2)*Double.valueOf(dmtc.getText().toString())*50)/Double.valueOf(lpp.getText().toString())
+                        ((Double.valueOf(tt.getText().toString())*Double.valueOf(tt.getText().toString()))*Double.valueOf(dmtc.getText().toString())*50)/Double.valueOf(lpp.getText().toString())
                 ));
             }
 
@@ -3017,7 +2783,7 @@ public class AddDraftSurveyManual extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if (t2.getText().toString().isEmpty() || t2.getText().toString().equals("NaN")){
+                if (t2.getText().toString().isEmpty() || t2.getText().toString().equals("NaN") || t2.getText().toString().equals(".")){
                     t2.setText("0");
                 }
                 dcft.setText(String.valueOf(
@@ -3039,14 +2805,14 @@ public class AddDraftSurveyManual extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if (tt.getText().toString().isEmpty() || tt.getText().toString().equals("NaN")){
+                if (tt.getText().toString().isEmpty() || tt.getText().toString().equals("NaN") || tt.getText().toString().equals(".")){
                     tt.setText("0");
                 }
                 t1.setText(String.valueOf(
                         (Double.valueOf(lcfy.getText().toString())*Double.valueOf(tpcy.getText().toString())*Double.valueOf(tt.getText().toString())*100)/Double.valueOf(lpp.getText().toString())
                 ));
                 t2.setText(String.valueOf(
-                        ((Double.valueOf(tt.getText().toString())*2)*Double.valueOf(dmtc.getText().toString())*50)/Double.valueOf(lpp.getText().toString())
+                        ((Double.valueOf(tt.getText().toString())*Double.valueOf(tt.getText().toString()))*Double.valueOf(dmtc.getText().toString())*50)/Double.valueOf(lpp.getText().toString())
                 ));
             }
 
@@ -3064,7 +2830,7 @@ public class AddDraftSurveyManual extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if (t1.getText().toString().isEmpty() || t1.getText().toString().equals("NaN")){
+                if (t1.getText().toString().isEmpty() || t1.getText().toString().equals("NaN") || t1.getText().toString().equals(".")){
                     t1.setText("0");
                 }
                 dcft.setText(String.valueOf(
@@ -3086,7 +2852,7 @@ public class AddDraftSurveyManual extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if (dcft.getText().toString().isEmpty() || dcft.getText().toString().equals("NaN")){
+                if (dcft.getText().toString().isEmpty() || dcft.getText().toString().equals("NaN") || dcft.getText().toString().equals(".")){
                     dcft.setText("0");
                 }
                 dc.setText(String.valueOf(((Double.valueOf(dod.getText().toString().replace(",","")) -
@@ -3112,7 +2878,7 @@ public class AddDraftSurveyManual extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if (ds.getText().toString().isEmpty()){
+                if (ds.getText().toString().isEmpty() || ds.getText().toString().equals(".")){
                     ds.setText("0");
                 }
                 dc.setText(String.valueOf(((Double.valueOf(dod.getText().toString().replace(",","")) -
@@ -3134,7 +2900,7 @@ public class AddDraftSurveyManual extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if (dod.getText().toString().isEmpty()){
+                if (dod.getText().toString().isEmpty() || dod.getText().toString().equals(".")){
                     dod.setText("0");
                 }
                 dc.setText(String.valueOf(((Double.valueOf(dod.getText().toString().replace(",","")) -
@@ -3156,7 +2922,7 @@ public class AddDraftSurveyManual extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if (dc.getText().toString().isEmpty()){
+                if (dc.getText().toString().isEmpty() || dc.getText().toString().equals(".")){
                     dc.setText("0");
                 }
                 dcfd3.setText(String.valueOf(Double.valueOf(dcft.getText().toString().replace(",","")) +
@@ -3178,7 +2944,7 @@ public class AddDraftSurveyManual extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if (dcfd3.getText().toString().isEmpty()){
+                if (dcfd3.getText().toString().isEmpty() || dcfd3.getText().toString().equals(".")){
                     dcfd3.setText("0");
                 }
                 nedD.setText(String.valueOf(
@@ -3200,7 +2966,7 @@ public class AddDraftSurveyManual extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if (nedD.getText().toString().isEmpty()|| nedD.getText().toString().equals("NaN")){
+                if (nedD.getText().toString().isEmpty()|| nedD.getText().toString().equals("NaN") || nedD.getText().toString().equals(".")){
                     nedD.setText("0");
                 }
             }
@@ -3219,7 +2985,7 @@ public class AddDraftSurveyManual extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if (tdw.getText().toString().isEmpty()){
+                if (tdw.getText().toString().isEmpty() || tdw.getText().toString().equals(".")){
                     tdw.setText("0");
                 }
                 nedD.setText(String.valueOf(
@@ -3232,6 +2998,246 @@ public class AddDraftSurveyManual extends AppCompatActivity {
             }
         });
         tdw.addTextChangedListener(new NumberTextWatcher(tdw));
+    }
+
+    public void setTextThread(final EditText ed, final String value){
+
+        Thread t =new Thread(){
+            public void run() {
+                handler.post(new Runnable() {
+                    public void run() {
+                        ed.setText(value);
+                    }
+                });
+            }
+        };
+        t.start();
+    }
+
+    private class AsyncTaskRunner extends AsyncTask<String, String, String> {
+
+        private String resp;
+        ProgressDialog progressDialog;
+
+        @Override
+        protected String doInBackground(String... params) {
+            publishProgress("Sleeping..."); // Calls onProgressUpdate()
+            try {
+                int time = Integer.parseInt(params[0])*1000;
+
+                Thread.sleep(time);
+                resp = "Slept for " + params[0] + " seconds";
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+                resp = e.getMessage();
+            } catch (Exception e) {
+                e.printStackTrace();
+                resp = e.getMessage();
+            }
+            return resp;
+        }
+
+
+        @Override
+        protected void onPostExecute(String result) {
+            // execution of result of Long time consuming operation
+            setFunction();
+            progressDialog.dismiss();
+        }
+
+
+        @Override
+        protected void onPreExecute() {
+            progressDialog = ProgressDialog.show(AddDraftSurveyManual.this,
+                    "",
+                    "Wait for a moment");
+            setTextThread(lpp,stringToDecimals(responseGlobal.body().getLpp()));
+            setTextThread(lwt,stringToDecimals(responseGlobal.body().getLwt()));
+            setTextThread(constant,stringToDecimals(responseGlobal.body().getConstant()));
+            setTextThread(lf,stringToDecimals(responseGlobal.body().getLf()));
+            setTextThread(lm,stringToDecimals(responseGlobal.body().getLm()));
+            setTextThread(la,stringToDecimals(responseGlobal.body().getLa()));
+            setTextThread(lbm,stringToDecimals(responseGlobal.body().getLbm()));
+            setTextThread(apparentTrim,stringToDecimals(responseGlobal.body().getApparentt()));
+            setTextThread(cargo,responseGlobal.body().getCargo());
+
+            if (responseGlobal.body().getFimage()!=null){
+                setImageEdit(responseGlobal.body().getFimage(), 1);
+                fImage = responseGlobal.body().getFimage();
+            }
+
+            if (responseGlobal.body().getAimage()!=null){
+                setImageEdit(responseGlobal.body().getAimage(), 2);
+                aImage = responseGlobal.body().getAimage();
+            }
+
+            if (responseGlobal.body().getMimage()!=null){
+                setImageEdit(responseGlobal.body().getMimage(), 3);
+                mImage = responseGlobal.body().getMimage();
+            }
+
+            setTextThread(dfp,stringToDecimals(responseGlobal.body().getDfp()));
+            setTextThread(dfs,stringToDecimals(responseGlobal.body().getDfs()));
+            setTextThread(steamCorr,stringToDecimals(responseGlobal.body().getFsteamcorr()));
+            setTextThread(forwardMean,stringToDecimals(responseGlobal.body().getFmean()));
+            setTextThread(forwardMeanAfterCorr,stringToDecimals(responseGlobal.body().getFaftersteamcorr()));
+            setTextThread(forwarAfter,stringToDecimals(responseGlobal.body().getFamean()));
+
+            setTextThread(dap,stringToDecimals(responseGlobal.body().getDap()));
+            setTextThread(das,stringToDecimals(responseGlobal.body().getDas()));
+            setTextThread(asteamCorr,stringToDecimals(responseGlobal.body().getAsteamcorr()));
+            setTextThread(afterMean,stringToDecimals(responseGlobal.body().getAmean()));
+            setTextThread(afterMeanAfterCorr,stringToDecimals(responseGlobal.body().getAaftersteamcorr()));
+            setTextThread(remarks,responseGlobal.body().getRemarks());
+
+            dmp.setText(stringToDecimals(responseGlobal.body().getDmp()));
+            dms.setText(stringToDecimals(responseGlobal.body().getDms()));
+            msisteamCorr.setText(stringToDecimals(responseGlobal.body().getMsteamcorr()));
+            midMean.setText(stringToDecimals(responseGlobal.body().getMmean()));
+            midMeanAfterCorr.setText(stringToDecimals(responseGlobal.body().getMaftersteamcorr()));
+            draftCorr.setText(stringToDecimals(responseGlobal.body().getDraftcorrdefor()));
+            faMeansCorr.setText(stringToDecimals(responseGlobal.body().getFamean()));
+            mOM.setText(stringToDecimals(responseGlobal.body().getMmmean()));
+
+            cdx.setText(stringToDecimals(responseGlobal.body().getX()));
+            cdx1.setText(stringToDecimals(responseGlobal.body().getX1()));
+            cdx2.setText(stringToDecimals(responseGlobal.body().getX2()));
+            cdy1.setText(stringToDecimals(responseGlobal.body().getY1()));
+            cdy2.setText(stringToDecimals(responseGlobal.body().getY2()));
+            cdy.setText(stringToDecimals(responseGlobal.body().getY()));
+
+            lcfx.setText(stringToDecimals(responseGlobal.body().getLcfx()));
+            lcfx1.setText(stringToDecimals(responseGlobal.body().getLcfx1()));
+            lcfx2.setText(stringToDecimals(responseGlobal.body().getLcfx2()));
+            lcfy1.setText(stringToDecimals(responseGlobal.body().getLcfy1()));
+            lcfy2.setText(stringToDecimals(responseGlobal.body().getLcfy2()));
+            lcfy.setText(stringToDecimals(responseGlobal.body().getLcfy()));
+
+            tpcx.setText(stringToDecimals(responseGlobal.body().getTpcx()));
+            tpcy.setText(stringToDecimals(responseGlobal.body().getTpccorrdisplacement()));
+            tpcx1.setText(stringToDecimals(responseGlobal.body().getTpcx1()));
+            tpcx2.setText(stringToDecimals(responseGlobal.body().getTpcx2()));
+            tpcy1.setText(stringToDecimals(responseGlobal.body().getTpcy1()));
+            tpcy2.setText(stringToDecimals(responseGlobal.body().getTpcy2()));
+
+            mtcpx.setText(stringToDecimals(responseGlobal.body().getMtcplusx()));
+            mtcpx1.setText(stringToDecimals(responseGlobal.body().getMtcplusx1()));
+            mtcpx2.setText(stringToDecimals(responseGlobal.body().getMtcplusx2()));
+            mtcpy1.setText(stringToDecimals(responseGlobal.body().getMtcplusy1()));
+            mtcpy2.setText(stringToDecimals(responseGlobal.body().getMtcplusy2()));
+            mtcpy.setText(stringToDecimals(responseGlobal.body().getMtcplusy()));
+
+            mtcmx.setText(stringToDecimals(responseGlobal.body().getMtcminx()));
+            mtcmx1.setText(stringToDecimals(responseGlobal.body().getMtcminx1()));
+            mtcmx2.setText(stringToDecimals(responseGlobal.body().getMtcminx2()));
+            mtcmy1.setText(stringToDecimals(responseGlobal.body().getMtcminy1()));
+            mtcmy2.setText(stringToDecimals(responseGlobal.body().getMtcminy2()));
+            mtcmy.setText(stringToDecimals(responseGlobal.body().getMtcminy()));
+
+            dmtc.setText(stringToDecimals(responseGlobal.body().getMeanmtc()));
+            tt.setText(stringToDecimals(responseGlobal.body().getTruetrim()));
+            t1.setText(stringToDecimals(responseGlobal.body().getTrim1()));
+            t2.setText(stringToDecimals(responseGlobal.body().getTrim2()));
+            dcft.setText(stringToDecimals(responseGlobal.body().getDispcortrim()));
+            ds.setText(stringToDecimals(responseGlobal.body().getDensitystandard()));
+            dod.setText(stringToDecimals(responseGlobal.body().getDensityobserved()));
+            dc.setText(stringToDecimals(responseGlobal.body().getDensitycorr()));
+            dcfd3.setText(stringToDecimals(responseGlobal.body().getCorrdisplacement()));
+            tdw.setText(stringToDecimals(responseGlobal.body().getTotaldeductweight()));
+            nedD.setText(stringToDecimals(responseGlobal.body().getNetdisp()));
+            setTextThread(dcft,stringToDecimals(responseGlobal.body().getDraftcorrdefor()));
+
+            setTextThread(docNumber,responseGlobal.body().getDocumentNumber());
+            setTextThread(docDate,responseGlobal.body().getDocumentDate().substring(0, 10));
+            setTextThread(startDate,responseGlobal.body().getSurveyStartTime().substring(0,10));
+            setTextThread(startTIme,responseGlobal.body().getSurveyStartTime().substring(11,16));
+            setTextThread(endDate,responseGlobal.body().getSurveyEndTime().substring(0,10));
+            setTextThread(endTime,responseGlobal.body().getSurveyEndTime().substring(11,16));
+            int valStatus=0;
+            switch (responseGlobal.body().getDocumentStatus()){
+                case "CREATED":
+                    valStatus = 0;
+                    break;
+                case "UPDATED":
+                    valStatus = 1;
+                    break;
+                case "DELETED":
+                    valStatus = 2;
+                    break;
+                case "REVISED":
+                    valStatus = 3;
+                    break;
+                case "REVIEWED":
+                    valStatus = 4;
+                    break;
+                case "ACCEPTED":
+                    valStatus = 5;
+                    break;
+                case "REJECTED":
+                    valStatus = 6;
+                    break;
+                case "VALIDATED":
+                    valStatus = 7;
+                    break;
+                case "APPROVED":
+                    valStatus = 8;
+                    break;
+            }
+            spinnerDocStatus.setSelection(valStatus);
+
+            int valSurveyType=0;
+            String surveyTypeS;
+            if (responseGlobal.body().getDraftSurveyManualType()==null){
+                surveyTypeS = "";
+            } else {
+                surveyTypeS = responseGlobal.body().getDraftSurveyManualType();
+            }
+            switch (surveyTypeS){
+                case "INITIAL":
+                    valSurveyType = 0;
+                    break;
+                case "INTERMEDIATE":
+                    valSurveyType = 1;
+                    break;
+                case "FINAL":
+                    valSurveyType = 2;
+                    break;
+                default:
+                    valSurveyType = 1;
+                    break;
+            }
+            spinnerSurveyType.setSelection(valSurveyType);
+
+            for (int i=0; i<spinnerBarge.getCount();i++){
+                if (spinnerBarge.getSelectedItem()==responseGlobal.body().getBargeName()){
+                    break;
+                }else{
+                    spinnerBarge.setSelection(i);
+                }
+            }
+
+            for (int i=0; i<spinnerLocation.getCount();i++){
+                if (spinnerLocation.getSelectedItem()==responseGlobal.body().getPlaceName()){
+                    break;
+                }else{
+                    spinnerLocation.setSelection(i);
+                }
+            }
+
+            for (int i=0; i<spinnerVessel.getCount();i++){
+                if (spinnerVessel.getSelectedItem()==responseGlobal.body().getTugBoatName()){
+                    break;
+                }else{
+                    spinnerVessel.setSelection(i);
+                }
+            }
+        }
+
+
+        @Override
+        protected void onProgressUpdate(String... text) {
+//            finalResult.setText(text[0]);
+        }
     }
 
     @Override

@@ -206,6 +206,7 @@ public class AdapterSamplingMBLineList extends RecyclerView.Adapter<AdapterSampl
             weather = itemView.findViewById(R.id.txt_docStatus_samplingmbasis);
             etc = itemView.findViewById(R.id.txt_etc_samplingmbasis);
             etc2 = itemView.findViewById(R.id.txt_etc2_samplingmbasis);
+            etc2.setVisibility(View.VISIBLE);
             interval = itemView.findViewById(R.id.txt_dateRange_samplingmbasis);
             viewSamplingMBLines = itemView.findViewById(R.id.view_list_samplingmbasis);
         }

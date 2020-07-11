@@ -15,13 +15,8 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.RecyclerView;
 
-
 import com.app.ptjasamutumineralindonesia.R;
 import com.app.ptjasamutumineralindonesia.detail.ApiDetailInterface;
-import com.app.ptjasamutumineralindonesia.detail.attendancecard.AttendanceCard;
-import com.app.ptjasamutumineralindonesia.detail.samplingtimebasis.AdapterSamplingTBasisList;
-import com.app.ptjasamutumineralindonesia.detail.samplingtimebasis.AddSamplingTimeBasis;
-import com.app.ptjasamutumineralindonesia.detail.samplingtimebasis.SamplingTimeBasisResult;
 import com.app.ptjasamutumineralindonesia.helpers.ApiBase;
 import com.app.ptjasamutumineralindonesia.role.Role;
 
@@ -151,6 +146,7 @@ public class AdapterSampleDispatchList extends RecyclerView.Adapter<AdapterSampl
                     @Override
                     public void onResponse(Call<Void> call, Response<Void> response) {
                         Toast.makeText(context,"Success delete sample dispatch",Toast.LENGTH_SHORT).show();
+                        holder.documentStatus.setText("DELETED");
                     }
 
                     @Override
