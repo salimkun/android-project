@@ -204,6 +204,7 @@ public class AddDraftSurveyManual extends AppCompatActivity {
 
         afterMean = findViewById(R.id.edit_afterMean_add_draftSurvey);
         afterMean.setText("0.0000");
+        afterMean.setEnabled(false);
 
         afterMeanAfterCorr = findViewById(R.id.edit_afterMeanAfterCorr_add_draftSurvey);
         afterMeanAfterCorr.setText("0.0000");
@@ -550,7 +551,7 @@ public class AddDraftSurveyManual extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 // TODO Auto-generated method stub
-                new TimePickerDialog(AddDraftSurveyManual.this, sTime, myCalendar
+                new TimePickerDialog(AddDraftSurveyManual.this, eTime, myCalendar
                         .get(Calendar.HOUR_OF_DAY), myCalendar.get(Calendar.MINUTE), true).show();
             }
         });
@@ -915,14 +916,14 @@ public class AddDraftSurveyManual extends AppCompatActivity {
         String myFormat = "yyyy-MM-dd"; //In which you need put here
         SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
 
-        docDate.setText(sdf.format(myCalendar.getTime()));
+        startDate.setText(sdf.format(myCalendar.getTime()));
     }
 
     private void updateLabelEndDate() {
         String myFormat = "yyyy-MM-dd"; //In which you need put here
         SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
 
-        docDate.setText(sdf.format(myCalendar.getTime()));
+        endDate.setText(sdf.format(myCalendar.getTime()));
     }
 
     public String stringToDecimals(String value){
