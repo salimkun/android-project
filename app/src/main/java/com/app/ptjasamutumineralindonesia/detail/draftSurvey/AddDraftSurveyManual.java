@@ -202,6 +202,7 @@ public class AddDraftSurveyManual extends AppCompatActivity {
         asteamCorr.setText("0.0000");
         asteamCorr.setEnabled(false);
 
+
         afterMean = findViewById(R.id.edit_afterMean_add_draftSurvey);
         afterMean.setText("0.0000");
         afterMean.setEnabled(false);
@@ -668,7 +669,7 @@ public class AddDraftSurveyManual extends AppCompatActivity {
                         jsonObj_.put("mimageContentType", mmime);
                         jsonObj_.put("mmean", BigDecimal.valueOf(Double.valueOf(midMean.getText().toString().replace(",", ""))));
                         jsonObj_.put("mmmean", BigDecimal.valueOf(Double.valueOf(mOM.getText().toString().replace(",", ""))));
-                        jsonObj_.put("msteamcor", BigDecimal.valueOf(Double.valueOf(msisteamCorr.getText().toString().replace(",", ""))));
+                        jsonObj_.put("msteamcorr", BigDecimal.valueOf(Double.valueOf(msisteamCorr.getText().toString().replace(",", ""))));
                         jsonObj_.put("mtcmincorrdisplacement", BigDecimal.valueOf(Double.valueOf(mtcmy.getText().toString().replace(",", ""))));
                         jsonObj_.put("mtcminx", BigDecimal.valueOf(Double.valueOf(mtcmx.getText().toString().replace(",", ""))));
                         jsonObj_.put("mtcminx1", BigDecimal.valueOf(Double.valueOf(mtcmx1.getText().toString().replace(",", ""))));
