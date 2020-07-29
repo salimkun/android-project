@@ -17,8 +17,10 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Base64;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
 import android.webkit.MimeTypeMap;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -26,6 +28,7 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
@@ -61,6 +64,8 @@ import java.util.Arrays;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -91,6 +96,7 @@ public class AddDraftSurveyManual extends AppCompatActivity {
     int type;
     Response<DraftSurveyResults> responseGlobal;
     Handler handler = new Handler();
+    Timer timer = null;
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
@@ -1130,6 +1136,7 @@ public class AddDraftSurveyManual extends AppCompatActivity {
 
     public void setFunction(){
         apparentTrim.addTextChangedListener(new TextWatcher() {
+            ProgressDialog progressDialog;
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
@@ -1140,53 +1147,68 @@ public class AddDraftSurveyManual extends AppCompatActivity {
                 if (apparentTrim.getText().toString().isEmpty() || apparentTrim.getText().toString().equals("NaN") || apparentTrim.getText().toString().equals(".")){
                     apparentTrim.setText("0");
                 }
-                msisteamCorr.setText(
-                        String.valueOf(
-                                (
-                                        (Double.valueOf(
-                                                apparentTrim.getText().toString().replace(",","")
-                                        ) * Double.valueOf(
-                                                lm.getText().toString().replace(",","")
-                                        )) / Double.valueOf(
-                                                lbm.getText().toString().replace(",","")
-                                        )
-                                )
-                        )
-                );
-
-                midMeanAfterCorr.setText(
-                        String.valueOf(
-                                (
-                                        (Double.valueOf(
-                                                apparentTrim.getText().toString().replace(",","")
-                                        ) * Double.valueOf(
-                                                lm.getText().toString().replace(",","")
-                                        )) / Double.valueOf(
-                                                lbm.getText().toString().replace(",","")
-                                        )
-                                ) + Double.valueOf(
-                                        midMean.getText().toString().replace(",","")
-                                )
-                        )
-                );
-
-                Double sC =  (
-                        (Double.valueOf(
-                                apparentTrim.getText().toString().replace(",","")
-                        ) * Double.valueOf(
-                                lf.getText().toString().replace(",","")
-                        )) / Double.valueOf(
-                                lbm.getText().toString().replace(",","")
-                        )
-                );
-                if (sC.isNaN()){
-                    sC = 0.0;
+                if (timer != null) {
+                    timer.cancel();
                 }
-                steamCorr.setText(String.valueOf(sC));
+            }
 
-                forwardMeanAfterCorr.setText(
-                        String.valueOf(
-                                (
+            @Override
+            public void afterTextChanged(Editable s) {
+                timer = new Timer();
+                timer.schedule(new TimerTask() {
+                    @Override
+                    public void run() {
+                        // do your actual work here
+                        // do your actual work here
+                        AddDraftSurveyManual.this.runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                progressDialog = ProgressDialog.show(AddDraftSurveyManual.this,
+                                        "",
+                                        "wait a moment ...");
+                            }
+                        });
+
+                        try {
+                            Thread.sleep(2000);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+
+                        AddDraftSurveyManual.this.runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                msisteamCorr.setText(
+                                        String.valueOf(
+                                                (
+                                                        (Double.valueOf(
+                                                                apparentTrim.getText().toString().replace(",","")
+                                                        ) * Double.valueOf(
+                                                                lm.getText().toString().replace(",","")
+                                                        )) / Double.valueOf(
+                                                                lbm.getText().toString().replace(",","")
+                                                        )
+                                                )
+                                        )
+                                );
+
+                                midMeanAfterCorr.setText(
+                                        String.valueOf(
+                                                (
+                                                        (Double.valueOf(
+                                                                apparentTrim.getText().toString().replace(",","")
+                                                        ) * Double.valueOf(
+                                                                lm.getText().toString().replace(",","")
+                                                        )) / Double.valueOf(
+                                                                lbm.getText().toString().replace(",","")
+                                                        )
+                                                ) + Double.valueOf(
+                                                        midMean.getText().toString().replace(",","")
+                                                )
+                                        )
+                                );
+
+                                Double sC =  (
                                         (Double.valueOf(
                                                 apparentTrim.getText().toString().replace(",","")
                                         ) * Double.valueOf(
@@ -1194,45 +1216,62 @@ public class AddDraftSurveyManual extends AppCompatActivity {
                                         )) / Double.valueOf(
                                                 lbm.getText().toString().replace(",","")
                                         )
-                                ) + Double.valueOf(
-                                        forwardMean.getText().toString().replace(",","")
-                                )
-                        )
-                );
+                                );
+                                if (sC.isNaN()){
+                                    sC = 0.0;
+                                }
+                                steamCorr.setText(String.valueOf(sC));
 
-                asteamCorr.setText(
-                        String.valueOf(
-                                (
-                                        (Double.valueOf(
-                                                apparentTrim.getText().toString().replace(",","")
-                                        ) * Double.valueOf(
-                                                la.getText().toString().replace(",","")
-                                        )) / Double.valueOf(
-                                                lbm.getText().toString().replace(",","")
+                                forwardMeanAfterCorr.setText(
+                                        String.valueOf(
+                                                (
+                                                        (Double.valueOf(
+                                                                apparentTrim.getText().toString().replace(",","")
+                                                        ) * Double.valueOf(
+                                                                lf.getText().toString().replace(",","")
+                                                        )) / Double.valueOf(
+                                                                lbm.getText().toString().replace(",","")
+                                                        )
+                                                ) + Double.valueOf(
+                                                        forwardMean.getText().toString().replace(",","")
+                                                )
                                         )
-                                )
-                        )
-                );
+                                );
 
-                afterMeanAfterCorr.setText(
-                        String.valueOf(
-                                (
-                                        (Double.valueOf(
-                                                apparentTrim.getText().toString().replace(",","")
-                                        ) * Double.valueOf(
-                                                la.getText().toString().replace(",","")
-                                        )) / Double.valueOf(
-                                                lbm.getText().toString().replace(",","")
+                                asteamCorr.setText(
+                                        String.valueOf(
+                                                (
+                                                        (Double.valueOf(
+                                                                apparentTrim.getText().toString().replace(",","")
+                                                        ) * Double.valueOf(
+                                                                la.getText().toString().replace(",","")
+                                                        )) / Double.valueOf(
+                                                                lbm.getText().toString().replace(",","")
+                                                        )
+                                                )
                                         )
-                                ) + Double.valueOf(
-                                        afterMean.getText().toString().replace(",","")
-                                )
-                        )
-                );
-            }
+                                );
 
-            @Override
-            public void afterTextChanged(Editable s) {
+                                afterMeanAfterCorr.setText(
+                                        String.valueOf(
+                                                (
+                                                        (Double.valueOf(
+                                                                apparentTrim.getText().toString().replace(",","")
+                                                        ) * Double.valueOf(
+                                                                la.getText().toString().replace(",","")
+                                                        )) / Double.valueOf(
+                                                                lbm.getText().toString().replace(",","")
+                                                        )
+                                                ) + Double.valueOf(
+                                                        afterMean.getText().toString().replace(",","")
+                                                )
+                                        )
+                                );
+                                progressDialog.dismiss();
+                            }
+                        });
+                    }
+                }, 1000);
             }
         });
         apparentTrim.addTextChangedListener(new NumberTextWatcher(apparentTrim));
@@ -1475,6 +1514,7 @@ public class AddDraftSurveyManual extends AppCompatActivity {
 
         lpp.addTextChangedListener(new NumberTextWatcher(lpp));
         lpp.addTextChangedListener(new TextWatcher() {
+            ProgressDialog progressDialog;
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
             }
@@ -1484,17 +1524,50 @@ public class AddDraftSurveyManual extends AppCompatActivity {
                 if (lpp.getText().toString().isEmpty() || lpp.getText().toString().equals(".")){
                     lpp.setText("0");
                 }
-                setTextThread(t1,String.valueOf(
-                        (Double.valueOf(lcfy.getText().toString())*Double.valueOf(tpcy.getText().toString())*Double.valueOf(tt.getText().toString())*100)/Double.valueOf(lpp.getText().toString())
-                ));
-                setTextThread(t2,String.valueOf(
-                        ((Double.valueOf(tt.getText().toString())*Double.valueOf(tt.getText().toString()))*Double.valueOf(dmtc.getText().toString())*50)/Double.valueOf(lpp.getText().toString())
-                ));
-                setTextThread(lbm,String.valueOf(Double.valueOf(lpp.getText().toString().replace(",",""))-(Double.valueOf(lf.getText().toString().replace(",",""))+Double.valueOf(la.getText().toString().replace(",","")))));
+                if (timer != null) {
+                    timer.cancel();
+                }
             }
 
             @Override
             public void afterTextChanged(Editable s) {
+                timer = new Timer();
+                timer.schedule(new TimerTask() {
+                    @Override
+                    public void run() {
+                        // do your actual work here
+                        // do your actual work here
+                        AddDraftSurveyManual.this.runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                progressDialog = ProgressDialog.show(AddDraftSurveyManual.this,
+                                        "",
+                                        "wait a moment ...");
+                            }
+                        });
+
+                        try {
+                            Thread.sleep(2000);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+
+                        AddDraftSurveyManual.this.runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                t1.setText(String.valueOf(
+                                        (Double.valueOf(lcfy.getText().toString())*Double.valueOf(tpcy.getText().toString())*Double.valueOf(tt.getText().toString())*100)/Double.valueOf(lpp.getText().toString())
+                                ));
+                                t2.setText(
+                                        String.valueOf(
+                                                ((Double.valueOf(tt.getText().toString())*Double.valueOf(tt.getText().toString()))*Double.valueOf(dmtc.getText().toString())*50)/Double.valueOf(lpp.getText().toString())));
+                                lbm.setText(String.valueOf(Double.valueOf(lpp.getText().toString().replace(",",""))-(Double.valueOf(lf.getText().toString().replace(",",""))+Double.valueOf(la.getText().toString().replace(",","")))
+                                ));
+                                progressDialog.dismiss();
+                            }
+                        });
+                    }
+                }, 1000);
             }
         });
 
@@ -1619,36 +1692,6 @@ public class AddDraftSurveyManual extends AppCompatActivity {
                 if (lf.getText().toString().isEmpty() || lf.getText().toString().equals(".")){
                     lf.setText("0");
                 }
-                lbm.setText(String.valueOf(Double.valueOf(lpp.getText().toString().replace(",",""))-(Double.valueOf(lf.getText().toString().replace(",",""))+Double.valueOf(la.getText().toString().replace(",","")))));
-                Double sC =  (
-                        (Double.valueOf(
-                                apparentTrim.getText().toString().replace(",","")
-                        ) * Double.valueOf(
-                                lf.getText().toString().replace(",","")
-                        )) / Double.valueOf(
-                                lbm.getText().toString().replace(",","")
-                        )
-                );
-                if (sC.isNaN()){
-                    sC = 0.0;
-                }
-                steamCorr.setText(String.valueOf(sC));
-
-                forwardMeanAfterCorr.setText(
-                        String.valueOf(
-                                (
-                                        (Double.valueOf(
-                                                apparentTrim.getText().toString().replace(",","")
-                                        ) * Double.valueOf(
-                                                lf.getText().toString().replace(",","")
-                                        )) / Double.valueOf(
-                                                lbm.getText().toString().replace(",","")
-                                        )
-                                ) + Double.valueOf(
-                                        forwardMean.getText().toString().replace(",","")
-                                )
-                        )
-                );
             }
 
             @Override
@@ -1656,8 +1699,55 @@ public class AddDraftSurveyManual extends AppCompatActivity {
             }
         });
         lf.addTextChangedListener(new NumberTextWatcher(lf));
+        lf.setOnEditorActionListener(new EditText.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                if (actionId == EditorInfo.IME_ACTION_SEARCH ||
+                        actionId == EditorInfo.IME_ACTION_DONE ||
+                        event != null &&
+                                event.getAction() == KeyEvent.ACTION_DOWN &&
+                                event.getKeyCode() == KeyEvent.KEYCODE_ENTER) {
+                    if (event == null || !event.isShiftPressed()) {
+                        // the user is done typing.
+                        lbm.setText(String.valueOf(Double.valueOf(lpp.getText().toString().replace(",",""))-(Double.valueOf(lf.getText().toString().replace(",",""))+Double.valueOf(la.getText().toString().replace(",","")))));
+                        Double sC =  (
+                                (Double.valueOf(
+                                        apparentTrim.getText().toString().replace(",","")
+                                ) * Double.valueOf(
+                                        lf.getText().toString().replace(",","")
+                                )) / Double.valueOf(
+                                        lbm.getText().toString().replace(",","")
+                                )
+                        );
+                        if (sC.isNaN()){
+                            sC = 0.0;
+                        }
+                        steamCorr.setText(String.valueOf(sC));
 
+                        forwardMeanAfterCorr.setText(
+                                String.valueOf(
+                                        (
+                                                (Double.valueOf(
+                                                        apparentTrim.getText().toString().replace(",","")
+                                                ) * Double.valueOf(
+                                                        lf.getText().toString().replace(",","")
+                                                )) / Double.valueOf(
+                                                        lbm.getText().toString().replace(",","")
+                                                )
+                                        ) + Double.valueOf(
+                                                forwardMean.getText().toString().replace(",","")
+                                        )
+                                )
+                        );
+                        return true; // consume.
+                    }
+                }
+                return false; // pass on to other listeners.
+            }
+        });
+        la.addTextChangedListener(new NumberTextWatcher(la));
         la.addTextChangedListener(new TextWatcher() {
+            ProgressDialog progressDialog;
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
@@ -1668,43 +1758,76 @@ public class AddDraftSurveyManual extends AppCompatActivity {
                 if (la.getText().toString().isEmpty() || la.getText().toString().equals(".")){
                     la.setText("0");
                 }
-                lbm.setText(String.valueOf(Double.valueOf(lpp.getText().toString().replace(",",""))-(Double.valueOf(lf.getText().toString().replace(",",""))+Double.valueOf(la.getText().toString().replace(",","")))));
-                asteamCorr.setText(
-                        String.valueOf(
-                                (
-                                        (Double.valueOf(
-                                                apparentTrim.getText().toString().replace(",","")
-                                        ) * Double.valueOf(
-                                                la.getText().toString().replace(",","")
-                                        )) / Double.valueOf(
-                                                lbm.getText().toString().replace(",","")
-                                        )
-                                )
-                        )
-                );
-
-                afterMeanAfterCorr.setText(
-                        String.valueOf(
-                                (
-                                        (Double.valueOf(
-                                                apparentTrim.getText().toString().replace(",","")
-                                        ) * Double.valueOf(
-                                                la.getText().toString().replace(",","")
-                                        )) / Double.valueOf(
-                                                lbm.getText().toString().replace(",","")
-                                        )
-                                ) + Double.valueOf(
-                                        afterMean.getText().toString().replace(",","")
-                                )
-                        )
-                );
+                if (timer != null) {
+                    timer.cancel();
+                }
             }
 
             @Override
             public void afterTextChanged(Editable s) {
+                timer = new Timer();
+                timer.schedule(new TimerTask() {
+                    @Override
+                    public void run() {
+                        // do your actual work here
+                        // do your actual work here
+                        AddDraftSurveyManual.this.runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                progressDialog = ProgressDialog.show(AddDraftSurveyManual.this,
+                                        "",
+                                        "wait a moment ...");
+                            }
+                        });
+
+                        try {
+                            Thread.sleep(2000);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+
+                        AddDraftSurveyManual.this.runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                lbm.setText(String.valueOf(Double.valueOf(lpp.getText().toString().replace(",",""))
+                                        -(Double.valueOf(lf.getText().toString().replace(",",""))
+                                        +Double.valueOf(la.getText().toString().replace(",","")))));
+                                asteamCorr.setText(
+                                        String.valueOf(
+                                                (
+                                                        (Double.valueOf(
+                                                                apparentTrim.getText().toString().replace(",","")
+                                                        ) * Double.valueOf(
+                                                                la.getText().toString().replace(",","")
+                                                        )) / Double.valueOf(
+                                                                lbm.getText().toString().replace(",","")
+                                                        )
+                                                )
+                                        )
+                                );
+
+                                afterMeanAfterCorr.setText(
+                                        String.valueOf(
+                                                (
+                                                        (Double.valueOf(
+                                                                apparentTrim.getText().toString().replace(",","")
+                                                        ) * Double.valueOf(
+                                                                la.getText().toString().replace(",","")
+                                                        )) / Double.valueOf(
+                                                                lbm.getText().toString().replace(",","")
+                                                        )
+                                                ) + Double.valueOf(
+                                                        afterMean.getText().toString().replace(",","")
+                                                )
+                                        )
+                                );
+                                progressDialog.dismiss();
+                            }
+                        });
+                    }
+                }, 1000);
             }
         });
-        la.addTextChangedListener(new NumberTextWatcher(la));
 
         dap.addTextChangedListener(new TextWatcher() {
             @Override
@@ -3002,18 +3125,17 @@ public class AddDraftSurveyManual extends AppCompatActivity {
         tdw.addTextChangedListener(new NumberTextWatcher(tdw));
     }
 
-    public void setTextThread(final EditText ed, final String value){
-
-        Thread t =new Thread(){
+    public void setTextThread(final EditText ed, final String value, int timeDelay){
+        new Thread(new Runnable() {
             public void run() {
-                handler.post(new Runnable() {
-                    public void run() {
-                        ed.setText(value);
-                    }
-                });
+                ed.setText(value);
             }
-        };
-        t.start();
+        }).start();
+        new Thread(new Runnable() {
+            public void run() {
+                // a potentially time consuming task
+            }
+        }).start();
     }
 
     private class AsyncTaskRunner extends AsyncTask<String, String, String> {
@@ -3053,15 +3175,15 @@ public class AddDraftSurveyManual extends AppCompatActivity {
             progressDialog = ProgressDialog.show(AddDraftSurveyManual.this,
                     "",
                     "Wait for a moment");
-            setTextThread(lpp,stringToDecimals(responseGlobal.body().getLpp()));
-            setTextThread(lwt,stringToDecimals(responseGlobal.body().getLwt()));
-            setTextThread(constant,stringToDecimals(responseGlobal.body().getConstant()));
-            setTextThread(lf,stringToDecimals(responseGlobal.body().getLf()));
-            setTextThread(lm,stringToDecimals(responseGlobal.body().getLm()));
-            setTextThread(la,stringToDecimals(responseGlobal.body().getLa()));
-            setTextThread(lbm,stringToDecimals(responseGlobal.body().getLbm()));
-            setTextThread(apparentTrim,stringToDecimals(responseGlobal.body().getApparentt()));
-            setTextThread(cargo,responseGlobal.body().getCargo());
+            setTextThread(lpp,stringToDecimals(responseGlobal.body().getLpp()), 1000);
+            setTextThread(lwt,stringToDecimals(responseGlobal.body().getLwt()), 1100);
+            setTextThread(constant,stringToDecimals(responseGlobal.body().getConstant()), 1200);
+            setTextThread(lf,stringToDecimals(responseGlobal.body().getLf()), 1300);
+            setTextThread(lm,stringToDecimals(responseGlobal.body().getLm()), 1400);
+            setTextThread(la,stringToDecimals(responseGlobal.body().getLa()), 1500);
+            setTextThread(lbm,stringToDecimals(responseGlobal.body().getLbm()), 1600);
+            setTextThread(apparentTrim,stringToDecimals(responseGlobal.body().getApparentt()), 1700);
+            setTextThread(cargo,responseGlobal.body().getCargo(), 1800);
 
             if (responseGlobal.body().getFimage()!=null){
                 setImageEdit(responseGlobal.body().getFimage(), 1);
@@ -3078,19 +3200,19 @@ public class AddDraftSurveyManual extends AppCompatActivity {
                 mImage = responseGlobal.body().getMimage();
             }
 
-            setTextThread(dfp,stringToDecimals(responseGlobal.body().getDfp()));
-            setTextThread(dfs,stringToDecimals(responseGlobal.body().getDfs()));
-            setTextThread(steamCorr,stringToDecimals(responseGlobal.body().getFsteamcorr()));
-            setTextThread(forwardMean,stringToDecimals(responseGlobal.body().getFmean()));
-            setTextThread(forwardMeanAfterCorr,stringToDecimals(responseGlobal.body().getFaftersteamcorr()));
-            setTextThread(forwarAfter,stringToDecimals(responseGlobal.body().getFamean()));
+            setTextThread(dfp,stringToDecimals(responseGlobal.body().getDfp()), 1000);
+            setTextThread(dfs,stringToDecimals(responseGlobal.body().getDfs()), 1100);
+            setTextThread(steamCorr,stringToDecimals(responseGlobal.body().getFsteamcorr()), 1200);
+            setTextThread(forwardMean,stringToDecimals(responseGlobal.body().getFmean()), 1300);
+            setTextThread(forwardMeanAfterCorr,stringToDecimals(responseGlobal.body().getFaftersteamcorr()),1400);
+            setTextThread(forwarAfter,stringToDecimals(responseGlobal.body().getFamean()),1500);
 
-            setTextThread(dap,stringToDecimals(responseGlobal.body().getDap()));
-            setTextThread(das,stringToDecimals(responseGlobal.body().getDas()));
-            setTextThread(asteamCorr,stringToDecimals(responseGlobal.body().getAsteamcorr()));
-            setTextThread(afterMean,stringToDecimals(responseGlobal.body().getAmean()));
-            setTextThread(afterMeanAfterCorr,stringToDecimals(responseGlobal.body().getAaftersteamcorr()));
-            setTextThread(remarks,responseGlobal.body().getRemarks());
+            setTextThread(dap,stringToDecimals(responseGlobal.body().getDap()),1600);
+            setTextThread(das,stringToDecimals(responseGlobal.body().getDas()), 1700);
+            setTextThread(asteamCorr,stringToDecimals(responseGlobal.body().getAsteamcorr()), 1800);
+            setTextThread(afterMean,stringToDecimals(responseGlobal.body().getAmean()), 1900);
+            setTextThread(afterMeanAfterCorr,stringToDecimals(responseGlobal.body().getAaftersteamcorr()), 2000);
+            setTextThread(remarks,responseGlobal.body().getRemarks(), 2100);
 
             dmp.setText(stringToDecimals(responseGlobal.body().getDmp()));
             dms.setText(stringToDecimals(responseGlobal.body().getDms()));
@@ -3147,14 +3269,14 @@ public class AddDraftSurveyManual extends AppCompatActivity {
             dcfd3.setText(stringToDecimals(responseGlobal.body().getCorrdisplacement()));
             tdw.setText(stringToDecimals(responseGlobal.body().getTotaldeductweight()));
             nedD.setText(stringToDecimals(responseGlobal.body().getNetdisp()));
-            setTextThread(dcft,stringToDecimals(responseGlobal.body().getDraftcorrdefor()));
+            setTextThread(dcft,stringToDecimals(responseGlobal.body().getDraftcorrdefor()), 1000);
 
-            setTextThread(docNumber,responseGlobal.body().getDocumentNumber());
-            setTextThread(docDate,responseGlobal.body().getDocumentDate().substring(0, 10));
-            setTextThread(startDate,responseGlobal.body().getSurveyStartTime().substring(0,10));
-            setTextThread(startTIme,responseGlobal.body().getSurveyStartTime().substring(11,16));
-            setTextThread(endDate,responseGlobal.body().getSurveyEndTime().substring(0,10));
-            setTextThread(endTime,responseGlobal.body().getSurveyEndTime().substring(11,16));
+            setTextThread(docNumber,responseGlobal.body().getDocumentNumber(), 1000);
+            setTextThread(docDate,responseGlobal.body().getDocumentDate().substring(0, 10), 1100);
+            setTextThread(startDate,responseGlobal.body().getSurveyStartTime().substring(0,10), 1200);
+            setTextThread(startTIme,responseGlobal.body().getSurveyStartTime().substring(11,16), 1300);
+            setTextThread(endDate,responseGlobal.body().getSurveyEndTime().substring(0,10), 1400);
+            setTextThread(endTime,responseGlobal.body().getSurveyEndTime().substring(11,16), 1500);
             int valStatus=0;
             switch (responseGlobal.body().getDocumentStatus()){
                 case "CREATED":
@@ -3241,6 +3363,7 @@ public class AddDraftSurveyManual extends AppCompatActivity {
 //            finalResult.setText(text[0]);
         }
     }
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
