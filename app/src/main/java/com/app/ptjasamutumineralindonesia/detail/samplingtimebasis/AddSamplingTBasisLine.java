@@ -1,8 +1,5 @@
 package com.app.ptjasamutumineralindonesia.detail.samplingtimebasis;
 
-import androidx.annotation.RequiresApi;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.Intent;
@@ -20,11 +17,11 @@ import android.widget.Spinner;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.app.ptjasamutumineralindonesia.R;
 import com.app.ptjasamutumineralindonesia.detail.ApiDetailInterface;
-import com.app.ptjasamutumineralindonesia.detail.samplingmassbasis.AddSamplingMassBasis;
-import com.app.ptjasamutumineralindonesia.detail.samplingmassbasis.AddSamplingMassBassLine;
-import com.app.ptjasamutumineralindonesia.detail.samplingmassbasis.SamplingMassBasisLineResults;
 import com.app.ptjasamutumineralindonesia.helpers.ApiBase;
 import com.app.ptjasamutumineralindonesia.sharepreference.LoginManager;
 import com.google.gson.JsonObject;
@@ -35,7 +32,6 @@ import org.json.JSONObject;
 
 import java.text.SimpleDateFormat;
 import java.time.Instant;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
@@ -213,6 +209,13 @@ public class AddSamplingTBasisLine extends AppCompatActivity {
                             } else {
                                 Toast.makeText(getBaseContext(), "Success Created", Toast.LENGTH_SHORT).show();
                                 idSamplingTBasisLine = response.body().getId();
+                                Intent intent = new Intent(AddSamplingTBasisLine.this, AddSamplingTimeBasis.class);
+                                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                                intent.putExtra("idAssignment", idAssignment);
+                                intent.putExtra("idAssignmentDocNumber", idAssignmentDocNumber);
+                                intent.putExtra("idSamplingTBasis", idSamplingTBasis);
+                                startActivity(intent);
+                                finish();
                             }
                         }
 
@@ -255,6 +258,13 @@ public class AddSamplingTBasisLine extends AppCompatActivity {
                                 Toast.makeText(getBaseContext(), response.raw().toString(), Toast.LENGTH_SHORT).show();
                             } else {
                                 Toast.makeText(getBaseContext(), "Success Updated", Toast.LENGTH_SHORT).show();
+                                Intent intent = new Intent(AddSamplingTBasisLine.this, AddSamplingTimeBasis.class);
+                                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                                intent.putExtra("idAssignment", idAssignment);
+                                intent.putExtra("idAssignmentDocNumber", idAssignmentDocNumber);
+                                intent.putExtra("idSamplingTBasis", idSamplingTBasis);
+                                startActivity(intent);
+                                finish();
                             }
                         }
 

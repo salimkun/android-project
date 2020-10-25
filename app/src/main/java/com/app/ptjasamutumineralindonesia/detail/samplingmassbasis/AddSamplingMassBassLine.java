@@ -1,10 +1,6 @@
 package com.app.ptjasamutumineralindonesia.detail.samplingmassbasis;
 
-import androidx.annotation.RequiresApi;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
@@ -13,14 +9,13 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
-import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.app.ptjasamutumineralindonesia.R;
 import com.app.ptjasamutumineralindonesia.detail.ApiDetailInterface;
-import com.app.ptjasamutumineralindonesia.detail.DetailAssignment;
-import com.app.ptjasamutumineralindonesia.detail.attendancecard.AddAttendanceCard;
 import com.app.ptjasamutumineralindonesia.helpers.ApiBase;
 import com.app.ptjasamutumineralindonesia.sharepreference.LoginManager;
 import com.google.gson.JsonObject;
@@ -30,14 +25,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.math.BigDecimal;
-import java.time.Instant;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.ZoneId;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Calendar;
 import java.util.List;
 
 import retrofit2.Call;
@@ -142,6 +131,13 @@ public class AddSamplingMassBassLine extends AppCompatActivity {
                             } else {
                                 Toast.makeText(getBaseContext(), "Success Created", Toast.LENGTH_SHORT).show();
                                 idSamplingMBasisLine = response.body().getId();
+                                Intent intent = new Intent(AddSamplingMassBassLine.this, AddSamplingMassBasis.class);
+                                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                                intent.putExtra("idAssignment", idAssignment);
+                                intent.putExtra("idAssignmentDocNumber", idAssignmentDocNumber);
+                                intent.putExtra("idSamplingMBasis", idSamplingMBasis);
+                                startActivity(intent);
+                                finish();
                             }
                         }
 
@@ -184,6 +180,13 @@ public class AddSamplingMassBassLine extends AppCompatActivity {
                                 Toast.makeText(getBaseContext(), response.raw().toString(), Toast.LENGTH_SHORT).show();
                             } else {
                                 Toast.makeText(getBaseContext(), "Success Updated", Toast.LENGTH_SHORT).show();
+                                Intent intent = new Intent(AddSamplingMassBassLine.this, AddSamplingMassBasis.class);
+                                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                                intent.putExtra("idAssignment", idAssignment);
+                                intent.putExtra("idAssignmentDocNumber", idAssignmentDocNumber);
+                                intent.putExtra("idSamplingMBasis", idSamplingMBasis);
+                                startActivity(intent);
+                                finish();
                             }
                         }
 

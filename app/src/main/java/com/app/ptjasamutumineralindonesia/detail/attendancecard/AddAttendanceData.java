@@ -1,14 +1,7 @@
 package com.app.ptjasamutumineralindonesia.detail.attendancecard;
 
-import androidx.annotation.RequiresApi;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.DividerItemDecoration;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
@@ -21,18 +14,15 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
-import android.widget.LinearLayout;
-import android.widget.SearchView;
 import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.app.ptjasamutumineralindonesia.R;
 import com.app.ptjasamutumineralindonesia.detail.ApiDetailInterface;
-import com.app.ptjasamutumineralindonesia.detail.DetailAssignment;
-import com.app.ptjasamutumineralindonesia.detail.sampledispatch.AddSampleDispatch;
-import com.app.ptjasamutumineralindonesia.detail.sampledispatch.AddSampleDispatchLines;
 import com.app.ptjasamutumineralindonesia.helpers.ApiBase;
 import com.app.ptjasamutumineralindonesia.sharepreference.LoginManager;
 import com.google.gson.JsonObject;
@@ -41,20 +31,16 @@ import com.google.gson.JsonParser;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.Instant;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 import java.util.Locale;
-import java.util.SimpleTimeZone;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -223,6 +209,13 @@ public class AddAttendanceData extends AppCompatActivity {
                             } else {
                                 Toast.makeText(getBaseContext(), "Success Created", Toast.LENGTH_SHORT).show();
                                 idDataAttendance = response.body().getId();
+                                Intent intent = new Intent(AddAttendanceData.this, AddAttendanceCard.class);
+                                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                                intent.putExtra("idAssignment", idAssignment);
+                                intent.putExtra("idAssignmentDocNumber", idAssignmentDocNumber);
+                                intent.putExtra("idTimeSheet", idTimeSheet);
+                                startActivity(intent);
+                                finish();
                             }
                         }
 
@@ -260,6 +253,13 @@ public class AddAttendanceData extends AppCompatActivity {
                                 Toast.makeText(getBaseContext(), response.raw().toString(), Toast.LENGTH_SHORT).show();
                             } else {
                                 Toast.makeText(getBaseContext(), "Success Updated", Toast.LENGTH_SHORT).show();
+                                Intent intent = new Intent(AddAttendanceData.this, AddAttendanceCard.class);
+                                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                                intent.putExtra("idAssignment", idAssignment);
+                                intent.putExtra("idAssignmentDocNumber", idAssignmentDocNumber);
+                                intent.putExtra("idTimeSheet", idTimeSheet);
+                                startActivity(intent);
+                                finish();
                             }
                         }
 
