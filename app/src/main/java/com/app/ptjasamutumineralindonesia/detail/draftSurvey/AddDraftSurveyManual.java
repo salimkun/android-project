@@ -43,7 +43,6 @@ import com.app.ptjasamutumineralindonesia.sharepreference.LoginManager;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.ByteArrayInputStream;
@@ -1283,8 +1282,8 @@ public class AddDraftSurveyManual extends AppCompatActivity {
                                         //print parameter
                                         Log.d("parameter for add  ", "AS PARAMETER  " + paramadd[0]);
 
-                                    } catch (JSONException e) {
-                                        Toast.makeText(getBaseContext(), "Error "+ e.getMessage(), Toast.LENGTH_SHORT).show();
+                                    } catch (Exception e) {
+                                        Toast.makeText(getBaseContext(), "Pastikan inputan benar", Toast.LENGTH_SHORT).show();
                                         e.printStackTrace();
                                     }
                                     Call<DraftSurveyResults> call = service.addDraftSurvey("Bearer ".concat(idToken), paramadd[0]);
@@ -1430,8 +1429,8 @@ public class AddDraftSurveyManual extends AppCompatActivity {
                                         //print parameter
                                         Log.d("parameter for add  ", "AS PARAMETER  " + paramadd[0]);
 
-                                    } catch (JSONException e) {
-                                        Toast.makeText(getBaseContext(), "Error "+ e.getMessage(), Toast.LENGTH_SHORT).show();
+                                    } catch (Exception e) {
+                                        Toast.makeText(getBaseContext(), "Pastikan inputan benar", Toast.LENGTH_SHORT).show();
                                         e.printStackTrace();
                                     }
                                     Call<DraftSurveyResults> call = service.updateDraftSurvey("Bearer ".concat(idToken), paramadd[0]);
