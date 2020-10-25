@@ -2102,7 +2102,6 @@ public class AddDraftSurveyManual extends AppCompatActivity {
                     if (dms.getText().toString().isEmpty() || dms.getText().toString().equals(".")){
                         dms.setText("0");
                     }
-                    midMean.setText(String.valueOf((Double.valueOf(dmp.getText().toString().replace(",",""))+Double.valueOf(dms.getText().toString().replace(",","")))/2));
                 }
 
                 @Override
