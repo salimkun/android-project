@@ -1,3 +1,4 @@
+
 package com.app.ptjasamutumineralindonesia.detail.draftSurvey;
 
 import android.app.DatePickerDialog;
@@ -629,511 +630,6 @@ public class AddDraftSurveyManual extends AppCompatActivity {
                                 if (apparentTrim.getText().toString().isEmpty() || apparentTrim.getText().toString().equals("NaN") || apparentTrim.getText().toString().equals(".")){
                                     apparentTrim.setText("0");
                                 }
-
-                                midMeanAfterCorr.setText(
-                                        String.valueOf(
-                                                (
-                                                        (Double.valueOf(
-                                                                apparentTrim.getText().toString().replace(",","")
-                                                        ) * Double.valueOf(
-                                                                lm.getText().toString().replace(",","")
-                                                        )) / Double.valueOf(
-                                                                lbm.getText().toString().replace(",","")
-                                                        )
-                                                ) + Double.valueOf(
-                                                        midMean.getText().toString().replace(",","")
-                                                )
-                                        )
-                                );
-
-                                Double sC =  (
-                                        (Double.valueOf(
-                                                apparentTrim.getText().toString().replace(",","")
-                                        ) * Double.valueOf(
-                                                lf.getText().toString().replace(",","")
-                                        )) / Double.valueOf(
-                                                lbm.getText().toString().replace(",","")
-                                        )
-                                );
-                                if (sC.isNaN()){
-                                    sC = 0.0;
-                                }
-                                steamCorr.setText(String.valueOf(sC));
-
-                                asteamCorr.setText(
-                                        String.valueOf(
-                                                (
-                                                        (Double.valueOf(
-                                                                apparentTrim.getText().toString().replace(",","")
-                                                        ) * Double.valueOf(
-                                                                la.getText().toString().replace(",","")
-                                                        )) / Double.valueOf(
-                                                                lbm.getText().toString().replace(",","")
-                                                        )
-                                                )
-                                        )
-                                );
-
-                                afterMeanAfterCorr.setText(
-                                        String.valueOf(
-                                                (
-                                                        (Double.valueOf(
-                                                                apparentTrim.getText().toString().replace(",","")
-                                                        ) * Double.valueOf(
-                                                                la.getText().toString().replace(",","")
-                                                        )) / Double.valueOf(
-                                                                lbm.getText().toString().replace(",","")
-                                                        )
-                                                ) + Double.valueOf(
-                                                        afterMean.getText().toString().replace(",","")
-                                                )
-                                        )
-                                );
-
-                                if (forwardMeanAfterCorr.getText().toString().isEmpty() || forwardMeanAfterCorr.getText().toString().equals("NaN")){
-                                    forwardMeanAfterCorr.setText("0");
-                                }
-                                forwarAfter.setText(String.valueOf(
-                                        (Double.valueOf(forwardMeanAfterCorr.getText().toString()) + Double.valueOf(afterMeanAfterCorr.getText().toString()))/2
-                                ));
-                                tt.setText(String.valueOf(Double.valueOf(afterMeanAfterCorr.getText().toString()) - Double.valueOf(forwardMeanAfterCorr.getText().toString())));
-                                faMeansCorr.setText(String.valueOf((Double.valueOf(forwardMeanAfterCorr.getText().toString().replace(",","")) + Double.valueOf(afterMeanAfterCorr.getText().toString().replace(",","")))/2));
-
-                                if (forwarAfter.getText().toString().isEmpty() || forwarAfter.getText().toString().equals("NaN") || forwarAfter.getText().toString().equals(".")){
-                                    forwarAfter.setText("0");
-                                }
-
-                                if (forwardMean.getText().toString().isEmpty() || forwardMean.getText().toString().equals(".")){
-                                    forwardMean.setText("0");
-                                }
-
-                                if (steamCorr.getText().toString().isEmpty() || steamCorr.getText().toString().equals("NaN") || steamCorr.getText().toString().equals(".")){
-                                    steamCorr.setText("0");
-                                }
-
-                                if (dfp.getText().toString().isEmpty() || dfp.getText().toString().equals(".")){
-                                    dfp.setText("0");
-                                }
-                                forwardMean.setText(String.valueOf((Double.valueOf(dfp.getText().toString().replace(",",""))+Double.valueOf(dfs.getText().toString().replace(",","")))/2));
-
-                                if (dfs.getText().toString().isEmpty() || dfs.getText().toString().equals(".")){
-                                    dfs.setText("0");
-                                }
-                                forwardMean.setText(String.valueOf((Double.valueOf(dfp.getText().toString().replace(",",""))+Double.valueOf(dfs.getText().toString().replace(",","")))/2));
-
-                                if (lwt.getText().toString().isEmpty() || lwt.getText().toString().equals(".")){
-                                    lwt.setText("0");
-                                }
-
-                                if (constant.getText().toString().isEmpty() || constant.getText().toString().equals(".")){
-                                    constant.setText("0");
-                                }
-
-                                if (lm.getText().toString().isEmpty() || lm.getText().toString().equals(".")){
-                                    lm.setText("0");
-                                }
-                                msisteamCorr.setText(
-                                        String.valueOf(
-                                                (
-                                                        (Double.valueOf(
-                                                                apparentTrim.getText().toString().replace(",","")
-                                                        ) * Double.valueOf(
-                                                                lm.getText().toString().replace(",","")
-                                                        )) / Double.valueOf(
-                                                                lbm.getText().toString().replace(",","")
-                                                        )
-                                                )
-                                        )
-                                );
-
-                                if (lpp.getText().toString().isEmpty() || lpp.getText().toString().equals(".") ){
-                                    lpp.setText("0");
-                                }
-                                if (timer != null) {
-                                    timer.cancel();
-                                }
-
-                                t1.setText(String.valueOf(
-                                        (Double.valueOf(lcfy.getText().toString())*Double.valueOf(tpcy.getText().toString())*Double.valueOf(tt.getText().toString())*100)/Double.valueOf(lpp.getText().toString())
-                                ));
-                                t2.setText(
-                                        String.valueOf(
-                                                ((Double.valueOf(tt.getText().toString())*Double.valueOf(tt.getText().toString()))*Double.valueOf(dmtc.getText().toString())*50)/Double.valueOf(lpp.getText().toString())));
-
-                                if (lbm.getText().toString().isEmpty() || lbm.getText().toString().equals("NaN") || lbm.getText().toString().equals(".")){
-                                    lbm.setText("0");
-                                }
-
-                                forwardMeanAfterCorr.setText(
-                                        String.valueOf(
-                                                (
-                                                        (Double.valueOf(
-                                                                apparentTrim.getText().toString().replace(",","")
-                                                        ) * Double.valueOf(
-                                                                lf.getText().toString().replace(",","")
-                                                        )) / Double.valueOf(
-                                                                lbm.getText().toString().replace(",","")
-                                                        )
-                                                ) + Double.valueOf(
-                                                        forwardMean.getText().toString().replace(",","")
-                                                )
-                                        )
-                                );
-                                if (lf.getText().toString().isEmpty() || lf.getText().toString().equals(".")){
-                                    lf.setText("0");
-                                }
-
-                                lbm.setText(String.valueOf(Double.valueOf(lpp.getText().toString().replace(",",""))-(Double.valueOf(lf.getText().toString().replace(",",""))+Double.valueOf(la.getText().toString().replace(",","")))));
-
-
-                                if (dap.getText().toString().isEmpty() || dap.getText().toString().equals(".")){
-                                    dap.setText("0");
-                                }
-                                afterMean.setText(String.valueOf((Double.valueOf(dap.getText().toString().replace(",",""))+Double.valueOf(das.getText().toString().replace(",","")))/2));
-
-                                if (das.getText().toString().isEmpty() || das.getText().toString().equals(".")){
-                                    das.setText("0");
-                                }
-                                afterMean.setText(String.valueOf((Double.valueOf(dap.getText().toString().replace(",",""))+Double.valueOf(das.getText().toString().replace(",","")))/2));
-
-                                if (asteamCorr.getText().toString().isEmpty() || asteamCorr.getText().toString().equals("NaN") || asteamCorr.getText().toString().equals(".")){
-                                    asteamCorr.setText("0");
-                                }
-                                if (afterMean.getText().toString().isEmpty() || afterMean.getText().toString().equals(".")){
-                                    afterMean.setText("0");
-                                }
-
-                                if (afterMeanAfterCorr.getText().toString().isEmpty() || afterMeanAfterCorr.getText().toString().equals("NaN") || afterMeanAfterCorr.getText().toString().equals(".")){
-                                    afterMeanAfterCorr.setText("0");
-                                }
-                                faMeansCorr.setText(String.valueOf((Double.valueOf(forwardMeanAfterCorr.getText().toString().replace(",","")) + Double.valueOf(afterMeanAfterCorr.getText().toString().replace(",","")))/2));
-
-                                if (dmp.getText().toString().isEmpty() || dmp.getText().toString().equals(".")){
-                                    dmp.setText("0");
-                                }
-                                midMean.setText(String.valueOf((Double.valueOf(dmp.getText().toString().replace(",",""))+Double.valueOf(dms.getText().toString().replace(",","")))/2));
-
-                                if (dms.getText().toString().isEmpty() || dms.getText().toString().equals(".")){
-                                    dms.setText("0");
-                                }
-                                midMean.setText(String.valueOf((Double.valueOf(dmp.getText().toString().replace(",",""))+Double.valueOf(dms.getText().toString().replace(",","")))/2));
-
-                                if (msisteamCorr.getText().toString().isEmpty() || msisteamCorr.getText().toString().equals("NaN") || msisteamCorr.getText().toString().equals(".")){
-                                    msisteamCorr.setText("0");
-                                }
-
-                                if (midMean.getText().toString().isEmpty() || midMean.getText().toString().equals(".")){
-                                    midMean.setText("0");
-                                }
-                                midMeanAfterCorr.setText(
-                                        String.valueOf(
-                                                (
-                                                        (Double.valueOf(
-                                                                apparentTrim.getText().toString().replace(",","")
-                                                        ) * Double.valueOf(
-                                                                lm.getText().toString().replace(",","")
-                                                        )) / Double.valueOf(
-                                                                lbm.getText().toString().replace(",","")
-                                                        )
-                                                ) + Double.valueOf(
-                                                        midMean.getText().toString().replace(",","")
-                                                )
-                                        )
-                                );
-
-                                if (midMeanAfterCorr.getText().toString().isEmpty() || midMeanAfterCorr.getText().toString().equals(".")){
-                                    midMeanAfterCorr.setText("0");
-                                }
-                                mOM.setText(String.valueOf((Double.valueOf(faMeansCorr.getText().toString().replace(",","")) + Double.valueOf(midMeanAfterCorr.getText().toString().replace(",","")))/2));
-                                draftCorr.setText(String.valueOf((Double.valueOf(mOM.getText().toString().replace(",","")) + Double.valueOf(midMeanAfterCorr.getText().toString().replace(",","")))/2));
-
-                                if (faMeansCorr.getText().toString().isEmpty() || faMeansCorr.getText().toString().equals("NaN") || faMeansCorr.getText().toString().equals(".")){
-                                    faMeansCorr.setText("0");
-                                }
-                                mOM.setText(String.valueOf((Double.valueOf(faMeansCorr.getText().toString().replace(",","")) + Double.valueOf(midMeanAfterCorr.getText().toString().replace(",","")))/2));
-
-                                if (mOM.getText().toString().isEmpty() || mOM.getText().toString().equals("NaN") || mOM.getText().toString().equals(".")){
-                                    mOM.setText("0");
-                                }
-                                draftCorr.setText(String.valueOf((Double.valueOf(mOM.getText().toString().replace(",","")) + Double.valueOf(midMeanAfterCorr.getText().toString().replace(",","")))/2));
-                                if (draftCorr.getText().toString().isEmpty() || draftCorr.getText().toString().equals("NaN") || draftCorr.getText().toString().equals(".")){
-                                    draftCorr.setText("0");
-                                }
-
-                                if (lcfy.getText().toString().isEmpty() || lcfy.getText().toString().equals("NaN") || lcfy.getText().toString().equals(".")){
-                                    lcfy.setText("0");
-                                }
-                                t1.setText(String.valueOf(
-                                        (Double.valueOf(lcfy.getText().toString())*Double.valueOf(tpcy.getText().toString())*Double.valueOf(tt.getText().toString())*100)/Double.valueOf(lpp.getText().toString())
-                                ));
-
-                                if (lcfy1.getText().toString().isEmpty() || lcfy1.getText().toString().equals(".")){
-                                    lcfy1.setText("0");
-                                }
-                                lcfy.setText(String.valueOf(
-                                        ((Double.valueOf(lcfx.getText().toString().replace(",",""))-Double.valueOf(lcfx1.getText().toString().replace(",","")))/
-                                                (Double.valueOf(lcfx2.getText().toString().replace(",",""))-(Double.valueOf(lcfx1.getText().toString().replace(",",""))))*
-                                                (Double.valueOf(lcfy2.getText().toString().replace(",",""))-Double.valueOf(lcfy1.getText().toString().replace(",","")))+
-                                                Double.valueOf(lcfy1.getText().toString().replace(",",""))
-                                        )
-                                ));
-                                if (lcfy2.getText().toString().isEmpty() || lcfy2.getText().toString().equals(".") || lcfy2.getText().toString().equals(".")){
-                                    lcfy2.setText("0");
-                                }
-
-                                if (lcfx.getText().toString().isEmpty() || lcfx.getText().toString().equals(".")){
-                                    lcfx.setText("0");
-                                }
-
-                                if (lcfx1.getText().toString().isEmpty() || lcfx1.getText().toString().equals(".")){
-                                    lcfx1.setText("0");
-                                }
-
-                                if (lcfx2.getText().toString().isEmpty() || lcfx2.getText().toString().equals(".")){
-                                    lcfx2.setText("0");
-                                }
-
-                                if (tpcy.getText().toString().isEmpty() || tpcy.getText().toString().equals("NaN") || tpcy.getText().toString().equals(".")){
-                                    tpcy.setText("0");
-                                }
-                                t1.setText(String.valueOf(
-                                        (Double.valueOf(lcfy.getText().toString())*Double.valueOf(tpcy.getText().toString())*Double.valueOf(tt.getText().toString())*100)/Double.valueOf(lpp.getText().toString())
-                                ));
-                                if (tpcy1.getText().toString().isEmpty() || tpcy1.getText().toString().equals(".")){
-                                    tpcy1.setText("0");
-                                }
-                                tpcy.setText(String.valueOf(
-                                        ((Double.valueOf(tpcx.getText().toString().replace(",",""))-Double.valueOf(tpcx1.getText().toString().replace(",","")))/
-                                                (Double.valueOf(tpcx2.getText().toString().replace(",",""))-(Double.valueOf(tpcx1.getText().toString().replace(",",""))))*
-                                                (Double.valueOf(tpcy2.getText().toString().replace(",",""))-Double.valueOf(tpcy1.getText().toString().replace(",","")))+
-                                                Double.valueOf(tpcy1.getText().toString().replace(",",""))
-                                        )
-                                ));
-                                if (tpcy2.getText().toString().isEmpty() || tpcy2.getText().toString().equals(".")){
-                                    tpcy2.setText("0");
-                                }
-
-                                if (tpcx.getText().toString().isEmpty() || tpcx.getText().toString().equals(".")){
-                                    tpcx.setText("0");
-                                }
-
-                                if (tpcx1.getText().toString().isEmpty() || tpcx1.getText().toString().equals(".")){
-                                    tpcx1.setText("0");
-                                }
-
-
-                                if (tpcx2.getText().toString().isEmpty() || tpcx2.getText().toString().equals(".")){
-                                    tpcx2.setText("0");
-                                }
-                                if (cdy.getText().toString().isEmpty() || cdy.getText().toString().equals("NaN") || cdy.getText().toString().equals(".")){
-                                    cdy.setText("0");
-                                }
-                                dcft.setText(String.valueOf(
-                                        Double.valueOf(cdy.getText().toString())+Double.valueOf(t1.getText().toString())+Double.valueOf(t2.getText().toString())
-                                ));
-                                if (cdy1.getText().toString().isEmpty() || cdy1.getText().toString().equals(".")){
-                                    cdy1.setText("0");
-                                }
-                                cdy.setText(String.valueOf(
-                                        ((Double.valueOf(cdx.getText().toString().replace(",",""))-Double.valueOf(cdx1.getText().toString().replace(",","")))/
-                                                (Double.valueOf(cdx2.getText().toString().replace(",",""))-(Double.valueOf(cdx1.getText().toString().replace(",",""))))*
-                                                (Double.valueOf(cdy2.getText().toString().replace(",",""))-Double.valueOf(cdy1.getText().toString().replace(",","")))+
-                                                Double.valueOf(cdy1.getText().toString().replace(",",""))
-                                        )
-                                ));
-                                if (cdy2.getText().toString().isEmpty() || cdy2.getText().toString().equals(".")){
-                                    cdy2.setText("0");
-                                }
-                                cdy.setText(String.valueOf(
-                                        ((Double.valueOf(cdx.getText().toString().replace(",",""))-Double.valueOf(cdx1.getText().toString().replace(",","")))/
-                                                (Double.valueOf(cdx2.getText().toString().replace(",",""))-(Double.valueOf(cdx1.getText().toString().replace(",",""))))*
-                                                (Double.valueOf(cdy2.getText().toString().replace(",",""))-Double.valueOf(cdy1.getText().toString().replace(",","")))+
-                                                Double.valueOf(cdy1.getText().toString().replace(",",""))
-                                        )
-                                ));
-
-                                if (cdx.getText().toString().isEmpty() || cdx.getText().toString().equals(".")){
-                                    cdx.setText("0");
-                                }
-                                cdy.setText(String.valueOf(
-                                        ((Double.valueOf(cdx.getText().toString().replace(",",""))-Double.valueOf(cdx1.getText().toString().replace(",","")))/
-                                                (Double.valueOf(cdx2.getText().toString().replace(",",""))-(Double.valueOf(cdx1.getText().toString().replace(",",""))))*
-                                                (Double.valueOf(cdy2.getText().toString().replace(",",""))-Double.valueOf(cdy1.getText().toString().replace(",","")))+
-                                                Double.valueOf(cdy1.getText().toString().replace(",",""))
-                                        )
-                                ));
-                                if (cdx2.getText().toString().isEmpty() || cdx2.getText().toString().equals(".")){
-                                    cdx2.setText("0");
-                                }
-                                cdy.setText(String.valueOf(
-                                        ((Double.valueOf(cdx.getText().toString().replace(",",""))-Double.valueOf(cdx1.getText().toString().replace(",","")))/
-                                                (Double.valueOf(cdx2.getText().toString().replace(",",""))-(Double.valueOf(cdx1.getText().toString().replace(",",""))))*
-                                                (Double.valueOf(cdy2.getText().toString().replace(",",""))-Double.valueOf(cdy1.getText().toString().replace(",","")))+
-                                                Double.valueOf(cdy1.getText().toString().replace(",",""))
-                                        )
-                                ));
-                                if (cdx1.getText().toString().isEmpty() || cdx1.getText().toString().equals(".")){
-                                    cdx1.setText("0");
-                                }
-                                cdy.setText(String.valueOf(
-                                        ((Double.valueOf(cdx.getText().toString().replace(",",""))-Double.valueOf(cdx1.getText().toString().replace(",","")))/
-                                                (Double.valueOf(cdx2.getText().toString().replace(",",""))-(Double.valueOf(cdx1.getText().toString().replace(",",""))))*
-                                                (Double.valueOf(cdy2.getText().toString().replace(",",""))-Double.valueOf(cdy1.getText().toString().replace(",","")))+
-                                                Double.valueOf(cdy1.getText().toString().replace(",",""))
-                                        )
-                                ));
-                                if (mtcpy.getText().toString().isEmpty() || mtcpy.getText().toString().equals("NaN") || mtcpy.getText().toString().equals(".")){
-                                    mtcpy.setText("0");
-                                }
-                                dmtc.setText(String.valueOf(
-                                        Double.valueOf(mtcpy.getText().toString()) - Double.valueOf(mtcmy.getText().toString())
-                                ));
-
-                                if (mtcpy1.getText().toString().isEmpty() || mtcpy1.getText().toString().equals(".")){
-                                    mtcpy1.setText("0");
-                                }
-                                mtcpy.setText(String.valueOf(
-                                        ((Double.valueOf(mtcpx.getText().toString().replace(",",""))-Double.valueOf(mtcpx1.getText().toString().replace(",","")))/
-                                                (Double.valueOf(mtcpx2.getText().toString().replace(",",""))-(Double.valueOf(mtcpx1.getText().toString().replace(",",""))))*
-                                                (Double.valueOf(mtcpy2.getText().toString().replace(",",""))-Double.valueOf(mtcpy1.getText().toString().replace(",","")))+
-                                                Double.valueOf(mtcpy1.getText().toString().replace(",",""))
-                                        )
-                                ));
-
-                                if (mtcpy2.getText().toString().isEmpty() || mtcpy2.getText().toString().equals(".")){
-                                    mtcpy2.setText("0");
-                                }
-                                mtcpy.setText(String.valueOf(
-                                        ((Double.valueOf(mtcpx.getText().toString().replace(",",""))-Double.valueOf(mtcpx1.getText().toString().replace(",","")))/
-                                                (Double.valueOf(mtcpx2.getText().toString().replace(",",""))-(Double.valueOf(mtcpx1.getText().toString().replace(",",""))))*
-                                                (Double.valueOf(mtcpy2.getText().toString().replace(",",""))-Double.valueOf(mtcpy1.getText().toString().replace(",","")))+
-                                                Double.valueOf(mtcpy1.getText().toString().replace(",",""))
-                                        )
-                                ));
-
-                                if (mtcpx.getText().toString().isEmpty()|| mtcpx.getText().toString().equals(".")){
-                                    mtcpx.setText("0");
-                                }
-                                mtcpy.setText(String.valueOf(
-                                        ((Double.valueOf(mtcpx.getText().toString().replace(",",""))-Double.valueOf(mtcpx1.getText().toString().replace(",","")))/
-                                                (Double.valueOf(mtcpx2.getText().toString().replace(",",""))-(Double.valueOf(mtcpx1.getText().toString().replace(",",""))))*
-                                                (Double.valueOf(mtcpy2.getText().toString().replace(",",""))-Double.valueOf(mtcpy1.getText().toString().replace(",","")))+
-                                                Double.valueOf(mtcpy1.getText().toString().replace(",",""))
-                                        )
-                                ));
-
-                                if (mtcpx1.getText().toString().isEmpty()|| mtcpx1.getText().toString().equals(".")){
-                                    mtcpx1.setText("0");
-                                }
-                                mtcpy.setText(String.valueOf(
-                                        ((Double.valueOf(mtcpx.getText().toString().replace(",",""))-Double.valueOf(mtcpx1.getText().toString().replace(",","")))/
-                                                (Double.valueOf(mtcpx2.getText().toString().replace(",",""))-(Double.valueOf(mtcpx1.getText().toString().replace(",",""))))*
-                                                (Double.valueOf(mtcpy2.getText().toString().replace(",",""))-Double.valueOf(mtcpy1.getText().toString().replace(",","")))+
-                                                Double.valueOf(mtcpy1.getText().toString().replace(",",""))
-                                        )
-                                ));
-
-                                if (mtcpx2.getText().toString().isEmpty() || mtcpx2.getText().toString().equals(".")){
-                                    mtcpx2.setText("0");
-                                }
-                                mtcpy.setText(String.valueOf(
-                                        ((Double.valueOf(mtcpx.getText().toString().replace(",",""))-Double.valueOf(mtcpx1.getText().toString().replace(",","")))/
-                                                (Double.valueOf(mtcpx2.getText().toString().replace(",",""))-(Double.valueOf(mtcpx1.getText().toString().replace(",",""))))*
-                                                (Double.valueOf(mtcpy2.getText().toString().replace(",",""))-Double.valueOf(mtcpy1.getText().toString().replace(",","")))+
-                                                Double.valueOf(mtcpy1.getText().toString().replace(",",""))
-                                        )
-                                ));
-
-                                if (mtcmy.getText().toString().isEmpty() || mtcmy.getText().toString().equals("NaN") || mtcmy.getText().toString().equals(".")){
-                                    mtcmy.setText("0");
-                                }
-                                dmtc.setText(String.valueOf(
-                                        Double.valueOf(mtcpy.getText().toString()) - Double.valueOf(mtcmy.getText().toString())
-                                ));
-                                if (mtcmy1.getText().toString().isEmpty() || mtcmy1.getText().toString().equals(".")){
-                                    mtcmy1.setText("0");
-                                }
-                                mtcmy.setText(String.valueOf(
-                                        ((Double.valueOf(mtcmx.getText().toString().replace(",",""))-Double.valueOf(mtcmx1.getText().toString().replace(",","")))/
-                                                (Double.valueOf(mtcmx2.getText().toString().replace(",",""))-(Double.valueOf(mtcmx1.getText().toString().replace(",",""))))*
-                                                (Double.valueOf(mtcmy2.getText().toString().replace(",",""))-Double.valueOf(mtcmy1.getText().toString().replace(",","")))+
-                                                Double.valueOf(mtcmy1.getText().toString().replace(",",""))
-                                        )
-                                ));
-
-                                if (mtcmy2.getText().toString().isEmpty() || mtcmy2.getText().toString().equals(".")){
-                                    mtcmy2.setText("0");
-                                }
-                                mtcmy.setText(String.valueOf(
-                                        ((Double.valueOf(mtcmx.getText().toString().replace(",",""))-Double.valueOf(mtcmx1.getText().toString().replace(",","")))/
-                                                (Double.valueOf(mtcmx2.getText().toString().replace(",",""))-(Double.valueOf(mtcmx1.getText().toString().replace(",",""))))*
-                                                (Double.valueOf(mtcmy2.getText().toString().replace(",",""))-Double.valueOf(mtcmy1.getText().toString().replace(",","")))+
-                                                Double.valueOf(mtcmy1.getText().toString().replace(",",""))
-                                        )
-                                ));
-                                if (mtcmx.getText().toString().isEmpty() || mtcmx.getText().toString().equals(".")){
-                                    mtcmx.setText("0");
-                                }
-                                mtcmy.setText(String.valueOf(
-                                        ((Double.valueOf(mtcmx.getText().toString().replace(",",""))-Double.valueOf(mtcmx1.getText().toString().replace(",","")))/
-                                                (Double.valueOf(mtcmx2.getText().toString().replace(",",""))-(Double.valueOf(mtcmx1.getText().toString().replace(",",""))))*
-                                                (Double.valueOf(mtcmy2.getText().toString().replace(",",""))-Double.valueOf(mtcmy1.getText().toString().replace(",","")))+
-                                                Double.valueOf(mtcmy1.getText().toString().replace(",",""))
-                                        )
-                                ));
-                                if (mtcmx1.getText().toString().isEmpty() || mtcmx1.getText().toString().equals(".")){
-                                    mtcmx1.setText("0");
-                                }
-                                mtcmy.setText(String.valueOf(
-                                        ((Double.valueOf(mtcmx.getText().toString().replace(",",""))-Double.valueOf(mtcmx1.getText().toString().replace(",","")))/
-                                                (Double.valueOf(mtcmx2.getText().toString().replace(",",""))-(Double.valueOf(mtcmx1.getText().toString().replace(",",""))))*
-                                                (Double.valueOf(mtcmy2.getText().toString().replace(",",""))-Double.valueOf(mtcmy1.getText().toString().replace(",","")))+
-                                                Double.valueOf(mtcmy1.getText().toString().replace(",",""))
-                                        )
-                                ));
-                                if (mtcmx2.getText().toString().isEmpty() || mtcmx2.getText().toString().equals(".")){
-                                    mtcmx2.setText("0");
-                                }
-                                mtcmy.setText(String.valueOf(
-                                        ((Double.valueOf(mtcmx.getText().toString().replace(",",""))-Double.valueOf(mtcmx1.getText().toString().replace(",","")))/
-                                                (Double.valueOf(mtcmx2.getText().toString().replace(",",""))-(Double.valueOf(mtcmx1.getText().toString().replace(",",""))))*
-                                                (Double.valueOf(mtcmy2.getText().toString().replace(",",""))-Double.valueOf(mtcmy1.getText().toString().replace(",","")))+
-                                                Double.valueOf(mtcmy1.getText().toString().replace(",",""))
-                                        )
-                                ));
-
-                                if (dmtc.getText().toString().isEmpty() || dmtc.getText().toString().equals("NaN") || dmtc.getText().toString().equals(".")){
-                                    dmtc.setText("0");
-                                }
-                                t2.setText(String.valueOf(
-                                        ((Double.valueOf(tt.getText().toString())*Double.valueOf(tt.getText().toString()))*Double.valueOf(dmtc.getText().toString())*50)/Double.valueOf(lpp.getText().toString())
-                                ));
-
-                                if (t2.getText().toString().isEmpty() || t2.getText().toString().equals("NaN") || t2.getText().toString().equals(".")){
-                                    t2.setText("0");
-                                }
-
-                                if (tt.getText().toString().isEmpty() || tt.getText().toString().equals("NaN") || tt.getText().toString().equals(".")){
-                                    tt.setText("0");
-                                }
-
-
-                                if (t1.getText().toString().isEmpty() || t1.getText().toString().equals("NaN") || t1.getText().toString().equals(".")){
-                                    t1.setText("0");
-                                }
-
-                                if (dcft.getText().toString().isEmpty() || dcft.getText().toString().equals("NaN") || dcft.getText().toString().equals(".")){
-                                    dcft.setText("0");
-                                }
-                                dc.setText(String.valueOf(((Double.valueOf(dod.getText().toString().replace(",","")) -
-                                        Double.valueOf(ds.getText().toString().replace(",",""))) / Double.valueOf(ds.getText().toString().replace(",",""))
-                                ) * Double.valueOf(dcft.getText().toString().replace(",",""))));
-
-                                dcfd3.setText(String.valueOf(Double.valueOf(dcft.getText().toString().replace(",","")) +
-                                        Double.valueOf(dc.getText().toString().replace(",",""))
-                                ));
-
-
                                 if (ds.getText().toString().isEmpty() || ds.getText().toString().equals(".")){
                                     ds.setText("0");
                                 }
@@ -1157,9 +653,413 @@ public class AddDraftSurveyManual extends AppCompatActivity {
                                 if (tdw.getText().toString().isEmpty() || tdw.getText().toString().equals(".")){
                                     tdw.setText("0");
                                 }
+
+                                if (t2.getText().toString().isEmpty() || t2.getText().toString().equals("NaN") || t2.getText().toString().equals(".")){
+                                    t2.setText("0");
+                                }
+
+                                if (tt.getText().toString().isEmpty() || tt.getText().toString().equals("NaN") || tt.getText().toString().equals(".")){
+                                    tt.setText("0");
+                                }
+
+
+                                if (t1.getText().toString().isEmpty() || t1.getText().toString().equals("NaN") || t1.getText().toString().equals(".")){
+                                    t1.setText("0");
+                                }
+
+                                if (dcft.getText().toString().isEmpty() || dcft.getText().toString().equals("NaN") || dcft.getText().toString().equals(".")){
+                                    dcft.setText("0");
+                                }
+
+                                if (dmtc.getText().toString().isEmpty() || dmtc.getText().toString().equals("NaN") || dmtc.getText().toString().equals(".")){
+                                    dmtc.setText("0");
+                                }
+
+                                if (mtcmx2.getText().toString().isEmpty() || mtcmx2.getText().toString().equals(".")){
+                                    mtcmx2.setText("0");
+                                }
+
+                                if (mtcmx1.getText().toString().isEmpty() || mtcmx1.getText().toString().equals(".")){
+                                    mtcmx1.setText("0");
+                                }
+
+                                if (mtcmx.getText().toString().isEmpty() || mtcmx.getText().toString().equals(".")){
+                                    mtcmx.setText("0");
+                                }
+
+                                if (mtcmy.getText().toString().isEmpty() || mtcmy.getText().toString().equals("NaN") || mtcmy.getText().toString().equals(".")){
+                                    mtcmy.setText("0");
+                                }
+                                if (mtcmy1.getText().toString().isEmpty() || mtcmy1.getText().toString().equals(".")){
+                                    mtcmy1.setText("0");
+                                }
+                                if (mtcmy2.getText().toString().isEmpty() || mtcmy2.getText().toString().equals(".")){
+                                    mtcmy2.setText("0");
+                                }
+
+                                if (mtcpy.getText().toString().isEmpty() || mtcpy.getText().toString().equals("NaN") || mtcpy.getText().toString().equals(".")){
+                                    mtcpy.setText("0");
+                                }
+
+                                if (mtcpy1.getText().toString().isEmpty() || mtcpy1.getText().toString().equals(".")){
+                                    mtcpy1.setText("0");
+                                }
+
+                                if (mtcpy2.getText().toString().isEmpty() || mtcpy2.getText().toString().equals(".")){
+                                    mtcpy2.setText("0");
+                                }
+
+                                if (mtcpx.getText().toString().isEmpty()|| mtcpx.getText().toString().equals(".")){
+                                    mtcpx.setText("0");
+                                }
+
+                                if (mtcpx1.getText().toString().isEmpty()|| mtcpx1.getText().toString().equals(".")){
+                                    mtcpx1.setText("0");
+                                }
+
+                                if (mtcpx2.getText().toString().isEmpty() || mtcpx2.getText().toString().equals(".")){
+                                    mtcpx2.setText("0");
+                                }
+
+                                if (tpcy2.getText().toString().isEmpty() || tpcy2.getText().toString().equals(".")){
+                                    tpcy2.setText("0");
+                                }
+
+                                if (tpcx.getText().toString().isEmpty() || tpcx.getText().toString().equals(".")){
+                                    tpcx.setText("0");
+                                }
+
+                                if (tpcx1.getText().toString().isEmpty() || tpcx1.getText().toString().equals(".")){
+                                    tpcx1.setText("0");
+                                }
+
+
+                                if (tpcx2.getText().toString().isEmpty() || tpcx2.getText().toString().equals(".")){
+                                    tpcx2.setText("0");
+                                }
+                                if (cdy.getText().toString().isEmpty() || cdy.getText().toString().equals("NaN") || cdy.getText().toString().equals(".")){
+                                    cdy.setText("0");
+                                }
+                                if (cdy1.getText().toString().isEmpty() || cdy1.getText().toString().equals(".")){
+                                    cdy1.setText("0");
+                                }
+                                if (cdy2.getText().toString().isEmpty() || cdy2.getText().toString().equals(".")){
+                                    cdy2.setText("0");
+                                }
+                                if (cdx.getText().toString().isEmpty() || cdx.getText().toString().equals(".")){
+                                    cdx.setText("0");
+                                }
+                                if (cdx2.getText().toString().isEmpty() || cdx2.getText().toString().equals(".")){
+                                    cdx2.setText("0");
+                                }
+                                if (cdx1.getText().toString().isEmpty() || cdx1.getText().toString().equals(".")){
+                                    cdx1.setText("0");
+                                }
+
+                                if (lcfy1.getText().toString().isEmpty() || lcfy1.getText().toString().equals(".")){
+                                    lcfy1.setText("0");
+                                }
+                                if (lcfy2.getText().toString().isEmpty() || lcfy2.getText().toString().equals(".") || lcfy2.getText().toString().equals(".")){
+                                    lcfy2.setText("0");
+                                }
+
+                                if (lcfx.getText().toString().isEmpty() || lcfx.getText().toString().equals(".")){
+                                    lcfx.setText("0");
+                                }
+
+                                if (lcfx1.getText().toString().isEmpty() || lcfx1.getText().toString().equals(".")){
+                                    lcfx1.setText("0");
+                                }
+
+                                if (lcfx2.getText().toString().isEmpty() || lcfx2.getText().toString().equals(".")){
+                                    lcfx2.setText("0");
+                                }
+
+                                if (tpcy.getText().toString().isEmpty() || tpcy.getText().toString().equals("NaN") || tpcy.getText().toString().equals(".")){
+                                    tpcy.setText("0");
+                                }
+                                if (tpcy1.getText().toString().isEmpty() || tpcy1.getText().toString().equals(".")){
+                                    tpcy1.setText("0");
+                                }
+                                if (faMeansCorr.getText().toString().isEmpty() || faMeansCorr.getText().toString().equals("NaN") || faMeansCorr.getText().toString().equals(".")){
+                                    faMeansCorr.setText("0");
+                                }
+                                if (mOM.getText().toString().isEmpty() || mOM.getText().toString().equals("NaN") || mOM.getText().toString().equals(".")){
+                                    mOM.setText("0");
+                                }
+                                if (lcfy.getText().toString().isEmpty() || lcfy.getText().toString().equals("NaN") || lcfy.getText().toString().equals(".")){
+                                    lcfy.setText("0");
+                                }
+
+                                if (asteamCorr.getText().toString().isEmpty() || asteamCorr.getText().toString().equals("NaN") || asteamCorr.getText().toString().equals(".")){
+                                    asteamCorr.setText("0");
+                                }
+                                if (afterMean.getText().toString().isEmpty() || afterMean.getText().toString().equals(".")){
+                                    afterMean.setText("0");
+                                }
+
+                                if (afterMeanAfterCorr.getText().toString().isEmpty() || afterMeanAfterCorr.getText().toString().equals("NaN") || afterMeanAfterCorr.getText().toString().equals(".")){
+                                    afterMeanAfterCorr.setText("0");
+                                }
+                                if (dmp.getText().toString().isEmpty() || dmp.getText().toString().equals(".")){
+                                    dmp.setText("0");
+                                }
+
+                                if (dms.getText().toString().isEmpty() || dms.getText().toString().equals(".")){
+                                    dms.setText("0");
+                                }
+                                if (msisteamCorr.getText().toString().isEmpty() || msisteamCorr.getText().toString().equals("NaN") || msisteamCorr.getText().toString().equals(".")){
+                                    msisteamCorr.setText("0");
+                                }
+
+                                if (midMean.getText().toString().isEmpty() || midMean.getText().toString().equals(".")){
+                                    midMean.setText("0");
+                                }
+                                if (lwt.getText().toString().isEmpty() || lwt.getText().toString().equals(".")){
+                                    lwt.setText("0");
+                                }
+
+                                if (constant.getText().toString().isEmpty() || constant.getText().toString().equals(".")){
+                                    constant.setText("0");
+                                }
+
+                                if (lm.getText().toString().isEmpty() || lm.getText().toString().equals(".")){
+                                    lm.setText("0");
+                                }
+                                if (lbm.getText().toString().isEmpty() || lbm.getText().toString().equals("NaN") || lbm.getText().toString().equals(".")){
+                                    lbm.setText("0");
+                                }
+                                if (lf.getText().toString().isEmpty() || lf.getText().toString().equals(".")){
+                                    lf.setText("0");
+                                }
+
+                                if (dap.getText().toString().isEmpty() || dap.getText().toString().equals(".")){
+                                    dap.setText("0");
+                                }
+                                if (das.getText().toString().isEmpty() || das.getText().toString().equals(".")){
+                                    das.setText("0");
+                                }
+                                if (forwarAfter.getText().toString().isEmpty() || forwarAfter.getText().toString().equals("NaN") || forwarAfter.getText().toString().equals(".")){
+                                    forwarAfter.setText("0");
+                                }
+
+                                if (forwardMean.getText().toString().isEmpty() || forwardMean.getText().toString().equals(".")){
+                                    forwardMean.setText("0");
+                                }
+
+                                if (steamCorr.getText().toString().isEmpty() || steamCorr.getText().toString().equals("NaN") || steamCorr.getText().toString().equals(".")){
+                                    steamCorr.setText("0");
+                                }
+
+                                if (dfp.getText().toString().isEmpty() || dfp.getText().toString().equals(".")){
+                                    dfp.setText("0");
+                                }
+                                if (dfs.getText().toString().isEmpty() || dfs.getText().toString().equals(".")){
+                                    dfs.setText("0");
+                                }
+
+                                if (forwardMeanAfterCorr.getText().toString().isEmpty() || forwardMeanAfterCorr.getText().toString().equals("NaN")){
+                                    forwardMeanAfterCorr.setText("0");
+                                }
+
+                                if (lpp.getText().toString().isEmpty() || lpp.getText().toString().equals(".") ){
+                                    lpp.setText("0");
+                                }
+
+                                if (midMeanAfterCorr.getText().toString().isEmpty() || midMeanAfterCorr.getText().toString().equals(".")){
+                                    midMeanAfterCorr.setText("0");
+                                }
+
+                                if (draftCorr.getText().toString().isEmpty() || draftCorr.getText().toString().equals("NaN") || draftCorr.getText().toString().equals(".")){
+                                    draftCorr.setText("0");
+                                }
+
+                                lbm.setText(String.valueOf(Double.valueOf(lpp.getText().toString().replace(",",""))-(Double.valueOf(lf.getText().toString().replace(",",""))+Double.valueOf(la.getText().toString().replace(",","")))));
+
+                                Double sC =  (
+                                        (Double.valueOf(
+                                                apparentTrim.getText().toString().replace(",","")
+                                        ) * Double.valueOf(
+                                                lf.getText().toString().replace(",","")
+                                        )) / Double.valueOf(
+                                                lbm.getText().toString().replace(",","")
+                                        )
+                                );
+                                if (sC.isNaN()){
+                                    sC = 0.0;
+                                }
+                                steamCorr.setText(String.valueOf(sC));
+
+                                forwardMean.setText(String.valueOf((Double.valueOf(dfp.getText().toString().replace(",",""))+Double.valueOf(dfs.getText().toString().replace(",","")))/2));
+
+                                forwardMeanAfterCorr.setText(
+                                        String.valueOf(
+                                                (
+                                                        (Double.valueOf(
+                                                                apparentTrim.getText().toString().replace(",","")
+                                                        ) * Double.valueOf(
+                                                                lf.getText().toString().replace(",","")
+                                                        )) / Double.valueOf(
+                                                                lbm.getText().toString().replace(",","")
+                                                        )
+                                                ) + Double.valueOf(
+                                                        forwardMean.getText().toString().replace(",","")
+                                                )
+                                        )
+                                );
+
+                                asteamCorr.setText(
+                                        String.valueOf(
+                                                (
+                                                        (Double.valueOf(
+                                                                apparentTrim.getText().toString().replace(",","")
+                                                        ) * Double.valueOf(
+                                                                la.getText().toString().replace(",","")
+                                                        )) / Double.valueOf(
+                                                                lbm.getText().toString().replace(",","")
+                                                        )
+                                                )
+                                        )
+                                );
+
+                                afterMean.setText(String.valueOf((Double.valueOf(dap.getText().toString().replace(",",""))+Double.valueOf(das.getText().toString().replace(",","")))/2));
+
+                                afterMeanAfterCorr.setText(
+                                        String.valueOf(
+                                                (
+                                                        (Double.valueOf(
+                                                                apparentTrim.getText().toString().replace(",","")
+                                                        ) * Double.valueOf(
+                                                                la.getText().toString().replace(",","")
+                                                        )) / Double.valueOf(
+                                                                lbm.getText().toString().replace(",","")
+                                                        )
+                                                ) + Double.valueOf(
+                                                        afterMean.getText().toString().replace(",","")
+                                                )
+                                        )
+                                );
+
+                                forwarAfter.setText(String.valueOf(
+                                        (Double.valueOf(forwardMeanAfterCorr.getText().toString()) + Double.valueOf(afterMeanAfterCorr.getText().toString()))/2
+                                ));
+
+                                msisteamCorr.setText(
+                                        String.valueOf(
+                                                (
+                                                        (Double.valueOf(
+                                                                apparentTrim.getText().toString().replace(",","")
+                                                        ) * Double.valueOf(
+                                                                lm.getText().toString().replace(",","")
+                                                        )) / Double.valueOf(
+                                                                lbm.getText().toString().replace(",","")
+                                                        )
+                                                )
+                                        )
+                                );
+
+
+
+                                midMean.setText(String.valueOf((Double.valueOf(dmp.getText().toString().replace(",",""))+Double.valueOf(dms.getText().toString().replace(",","")))/2));
+
+                                midMeanAfterCorr.setText(
+                                        String.valueOf(
+                                                (
+                                                        (Double.valueOf(
+                                                                apparentTrim.getText().toString().replace(",","")
+                                                        ) * Double.valueOf(
+                                                                lm.getText().toString().replace(",","")
+                                                        )) / Double.valueOf(
+                                                                lbm.getText().toString().replace(",","")
+                                                        )
+                                                ) + Double.valueOf(
+                                                        midMean.getText().toString().replace(",","")
+                                                )
+                                        )
+                                );
+
+                                faMeansCorr.setText(String.valueOf((Double.valueOf(forwardMeanAfterCorr.getText().toString().replace(",","")) + Double.valueOf(afterMeanAfterCorr.getText().toString().replace(",","")))/2));
+
+                                mOM.setText(String.valueOf((Double.valueOf(faMeansCorr.getText().toString().replace(",","")) + Double.valueOf(midMeanAfterCorr.getText().toString().replace(",","")))/2));
+
+
+                                draftCorr.setText(String.valueOf((Double.valueOf(mOM.getText().toString().replace(",","")) + Double.valueOf(midMeanAfterCorr.getText().toString().replace(",","")))/2));
+
+
+                                cdy.setText(String.valueOf(
+                                        ((Double.valueOf(cdx.getText().toString().replace(",",""))-Double.valueOf(cdx1.getText().toString().replace(",","")))/
+                                                (Double.valueOf(cdx2.getText().toString().replace(",",""))-(Double.valueOf(cdx1.getText().toString().replace(",",""))))*
+                                                (Double.valueOf(cdy2.getText().toString().replace(",",""))-Double.valueOf(cdy1.getText().toString().replace(",","")))+
+                                                Double.valueOf(cdy1.getText().toString().replace(",",""))
+                                        )
+                                ));
+
+
+                                lcfy.setText(String.valueOf(
+                                        ((Double.valueOf(lcfx.getText().toString().replace(",",""))-Double.valueOf(lcfx1.getText().toString().replace(",","")))/
+                                                (Double.valueOf(lcfx2.getText().toString().replace(",",""))-(Double.valueOf(lcfx1.getText().toString().replace(",",""))))*
+                                                (Double.valueOf(lcfy2.getText().toString().replace(",",""))-Double.valueOf(lcfy1.getText().toString().replace(",","")))+
+                                                Double.valueOf(lcfy1.getText().toString().replace(",",""))
+                                        )
+                                ));
+
+                                tpcy.setText(String.valueOf(
+                                        ((Double.valueOf(tpcx.getText().toString().replace(",",""))-Double.valueOf(tpcx1.getText().toString().replace(",","")))/
+                                                (Double.valueOf(tpcx2.getText().toString().replace(",",""))-(Double.valueOf(tpcx1.getText().toString().replace(",",""))))*
+                                                (Double.valueOf(tpcy2.getText().toString().replace(",",""))-Double.valueOf(tpcy1.getText().toString().replace(",","")))+
+                                                Double.valueOf(tpcy1.getText().toString().replace(",",""))
+                                        )
+                                ));
+
+                                mtcpy.setText(String.valueOf(
+                                        ((Double.valueOf(mtcpx.getText().toString().replace(",",""))-Double.valueOf(mtcpx1.getText().toString().replace(",","")))/
+                                                (Double.valueOf(mtcpx2.getText().toString().replace(",",""))-(Double.valueOf(mtcpx1.getText().toString().replace(",",""))))*
+                                                (Double.valueOf(mtcpy2.getText().toString().replace(",",""))-Double.valueOf(mtcpy1.getText().toString().replace(",","")))+
+                                                Double.valueOf(mtcpy1.getText().toString().replace(",",""))
+                                        )
+                                ));
+
+                                mtcmy.setText(String.valueOf(
+                                        ((Double.valueOf(mtcmx.getText().toString().replace(",",""))-Double.valueOf(mtcmx1.getText().toString().replace(",","")))/
+                                                (Double.valueOf(mtcmx2.getText().toString().replace(",",""))-(Double.valueOf(mtcmx1.getText().toString().replace(",",""))))*
+                                                (Double.valueOf(mtcmy2.getText().toString().replace(",",""))-Double.valueOf(mtcmy1.getText().toString().replace(",","")))+
+                                                Double.valueOf(mtcmy1.getText().toString().replace(",",""))
+                                        )
+                                ));
+
+
+                                dmtc.setText(String.valueOf(
+                                        Double.valueOf(mtcpy.getText().toString()) - Double.valueOf(mtcmy.getText().toString())
+                                ));
+
+
+
+                                tt.setText(String.valueOf(Double.valueOf(afterMeanAfterCorr.getText().toString()) - Double.valueOf(forwardMeanAfterCorr.getText().toString())));
+
+                                t1.setText(String.valueOf(
+                                        (Double.valueOf(lcfy.getText().toString())*Double.valueOf(tpcy.getText().toString())*Double.valueOf(tt.getText().toString())*100)/Double.valueOf(lpp.getText().toString())
+                                ));
+                                t2.setText(
+                                        String.valueOf(
+                                                ((Double.valueOf(tt.getText().toString())*Double.valueOf(tt.getText().toString()))*Double.valueOf(dmtc.getText().toString())*50)/Double.valueOf(lpp.getText().toString())));
+
+
+                                dcft.setText(String.valueOf(
+                                        Double.valueOf(cdy.getText().toString())+Double.valueOf(t1.getText().toString())+Double.valueOf(t2.getText().toString())
+                                ));
+
+                                dc.setText(String.valueOf(((Double.valueOf(dod.getText().toString().replace(",","")) -
+                                        Double.valueOf(ds.getText().toString().replace(",",""))) / Double.valueOf(ds.getText().toString().replace(",",""))
+                                ) * Double.valueOf(dcft.getText().toString().replace(",",""))));
+
+                                dcfd3.setText(String.valueOf(Double.valueOf(dcft.getText().toString().replace(",","")) +
+                                        Double.valueOf(dc.getText().toString().replace(",",""))
+                                ));
+
                                 nedD.setText(String.valueOf(
                                         Double.valueOf(dcfd3.getText().toString())-Double.valueOf(tdw.getText().toString())
                                 ));
+                                // rumus
                                 progressDialog[0].dismiss();
                                 if (docNumber.getText().toString().equals("-") || docNumber.getText().toString().isEmpty()) {
                                     try {
