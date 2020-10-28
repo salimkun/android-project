@@ -619,745 +619,751 @@ public class AddDraftSurveyManual extends AppCompatActivity {
                         });
 
                         try {
-                            Thread.sleep(1000);
+                            Thread.sleep(3000);
                         } catch (InterruptedException e) {
                             e.printStackTrace();
                         }
 
-                        AddDraftSurveyManual.this.runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                if (apparentTrim.getText().toString().isEmpty() || apparentTrim.getText().toString().equals("NaN") || apparentTrim.getText().toString().equals(".")){
-                                    apparentTrim.setText("0");
-                                }
-                                if (ds.getText().toString().isEmpty() || ds.getText().toString().equals(".")){
-                                    ds.setText("0");
-                                }
+                        if (apparentTrim.getText().toString().isEmpty() || apparentTrim.getText().toString().equals("NaN") || apparentTrim.getText().toString().equals(".")){
+                            apparentTrim.setText("0");
+                        }
+                        if (ds.getText().toString().isEmpty() || ds.getText().toString().equals(".")){
+                            ds.setText("0");
+                        }
 
-                                if (dod.getText().toString().isEmpty() || dod.getText().toString().equals(".")){
-                                    dod.setText("0");
-                                }
+                        if (dod.getText().toString().isEmpty() || dod.getText().toString().equals(".")){
+                            dod.setText("0");
+                        }
 
-                                if (dc.getText().toString().isEmpty() || dc.getText().toString().equals(".")){
-                                    dc.setText("0");
-                                }
+                        if (dc.getText().toString().isEmpty() || dc.getText().toString().equals(".")){
+                            dc.setText("0");
+                        }
 
-                                if (dcfd3.getText().toString().isEmpty() || dcfd3.getText().toString().equals(".")){
-                                    dcfd3.setText("0");
-                                }
+                        if (dcfd3.getText().toString().isEmpty() || dcfd3.getText().toString().equals(".")){
+                            dcfd3.setText("0");
+                        }
 
-                                if (nedD.getText().toString().isEmpty()|| nedD.getText().toString().equals("NaN") || nedD.getText().toString().equals(".")){
-                                    nedD.setText("0");
-                                }
+                        if (nedD.getText().toString().isEmpty()|| nedD.getText().toString().equals("NaN") || nedD.getText().toString().equals(".")){
+                            nedD.setText("0");
+                        }
 
-                                if (tdw.getText().toString().isEmpty() || tdw.getText().toString().equals(".")){
-                                    tdw.setText("0");
-                                }
+                        if (tdw.getText().toString().isEmpty() || tdw.getText().toString().equals(".")){
+                            tdw.setText("0");
+                        }
 
-                                if (t2.getText().toString().isEmpty() || t2.getText().toString().equals("NaN") || t2.getText().toString().equals(".")){
-                                    t2.setText("0");
-                                }
+                        if (t2.getText().toString().isEmpty() || t2.getText().toString().equals("NaN") || t2.getText().toString().equals(".")){
+                            t2.setText("0");
+                        }
 
-                                if (tt.getText().toString().isEmpty() || tt.getText().toString().equals("NaN") || tt.getText().toString().equals(".")){
-                                    tt.setText("0");
-                                }
+                        if (tt.getText().toString().isEmpty() || tt.getText().toString().equals("NaN") || tt.getText().toString().equals(".")){
+                            tt.setText("0");
+                        }
 
 
-                                if (t1.getText().toString().isEmpty() || t1.getText().toString().equals("NaN") || t1.getText().toString().equals(".")){
-                                    t1.setText("0");
-                                }
+                        if (t1.getText().toString().isEmpty() || t1.getText().toString().equals("NaN") || t1.getText().toString().equals(".")){
+                            t1.setText("0");
+                        }
 
-                                if (dcft.getText().toString().isEmpty() || dcft.getText().toString().equals("NaN") || dcft.getText().toString().equals(".")){
-                                    dcft.setText("0");
-                                }
+                        if (dcft.getText().toString().isEmpty() || dcft.getText().toString().equals("NaN") || dcft.getText().toString().equals(".")){
+                            dcft.setText("0");
+                        }
 
-                                if (dmtc.getText().toString().isEmpty() || dmtc.getText().toString().equals("NaN") || dmtc.getText().toString().equals(".")){
-                                    dmtc.setText("0");
-                                }
+                        if (dmtc.getText().toString().isEmpty() || dmtc.getText().toString().equals("NaN") || dmtc.getText().toString().equals(".")){
+                            dmtc.setText("0");
+                        }
 
-                                if (mtcmx2.getText().toString().isEmpty() || mtcmx2.getText().toString().equals(".")){
-                                    mtcmx2.setText("0");
-                                }
+                        if (mtcmx2.getText().toString().isEmpty() || mtcmx2.getText().toString().equals(".")){
+                            mtcmx2.setText("0");
+                        }
 
-                                if (mtcmx1.getText().toString().isEmpty() || mtcmx1.getText().toString().equals(".")){
-                                    mtcmx1.setText("0");
-                                }
+                        if (mtcmx1.getText().toString().isEmpty() || mtcmx1.getText().toString().equals(".")){
+                            mtcmx1.setText("0");
+                        }
 
-                                if (mtcmx.getText().toString().isEmpty() || mtcmx.getText().toString().equals(".")){
-                                    mtcmx.setText("0");
-                                }
+                        if (mtcmx.getText().toString().isEmpty() || mtcmx.getText().toString().equals(".")){
+                            mtcmx.setText("0");
+                        }
 
-                                if (mtcmy.getText().toString().isEmpty() || mtcmy.getText().toString().equals("NaN") || mtcmy.getText().toString().equals(".")){
-                                    mtcmy.setText("0");
-                                }
-                                if (mtcmy1.getText().toString().isEmpty() || mtcmy1.getText().toString().equals(".")){
-                                    mtcmy1.setText("0");
-                                }
-                                if (mtcmy2.getText().toString().isEmpty() || mtcmy2.getText().toString().equals(".")){
-                                    mtcmy2.setText("0");
-                                }
+                        if (mtcmy.getText().toString().isEmpty() || mtcmy.getText().toString().equals("NaN") || mtcmy.getText().toString().equals(".")){
+                            mtcmy.setText("0");
+                        }
+                        if (mtcmy1.getText().toString().isEmpty() || mtcmy1.getText().toString().equals(".")){
+                            mtcmy1.setText("0");
+                        }
+                        if (mtcmy2.getText().toString().isEmpty() || mtcmy2.getText().toString().equals(".")){
+                            mtcmy2.setText("0");
+                        }
 
-                                if (mtcpy.getText().toString().isEmpty() || mtcpy.getText().toString().equals("NaN") || mtcpy.getText().toString().equals(".")){
-                                    mtcpy.setText("0");
-                                }
+                        if (mtcpy.getText().toString().isEmpty() || mtcpy.getText().toString().equals("NaN") || mtcpy.getText().toString().equals(".")){
+                            mtcpy.setText("0");
+                        }
 
-                                if (mtcpy1.getText().toString().isEmpty() || mtcpy1.getText().toString().equals(".")){
-                                    mtcpy1.setText("0");
-                                }
+                        if (mtcpy1.getText().toString().isEmpty() || mtcpy1.getText().toString().equals(".")){
+                            mtcpy1.setText("0");
+                        }
 
-                                if (mtcpy2.getText().toString().isEmpty() || mtcpy2.getText().toString().equals(".")){
-                                    mtcpy2.setText("0");
-                                }
+                        if (mtcpy2.getText().toString().isEmpty() || mtcpy2.getText().toString().equals(".")){
+                            mtcpy2.setText("0");
+                        }
 
-                                if (mtcpx.getText().toString().isEmpty()|| mtcpx.getText().toString().equals(".")){
-                                    mtcpx.setText("0");
-                                }
+                        if (mtcpx.getText().toString().isEmpty()|| mtcpx.getText().toString().equals(".")){
+                            mtcpx.setText("0");
+                        }
 
-                                if (mtcpx1.getText().toString().isEmpty()|| mtcpx1.getText().toString().equals(".")){
-                                    mtcpx1.setText("0");
-                                }
+                        if (mtcpx1.getText().toString().isEmpty()|| mtcpx1.getText().toString().equals(".")){
+                            mtcpx1.setText("0");
+                        }
 
-                                if (mtcpx2.getText().toString().isEmpty() || mtcpx2.getText().toString().equals(".")){
-                                    mtcpx2.setText("0");
-                                }
+                        if (mtcpx2.getText().toString().isEmpty() || mtcpx2.getText().toString().equals(".")){
+                            mtcpx2.setText("0");
+                        }
 
-                                if (tpcy2.getText().toString().isEmpty() || tpcy2.getText().toString().equals(".")){
-                                    tpcy2.setText("0");
-                                }
+                        if (tpcy2.getText().toString().isEmpty() || tpcy2.getText().toString().equals(".")){
+                            tpcy2.setText("0");
+                        }
 
-                                if (tpcx.getText().toString().isEmpty() || tpcx.getText().toString().equals(".")){
-                                    tpcx.setText("0");
-                                }
+                        if (tpcx.getText().toString().isEmpty() || tpcx.getText().toString().equals(".")){
+                            tpcx.setText("0");
+                        }
 
-                                if (tpcx1.getText().toString().isEmpty() || tpcx1.getText().toString().equals(".")){
-                                    tpcx1.setText("0");
-                                }
+                        if (tpcx1.getText().toString().isEmpty() || tpcx1.getText().toString().equals(".")){
+                            tpcx1.setText("0");
+                        }
 
 
-                                if (tpcx2.getText().toString().isEmpty() || tpcx2.getText().toString().equals(".")){
-                                    tpcx2.setText("0");
-                                }
-                                if (cdy.getText().toString().isEmpty() || cdy.getText().toString().equals("NaN") || cdy.getText().toString().equals(".")){
-                                    cdy.setText("0");
-                                }
-                                if (cdy1.getText().toString().isEmpty() || cdy1.getText().toString().equals(".")){
-                                    cdy1.setText("0");
-                                }
-                                if (cdy2.getText().toString().isEmpty() || cdy2.getText().toString().equals(".")){
-                                    cdy2.setText("0");
-                                }
-                                if (cdx.getText().toString().isEmpty() || cdx.getText().toString().equals(".")){
-                                    cdx.setText("0");
-                                }
-                                if (cdx2.getText().toString().isEmpty() || cdx2.getText().toString().equals(".")){
-                                    cdx2.setText("0");
-                                }
-                                if (cdx1.getText().toString().isEmpty() || cdx1.getText().toString().equals(".")){
-                                    cdx1.setText("0");
-                                }
+                        if (tpcx2.getText().toString().isEmpty() || tpcx2.getText().toString().equals(".")){
+                            tpcx2.setText("0");
+                        }
+                        if (cdy.getText().toString().isEmpty() || cdy.getText().toString().equals("NaN") || cdy.getText().toString().equals(".")){
+                            cdy.setText("0");
+                        }
+                        if (cdy1.getText().toString().isEmpty() || cdy1.getText().toString().equals(".")){
+                            cdy1.setText("0");
+                        }
+                        if (cdy2.getText().toString().isEmpty() || cdy2.getText().toString().equals(".")){
+                            cdy2.setText("0");
+                        }
+                        if (cdx.getText().toString().isEmpty() || cdx.getText().toString().equals(".")){
+                            cdx.setText("0");
+                        }
+                        if (cdx2.getText().toString().isEmpty() || cdx2.getText().toString().equals(".")){
+                            cdx2.setText("0");
+                        }
+                        if (cdx1.getText().toString().isEmpty() || cdx1.getText().toString().equals(".")){
+                            cdx1.setText("0");
+                        }
 
-                                if (lcfy1.getText().toString().isEmpty() || lcfy1.getText().toString().equals(".")){
-                                    lcfy1.setText("0");
-                                }
-                                if (lcfy2.getText().toString().isEmpty() || lcfy2.getText().toString().equals(".") || lcfy2.getText().toString().equals(".")){
-                                    lcfy2.setText("0");
-                                }
+                        if (lcfy1.getText().toString().isEmpty() || lcfy1.getText().toString().equals(".")){
+                            lcfy1.setText("0");
+                        }
+                        if (lcfy2.getText().toString().isEmpty() || lcfy2.getText().toString().equals(".") || lcfy2.getText().toString().equals(".")){
+                            lcfy2.setText("0");
+                        }
 
-                                if (lcfx.getText().toString().isEmpty() || lcfx.getText().toString().equals(".")){
-                                    lcfx.setText("0");
-                                }
+                        if (lcfx.getText().toString().isEmpty() || lcfx.getText().toString().equals(".")){
+                            lcfx.setText("0");
+                        }
 
-                                if (lcfx1.getText().toString().isEmpty() || lcfx1.getText().toString().equals(".")){
-                                    lcfx1.setText("0");
-                                }
+                        if (lcfx1.getText().toString().isEmpty() || lcfx1.getText().toString().equals(".")){
+                            lcfx1.setText("0");
+                        }
 
-                                if (lcfx2.getText().toString().isEmpty() || lcfx2.getText().toString().equals(".")){
-                                    lcfx2.setText("0");
-                                }
+                        if (lcfx2.getText().toString().isEmpty() || lcfx2.getText().toString().equals(".")){
+                            lcfx2.setText("0");
+                        }
 
-                                if (tpcy.getText().toString().isEmpty() || tpcy.getText().toString().equals("NaN") || tpcy.getText().toString().equals(".")){
-                                    tpcy.setText("0");
-                                }
-                                if (tpcy1.getText().toString().isEmpty() || tpcy1.getText().toString().equals(".")){
-                                    tpcy1.setText("0");
-                                }
-                                if (faMeansCorr.getText().toString().isEmpty() || faMeansCorr.getText().toString().equals("NaN") || faMeansCorr.getText().toString().equals(".")){
-                                    faMeansCorr.setText("0");
-                                }
-                                if (mOM.getText().toString().isEmpty() || mOM.getText().toString().equals("NaN") || mOM.getText().toString().equals(".")){
-                                    mOM.setText("0");
-                                }
-                                if (lcfy.getText().toString().isEmpty() || lcfy.getText().toString().equals("NaN") || lcfy.getText().toString().equals(".")){
-                                    lcfy.setText("0");
-                                }
+                        if (tpcy.getText().toString().isEmpty() || tpcy.getText().toString().equals("NaN") || tpcy.getText().toString().equals(".")){
+                            tpcy.setText("0");
+                        }
+                        if (tpcy1.getText().toString().isEmpty() || tpcy1.getText().toString().equals(".")){
+                            tpcy1.setText("0");
+                        }
+                        if (faMeansCorr.getText().toString().isEmpty() || faMeansCorr.getText().toString().equals("NaN") || faMeansCorr.getText().toString().equals(".")){
+                            faMeansCorr.setText("0");
+                        }
+                        if (mOM.getText().toString().isEmpty() || mOM.getText().toString().equals("NaN") || mOM.getText().toString().equals(".")){
+                            mOM.setText("0");
+                        }
+                        if (lcfy.getText().toString().isEmpty() || lcfy.getText().toString().equals("NaN") || lcfy.getText().toString().equals(".")){
+                            lcfy.setText("0");
+                        }
 
-                                if (asteamCorr.getText().toString().isEmpty() || asteamCorr.getText().toString().equals("NaN") || asteamCorr.getText().toString().equals(".")){
-                                    asteamCorr.setText("0");
-                                }
-                                if (afterMean.getText().toString().isEmpty() || afterMean.getText().toString().equals(".")){
-                                    afterMean.setText("0");
-                                }
+                        if (asteamCorr.getText().toString().isEmpty() || asteamCorr.getText().toString().equals("NaN") || asteamCorr.getText().toString().equals(".")){
+                            asteamCorr.setText("0");
+                        }
+                        if (afterMean.getText().toString().isEmpty() || afterMean.getText().toString().equals(".")){
+                            afterMean.setText("0");
+                        }
 
-                                if (afterMeanAfterCorr.getText().toString().isEmpty() || afterMeanAfterCorr.getText().toString().equals("NaN") || afterMeanAfterCorr.getText().toString().equals(".")){
-                                    afterMeanAfterCorr.setText("0");
-                                }
-                                if (dmp.getText().toString().isEmpty() || dmp.getText().toString().equals(".")){
-                                    dmp.setText("0");
-                                }
+                        if (afterMeanAfterCorr.getText().toString().isEmpty() || afterMeanAfterCorr.getText().toString().equals("NaN") || afterMeanAfterCorr.getText().toString().equals(".")){
+                            afterMeanAfterCorr.setText("0");
+                        }
+                        if (dmp.getText().toString().isEmpty() || dmp.getText().toString().equals(".")){
+                            dmp.setText("0");
+                        }
 
-                                if (dms.getText().toString().isEmpty() || dms.getText().toString().equals(".")){
-                                    dms.setText("0");
-                                }
-                                if (msisteamCorr.getText().toString().isEmpty() || msisteamCorr.getText().toString().equals("NaN") || msisteamCorr.getText().toString().equals(".")){
-                                    msisteamCorr.setText("0");
-                                }
+                        if (dms.getText().toString().isEmpty() || dms.getText().toString().equals(".")){
+                            dms.setText("0");
+                        }
+                        if (msisteamCorr.getText().toString().isEmpty() || msisteamCorr.getText().toString().equals("NaN") || msisteamCorr.getText().toString().equals(".")){
+                            msisteamCorr.setText("0");
+                        }
 
-                                if (midMean.getText().toString().isEmpty() || midMean.getText().toString().equals(".")){
-                                    midMean.setText("0");
-                                }
-                                if (lwt.getText().toString().isEmpty() || lwt.getText().toString().equals(".")){
-                                    lwt.setText("0");
-                                }
+                        if (midMean.getText().toString().isEmpty() || midMean.getText().toString().equals(".")){
+                            midMean.setText("0");
+                        }
+                        if (lwt.getText().toString().isEmpty() || lwt.getText().toString().equals(".")){
+                            lwt.setText("0");
+                        }
 
-                                if (constant.getText().toString().isEmpty() || constant.getText().toString().equals(".")){
-                                    constant.setText("0");
-                                }
+                        if (constant.getText().toString().isEmpty() || constant.getText().toString().equals(".")){
+                            constant.setText("0");
+                        }
 
-                                if (lm.getText().toString().isEmpty() || lm.getText().toString().equals(".")){
-                                    lm.setText("0");
-                                }
-                                if (lbm.getText().toString().isEmpty() || lbm.getText().toString().equals("NaN") || lbm.getText().toString().equals(".")){
-                                    lbm.setText("0");
-                                }
-                                if (lf.getText().toString().isEmpty() || lf.getText().toString().equals(".")){
-                                    lf.setText("0");
-                                }
+                        if (lm.getText().toString().isEmpty() || lm.getText().toString().equals(".")){
+                            lm.setText("0");
+                        }
+                        if (lbm.getText().toString().isEmpty() || lbm.getText().toString().equals("NaN") || lbm.getText().toString().equals(".")){
+                            lbm.setText("0");
+                        }
+                        if (lf.getText().toString().isEmpty() || lf.getText().toString().equals(".")){
+                            lf.setText("0");
+                        }
 
-                                if (dap.getText().toString().isEmpty() || dap.getText().toString().equals(".")){
-                                    dap.setText("0");
-                                }
-                                if (das.getText().toString().isEmpty() || das.getText().toString().equals(".")){
-                                    das.setText("0");
-                                }
-                                if (forwarAfter.getText().toString().isEmpty() || forwarAfter.getText().toString().equals("NaN") || forwarAfter.getText().toString().equals(".")){
-                                    forwarAfter.setText("0");
-                                }
+                        if (dap.getText().toString().isEmpty() || dap.getText().toString().equals(".")){
+                            dap.setText("0");
+                        }
+                        if (das.getText().toString().isEmpty() || das.getText().toString().equals(".")){
+                            das.setText("0");
+                        }
+                        if (forwarAfter.getText().toString().isEmpty() || forwarAfter.getText().toString().equals("NaN") || forwarAfter.getText().toString().equals(".")){
+                            forwarAfter.setText("0");
+                        }
 
-                                if (forwardMean.getText().toString().isEmpty() || forwardMean.getText().toString().equals(".")){
-                                    forwardMean.setText("0");
-                                }
+                        if (forwardMean.getText().toString().isEmpty() || forwardMean.getText().toString().equals(".")){
+                            forwardMean.setText("0");
+                        }
 
-                                if (steamCorr.getText().toString().isEmpty() || steamCorr.getText().toString().equals("NaN") || steamCorr.getText().toString().equals(".")){
-                                    steamCorr.setText("0");
-                                }
+                        if (steamCorr.getText().toString().isEmpty() || steamCorr.getText().toString().equals("NaN") || steamCorr.getText().toString().equals(".")){
+                            steamCorr.setText("0");
+                        }
 
-                                if (dfp.getText().toString().isEmpty() || dfp.getText().toString().equals(".")){
-                                    dfp.setText("0");
-                                }
-                                if (dfs.getText().toString().isEmpty() || dfs.getText().toString().equals(".")){
-                                    dfs.setText("0");
-                                }
+                        if (dfp.getText().toString().isEmpty() || dfp.getText().toString().equals(".")){
+                            dfp.setText("0");
+                        }
+                        if (dfs.getText().toString().isEmpty() || dfs.getText().toString().equals(".")){
+                            dfs.setText("0");
+                        }
 
-                                if (forwardMeanAfterCorr.getText().toString().isEmpty() || forwardMeanAfterCorr.getText().toString().equals("NaN")){
-                                    forwardMeanAfterCorr.setText("0");
-                                }
+                        if (forwardMeanAfterCorr.getText().toString().isEmpty() || forwardMeanAfterCorr.getText().toString().equals("NaN")){
+                            forwardMeanAfterCorr.setText("0");
+                        }
 
-                                if (lpp.getText().toString().isEmpty() || lpp.getText().toString().equals(".") ){
-                                    lpp.setText("0");
-                                }
+                        if (lpp.getText().toString().isEmpty() || lpp.getText().toString().equals(".") ){
+                            lpp.setText("0");
+                        }
 
-                                if (midMeanAfterCorr.getText().toString().isEmpty() || midMeanAfterCorr.getText().toString().equals(".")){
-                                    midMeanAfterCorr.setText("0");
-                                }
+                        if (midMeanAfterCorr.getText().toString().isEmpty() || midMeanAfterCorr.getText().toString().equals(".")){
+                            midMeanAfterCorr.setText("0");
+                        }
 
-                                if (draftCorr.getText().toString().isEmpty() || draftCorr.getText().toString().equals("NaN") || draftCorr.getText().toString().equals(".")){
-                                    draftCorr.setText("0");
-                                }
+                        if (draftCorr.getText().toString().isEmpty() || draftCorr.getText().toString().equals("NaN") || draftCorr.getText().toString().equals(".")){
+                            draftCorr.setText("0");
+                        }
 
-                                lbm.setText(String.valueOf(Double.valueOf(lpp.getText().toString().replace(",",""))-(Double.valueOf(lf.getText().toString().replace(",",""))+Double.valueOf(la.getText().toString().replace(",","")))));
+                        lbm.setText(String.valueOf(Double.valueOf(lpp.getText().toString().replace(",",""))-(Double.valueOf(lf.getText().toString().replace(",",""))+Double.valueOf(la.getText().toString().replace(",","")))));
 
-                                Double sC =  (
-                                        (Double.valueOf(
-                                                apparentTrim.getText().toString().replace(",","")
-                                        ) * Double.valueOf(
-                                                lf.getText().toString().replace(",","")
-                                        )) / Double.valueOf(
-                                                lbm.getText().toString().replace(",","")
-                                        )
-                                );
-                                if (sC.isNaN()){
-                                    sC = 0.0;
-                                }
-                                steamCorr.setText(String.valueOf(sC));
+                        Double sC =  (
+                                (Double.valueOf(
+                                        apparentTrim.getText().toString().replace(",","")
+                                ) * Double.valueOf(
+                                        lf.getText().toString().replace(",","")
+                                )) / Double.valueOf(
+                                        lbm.getText().toString().replace(",","")
+                                )
+                        );
+                        if (sC.isNaN() || sC.isInfinite()){
+                            sC = 0.0;
+                        }
+                        steamCorr.setText(String.valueOf(sC));
 
-                                forwardMean.setText(String.valueOf((Double.valueOf(dfp.getText().toString().replace(",",""))+Double.valueOf(dfs.getText().toString().replace(",","")))/2));
+                        Double fM = (Double.valueOf(dfp.getText().toString().replace(",",""))+Double.valueOf(dfs.getText().toString().replace(",","")))/2;
+                        if (fM.isNaN() || fM.isInfinite()){
+                            fM = 0.0;
+                        }
+                        forwardMean.setText(String.valueOf(fM));
 
-                                forwardMeanAfterCorr.setText(
-                                        String.valueOf(
-                                                (
-                                                        (Double.valueOf(
-                                                                apparentTrim.getText().toString().replace(",","")
-                                                        ) * Double.valueOf(
-                                                                lf.getText().toString().replace(",","")
-                                                        )) / Double.valueOf(
-                                                                lbm.getText().toString().replace(",","")
-                                                        )
-                                                ) + Double.valueOf(
-                                                        forwardMean.getText().toString().replace(",","")
+                        Double fMAC =  ((Double.valueOf(
+                                apparentTrim.getText().toString().replace(",","")
+                        ) * Double.valueOf(
+                                lf.getText().toString().replace(",","")
+                        )) / Double.valueOf(
+                                lbm.getText().toString().replace(",","")
+                        )
+                                        ) + Double.valueOf(
+                                forwardMean.getText().toString().replace(",","")
+                        );
+                        if (fMAC.isInfinite() || fMAC.isNaN()){
+                            fMAC = 0.0;
+                        }
+                        forwardMeanAfterCorr.setText(String.valueOf(fMAC));
+
+                        Double aSC = (
+                                (Double.valueOf(
+                                        apparentTrim.getText().toString().replace(",","")
+                                ) * Double.valueOf(
+                                        la.getText().toString().replace(",","")
+                                )) / Double.valueOf(
+                                        lbm.getText().toString().replace(",","")
+                                )
+                        );
+                        if (aSC.isNaN()|| aSC.isInfinite()){
+                            aSC = 0.0;
+                        }
+                        asteamCorr.setText(String.valueOf(aSC));
+
+                        Double aM = ((Double.valueOf(dap.getText().toString().replace(",",""))+Double.valueOf(das.getText().toString().replace(",","")))/2);
+                        if (aM.isInfinite()||aM.isNaN()){
+                            aM = 0.0;
+                        }
+                        afterMean.setText(String.valueOf(aM));
+
+                        Double aMAC = (
+                                (Double.valueOf(
+                                        apparentTrim.getText().toString().replace(",","")
+                                ) * Double.valueOf(
+                                        la.getText().toString().replace(",","")
+                                )) / Double.valueOf(
+                                        lbm.getText().toString().replace(",","")
+                                )
+                        ) + Double.valueOf(
+                                afterMean.getText().toString().replace(",","")
+                        );
+                        if (aMAC.isNaN()||aMAC.isInfinite()){
+                            aMAC = 0.0;
+                        }
+                        afterMeanAfterCorr.setText(String.valueOf(aMAC));
+
+                        Double fA =   (Double.valueOf(forwardMeanAfterCorr.getText().toString().replace(",","")) + Double.valueOf(afterMeanAfterCorr.getText().toString().replace(",","")))/2;
+                        if (fA.isInfinite()||fA.isNaN()){
+                            fA = 0.0;
+                        }
+                        forwarAfter.setText(String.valueOf(fA));
+
+                        Double mSC = (
+                                (Double.valueOf(
+                                        apparentTrim.getText().toString().replace(",","")
+                                ) * Double.valueOf(
+                                        lm.getText().toString().replace(",","")
+                                )) / Double.valueOf(
+                                        lbm.getText().toString().replace(",","")
+                                )
+                        );
+                        if (mSC.isNaN()||mSC.isInfinite()){
+                            mSC = 0.0;
+                        }
+                        msisteamCorr.setText(String.valueOf(mSC));
+
+                        midMean.setText(String.valueOf((Double.valueOf(dmp.getText().toString().replace(",",""))+Double.valueOf(dms.getText().toString().replace(",","")))/2));
+
+                        midMeanAfterCorr.setText(
+                                String.valueOf(
+                                        (
+                                                (Double.valueOf(
+                                                        apparentTrim.getText().toString().replace(",","")
+                                                ) * Double.valueOf(
+                                                        lm.getText().toString().replace(",","")
+                                                )) / Double.valueOf(
+                                                        lbm.getText().toString().replace(",","")
                                                 )
+                                        ) + Double.valueOf(
+                                                midMean.getText().toString().replace(",","")
                                         )
-                                );
+                                )
+                        );
 
-                                asteamCorr.setText(
-                                        String.valueOf(
-                                                (
-                                                        (Double.valueOf(
-                                                                apparentTrim.getText().toString().replace(",","")
-                                                        ) * Double.valueOf(
-                                                                la.getText().toString().replace(",","")
-                                                        )) / Double.valueOf(
-                                                                lbm.getText().toString().replace(",","")
-                                                        )
-                                                )
-                                        )
-                                );
+                        faMeansCorr.setText(String.valueOf((Double.valueOf(forwardMeanAfterCorr.getText().toString().replace(",","")) + Double.valueOf(afterMeanAfterCorr.getText().toString().replace(",","")))/2));
 
-                                afterMean.setText(String.valueOf((Double.valueOf(dap.getText().toString().replace(",",""))+Double.valueOf(das.getText().toString().replace(",","")))/2));
-
-                                afterMeanAfterCorr.setText(
-                                        String.valueOf(
-                                                (
-                                                        (Double.valueOf(
-                                                                apparentTrim.getText().toString().replace(",","")
-                                                        ) * Double.valueOf(
-                                                                la.getText().toString().replace(",","")
-                                                        )) / Double.valueOf(
-                                                                lbm.getText().toString().replace(",","")
-                                                        )
-                                                ) + Double.valueOf(
-                                                        afterMean.getText().toString().replace(",","")
-                                                )
-                                        )
-                                );
-
-                                forwarAfter.setText(String.valueOf(
-                                        (Double.valueOf(forwardMeanAfterCorr.getText().toString()) + Double.valueOf(afterMeanAfterCorr.getText().toString()))/2
-                                ));
-
-                                msisteamCorr.setText(
-                                        String.valueOf(
-                                                (
-                                                        (Double.valueOf(
-                                                                apparentTrim.getText().toString().replace(",","")
-                                                        ) * Double.valueOf(
-                                                                lm.getText().toString().replace(",","")
-                                                        )) / Double.valueOf(
-                                                                lbm.getText().toString().replace(",","")
-                                                        )
-                                                )
-                                        )
-                                );
+                        mOM.setText(String.valueOf((Double.valueOf(faMeansCorr.getText().toString().replace(",","")) + Double.valueOf(midMeanAfterCorr.getText().toString().replace(",","")))/2));
 
 
-
-                                midMean.setText(String.valueOf((Double.valueOf(dmp.getText().toString().replace(",",""))+Double.valueOf(dms.getText().toString().replace(",","")))/2));
-
-                                midMeanAfterCorr.setText(
-                                        String.valueOf(
-                                                (
-                                                        (Double.valueOf(
-                                                                apparentTrim.getText().toString().replace(",","")
-                                                        ) * Double.valueOf(
-                                                                lm.getText().toString().replace(",","")
-                                                        )) / Double.valueOf(
-                                                                lbm.getText().toString().replace(",","")
-                                                        )
-                                                ) + Double.valueOf(
-                                                        midMean.getText().toString().replace(",","")
-                                                )
-                                        )
-                                );
-
-                                faMeansCorr.setText(String.valueOf((Double.valueOf(forwardMeanAfterCorr.getText().toString().replace(",","")) + Double.valueOf(afterMeanAfterCorr.getText().toString().replace(",","")))/2));
-
-                                mOM.setText(String.valueOf((Double.valueOf(faMeansCorr.getText().toString().replace(",","")) + Double.valueOf(midMeanAfterCorr.getText().toString().replace(",","")))/2));
+                        draftCorr.setText(String.valueOf((Double.valueOf(mOM.getText().toString().replace(",","")) + Double.valueOf(midMeanAfterCorr.getText().toString().replace(",","")))/2));
 
 
-                                draftCorr.setText(String.valueOf((Double.valueOf(mOM.getText().toString().replace(",","")) + Double.valueOf(midMeanAfterCorr.getText().toString().replace(",","")))/2));
+                        cdy.setText(String.valueOf(
+                                ((Double.valueOf(cdx.getText().toString().replace(",",""))-Double.valueOf(cdx1.getText().toString().replace(",","")))/
+                                        (Double.valueOf(cdx2.getText().toString().replace(",",""))-(Double.valueOf(cdx1.getText().toString().replace(",",""))))*
+                                        (Double.valueOf(cdy2.getText().toString().replace(",",""))-Double.valueOf(cdy1.getText().toString().replace(",","")))+
+                                        Double.valueOf(cdy1.getText().toString().replace(",",""))
+                                )
+                        ));
 
 
-                                cdy.setText(String.valueOf(
-                                        ((Double.valueOf(cdx.getText().toString().replace(",",""))-Double.valueOf(cdx1.getText().toString().replace(",","")))/
-                                                (Double.valueOf(cdx2.getText().toString().replace(",",""))-(Double.valueOf(cdx1.getText().toString().replace(",",""))))*
-                                                (Double.valueOf(cdy2.getText().toString().replace(",",""))-Double.valueOf(cdy1.getText().toString().replace(",","")))+
-                                                Double.valueOf(cdy1.getText().toString().replace(",",""))
-                                        )
-                                ));
+                        lcfy.setText(String.valueOf(
+                                ((Double.valueOf(lcfx.getText().toString().replace(",",""))-Double.valueOf(lcfx1.getText().toString().replace(",","")))/
+                                        (Double.valueOf(lcfx2.getText().toString().replace(",",""))-(Double.valueOf(lcfx1.getText().toString().replace(",",""))))*
+                                        (Double.valueOf(lcfy2.getText().toString().replace(",",""))-Double.valueOf(lcfy1.getText().toString().replace(",","")))+
+                                        Double.valueOf(lcfy1.getText().toString().replace(",",""))
+                                )
+                        ));
+
+                        tpcy.setText(String.valueOf(
+                                ((Double.valueOf(tpcx.getText().toString().replace(",",""))-Double.valueOf(tpcx1.getText().toString().replace(",","")))/
+                                        (Double.valueOf(tpcx2.getText().toString().replace(",",""))-(Double.valueOf(tpcx1.getText().toString().replace(",",""))))*
+                                        (Double.valueOf(tpcy2.getText().toString().replace(",",""))-Double.valueOf(tpcy1.getText().toString().replace(",","")))+
+                                        Double.valueOf(tpcy1.getText().toString().replace(",",""))
+                                )
+                        ));
+
+                        mtcpy.setText(String.valueOf(
+                                ((Double.valueOf(mtcpx.getText().toString().replace(",",""))-Double.valueOf(mtcpx1.getText().toString().replace(",","")))/
+                                        (Double.valueOf(mtcpx2.getText().toString().replace(",",""))-(Double.valueOf(mtcpx1.getText().toString().replace(",",""))))*
+                                        (Double.valueOf(mtcpy2.getText().toString().replace(",",""))-Double.valueOf(mtcpy1.getText().toString().replace(",","")))+
+                                        Double.valueOf(mtcpy1.getText().toString().replace(",",""))
+                                )
+                        ));
+
+                        mtcmy.setText(String.valueOf(
+                                ((Double.valueOf(mtcmx.getText().toString().replace(",",""))-Double.valueOf(mtcmx1.getText().toString().replace(",","")))/
+                                        (Double.valueOf(mtcmx2.getText().toString().replace(",",""))-(Double.valueOf(mtcmx1.getText().toString().replace(",",""))))*
+                                        (Double.valueOf(mtcmy2.getText().toString().replace(",",""))-Double.valueOf(mtcmy1.getText().toString().replace(",","")))+
+                                        Double.valueOf(mtcmy1.getText().toString().replace(",",""))
+                                )
+                        ));
 
 
-                                lcfy.setText(String.valueOf(
-                                        ((Double.valueOf(lcfx.getText().toString().replace(",",""))-Double.valueOf(lcfx1.getText().toString().replace(",","")))/
-                                                (Double.valueOf(lcfx2.getText().toString().replace(",",""))-(Double.valueOf(lcfx1.getText().toString().replace(",",""))))*
-                                                (Double.valueOf(lcfy2.getText().toString().replace(",",""))-Double.valueOf(lcfy1.getText().toString().replace(",","")))+
-                                                Double.valueOf(lcfy1.getText().toString().replace(",",""))
-                                        )
-                                ));
-
-                                tpcy.setText(String.valueOf(
-                                        ((Double.valueOf(tpcx.getText().toString().replace(",",""))-Double.valueOf(tpcx1.getText().toString().replace(",","")))/
-                                                (Double.valueOf(tpcx2.getText().toString().replace(",",""))-(Double.valueOf(tpcx1.getText().toString().replace(",",""))))*
-                                                (Double.valueOf(tpcy2.getText().toString().replace(",",""))-Double.valueOf(tpcy1.getText().toString().replace(",","")))+
-                                                Double.valueOf(tpcy1.getText().toString().replace(",",""))
-                                        )
-                                ));
-
-                                mtcpy.setText(String.valueOf(
-                                        ((Double.valueOf(mtcpx.getText().toString().replace(",",""))-Double.valueOf(mtcpx1.getText().toString().replace(",","")))/
-                                                (Double.valueOf(mtcpx2.getText().toString().replace(",",""))-(Double.valueOf(mtcpx1.getText().toString().replace(",",""))))*
-                                                (Double.valueOf(mtcpy2.getText().toString().replace(",",""))-Double.valueOf(mtcpy1.getText().toString().replace(",","")))+
-                                                Double.valueOf(mtcpy1.getText().toString().replace(",",""))
-                                        )
-                                ));
-
-                                mtcmy.setText(String.valueOf(
-                                        ((Double.valueOf(mtcmx.getText().toString().replace(",",""))-Double.valueOf(mtcmx1.getText().toString().replace(",","")))/
-                                                (Double.valueOf(mtcmx2.getText().toString().replace(",",""))-(Double.valueOf(mtcmx1.getText().toString().replace(",",""))))*
-                                                (Double.valueOf(mtcmy2.getText().toString().replace(",",""))-Double.valueOf(mtcmy1.getText().toString().replace(",","")))+
-                                                Double.valueOf(mtcmy1.getText().toString().replace(",",""))
-                                        )
-                                ));
-
-
-                                dmtc.setText(String.valueOf(
-                                        Double.valueOf(mtcpy.getText().toString()) - Double.valueOf(mtcmy.getText().toString())
-                                ));
+                        dmtc.setText(String.valueOf(
+                                Double.valueOf(mtcpy.getText().toString().replace(",","")) - Double.valueOf(mtcmy.getText().toString().replace(",",""))
+                        ));
 
 
 
-                                tt.setText(String.valueOf(Double.valueOf(afterMeanAfterCorr.getText().toString()) - Double.valueOf(forwardMeanAfterCorr.getText().toString())));
+                        tt.setText(String.valueOf(Double.valueOf(afterMeanAfterCorr.getText().toString().replace(",","")) - Double.valueOf(forwardMeanAfterCorr.getText().toString().replace(",",""))));
 
-                                t1.setText(String.valueOf(
-                                        (Double.valueOf(lcfy.getText().toString())*Double.valueOf(tpcy.getText().toString())*Double.valueOf(tt.getText().toString())*100)/Double.valueOf(lpp.getText().toString())
-                                ));
-                                t2.setText(
-                                        String.valueOf(
-                                                ((Double.valueOf(tt.getText().toString())*Double.valueOf(tt.getText().toString()))*Double.valueOf(dmtc.getText().toString())*50)/Double.valueOf(lpp.getText().toString())));
+                        t1.setText(String.valueOf(
+                                (Double.valueOf(lcfy.getText().toString().replace(",",""))*Double.valueOf(tpcy.getText().toString().replace(",",""))*Double.valueOf(tt.getText().toString().replace(",",""))*100)/Double.valueOf(lpp.getText().toString().replace(",",""))
+                        ));
+                        t2.setText(
+                                String.valueOf(
+                                        ((Double.valueOf(tt.getText().toString().replace(",",""))*Double.valueOf(tt.getText().toString().replace(",","")))*Double.valueOf(dmtc.getText().toString().replace(",",""))*50)/Double.valueOf(lpp.getText().toString().replace(",",""))));
 
 
-                                dcft.setText(String.valueOf(
-                                        Double.valueOf(cdy.getText().toString())+Double.valueOf(t1.getText().toString())+Double.valueOf(t2.getText().toString())
-                                ));
+                        dcft.setText(String.valueOf(
+                                Double.valueOf(cdy.getText().toString())+Double.valueOf(t1.getText().toString())+Double.valueOf(t2.getText().toString())
+                        ));
 
-                                dc.setText(String.valueOf(((Double.valueOf(dod.getText().toString().replace(",","")) -
-                                        Double.valueOf(ds.getText().toString().replace(",",""))) / Double.valueOf(ds.getText().toString().replace(",",""))
-                                ) * Double.valueOf(dcft.getText().toString().replace(",",""))));
+                        dc.setText(String.valueOf(((Double.valueOf(dod.getText().toString().replace(",","")) -
+                                Double.valueOf(ds.getText().toString().replace(",",""))) / Double.valueOf(ds.getText().toString().replace(",",""))
+                        ) * Double.valueOf(dcft.getText().toString().replace(",",""))));
 
-                                dcfd3.setText(String.valueOf(Double.valueOf(dcft.getText().toString().replace(",","")) +
-                                        Double.valueOf(dc.getText().toString().replace(",",""))
-                                ));
+                        Double dcf3 =  Double.valueOf(dcft.getText().toString().replace(",","")) + Double.valueOf(dc.getText().toString().replace(",",""));
+                        if (dcf3.isInfinite()||dcf3.isNaN()){
+                            dcf3 = 0.0;
+                        }
+                        dcfd3.setText(String.valueOf(dcf3));
 
-                                nedD.setText(String.valueOf(
-                                        Double.valueOf(dcfd3.getText().toString())-Double.valueOf(tdw.getText().toString())
-                                ));
-                                // rumus
-                                progressDialog[0].dismiss();
-                                if (docNumber.getText().toString().equals("-") || docNumber.getText().toString().isEmpty()) {
-                                    try {
-                                        JSONObject jsonObj_ = new JSONObject();
-                                        jsonObj_.put("aaftersteamcorr", BigDecimal.valueOf(Double.valueOf(afterMeanAfterCorr.getText().toString().replace(",", ""))));
-                                        jsonObj_.put("aimage", endcodeA);
-                                        jsonObj_.put("aimageContentType", amime);
-                                        jsonObj_.put("amean", BigDecimal.valueOf(Double.valueOf(afterMean.getText().toString().replace(",", ""))));
-                                        jsonObj_.put("apparentt", BigDecimal.valueOf(Double.valueOf(apparentTrim.getText().toString().replace(",", ""))));
-                                        jsonObj_.put("assignmentWorkOrderDocumentNumber", idAssignmentDocNumber);
-                                        jsonObj_.put("assignmentWorkOrderId", idAssignment);
-                                        jsonObj_.put("asteamcorr", stringToDecimals(asteamCorr.getText().toString()));
-                                        jsonObj_.put("bargeId", idBargeArr.get(spinnerBarge.getSelectedItemPosition()));
-                                        jsonObj_.put("bargeName", spinnerBarge.getSelectedItem().toString());
-                                        jsonObj_.put("cargo", cargo.getText());
-                                        jsonObj_.put("constant", constant.getText());
-                                        jsonObj_.put("corrdisplacement", BigDecimal.valueOf(Double.valueOf(cdy.getText().toString().replace(",", ""))));
-                                        jsonObj_.put("da", null);
-                                        jsonObj_.put("daftermean", null);
-                                        jsonObj_.put("dap", BigDecimal.valueOf(Double.valueOf(dap.getText().toString().replace(",", ""))));
-                                        jsonObj_.put("das", BigDecimal.valueOf(Double.valueOf(das.getText().toString().replace(",", ""))));
-                                        jsonObj_.put("densitycorr", BigDecimal.valueOf(Double.valueOf(dc.getText().toString().replace(",", ""))));
-                                        jsonObj_.put("densityobserved", BigDecimal.valueOf(Double.valueOf(dod.getText().toString().replace(",", ""))));
-                                        jsonObj_.put("densitystandard", BigDecimal.valueOf(Double.valueOf(ds.getText().toString().replace(",", ""))));
-                                        jsonObj_.put("df", null);
-                                        jsonObj_.put("dforwardmean", null);
-                                        jsonObj_.put("dfp", BigDecimal.valueOf(Double.valueOf(dfp.getText().toString().replace(",", ""))));
-                                        jsonObj_.put("dfs", BigDecimal.valueOf(Double.valueOf(dfs.getText().toString().replace(",", ""))));
-                                        String dcfd;
-                                        if (!dcfd3.getText().toString().isEmpty()){
-                                            dcfd = dcfd3.getText().toString();
-                                        } else {
-                                            dcfd = "0";
-                                        }
-                                        jsonObj_.put("dispcorrdensity", BigDecimal.valueOf(Double.valueOf(dcfd.replace(",", ""))));
-                                        jsonObj_.put("dispcortrim", BigDecimal.valueOf(Double.valueOf(dcft.getText().toString().replace(",", ""))));
-                                        jsonObj_.put("dm", null);
-                                        jsonObj_.put("dmp", BigDecimal.valueOf(Double.valueOf(dmp.getText().toString().replace(",", ""))));
-                                        jsonObj_.put("dms", BigDecimal.valueOf(Double.valueOf(dms.getText().toString().replace(",", ""))));
-                                        jsonObj_.put("documentDate", docDateInstant);
-                                        jsonObj_.put("documentNumber", docNumber.getText());
-                                        jsonObj_.put("documentStatus", spinnerDocStatus.getSelectedItem().toString());
-                                        jsonObj_.put("draftSurveyManualType", spinnerSurveyType.getSelectedItem().toString());
-                                        jsonObj_.put("draftcorrdefor", BigDecimal.valueOf(Double.valueOf(draftCorr.getText().toString().replace(",", ""))));
-                                        jsonObj_.put("faftersteamcorr", BigDecimal.valueOf(Double.valueOf(forwardMeanAfterCorr.getText().toString().replace(",", ""))));
-                                        jsonObj_.put("famean", BigDecimal.valueOf(Double.valueOf(forwarAfter.getText().toString().replace(",", ""))));
-                                        jsonObj_.put("fimage", endcodeF);
-                                        jsonObj_.put("fimageContentType", fmime);
-                                        jsonObj_.put("fmean", BigDecimal.valueOf(Double.valueOf(forwardMean.getText().toString().replace(",", ""))));
-                                        jsonObj_.put("fsteamcorr", BigDecimal.valueOf(Double.valueOf(steamCorr.getText().toString().replace(",", ""))));
-                                        jsonObj_.put("la", BigDecimal.valueOf(Double.valueOf(la.getText().toString().replace(",", ""))));
-                                        jsonObj_.put("lbm", BigDecimal.valueOf(Double.valueOf(lbm.getText().toString().replace(",", ""))));
-                                        jsonObj_.put("lcfcorrdisplacement", BigDecimal.valueOf(Double.valueOf(lcfy.getText().toString().replace(",", ""))));
-                                        jsonObj_.put("lcfx", BigDecimal.valueOf(Double.valueOf(lcfx.getText().toString().replace(",", ""))));
-                                        jsonObj_.put("lcfx1", BigDecimal.valueOf(Double.valueOf(lcfx1.getText().toString().replace(",", ""))));
-                                        jsonObj_.put("lcfx2", BigDecimal.valueOf(Double.valueOf(lcfx2.getText().toString().replace(",", ""))));
-                                        jsonObj_.put("lcfy", BigDecimal.valueOf(Double.valueOf(lcfy.getText().toString().replace(",", ""))));
-                                        jsonObj_.put("lcfy1", BigDecimal.valueOf(Double.valueOf(lcfy1.getText().toString().replace(",", ""))));
-                                        jsonObj_.put("lcfy2", BigDecimal.valueOf(Double.valueOf(lcfy2.getText().toString().replace(",", ""))));
-                                        jsonObj_.put("lf", BigDecimal.valueOf(Double.valueOf(lf.getText().toString().replace(",", ""))));
-                                        jsonObj_.put("lm", BigDecimal.valueOf(Double.valueOf(lm.getText().toString().replace(",", ""))));
-                                        jsonObj_.put("lpp", BigDecimal.valueOf(Double.valueOf(lpp.getText().toString().replace(",", ""))));
-                                        jsonObj_.put("lwt", BigDecimal.valueOf(Double.valueOf(lwt.getText().toString().replace(",", ""))));
-                                        Double maftersteamCorr = Double.valueOf(midMeanAfterCorr.getText().toString().replace(",", ""));
-                                        if (maftersteamCorr.isNaN() || maftersteamCorr.isInfinite()){
-                                            maftersteamCorr = 0.0;
-                                        }
-                                        jsonObj_.put("maftersteamcorr",
-                                                BigDecimal.valueOf(maftersteamCorr));
-                                        jsonObj_.put("meanfa", BigDecimal.valueOf(Double.valueOf(forwarAfter.getText().toString().replace(",", ""))));
-                                        jsonObj_.put("meanmtc", BigDecimal.valueOf(Double.valueOf(dmtc.getText().toString().replace(",", ""))));
-                                        jsonObj_.put("mimage", endcodeM);
-                                        jsonObj_.put("mimageContentType", mmime);
-                                        jsonObj_.put("mmean", BigDecimal.valueOf(Double.valueOf(midMean.getText().toString().replace(",", ""))));
-                                        jsonObj_.put("mmmean", BigDecimal.valueOf(Double.valueOf(mOM.getText().toString().replace(",", ""))));
-                                        jsonObj_.put("msteamcorr", BigDecimal.valueOf(Double.valueOf(msisteamCorr.getText().toString().replace(",", ""))));
-                                        jsonObj_.put("mtcmincorrdisplacement", BigDecimal.valueOf(Double.valueOf(mtcmy.getText().toString().replace(",", ""))));
-                                        jsonObj_.put("mtcminx", BigDecimal.valueOf(Double.valueOf(mtcmx.getText().toString().replace(",", ""))));
-                                        jsonObj_.put("mtcminx1", BigDecimal.valueOf(Double.valueOf(mtcmx1.getText().toString().replace(",", ""))));
-                                        jsonObj_.put("mtcminx2", BigDecimal.valueOf(Double.valueOf(mtcmx2.getText().toString().replace(",", ""))));
-                                        jsonObj_.put("mtcminy", BigDecimal.valueOf(Double.valueOf(mtcmy.getText().toString().replace(",", ""))));
-                                        jsonObj_.put("mtcminy1", BigDecimal.valueOf(Double.valueOf(mtcmy1.getText().toString().replace(",", ""))));
-                                        jsonObj_.put("mtcminy2", BigDecimal.valueOf(Double.valueOf(mtcmy2.getText().toString().replace(",", ""))));
-                                        jsonObj_.put("mtcpluscorrdisplacement", BigDecimal.valueOf(Double.valueOf(mtcpy.getText().toString().replace(",", ""))));
-                                        jsonObj_.put("mtcplusx", BigDecimal.valueOf(Double.valueOf(mtcpx.getText().toString().replace(",", ""))));
-                                        jsonObj_.put("mtcplusx1", BigDecimal.valueOf(Double.valueOf(mtcpx1.getText().toString().replace(",", ""))));
-                                        jsonObj_.put("mtcplusx2", BigDecimal.valueOf(Double.valueOf(mtcpx2.getText().toString().replace(",", ""))));
-                                        jsonObj_.put("mtcplusy", BigDecimal.valueOf(Double.valueOf(mtcpy.getText().toString().replace(",", ""))));
-                                        jsonObj_.put("mtcplusy1", BigDecimal.valueOf(Double.valueOf(mtcpy1.getText().toString().replace(",", ""))));
-                                        jsonObj_.put("mtcplusy2", BigDecimal.valueOf(Double.valueOf(mtcpy2.getText().toString().replace(",", ""))));
-                                        jsonObj_.put("netdisp", BigDecimal.valueOf(Double.valueOf(nedD.getText().toString().replace(",", ""))));
-                                        jsonObj_.put("placeId", idLocationArr.get(spinnerLocation.getSelectedItemPosition()));
-                                        jsonObj_.put("placeName", spinnerLocation.getSelectedItem().toString());
-                                        jsonObj_.put("surveyEndTime", endDateInstant);
-                                        jsonObj_.put("surveyStartTime", startDateInstant);
-                                        jsonObj_.put("remarks", remarks.getText().toString());
-                                        jsonObj_.put("totaldeductweight", Double.valueOf(tdw.getText().toString().replace(",", "")));
-                                        jsonObj_.put("tpccorrdisplacement", stringToDecimals(tpcy.getText().toString()));
-                                        jsonObj_.put("tpcx", BigDecimal.valueOf(Double.valueOf(tpcx.getText().toString().replace(",", ""))));
-                                        jsonObj_.put("tpcx1", BigDecimal.valueOf(Double.valueOf(tpcx1.getText().toString().replace(",", ""))));
-                                        jsonObj_.put("tpcx2", BigDecimal.valueOf(Double.valueOf(tpcx2.getText().toString().replace(",", ""))));
-                                        jsonObj_.put("tpcy", BigDecimal.valueOf(Double.valueOf(tpcy.getText().toString().replace(",", ""))));
-                                        jsonObj_.put("tpcy1", BigDecimal.valueOf(Double.valueOf(tpcy1.getText().toString().replace(",", ""))));
-                                        jsonObj_.put("tpcy2", BigDecimal.valueOf(Double.valueOf(tpcy2.getText().toString().replace(",", ""))));
-                                        jsonObj_.put("trim1", BigDecimal.valueOf(Double.valueOf(t1.getText().toString().replace(",", ""))));
-                                        jsonObj_.put("trim2", BigDecimal.valueOf(Double.valueOf(t2.getText().toString().replace(",", ""))));
-                                        jsonObj_.put("truetrim", BigDecimal.valueOf(Double.valueOf(tt.getText().toString().replace(",", ""))));
-                                        jsonObj_.put("tugBoatId", idVesselArr.get(spinnerVessel.getSelectedItemPosition()));
-                                        jsonObj_.put("tugBoatName", spinnerVessel.getSelectedItem().toString());
-                                        jsonObj_.put("x", BigDecimal.valueOf(Double.valueOf(cdx.getText().toString().replace(",", ""))));
-                                        jsonObj_.put("x1", BigDecimal.valueOf(Double.valueOf(cdx1.getText().toString().replace(",", ""))));
-                                        jsonObj_.put("x2", BigDecimal.valueOf(Double.valueOf(cdx2.getText().toString().replace(",", ""))));
-                                        jsonObj_.put("y", BigDecimal.valueOf(Double.valueOf(cdy.getText().toString().replace(",", ""))));
-                                        jsonObj_.put("y1", BigDecimal.valueOf(Double.valueOf(cdy1.getText().toString().replace(",", ""))));
-                                        jsonObj_.put("y2", BigDecimal.valueOf(Double.valueOf(cdy2.getText().toString().replace(",", ""))));
+                        Double neD =  Double.valueOf(dcfd3.getText().toString().replace(",",""))-Double.valueOf(tdw.getText().toString().replace(",",""));
+                        if (neD.isInfinite()||neD.isNaN()){
+                            neD = 0.0;
+                        }
+                        nedD.setText(String.valueOf(neD));
 
-                                        JsonParser jsonParser = new JsonParser();
-                                        paramadd[0] = (JsonObject) jsonParser.parse(jsonObj_.toString());
-
-                                        //print parameter
-                                        Log.d("parameter for add  ", "AS PARAMETER  " + paramadd[0]);
-
-                                    } catch (Exception e) {
-                                        Toast.makeText(getBaseContext(), "Pastikan inputan benar", Toast.LENGTH_SHORT).show();
-                                        e.printStackTrace();
-                                    }
-                                    Call<DraftSurveyResults> call = service.addDraftSurvey("Bearer ".concat(idToken), paramadd[0]);
-                                    Log.d("request add attendace", call.request().toString());
-                                    call.enqueue(new Callback<DraftSurveyResults>() {
-                                        @Override
-                                        public void onResponse(Call<DraftSurveyResults> call, Response<DraftSurveyResults> response) {
-                                            Log.d("ini loh", response.raw().toString());
-                                            if (!response.isSuccessful()) {
-                                                Toast.makeText(getBaseContext(), response.raw().toString(), Toast.LENGTH_SHORT).show();
-                                            } else {
-                                                Toast.makeText(getBaseContext(), "Success Created", Toast.LENGTH_SHORT).show();
-                                                docNumber.setText(response.body().getDocumentNumber());
-                                                idDraftSurvey = response.body().getId();
-                                            }
-                                        }
-
-                                        @Override
-                                        public void onFailure(Call<DraftSurveyResults> call, Throwable t) {
-                                            //for getting error in network put here Toast, so get the error on network
-                                            Toast.makeText(getBaseContext(), "Failed to add draft survey, please try at a moment", Toast.LENGTH_SHORT).show();
-                                        }
-                                    });
-
+                        if (docNumber.getText().toString().equals("-") || docNumber.getText().toString().isEmpty()) {
+                            try {
+                                JSONObject jsonObj_ = new JSONObject();
+                                jsonObj_.put("aaftersteamcorr", BigDecimal.valueOf(Double.valueOf(afterMeanAfterCorr.getText().toString().replace(",", ""))));
+                                jsonObj_.put("aimage", endcodeA);
+                                jsonObj_.put("aimageContentType", amime);
+                                jsonObj_.put("amean", BigDecimal.valueOf(Double.valueOf(afterMean.getText().toString().replace(",", ""))));
+                                jsonObj_.put("apparentt", BigDecimal.valueOf(Double.valueOf(apparentTrim.getText().toString().replace(",", ""))));
+                                jsonObj_.put("assignmentWorkOrderDocumentNumber", idAssignmentDocNumber);
+                                jsonObj_.put("assignmentWorkOrderId", idAssignment);
+                                jsonObj_.put("asteamcorr", stringToDecimals(asteamCorr.getText().toString()));
+                                jsonObj_.put("bargeId", idBargeArr.get(spinnerBarge.getSelectedItemPosition()));
+                                jsonObj_.put("bargeName", spinnerBarge.getSelectedItem().toString());
+                                jsonObj_.put("cargo", cargo.getText());
+                                jsonObj_.put("constant", constant.getText());
+                                jsonObj_.put("corrdisplacement", BigDecimal.valueOf(Double.valueOf(cdy.getText().toString().replace(",", ""))));
+                                jsonObj_.put("da", null);
+                                jsonObj_.put("daftermean", null);
+                                jsonObj_.put("dap", BigDecimal.valueOf(Double.valueOf(dap.getText().toString().replace(",", ""))));
+                                jsonObj_.put("das", BigDecimal.valueOf(Double.valueOf(das.getText().toString().replace(",", ""))));
+                                jsonObj_.put("densitycorr", BigDecimal.valueOf(Double.valueOf(dc.getText().toString().replace(",", ""))));
+                                jsonObj_.put("densityobserved", BigDecimal.valueOf(Double.valueOf(dod.getText().toString().replace(",", ""))));
+                                jsonObj_.put("densitystandard", BigDecimal.valueOf(Double.valueOf(ds.getText().toString().replace(",", ""))));
+                                jsonObj_.put("df", null);
+                                jsonObj_.put("dforwardmean", null);
+                                jsonObj_.put("dfp", BigDecimal.valueOf(Double.valueOf(dfp.getText().toString().replace(",", ""))));
+                                jsonObj_.put("dfs", BigDecimal.valueOf(Double.valueOf(dfs.getText().toString().replace(",", ""))));
+                                String dcfd;
+                                if (!dcfd3.getText().toString().isEmpty()){
+                                    dcfd = dcfd3.getText().toString();
                                 } else {
-                                    try {
-                                        JSONObject jsonObj_ = new JSONObject();
-                                        jsonObj_.put("aaftersteamcorr", BigDecimal.valueOf(Double.valueOf(afterMeanAfterCorr.getText().toString().replace(",", ""))));
-                                        jsonObj_.put("aimage", endcodeA);
-                                        jsonObj_.put("aimageContentType", amime);
-                                        jsonObj_.put("amean", BigDecimal.valueOf(Double.valueOf(afterMean.getText().toString().replace(",", ""))));
-                                        jsonObj_.put("apparentt", BigDecimal.valueOf(Double.valueOf(apparentTrim.getText().toString().replace(",", ""))));
-                                        jsonObj_.put("assignmentWorkOrderDocumentNumber", idAssignmentDocNumber);
-                                        jsonObj_.put("assignmentWorkOrderId", idAssignment);
-                                        jsonObj_.put("asteamcorr", BigDecimal.valueOf(Double.valueOf(asteamCorr.getText().toString().replace(",", ""))));
-                                        jsonObj_.put("bargeId", idBargeArr.get(spinnerBarge.getSelectedItemPosition()));
-                                        jsonObj_.put("bargeName", spinnerBarge.getSelectedItem().toString());
-                                        jsonObj_.put("cargo", cargo.getText());
-                                        jsonObj_.put("constant", constant.getText());
-                                        jsonObj_.put("corrdisplacement", BigDecimal.valueOf(Double.valueOf(cdy.getText().toString().replace(",", ""))));
-                                        jsonObj_.put("da", null);
-                                        jsonObj_.put("daftermean", null);
-                                        jsonObj_.put("dap", BigDecimal.valueOf(Double.valueOf(dap.getText().toString().replace(",", ""))));
-                                        jsonObj_.put("das", BigDecimal.valueOf(Double.valueOf(das.getText().toString().replace(",", ""))));
-                                        jsonObj_.put("densitycorr", BigDecimal.valueOf(Double.valueOf(dc.getText().toString().replace(",", ""))));
-                                        jsonObj_.put("densityobserved", BigDecimal.valueOf(Double.valueOf(dod.getText().toString().replace(",", ""))));
-                                        jsonObj_.put("densitystandard", BigDecimal.valueOf(Double.valueOf(ds.getText().toString().replace(",", ""))));
-                                        jsonObj_.put("df", null);
-                                        jsonObj_.put("dforwardmean", null);
-                                        jsonObj_.put("dfp", BigDecimal.valueOf(Double.valueOf(dfp.getText().toString().replace(",", ""))));
-                                        jsonObj_.put("dfs", BigDecimal.valueOf(Double.valueOf(dfs.getText().toString().replace(",", ""))));
-                                        String dcfd;
-                                        if (!dcfd3.getText().toString().isEmpty()){
-                                            dcfd = dcfd3.getText().toString();
-                                        } else {
-                                            dcfd = "0";
-                                        }
-                                        jsonObj_.put("dispcorrdensity", BigDecimal.valueOf(Double.valueOf(dcfd.replace(",", ""))));
-                                        jsonObj_.put("dispcortrim", BigDecimal.valueOf(Double.valueOf(dcft.getText().toString().replace(",", ""))));
-                                        jsonObj_.put("dm", null);
-                                        jsonObj_.put("dmp", BigDecimal.valueOf(Double.valueOf(dmp.getText().toString().replace(",", ""))));
-                                        jsonObj_.put("dms", BigDecimal.valueOf(Double.valueOf(dms.getText().toString().replace(",", ""))));
-                                        jsonObj_.put("documentDate", docDateInstant);
-                                        jsonObj_.put("documentNumber", docNumber.getText());
-                                        jsonObj_.put("documentStatus", spinnerDocStatus.getSelectedItem().toString());
-                                        jsonObj_.put("draftSurveyManualType", spinnerSurveyType.getSelectedItem().toString());
-                                        jsonObj_.put("draftcorrdefor", BigDecimal.valueOf(Double.valueOf(draftCorr.getText().toString().replace(",", ""))));
-                                        jsonObj_.put("faftersteamcorr", BigDecimal.valueOf(Double.valueOf(forwardMeanAfterCorr.getText().toString().replace(",", ""))));
-                                        jsonObj_.put("famean", BigDecimal.valueOf(Double.valueOf(forwarAfter.getText().toString().replace(",", ""))));
-                                        jsonObj_.put("fimage", endcodeF);
-                                        jsonObj_.put("fimageContentType", fmime);
-                                        jsonObj_.put("fmean", BigDecimal.valueOf(Double.valueOf(forwardMean.getText().toString().replace(",", ""))));
-                                        jsonObj_.put("fsteamcorr", BigDecimal.valueOf(Double.valueOf(steamCorr.getText().toString().replace(",", ""))));
-                                        jsonObj_.put("la", BigDecimal.valueOf(Double.valueOf(la.getText().toString().replace(",", ""))));
-                                        jsonObj_.put("lbm", BigDecimal.valueOf(Double.valueOf(lbm.getText().toString().replace(",", ""))));
-                                        jsonObj_.put("lcfcorrdisplacement",BigDecimal.valueOf(Double.valueOf(lcfy.getText().toString().replace(",", ""))));
-                                        jsonObj_.put("lcfx", BigDecimal.valueOf(Double.valueOf(lcfx.getText().toString().replace(",", ""))));
-                                        jsonObj_.put("lcfx1", BigDecimal.valueOf(Double.valueOf(lcfx1.getText().toString().replace(",", ""))));
-                                        jsonObj_.put("lcfx2", BigDecimal.valueOf(Double.valueOf(lcfx2.getText().toString().replace(",", ""))));
-                                        jsonObj_.put("lcfy", BigDecimal.valueOf(Double.valueOf(lcfy.getText().toString().replace(",", ""))));
-                                        jsonObj_.put("lcfy1", BigDecimal.valueOf(Double.valueOf(lcfy1.getText().toString().replace(",", ""))));
-                                        jsonObj_.put("lcfy2", BigDecimal.valueOf(Double.valueOf(lcfy2.getText().toString().replace(",", ""))));
-                                        jsonObj_.put("lf", BigDecimal.valueOf(Double.valueOf(lf.getText().toString().replace(",", ""))));
-                                        jsonObj_.put("lm", BigDecimal.valueOf(Double.valueOf(lm.getText().toString().replace(",", ""))));
-                                        jsonObj_.put("lpp", BigDecimal.valueOf(Double.valueOf(lpp.getText().toString().replace(",", ""))));
-                                        jsonObj_.put("lwt", BigDecimal.valueOf(Double.valueOf(lwt.getText().toString().replace(",", ""))));
-                                        jsonObj_.put("maftersteamcorr", BigDecimal.valueOf(Double.valueOf(midMeanAfterCorr.getText().toString().replace(",", ""))));
-                                        jsonObj_.put("meanfa", BigDecimal.valueOf(Double.valueOf(forwarAfter.getText().toString().replace(",", ""))));
-                                        jsonObj_.put("meanmtc", BigDecimal.valueOf(Double.valueOf(dmtc.getText().toString().replace(",", ""))));
-                                        jsonObj_.put("mimage", endcodeM);
-                                        jsonObj_.put("mimageContentType", mmime);
-                                        jsonObj_.put("mmean", BigDecimal.valueOf(Double.valueOf(midMean.getText().toString().replace(",", ""))));
-                                        jsonObj_.put("mmmean", BigDecimal.valueOf(Double.valueOf(mOM.getText().toString().replace(",", ""))));
-                                        jsonObj_.put("msteamcorr", BigDecimal.valueOf(Double.valueOf(msisteamCorr.getText().toString().replace(",", ""))));
-                                        Double mtcmyVal = Double.valueOf(mtcmy.getText().toString().replace(",", ""));
-                                        if (mtcmyVal.isNaN()){
-                                            mtcmyVal = 0.0;
-                                        }
-                                        jsonObj_.put("mtcmincorrdisplacement", BigDecimal.valueOf(mtcmyVal));
-                                        jsonObj_.put("mtcminx", BigDecimal.valueOf(Double.valueOf(mtcmx.getText().toString().replace(",", ""))));
-                                        jsonObj_.put("mtcminx1", BigDecimal.valueOf(Double.valueOf(mtcmx1.getText().toString().replace(",", ""))));
-                                        jsonObj_.put("mtcminx2", BigDecimal.valueOf(Double.valueOf(mtcmx2.getText().toString().replace(",", ""))));
-                                        jsonObj_.put("mtcminy", BigDecimal.valueOf(Double.valueOf(mtcmyVal)));
-                                        jsonObj_.put("mtcminy1", BigDecimal.valueOf(Double.valueOf(mtcmy1.getText().toString().replace(",", ""))));
-                                        jsonObj_.put("mtcminy2", BigDecimal.valueOf(Double.valueOf(mtcmy2.getText().toString().replace(",", ""))));
-                                        jsonObj_.put("mtcpluscorrdisplacement", BigDecimal.valueOf(Double.valueOf(mtcpy.getText().toString().replace(",", ""))));
-                                        jsonObj_.put("mtcplusx", BigDecimal.valueOf(Double.valueOf(mtcpx.getText().toString().replace(",", ""))));
-                                        jsonObj_.put("mtcplusx1", BigDecimal.valueOf(Double.valueOf(mtcpx1.getText().toString().replace(",", ""))));
-                                        jsonObj_.put("mtcplusx2", BigDecimal.valueOf(Double.valueOf(mtcpx2.getText().toString().replace(",", ""))));
-                                        jsonObj_.put("mtcplusy", BigDecimal.valueOf(Double.valueOf(mtcpy.getText().toString().replace(",", ""))));
-                                        jsonObj_.put("mtcplusy1", BigDecimal.valueOf(Double.valueOf(mtcpy1.getText().toString().replace(",", ""))));
-                                        jsonObj_.put("mtcplusy2", BigDecimal.valueOf(Double.valueOf(mtcpy2.getText().toString().replace(",", ""))));
-                                        jsonObj_.put("netdisp", BigDecimal.valueOf(Double.valueOf(nedD.getText().toString().replace(",", ""))));
-                                        jsonObj_.put("placeId", idLocationArr.get(spinnerLocation.getSelectedItemPosition()));
-                                        jsonObj_.put("placeName", spinnerLocation.getSelectedItem().toString());
-                                        jsonObj_.put("surveyEndTime", endDateInstant);
-                                        jsonObj_.put("surveyStartTime", startDateInstant);
-                                        jsonObj_.put("remarks", remarks.getText().toString());
-                                        jsonObj_.put("totaldeductweight", Double.valueOf(tdw.getText().toString().replace(",", "")));
-                                        jsonObj_.put("tpccorrdisplacement", stringToDecimals(tpcy.getText().toString()));
-                                        jsonObj_.put("tpcx", BigDecimal.valueOf(Double.valueOf(tpcx.getText().toString().replace(",", ""))));
-                                        jsonObj_.put("tpcx1", BigDecimal.valueOf(Double.valueOf(tpcx1.getText().toString().replace(",", ""))));
-                                        jsonObj_.put("tpcx2", BigDecimal.valueOf(Double.valueOf(tpcx2.getText().toString().replace(",", ""))));
-                                        jsonObj_.put("tpcy", BigDecimal.valueOf(Double.valueOf(tpcy.getText().toString().replace(",", ""))));
-                                        jsonObj_.put("tpcy1", BigDecimal.valueOf(Double.valueOf(tpcy1.getText().toString().replace(",", ""))));
-                                        jsonObj_.put("tpcy2", BigDecimal.valueOf(Double.valueOf(tpcy2.getText().toString().replace(",", ""))));
-                                        jsonObj_.put("trim1", BigDecimal.valueOf(Double.valueOf(t1.getText().toString().replace(",", ""))));
-                                        jsonObj_.put("trim2", BigDecimal.valueOf(Double.valueOf(t2.getText().toString().replace(",", ""))));
-                                        jsonObj_.put("truetrim", BigDecimal.valueOf(Double.valueOf(tt.getText().toString().replace(",", ""))));
-                                        jsonObj_.put("tugBoatId", idVesselArr.get(spinnerVessel.getSelectedItemPosition()));
-                                        jsonObj_.put("tugBoatName", spinnerVessel.getSelectedItem().toString());
-                                        jsonObj_.put("x", BigDecimal.valueOf(Double.valueOf(cdx.getText().toString().replace(",", ""))));
-                                        jsonObj_.put("x1", BigDecimal.valueOf(Double.valueOf(cdx1.getText().toString().replace(",", ""))));
-                                        jsonObj_.put("x2", BigDecimal.valueOf(Double.valueOf(cdx2.getText().toString().replace(",", ""))));
-                                        jsonObj_.put("y", BigDecimal.valueOf(Double.valueOf(cdy.getText().toString().replace(",", ""))));
-                                        jsonObj_.put("y1", BigDecimal.valueOf(Double.valueOf(cdy1.getText().toString().replace(",", ""))));
-                                        jsonObj_.put("y2", BigDecimal.valueOf(Double.valueOf(cdy2.getText().toString().replace(",", ""))));
-                                        jsonObj_.put("id", idDraftSurvey);
+                                    dcfd = "0";
+                                }
+                                jsonObj_.put("dispcorrdensity", BigDecimal.valueOf(Double.valueOf(dcfd.replace(",", ""))));
+                                jsonObj_.put("dispcortrim", BigDecimal.valueOf(Double.valueOf(dcft.getText().toString().replace(",", ""))));
+                                jsonObj_.put("dm", null);
+                                jsonObj_.put("dmp", BigDecimal.valueOf(Double.valueOf(dmp.getText().toString().replace(",", ""))));
+                                jsonObj_.put("dms", BigDecimal.valueOf(Double.valueOf(dms.getText().toString().replace(",", ""))));
+                                jsonObj_.put("documentDate", docDateInstant);
+                                jsonObj_.put("documentNumber", docNumber.getText());
+                                jsonObj_.put("documentStatus", spinnerDocStatus.getSelectedItem().toString());
+                                jsonObj_.put("draftSurveyManualType", spinnerSurveyType.getSelectedItem().toString());
+                                jsonObj_.put("draftcorrdefor", BigDecimal.valueOf(Double.valueOf(draftCorr.getText().toString().replace(",", ""))));
+                                jsonObj_.put("faftersteamcorr", BigDecimal.valueOf(Double.valueOf(forwardMeanAfterCorr.getText().toString().replace(",", ""))));
+                                jsonObj_.put("famean", BigDecimal.valueOf(Double.valueOf(forwarAfter.getText().toString().replace(",", ""))));
+                                jsonObj_.put("fimage", endcodeF);
+                                jsonObj_.put("fimageContentType", fmime);
+                                jsonObj_.put("fmean", BigDecimal.valueOf(Double.valueOf(forwardMean.getText().toString().replace(",", ""))));
+                                jsonObj_.put("fsteamcorr", BigDecimal.valueOf(Double.valueOf(steamCorr.getText().toString().replace(",", ""))));
+                                jsonObj_.put("la", BigDecimal.valueOf(Double.valueOf(la.getText().toString().replace(",", ""))));
+                                jsonObj_.put("lbm", BigDecimal.valueOf(Double.valueOf(lbm.getText().toString().replace(",", ""))));
+                                jsonObj_.put("lcfcorrdisplacement", BigDecimal.valueOf(Double.valueOf(lcfy.getText().toString().replace(",", ""))));
+                                jsonObj_.put("lcfx", BigDecimal.valueOf(Double.valueOf(lcfx.getText().toString().replace(",", ""))));
+                                jsonObj_.put("lcfx1", BigDecimal.valueOf(Double.valueOf(lcfx1.getText().toString().replace(",", ""))));
+                                jsonObj_.put("lcfx2", BigDecimal.valueOf(Double.valueOf(lcfx2.getText().toString().replace(",", ""))));
+                                jsonObj_.put("lcfy", BigDecimal.valueOf(Double.valueOf(lcfy.getText().toString().replace(",", ""))));
+                                jsonObj_.put("lcfy1", BigDecimal.valueOf(Double.valueOf(lcfy1.getText().toString().replace(",", ""))));
+                                jsonObj_.put("lcfy2", BigDecimal.valueOf(Double.valueOf(lcfy2.getText().toString().replace(",", ""))));
+                                jsonObj_.put("lf", BigDecimal.valueOf(Double.valueOf(lf.getText().toString().replace(",", ""))));
+                                jsonObj_.put("lm", BigDecimal.valueOf(Double.valueOf(lm.getText().toString().replace(",", ""))));
+                                jsonObj_.put("lpp", BigDecimal.valueOf(Double.valueOf(lpp.getText().toString().replace(",", ""))));
+                                jsonObj_.put("lwt", BigDecimal.valueOf(Double.valueOf(lwt.getText().toString().replace(",", ""))));
+                                Double maftersteamCorr = Double.valueOf(midMeanAfterCorr.getText().toString().replace(",", ""));
+                                if (maftersteamCorr.isNaN() || maftersteamCorr.isInfinite()){
+                                    maftersteamCorr = 0.0;
+                                }
+                                jsonObj_.put("maftersteamcorr",
+                                        BigDecimal.valueOf(maftersteamCorr));
+                                jsonObj_.put("meanfa", BigDecimal.valueOf(Double.valueOf(forwarAfter.getText().toString().replace(",", ""))));
+                                jsonObj_.put("meanmtc", BigDecimal.valueOf(Double.valueOf(dmtc.getText().toString().replace(",", ""))));
+                                jsonObj_.put("mimage", endcodeM);
+                                jsonObj_.put("mimageContentType", mmime);
+                                jsonObj_.put("mmean", BigDecimal.valueOf(Double.valueOf(midMean.getText().toString().replace(",", ""))));
+                                jsonObj_.put("mmmean", BigDecimal.valueOf(Double.valueOf(mOM.getText().toString().replace(",", ""))));
+                                jsonObj_.put("msteamcorr", BigDecimal.valueOf(Double.valueOf(msisteamCorr.getText().toString().replace(",", ""))));
+                                jsonObj_.put("mtcmincorrdisplacement", BigDecimal.valueOf(Double.valueOf(mtcmy.getText().toString().replace(",", ""))));
+                                jsonObj_.put("mtcminx", BigDecimal.valueOf(Double.valueOf(mtcmx.getText().toString().replace(",", ""))));
+                                jsonObj_.put("mtcminx1", BigDecimal.valueOf(Double.valueOf(mtcmx1.getText().toString().replace(",", ""))));
+                                jsonObj_.put("mtcminx2", BigDecimal.valueOf(Double.valueOf(mtcmx2.getText().toString().replace(",", ""))));
+                                jsonObj_.put("mtcminy", BigDecimal.valueOf(Double.valueOf(mtcmy.getText().toString().replace(",", ""))));
+                                jsonObj_.put("mtcminy1", BigDecimal.valueOf(Double.valueOf(mtcmy1.getText().toString().replace(",", ""))));
+                                jsonObj_.put("mtcminy2", BigDecimal.valueOf(Double.valueOf(mtcmy2.getText().toString().replace(",", ""))));
+                                jsonObj_.put("mtcpluscorrdisplacement", BigDecimal.valueOf(Double.valueOf(mtcpy.getText().toString().replace(",", ""))));
+                                jsonObj_.put("mtcplusx", BigDecimal.valueOf(Double.valueOf(mtcpx.getText().toString().replace(",", ""))));
+                                jsonObj_.put("mtcplusx1", BigDecimal.valueOf(Double.valueOf(mtcpx1.getText().toString().replace(",", ""))));
+                                jsonObj_.put("mtcplusx2", BigDecimal.valueOf(Double.valueOf(mtcpx2.getText().toString().replace(",", ""))));
+                                jsonObj_.put("mtcplusy", BigDecimal.valueOf(Double.valueOf(mtcpy.getText().toString().replace(",", ""))));
+                                jsonObj_.put("mtcplusy1", BigDecimal.valueOf(Double.valueOf(mtcpy1.getText().toString().replace(",", ""))));
+                                jsonObj_.put("mtcplusy2", BigDecimal.valueOf(Double.valueOf(mtcpy2.getText().toString().replace(",", ""))));
+                                jsonObj_.put("netdisp", BigDecimal.valueOf(Double.valueOf(nedD.getText().toString().replace(",", ""))));
+                                jsonObj_.put("placeId", idLocationArr.get(spinnerLocation.getSelectedItemPosition()));
+                                jsonObj_.put("placeName", spinnerLocation.getSelectedItem().toString());
+                                jsonObj_.put("surveyEndTime", endDateInstant);
+                                jsonObj_.put("surveyStartTime", startDateInstant);
+                                jsonObj_.put("remarks", remarks.getText().toString());
+                                jsonObj_.put("totaldeductweight", Double.valueOf(tdw.getText().toString().replace(",", "")));
+                                jsonObj_.put("tpccorrdisplacement", stringToDecimals(tpcy.getText().toString()));
+                                jsonObj_.put("tpcx", BigDecimal.valueOf(Double.valueOf(tpcx.getText().toString().replace(",", ""))));
+                                jsonObj_.put("tpcx1", BigDecimal.valueOf(Double.valueOf(tpcx1.getText().toString().replace(",", ""))));
+                                jsonObj_.put("tpcx2", BigDecimal.valueOf(Double.valueOf(tpcx2.getText().toString().replace(",", ""))));
+                                jsonObj_.put("tpcy", BigDecimal.valueOf(Double.valueOf(tpcy.getText().toString().replace(",", ""))));
+                                jsonObj_.put("tpcy1", BigDecimal.valueOf(Double.valueOf(tpcy1.getText().toString().replace(",", ""))));
+                                jsonObj_.put("tpcy2", BigDecimal.valueOf(Double.valueOf(tpcy2.getText().toString().replace(",", ""))));
+                                jsonObj_.put("trim1", BigDecimal.valueOf(Double.valueOf(t1.getText().toString().replace(",", ""))));
+                                jsonObj_.put("trim2", BigDecimal.valueOf(Double.valueOf(t2.getText().toString().replace(",", ""))));
+                                jsonObj_.put("truetrim", BigDecimal.valueOf(Double.valueOf(tt.getText().toString().replace(",", ""))));
+                                jsonObj_.put("tugBoatId", idVesselArr.get(spinnerVessel.getSelectedItemPosition()));
+                                jsonObj_.put("tugBoatName", spinnerVessel.getSelectedItem().toString());
+                                jsonObj_.put("x", BigDecimal.valueOf(Double.valueOf(cdx.getText().toString().replace(",", ""))));
+                                jsonObj_.put("x1", BigDecimal.valueOf(Double.valueOf(cdx1.getText().toString().replace(",", ""))));
+                                jsonObj_.put("x2", BigDecimal.valueOf(Double.valueOf(cdx2.getText().toString().replace(",", ""))));
+                                jsonObj_.put("y", BigDecimal.valueOf(Double.valueOf(cdy.getText().toString().replace(",", ""))));
+                                jsonObj_.put("y1", BigDecimal.valueOf(Double.valueOf(cdy1.getText().toString().replace(",", ""))));
+                                jsonObj_.put("y2", BigDecimal.valueOf(Double.valueOf(cdy2.getText().toString().replace(",", ""))));
 
-                                        JsonParser jsonParser = new JsonParser();
-                                        paramadd[0] = (JsonObject) jsonParser.parse(jsonObj_.toString());
+                                JsonParser jsonParser = new JsonParser();
+                                paramadd[0] = (JsonObject) jsonParser.parse(jsonObj_.toString());
 
-                                        //print parameter
-                                        Log.d("parameter for add  ", "AS PARAMETER  " + paramadd[0]);
+                                //print parameter
+                                Log.d("parameter for add  ", "AS PARAMETER  " + paramadd[0]);
 
-                                    } catch (Exception e) {
-                                        Toast.makeText(getBaseContext(), "Pastikan inputan benar", Toast.LENGTH_SHORT).show();
-                                        e.printStackTrace();
+                            } catch (Exception e) {
+                                Toast.makeText(getBaseContext(), "Pastikan inputan benar", Toast.LENGTH_SHORT).show();
+                                e.printStackTrace();
+                            }
+                            Call<DraftSurveyResults> call = service.addDraftSurvey("Bearer ".concat(idToken), paramadd[0]);
+                            Log.d("request add attendace", call.request().toString());
+                            call.enqueue(new Callback<DraftSurveyResults>() {
+                                @Override
+                                public void onResponse(Call<DraftSurveyResults> call, Response<DraftSurveyResults> response) {
+                                    Log.d("ini loh", response.raw().toString());
+                                    progressDialog[0].dismiss();
+                                    if (!response.isSuccessful()) {
+                                        Toast.makeText(getBaseContext(), response.raw().toString(), Toast.LENGTH_SHORT).show();
+                                    } else {
+                                        Toast.makeText(getBaseContext(), "Success Created", Toast.LENGTH_SHORT).show();
+                                        docNumber.setText(response.body().getDocumentNumber());
+                                        idDraftSurvey = response.body().getId();
                                     }
-                                    Call<DraftSurveyResults> call = service.updateDraftSurvey("Bearer ".concat(idToken), paramadd[0]);
-                                    Log.d("request put attendace", call.request().toString());
-                                    call.enqueue(new Callback<DraftSurveyResults>() {
-                                        @Override
-                                        public void onResponse(Call<DraftSurveyResults> call, Response<DraftSurveyResults> response) {
-                                            if (!response.isSuccessful()) {
-                                                Toast.makeText(getBaseContext(), response.raw().toString(), Toast.LENGTH_SHORT).show();
-                                            } else {
-                                                Toast.makeText(getBaseContext(), "Success Updated", Toast.LENGTH_SHORT).show();
-                                                docNumber.setText(response.body().getDocumentNumber());
-                                            }
-                                        }
-
-                                        @Override
-                                        public void onFailure(Call<DraftSurveyResults> call, Throwable t) {
-                                            //for getting error in network put here Toast, so get the error on network
-                                            Toast.makeText(getBaseContext(), "Failed to update draft survey, please try at a moment", Toast.LENGTH_SHORT).show();
-                                        }
-                                    });
                                 }
 
+                                @Override
+                                public void onFailure(Call<DraftSurveyResults> call, Throwable t) {
+                                    //for getting error in network put here Toast, so get the error on network
+                                    Toast.makeText(getBaseContext(), "Failed to add draft survey, please try at a moment", Toast.LENGTH_SHORT).show();
+                                }
+                            });
+
+                        } else {
+                            try {
+                                JSONObject jsonObj_ = new JSONObject();
+                                jsonObj_.put("aaftersteamcorr", BigDecimal.valueOf(Double.valueOf(afterMeanAfterCorr.getText().toString().replace(",", ""))));
+                                jsonObj_.put("aimage", endcodeA);
+                                jsonObj_.put("aimageContentType", amime);
+                                jsonObj_.put("amean", BigDecimal.valueOf(Double.valueOf(afterMean.getText().toString().replace(",", ""))));
+                                jsonObj_.put("apparentt", BigDecimal.valueOf(Double.valueOf(apparentTrim.getText().toString().replace(",", ""))));
+                                jsonObj_.put("assignmentWorkOrderDocumentNumber", idAssignmentDocNumber);
+                                jsonObj_.put("assignmentWorkOrderId", idAssignment);
+                                jsonObj_.put("asteamcorr", BigDecimal.valueOf(Double.valueOf(asteamCorr.getText().toString().replace(",", ""))));
+                                jsonObj_.put("bargeId", idBargeArr.get(spinnerBarge.getSelectedItemPosition()));
+                                jsonObj_.put("bargeName", spinnerBarge.getSelectedItem().toString());
+                                jsonObj_.put("cargo", cargo.getText());
+                                jsonObj_.put("constant", constant.getText());
+                                jsonObj_.put("corrdisplacement", BigDecimal.valueOf(Double.valueOf(cdy.getText().toString().replace(",", ""))));
+                                jsonObj_.put("da", null);
+                                jsonObj_.put("daftermean", null);
+                                jsonObj_.put("dap", BigDecimal.valueOf(Double.valueOf(dap.getText().toString().replace(",", ""))));
+                                jsonObj_.put("das", BigDecimal.valueOf(Double.valueOf(das.getText().toString().replace(",", ""))));
+                                jsonObj_.put("densitycorr", BigDecimal.valueOf(Double.valueOf(dc.getText().toString().replace(",", ""))));
+                                jsonObj_.put("densityobserved", BigDecimal.valueOf(Double.valueOf(dod.getText().toString().replace(",", ""))));
+                                jsonObj_.put("densitystandard", BigDecimal.valueOf(Double.valueOf(ds.getText().toString().replace(",", ""))));
+                                jsonObj_.put("df", null);
+                                jsonObj_.put("dforwardmean", null);
+                                jsonObj_.put("dfp", BigDecimal.valueOf(Double.valueOf(dfp.getText().toString().replace(",", ""))));
+                                jsonObj_.put("dfs", BigDecimal.valueOf(Double.valueOf(dfs.getText().toString().replace(",", ""))));
+                                String dcfd;
+                                if (!dcfd3.getText().toString().isEmpty()) {
+                                    dcfd = dcfd3.getText().toString();
+                                } else {
+                                    dcfd = "0";
+                                }
+                                jsonObj_.put("dispcorrdensity", BigDecimal.valueOf(Double.valueOf(dcfd.replace(",", ""))));
+                                jsonObj_.put("dispcortrim", BigDecimal.valueOf(Double.valueOf(dcft.getText().toString().replace(",", ""))));
+                                jsonObj_.put("dm", null);
+                                jsonObj_.put("dmp", BigDecimal.valueOf(Double.valueOf(dmp.getText().toString().replace(",", ""))));
+                                jsonObj_.put("dms", BigDecimal.valueOf(Double.valueOf(dms.getText().toString().replace(",", ""))));
+                                jsonObj_.put("documentDate", docDateInstant);
+                                jsonObj_.put("documentNumber", docNumber.getText());
+                                jsonObj_.put("documentStatus", spinnerDocStatus.getSelectedItem().toString());
+                                jsonObj_.put("draftSurveyManualType", spinnerSurveyType.getSelectedItem().toString());
+                                jsonObj_.put("draftcorrdefor", BigDecimal.valueOf(Double.valueOf(draftCorr.getText().toString().replace(",", ""))));
+                                jsonObj_.put("faftersteamcorr", BigDecimal.valueOf(Double.valueOf(forwardMeanAfterCorr.getText().toString().replace(",", ""))));
+                                jsonObj_.put("famean", BigDecimal.valueOf(Double.valueOf(forwarAfter.getText().toString().replace(",", ""))));
+                                jsonObj_.put("fimage", endcodeF);
+                                jsonObj_.put("fimageContentType", fmime);
+                                jsonObj_.put("fmean", BigDecimal.valueOf(Double.valueOf(forwardMean.getText().toString().replace(",", ""))));
+                                jsonObj_.put("fsteamcorr", BigDecimal.valueOf(Double.valueOf(steamCorr.getText().toString().replace(",", ""))));
+                                jsonObj_.put("la", BigDecimal.valueOf(Double.valueOf(la.getText().toString().replace(",", ""))));
+                                jsonObj_.put("lbm", BigDecimal.valueOf(Double.valueOf(lbm.getText().toString().replace(",", ""))));
+                                jsonObj_.put("lcfcorrdisplacement", BigDecimal.valueOf(Double.valueOf(lcfy.getText().toString().replace(",", ""))));
+                                jsonObj_.put("lcfx", BigDecimal.valueOf(Double.valueOf(lcfx.getText().toString().replace(",", ""))));
+                                jsonObj_.put("lcfx1", BigDecimal.valueOf(Double.valueOf(lcfx1.getText().toString().replace(",", ""))));
+                                jsonObj_.put("lcfx2", BigDecimal.valueOf(Double.valueOf(lcfx2.getText().toString().replace(",", ""))));
+                                jsonObj_.put("lcfy", BigDecimal.valueOf(Double.valueOf(lcfy.getText().toString().replace(",", ""))));
+                                jsonObj_.put("lcfy1", BigDecimal.valueOf(Double.valueOf(lcfy1.getText().toString().replace(",", ""))));
+                                jsonObj_.put("lcfy2", BigDecimal.valueOf(Double.valueOf(lcfy2.getText().toString().replace(",", ""))));
+                                jsonObj_.put("lf", BigDecimal.valueOf(Double.valueOf(lf.getText().toString().replace(",", ""))));
+                                jsonObj_.put("lm", BigDecimal.valueOf(Double.valueOf(lm.getText().toString().replace(",", ""))));
+                                jsonObj_.put("lpp", BigDecimal.valueOf(Double.valueOf(lpp.getText().toString().replace(",", ""))));
+                                jsonObj_.put("lwt", BigDecimal.valueOf(Double.valueOf(lwt.getText().toString().replace(",", ""))));
+                                jsonObj_.put("maftersteamcorr", BigDecimal.valueOf(Double.valueOf(midMeanAfterCorr.getText().toString().replace(",", ""))));
+                                jsonObj_.put("meanfa", BigDecimal.valueOf(Double.valueOf(forwarAfter.getText().toString().replace(",", ""))));
+                                jsonObj_.put("meanmtc", BigDecimal.valueOf(Double.valueOf(dmtc.getText().toString().replace(",", ""))));
+                                jsonObj_.put("mimage", endcodeM);
+                                jsonObj_.put("mimageContentType", mmime);
+                                jsonObj_.put("mmean", BigDecimal.valueOf(Double.valueOf(midMean.getText().toString().replace(",", ""))));
+                                jsonObj_.put("mmmean", BigDecimal.valueOf(Double.valueOf(mOM.getText().toString().replace(",", ""))));
+                                jsonObj_.put("msteamcorr", BigDecimal.valueOf(Double.valueOf(msisteamCorr.getText().toString().replace(",", ""))));
+                                Double mtcmyVal = Double.valueOf(mtcmy.getText().toString().replace(",", ""));
+                                if (mtcmyVal.isNaN()) {
+                                    mtcmyVal = 0.0;
+                                }
+                                jsonObj_.put("mtcmincorrdisplacement", BigDecimal.valueOf(mtcmyVal));
+                                jsonObj_.put("mtcminx", BigDecimal.valueOf(Double.valueOf(mtcmx.getText().toString().replace(",", ""))));
+                                jsonObj_.put("mtcminx1", BigDecimal.valueOf(Double.valueOf(mtcmx1.getText().toString().replace(",", ""))));
+                                jsonObj_.put("mtcminx2", BigDecimal.valueOf(Double.valueOf(mtcmx2.getText().toString().replace(",", ""))));
+                                jsonObj_.put("mtcminy", BigDecimal.valueOf(Double.valueOf(mtcmyVal)));
+                                jsonObj_.put("mtcminy1", BigDecimal.valueOf(Double.valueOf(mtcmy1.getText().toString().replace(",", ""))));
+                                jsonObj_.put("mtcminy2", BigDecimal.valueOf(Double.valueOf(mtcmy2.getText().toString().replace(",", ""))));
+                                jsonObj_.put("mtcpluscorrdisplacement", BigDecimal.valueOf(Double.valueOf(mtcpy.getText().toString().replace(",", ""))));
+                                jsonObj_.put("mtcplusx", BigDecimal.valueOf(Double.valueOf(mtcpx.getText().toString().replace(",", ""))));
+                                jsonObj_.put("mtcplusx1", BigDecimal.valueOf(Double.valueOf(mtcpx1.getText().toString().replace(",", ""))));
+                                jsonObj_.put("mtcplusx2", BigDecimal.valueOf(Double.valueOf(mtcpx2.getText().toString().replace(",", ""))));
+                                jsonObj_.put("mtcplusy", BigDecimal.valueOf(Double.valueOf(mtcpy.getText().toString().replace(",", ""))));
+                                jsonObj_.put("mtcplusy1", BigDecimal.valueOf(Double.valueOf(mtcpy1.getText().toString().replace(",", ""))));
+                                jsonObj_.put("mtcplusy2", BigDecimal.valueOf(Double.valueOf(mtcpy2.getText().toString().replace(",", ""))));
+                                jsonObj_.put("netdisp", BigDecimal.valueOf(Double.valueOf(nedD.getText().toString().replace(",", ""))));
+                                jsonObj_.put("placeId", idLocationArr.get(spinnerLocation.getSelectedItemPosition()));
+                                jsonObj_.put("placeName", spinnerLocation.getSelectedItem().toString());
+                                jsonObj_.put("surveyEndTime", endDateInstant);
+                                jsonObj_.put("surveyStartTime", startDateInstant);
+                                jsonObj_.put("remarks", remarks.getText().toString());
+                                jsonObj_.put("totaldeductweight", Double.valueOf(tdw.getText().toString().replace(",", "")));
+                                jsonObj_.put("tpccorrdisplacement", stringToDecimals(tpcy.getText().toString()));
+                                jsonObj_.put("tpcx", BigDecimal.valueOf(Double.valueOf(tpcx.getText().toString().replace(",", ""))));
+                                jsonObj_.put("tpcx1", BigDecimal.valueOf(Double.valueOf(tpcx1.getText().toString().replace(",", ""))));
+                                jsonObj_.put("tpcx2", BigDecimal.valueOf(Double.valueOf(tpcx2.getText().toString().replace(",", ""))));
+                                jsonObj_.put("tpcy", BigDecimal.valueOf(Double.valueOf(tpcy.getText().toString().replace(",", ""))));
+                                jsonObj_.put("tpcy1", BigDecimal.valueOf(Double.valueOf(tpcy1.getText().toString().replace(",", ""))));
+                                jsonObj_.put("tpcy2", BigDecimal.valueOf(Double.valueOf(tpcy2.getText().toString().replace(",", ""))));
+                                jsonObj_.put("trim1", BigDecimal.valueOf(Double.valueOf(t1.getText().toString().replace(",", ""))));
+                                jsonObj_.put("trim2", BigDecimal.valueOf(Double.valueOf(t2.getText().toString().replace(",", ""))));
+                                jsonObj_.put("truetrim", BigDecimal.valueOf(Double.valueOf(tt.getText().toString().replace(",", ""))));
+                                jsonObj_.put("tugBoatId", idVesselArr.get(spinnerVessel.getSelectedItemPosition()));
+                                jsonObj_.put("tugBoatName", spinnerVessel.getSelectedItem().toString());
+                                jsonObj_.put("x", BigDecimal.valueOf(Double.valueOf(cdx.getText().toString().replace(",", ""))));
+                                jsonObj_.put("x1", BigDecimal.valueOf(Double.valueOf(cdx1.getText().toString().replace(",", ""))));
+                                jsonObj_.put("x2", BigDecimal.valueOf(Double.valueOf(cdx2.getText().toString().replace(",", ""))));
+                                jsonObj_.put("y", BigDecimal.valueOf(Double.valueOf(cdy.getText().toString().replace(",", ""))));
+                                jsonObj_.put("y1", BigDecimal.valueOf(Double.valueOf(cdy1.getText().toString().replace(",", ""))));
+                                jsonObj_.put("y2", BigDecimal.valueOf(Double.valueOf(cdy2.getText().toString().replace(",", ""))));
+                                jsonObj_.put("id", idDraftSurvey);
+
+                                JsonParser jsonParser = new JsonParser();
+                                paramadd[0] = (JsonObject) jsonParser.parse(jsonObj_.toString());
+
+                                //print parameter
+                                Log.d("parameter for add  ", "AS PARAMETER  " + paramadd[0]);
+
+                            } catch (Exception e) {
+                                Toast.makeText(getBaseContext(), "Pastikan inputan benar", Toast.LENGTH_SHORT).show();
+                                e.printStackTrace();
                             }
-                        });
+                            Call<DraftSurveyResults> call = service.updateDraftSurvey("Bearer ".concat(idToken), paramadd[0]);
+                            Log.d("request put attendace", call.request().toString());
+                            call.enqueue(new Callback<DraftSurveyResults>() {
+                                @Override
+                                public void onResponse(Call<DraftSurveyResults> call, Response<DraftSurveyResults> response) {
+                                    progressDialog[0].dismiss();
+                                    if (!response.isSuccessful()) {
+                                        Toast.makeText(getBaseContext(), response.raw().toString(), Toast.LENGTH_SHORT).show();
+                                    } else {
+                                        Toast.makeText(getBaseContext(), "Success Updated", Toast.LENGTH_SHORT).show();
+                                        docNumber.setText(response.body().getDocumentNumber());
+                                    }
+                                }
+
+                                @Override
+                                public void onFailure(Call<DraftSurveyResults> call, Throwable t) {
+                                    //for getting error in network put here Toast, so get the error on network
+                                    Toast.makeText(getBaseContext(), "Failed to update draft survey, please try at a moment", Toast.LENGTH_SHORT).show();
+                                }
+                            });
+                        }
                     }
-                }, 2000);
+                }, 3000);
 
             }
         });
