@@ -1041,13 +1041,21 @@ public class AddDraftSurveyManual extends AppCompatActivity {
 
                         tt.setText(String.valueOf(Double.valueOf(afterMeanAfterCorr.getText().toString().replace(",","")) - Double.valueOf(forwardMeanAfterCorr.getText().toString().replace(",",""))));
 
-                        t1.setText(String.valueOf(
-                                (Double.valueOf(lcfy.getText().toString().replace(",",""))*Double.valueOf(tpcy.getText().toString().replace(",",""))*Double.valueOf(tt.getText().toString().replace(",",""))*100)/Double.valueOf(lpp.getText().toString().replace(",",""))
-                        ));
-                        t2.setText(
-                                String.valueOf(
-                                        ((Double.valueOf(tt.getText().toString().replace(",",""))*Double.valueOf(tt.getText().toString().replace(",","")))*Double.valueOf(dmtc.getText().toString().replace(",",""))*50)/Double.valueOf(lpp.getText().toString().replace(",",""))));
+                        if (lpp.getText().toString().replace(",","").equalsIgnoreCase("0")) {
+                            t1.setText("0");
+                        } else {
+                            t1.setText(String.valueOf(
+                                    (Double.valueOf(lpp.getText().toString().replace(",",""))*Double.valueOf(tpcy.getText().toString().replace(",",""))*Double.valueOf(tt.getText().toString().replace(",",""))*100)/Double.valueOf(lpp.getText().toString().replace(",",""))
+                            ));
+                        }
 
+                        if (lpp.getText().toString().replace(",","").equalsIgnoreCase("0")) {
+                            t2.setText("0");
+                        } else {
+                            t2.setText(String.valueOf(
+                                    (Math.pow(Double.valueOf(tt.getText().toString().replace(",","")),2) * Double.valueOf(dmtc.getText().toString().replace(",",""))*50)/Double.valueOf(lpp.getText().toString().replace(",",""))
+                            ));
+                        }
 
                         dcft.setText(String.valueOf(
                                 Double.valueOf(cdy.getText().toString().replace(",",""))+Double.valueOf(t1.getText().toString().replace(",",""))+Double.valueOf(t2.getText().toString().replace(",",""))
