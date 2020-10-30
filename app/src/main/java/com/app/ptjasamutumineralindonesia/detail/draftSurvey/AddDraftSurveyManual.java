@@ -889,6 +889,7 @@ public class AddDraftSurveyManual extends AppCompatActivity {
 
                         Double fM = (Double.valueOf(dfp.getText().toString().replace(",",""))+Double.valueOf(dfs.getText().toString().replace(",","")))/2;
                         if (fM.isNaN() || fM.isInfinite()){
+
                             fM = 0.0;
                         }
                         forwardMean.setText(String.valueOf(fM));
@@ -1049,7 +1050,7 @@ public class AddDraftSurveyManual extends AppCompatActivity {
 
 
                         dcft.setText(String.valueOf(
-                                Double.valueOf(cdy.getText().toString())+Double.valueOf(t1.getText().toString())+Double.valueOf(t2.getText().toString())
+                                Double.valueOf(cdy.getText().toString().replace(",",""))+Double.valueOf(t1.getText().toString().replace(",",""))+Double.valueOf(t2.getText().toString().replace(",",""))
                         ));
 
                         dc.setText(String.valueOf(((Double.valueOf(dod.getText().toString().replace(",","")) -
