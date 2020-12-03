@@ -1628,6 +1628,8 @@ public class AddDraftSurveyManual extends AppCompatActivity {
                     if (apparentTrim.getText().toString().isEmpty() || apparentTrim.getText().toString().equals("NaN") || apparentTrim.getText().toString().equals(".")){
                         apparentTrim.setText("0");
                     }
+
+
                 }
 
                 @Override
@@ -1635,6 +1637,7 @@ public class AddDraftSurveyManual extends AppCompatActivity {
 
                 }
             });
+
             apparentTrim.addTextChangedListener(new NumberTextWatcher(apparentTrim));
 
             forwardMeanAfterCorr.addTextChangedListener(new TextWatcher() {
