@@ -50,6 +50,8 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.math.BigDecimal;
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
 import java.text.SimpleDateFormat;
 import java.time.Instant;
 import java.time.LocalDate;
@@ -880,7 +882,7 @@ public class AddDraftSurveyManual extends AppCompatActivity {
                                         lf.getText().toString().replace(",","")
                                 )) / Double.valueOf(
                                         lbm.getText().toString().replace(",","")
-                                )
+                                ) * -1
                         );
                         if (sC.isNaN() || sC.isInfinite()){
                             sC = 0.0;
@@ -894,16 +896,23 @@ public class AddDraftSurveyManual extends AppCompatActivity {
                         }
                         forwardMean.setText(String.valueOf(fM));
 
-                        Double fMAC =  ((Double.valueOf(
-                                apparentTrim.getText().toString().replace(",","")
-                        ) * Double.valueOf(
-                                lf.getText().toString().replace(",","")
-                        )) / Double.valueOf(
-                                lbm.getText().toString().replace(",","")
-                        )
-                                        ) + Double.valueOf(
+//                        Double fMAC =  ((Double.valueOf(
+//                                apparentTrim.getText().toString().replace(",","")
+//                        ) * Double.valueOf(
+//                                lf.getText().toString().replace(",","")
+//                        )) / Double.valueOf(
+//                                lbm.getText().toString().replace(",","")
+//                        )
+//                                        ) + Double.valueOf(
+//                                forwardMean.getText().toString().replace(",","")
+//                        );
+
+                        Double fMAC =  Double.parseDouble(
                                 forwardMean.getText().toString().replace(",","")
+                        ) + Double.parseDouble(
+                                steamCorr.getText().toString().replace(",","")
                         );
+
                         if (fMAC.isInfinite() || fMAC.isNaN()){
                             fMAC = 0.0;
                         }
@@ -1045,7 +1054,7 @@ public class AddDraftSurveyManual extends AppCompatActivity {
                             t1.setText("0");
                         } else {
                             t1.setText(String.valueOf(
-                                    (Double.valueOf(lpp.getText().toString().replace(",",""))*Double.valueOf(tpcy.getText().toString().replace(",",""))*Double.valueOf(tt.getText().toString().replace(",",""))*100)/Double.valueOf(lpp.getText().toString().replace(",",""))
+                                    (Double.parseDouble(lpp.getText().toString().replace(",",""))*Double.parseDouble(tpcy.getText().toString().replace(",",""))*Double.parseDouble(tt.getText().toString().replace(",",""))*100)/Double.parseDouble(lpp.getText().toString().replace(",",""))
                             ));
                         }
 
@@ -1053,16 +1062,20 @@ public class AddDraftSurveyManual extends AppCompatActivity {
                             t2.setText("0");
                         } else {
                             t2.setText(String.valueOf(
-                                    (Math.pow(Double.valueOf(tt.getText().toString().replace(",","")),2) * Double.valueOf(dmtc.getText().toString().replace(",",""))*50)/Double.valueOf(lpp.getText().toString().replace(",",""))
+                                    (Math.pow(Double.parseDouble(tt.getText().toString().replace(",","")),2) * Double.parseDouble(dmtc.getText().toString().replace(",",""))*50)/Double.parseDouble(lpp.getText().toString().replace(",",""))
                             ));
                         }
 
                         dcft.setText(String.valueOf(
-                                Double.valueOf(cdy.getText().toString().replace(",",""))+Double.valueOf(t1.getText().toString().replace(",",""))+Double.valueOf(t2.getText().toString().replace(",",""))
+                                Double.parseDouble(cdy.getText().toString().replace(",",""))+Double.parseDouble(t1.getText().toString().replace(",",""))+Double.parseDouble(t2.getText().toString().replace(",",""))
                         ));
 
-                        dc.setText(String.valueOf(((Double.valueOf(dod.getText().toString().replace(",","")) -
-                                Double.valueOf(ds.getText().toString().replace(",",""))) / Double.valueOf(ds.getText().toString().replace(",",""))
+                        double dsTemporary = 1.025;
+                        if (Double.parseDouble(ds.getText().toString())==0){
+                            dsTemporary = Double.parseDouble(ds.getText().toString());
+                        }
+                        dc.setText(String.valueOf(((Double.parseDouble(dod.getText().toString().replace(",","")) -
+                                dsTemporary) / dsTemporary
                         ) * Double.valueOf(dcft.getText().toString().replace(",",""))));
 
                         Double dcf3 =  Double.valueOf(dcft.getText().toString().replace(",","")) + Double.valueOf(dc.getText().toString().replace(",",""));
@@ -1071,7 +1084,7 @@ public class AddDraftSurveyManual extends AppCompatActivity {
                         }
                         dcfd3.setText(String.valueOf(dcf3));
 
-                        Double neD =  Double.valueOf(dcfd3.getText().toString().replace(",",""))-Double.valueOf(tdw.getText().toString().replace(",",""));
+                        Double neD =  Double.parseDouble(dcfd3.getText().toString().replace(",",""))+Double.parseDouble(tdw.getText().toString().replace(",",""));
                         if (neD.isInfinite()||neD.isNaN()){
                             neD = 0.0;
                         }
@@ -1092,7 +1105,7 @@ public class AddDraftSurveyManual extends AppCompatActivity {
                                 jsonObj_.put("bargeName", spinnerBarge.getSelectedItem().toString());
                                 jsonObj_.put("cargo", cargo.getText());
                                 jsonObj_.put("constant", constant.getText());
-                                jsonObj_.put("corrdisplacement", BigDecimal.valueOf(Double.valueOf(cdy.getText().toString().replace(",", ""))));
+                                jsonObj_.put("corrdisplacement", BigDecimal.valueOf(Double.parseDouble(dcfd3.getText().toString().replace(",", ""))));
                                 jsonObj_.put("da", null);
                                 jsonObj_.put("daftermean", null);
                                 jsonObj_.put("dap", BigDecimal.valueOf(Double.valueOf(dap.getText().toString().replace(",", ""))));
@@ -1125,7 +1138,7 @@ public class AddDraftSurveyManual extends AppCompatActivity {
                                 jsonObj_.put("fimage", endcodeF);
                                 jsonObj_.put("fimageContentType", fmime);
                                 jsonObj_.put("fmean", BigDecimal.valueOf(Double.valueOf(forwardMean.getText().toString().replace(",", ""))));
-                                jsonObj_.put("fsteamcorr", BigDecimal.valueOf(Double.valueOf(steamCorr.getText().toString().replace(",", ""))));
+                                jsonObj_.put("fsteamcorr", new BigDecimal(steamCorr.getText().toString().replace(",", "")));
                                 jsonObj_.put("la", BigDecimal.valueOf(Double.valueOf(la.getText().toString().replace(",", ""))));
                                 jsonObj_.put("lbm", BigDecimal.valueOf(Double.valueOf(lbm.getText().toString().replace(",", ""))));
                                 jsonObj_.put("lcfcorrdisplacement", BigDecimal.valueOf(Double.valueOf(lcfy.getText().toString().replace(",", ""))));
@@ -1166,13 +1179,13 @@ public class AddDraftSurveyManual extends AppCompatActivity {
                                 jsonObj_.put("mtcplusy", BigDecimal.valueOf(Double.valueOf(mtcpy.getText().toString().replace(",", ""))));
                                 jsonObj_.put("mtcplusy1", BigDecimal.valueOf(Double.valueOf(mtcpy1.getText().toString().replace(",", ""))));
                                 jsonObj_.put("mtcplusy2", BigDecimal.valueOf(Double.valueOf(mtcpy2.getText().toString().replace(",", ""))));
-                                jsonObj_.put("netdisp", BigDecimal.valueOf(Double.valueOf(nedD.getText().toString().replace(",", ""))));
+                                jsonObj_.put("netdisp", BigDecimal.valueOf(Double.parseDouble(nedD.getText().toString().replace(",", ""))));
                                 jsonObj_.put("placeId", idLocationArr.get(spinnerLocation.getSelectedItemPosition()));
                                 jsonObj_.put("placeName", spinnerLocation.getSelectedItem().toString());
                                 jsonObj_.put("surveyEndTime", endDateInstant);
                                 jsonObj_.put("surveyStartTime", startDateInstant);
                                 jsonObj_.put("remarks", remarks.getText().toString());
-                                jsonObj_.put("totaldeductweight", Double.valueOf(tdw.getText().toString().replace(",", "")));
+                                jsonObj_.put("totaldeductweight", Double.parseDouble(tdw.getText().toString().replace(",", "")));
                                 jsonObj_.put("tpccorrdisplacement", stringToDecimals(tpcy.getText().toString()));
                                 jsonObj_.put("tpcx", BigDecimal.valueOf(Double.valueOf(tpcx.getText().toString().replace(",", ""))));
                                 jsonObj_.put("tpcx1", BigDecimal.valueOf(Double.valueOf(tpcx1.getText().toString().replace(",", ""))));
@@ -1240,7 +1253,7 @@ public class AddDraftSurveyManual extends AppCompatActivity {
                                 jsonObj_.put("bargeName", spinnerBarge.getSelectedItem().toString());
                                 jsonObj_.put("cargo", cargo.getText());
                                 jsonObj_.put("constant", constant.getText());
-                                jsonObj_.put("corrdisplacement", BigDecimal.valueOf(Double.valueOf(cdy.getText().toString().replace(",", ""))));
+                                jsonObj_.put("corrdisplacement", BigDecimal.valueOf(Double.parseDouble(dcfd3.getText().toString().replace(",", ""))));
                                 jsonObj_.put("da", null);
                                 jsonObj_.put("daftermean", null);
                                 jsonObj_.put("dap", BigDecimal.valueOf(Double.valueOf(dap.getText().toString().replace(",", ""))));
@@ -1268,12 +1281,12 @@ public class AddDraftSurveyManual extends AppCompatActivity {
                                 jsonObj_.put("documentStatus", spinnerDocStatus.getSelectedItem().toString());
                                 jsonObj_.put("draftSurveyManualType", spinnerSurveyType.getSelectedItem().toString());
                                 jsonObj_.put("draftcorrdefor", BigDecimal.valueOf(Double.valueOf(draftCorr.getText().toString().replace(",", ""))));
-                                jsonObj_.put("faftersteamcorr", BigDecimal.valueOf(Double.valueOf(forwardMeanAfterCorr.getText().toString().replace(",", ""))));
+                                jsonObj_.put("faftersteamcorr", new BigDecimal(forwardMeanAfterCorr.getText().toString().replace(",", "")));
                                 jsonObj_.put("famean", BigDecimal.valueOf(Double.valueOf(forwarAfter.getText().toString().replace(",", ""))));
                                 jsonObj_.put("fimage", endcodeF);
                                 jsonObj_.put("fimageContentType", fmime);
                                 jsonObj_.put("fmean", BigDecimal.valueOf(Double.valueOf(forwardMean.getText().toString().replace(",", ""))));
-                                jsonObj_.put("fsteamcorr", BigDecimal.valueOf(Double.valueOf(steamCorr.getText().toString().replace(",", ""))));
+                                jsonObj_.put("fsteamcorr", new BigDecimal(steamCorr.getText().toString().replace(",", "")));
                                 jsonObj_.put("la", BigDecimal.valueOf(Double.valueOf(la.getText().toString().replace(",", ""))));
                                 jsonObj_.put("lbm", BigDecimal.valueOf(Double.valueOf(lbm.getText().toString().replace(",", ""))));
                                 jsonObj_.put("lcfcorrdisplacement", BigDecimal.valueOf(Double.valueOf(lcfy.getText().toString().replace(",", ""))));
@@ -1313,13 +1326,13 @@ public class AddDraftSurveyManual extends AppCompatActivity {
                                 jsonObj_.put("mtcplusy", BigDecimal.valueOf(Double.valueOf(mtcpy.getText().toString().replace(",", ""))));
                                 jsonObj_.put("mtcplusy1", BigDecimal.valueOf(Double.valueOf(mtcpy1.getText().toString().replace(",", ""))));
                                 jsonObj_.put("mtcplusy2", BigDecimal.valueOf(Double.valueOf(mtcpy2.getText().toString().replace(",", ""))));
-                                jsonObj_.put("netdisp", BigDecimal.valueOf(Double.valueOf(nedD.getText().toString().replace(",", ""))));
+                                jsonObj_.put("netdisp", BigDecimal.valueOf(Double.parseDouble(nedD.getText().toString().replace(",", ""))));
                                 jsonObj_.put("placeId", idLocationArr.get(spinnerLocation.getSelectedItemPosition()));
                                 jsonObj_.put("placeName", spinnerLocation.getSelectedItem().toString());
                                 jsonObj_.put("surveyEndTime", endDateInstant);
                                 jsonObj_.put("surveyStartTime", startDateInstant);
                                 jsonObj_.put("remarks", remarks.getText().toString());
-                                jsonObj_.put("totaldeductweight", Double.valueOf(tdw.getText().toString().replace(",", "")));
+                                jsonObj_.put("totaldeductweight", Double.parseDouble(tdw.getText().toString().replace(",", "")));
                                 jsonObj_.put("tpccorrdisplacement", stringToDecimals(tpcy.getText().toString()));
                                 jsonObj_.put("tpcx", BigDecimal.valueOf(Double.valueOf(tpcx.getText().toString().replace(",", ""))));
                                 jsonObj_.put("tpcx1", BigDecimal.valueOf(Double.valueOf(tpcx1.getText().toString().replace(",", ""))));
@@ -1415,7 +1428,14 @@ public class AddDraftSurveyManual extends AppCompatActivity {
 
     public String stringToDecimals(String value){
         try {
-            value = BigDecimal.valueOf(Double.valueOf(value)).toString();
+//            value = BigDecimal.valueOf(Double.valueOf(value)).toString();
+            DecimalFormatSymbols otherSymbols = new DecimalFormatSymbols(Locale.US);
+            otherSymbols.setDecimalSeparator('.');
+            otherSymbols.setGroupingSeparator(',');
+            DecimalFormat df = new DecimalFormat("#,###.####", otherSymbols);
+            df.setMaximumFractionDigits(10);
+
+            value = df.format(new BigDecimal(value));
         }
         catch(Exception e) {
             value = "0";
@@ -2999,7 +3019,7 @@ public class AddDraftSurveyManual extends AppCompatActivity {
 
             setTextThread(dfp,stringToDecimals(responseGlobal.body().getDfp()), 1000);
             setTextThread(dfs,stringToDecimals(responseGlobal.body().getDfs()), 1100);
-            setTextThread(steamCorr,stringToDecimals(responseGlobal.body().getFsteamcorr()), 1200);
+            setTextThread(steamCorr,'-'+ stringToDecimals(responseGlobal.body().getFsteamcorr()), 1200);
             setTextThread(forwardMean,stringToDecimals(responseGlobal.body().getFmean()), 1300);
             setTextThread(forwardMeanAfterCorr,stringToDecimals(responseGlobal.body().getFaftersteamcorr()),1400);
             setTextThread(forwarAfter,stringToDecimals(responseGlobal.body().getFamean()),1500);
